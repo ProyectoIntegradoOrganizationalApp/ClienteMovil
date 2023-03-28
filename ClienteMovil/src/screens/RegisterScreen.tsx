@@ -1,13 +1,13 @@
 import { Button, View, StyleSheet } from "react-native";
 import { Text } from "react-native-paper";
 
-const LoginScreen = ({ navigation }: { navigation: any }) => {
+const RegisterScreen = ({ navigation }: { navigation: any }) => {
   return (
     <View style={styles.container}>
-      <Text variant="headlineMedium">Login Screen</Text>
+      <Text variant="headlineMedium">Register Screen</Text>
       <Button
-        title={`Go to Register`}
-        onPress={navigation.navigate("Register")}
+        title={`Go to Login`}
+        onPress={() => navigation.navigate("Login")}
       />
     </View>
   );
@@ -21,4 +21,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default RegisterScreen;

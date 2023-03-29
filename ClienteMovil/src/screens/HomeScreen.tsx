@@ -4,18 +4,18 @@ import OrganizationComponent from "../components/OrganizationComponent";
 const organizations = [
   {
     id: "1",
-    title: "Título 1",
-    subtitle: "Subtítulo 1",
+    title: "Organización 1",
+    subtitle: "Descripción",
   },
   {
     id: "2",
-    title: "Título 2",
-    subtitle: "Subtítulo 2",
+    title: "Organización 2",
+    subtitle: "Descripción",
   },
   {
     id: "3",
-    title: "Título 3",
-    subtitle: "Subtítulo 3",
+    title: "Organización 3",
+    subtitle: "Descripción",
   },
 ];
 

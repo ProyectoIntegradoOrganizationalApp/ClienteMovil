@@ -7,7 +7,7 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
       <Text variant="headlineMedium">Login Screen</Text>
       <Button
         title={`Go to Register`}
-        onPress={navigation.navigate("Register")}
+        onPress={() => navigation.navigate("Register")}
       />
     </View>
   );

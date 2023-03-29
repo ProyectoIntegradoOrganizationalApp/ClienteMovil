@@ -4,7 +4,7 @@ import { Text } from "react-native-paper";
 const BoardScreen = () => {
   return (
     <View style={styles.container}>
-      <Text variant="headlineMedium">Login Screen</Text>
+      <Text variant="headlineMedium">Board Screen</Text>
     </View>
   );
 };

@@ -4,17 +4,17 @@ import BoardComponent from "../components/BoardComponent";
 const boards = [
   {
     id: "1",
-    title: "Título 1",
+    title: "Tablero 1",
     cover: "https://picsum.photos/600",
   },
   {
     id: "2",
-    title: "Título 2",
+    title: "Tablero 2",
     cover: "https://picsum.photos/700",
   },
   {
     id: "3",
-    title: "Título 3",
+    title: "Tablero 3",
     cover: "https://picsum.photos/800",
   },
 ];

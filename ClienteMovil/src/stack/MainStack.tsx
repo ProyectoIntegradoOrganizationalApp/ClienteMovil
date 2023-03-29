@@ -8,20 +8,20 @@ const Stack = createNativeStackNavigator();
 const MainStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ headerShown: false }}
-      />
+      <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen
         name="Organization"
         component={OrganizationScreen}
-        options={{ headerShown: false }}
+        options={({ route }: { route: any }) => ({
+          title: route.params.organizationTitle,
+        })}
       />
       <Stack.Screen
         name="Board"
         component={BoardScreen}
-        options={{ headerShown: false }}
+        options={({ route }: { route: any }) => ({
+          title: route.params.boardTitle,
+        })}
       />
     </Stack.Navigator>
   );

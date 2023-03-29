@@ -12,6 +12,8 @@ const MainNavigationComponent = () => {
         name="MainStack"
         component={MainStack}
         options={{
+          headerShown: false,
+          tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => {
             return <Icon name="home" size={size} color={color} />;
           },

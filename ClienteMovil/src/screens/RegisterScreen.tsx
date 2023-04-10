@@ -4,110 +4,84 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   View,
 } from "react-native";
+import LoginInputComponent from "../components/LoginInputComponent";
+import { Formik } from "formik";
+import { loginValidationSchema } from "../utils/loginValidationSchema";
 
 function register() {}
 
+const initialValues = {
+  email: "",
+  password: "",
+};
+
 const RegisterScreen = ({ navigation }: { navigation: any }) => {
   return (
-    <View
-      style={{
-        padding: 20,
-        marginTop: 50,
-      }}
+    <Formik
+      validationSchema={loginValidationSchema}
+      initialValues={initialValues}
+      onSubmit={(values) => console.log(values)}
     >
-      <ScrollView>
-        <View
-          style={{
-            alignItems: "center",
-            marginBottom: 20,
-          }}
-        >
-          <Image
-            source={{
-              uri: "https://picsum.photos/777",
-            }}
-            style={{
-              width: 300,
-              height: 300,
-            }}
-          />
-        </View>
-        <Text
-          style={{
-            fontSize: 25,
-          }}
-        >
-          E-Mail:
-        </Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Introduzca su e-mail"
-          keyboardType="email-address"
-        />
-        <Text
-          style={{
-            fontSize: 25,
-          }}
-        >
-          Usuario:
-        </Text>
-        <TextInput style={styles.input} placeholder="Introduzca su usuario" />
-        <Text
-          style={{
-            fontSize: 25,
-          }}
-        >
-          Contraseña:
-        </Text>
-        <TextInput
-          // secureTextEntry={true}
-          style={styles.input}
-          placeholder="Introduzca su contraseña"
-        />
-        <Text
-          style={{
-            fontSize: 25,
-          }}
-        >
-          Repetir contraseña:
-        </Text>
-        <TextInput
-          // secureTextEntry={true}
-          style={styles.input}
-          placeholder="Introduzca su contraseña de nuevo"
-        />
-        <View style={styles.button}>
-          <Button title="Registrarse" onPress={register} />
-          <View
-            style={{
-              alignItems: "center",
-              marginTop: 15,
-            }}
-          >
-            <Text onPress={() => navigation.navigate("Login")}>
-              ¿Ya tienes cuenta? Inicia sesión aquí
-            </Text>
+      {({ handleChange, handleSubmit, values }) => {
+        return (
+          <View style={styles.view}>
+            <ScrollView>
+              <View style={styles.viewImage}>
+                <Image
+                  source={{
+                    uri: "https://picsum.photos/777",
+                  }}
+                  style={styles.image}
+                />
+              </View>
+              <Text style={styles.text}>Email</Text>
+              <LoginInputComponent name="email" />
+              <Text style={styles.text}>User</Text>
+              <LoginInputComponent name="user" />
+              <Text style={styles.text}>Password</Text>
+              <LoginInputComponent name="password" secureTextEntry />
+              <Text style={styles.text}>Confirm password</Text>
+              <LoginInputComponent name="passwordConfirm" secureTextEntry />
+              <View style={styles.button}>
+                <Button title="Sign Up" onPress={register} />
+                <View style={styles.viewText}>
+                  <Text onPress={() => navigation.navigate("Login")}>
+                    Already have an account? Sign in here
+                  </Text>
+                </View>
+              </View>
+            </ScrollView>
           </View>
-        </View>
-      </ScrollView>
-    </View>
+        );
+      }}
+    </Formik>
   );
 };
 
 const styles = StyleSheet.create({
-  input: {
-    fontSize: 18,
-    height: 60,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-
   button: {
     margin: 20,
+  },
+  image: {
+    width: 300,
+    height: 300,
+  },
+  text: {
+    fontSize: 25,
+  },
+  view: {
+    padding: 20,
+    marginTop: 50,
+  },
+  viewImage: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  viewText: {
+    alignItems: "center",
+    marginTop: 15,
   },
 });
 

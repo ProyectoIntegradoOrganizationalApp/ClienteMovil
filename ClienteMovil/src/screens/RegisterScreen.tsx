@@ -41,9 +41,9 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
               <Text style={styles.text}>User</Text>
               <LoginInputComponent name="user" />
               <Text style={styles.text}>Password</Text>
-              <LoginInputComponent name="password" secureTextEntry />
+              <LoginInputComponent name="password" />
               <Text style={styles.text}>Confirm password</Text>
-              <LoginInputComponent name="passwordConfirm" secureTextEntry />
+              <LoginInputComponent name="passwordConfirm" />
               <View style={styles.button}>
                 <Button title="Sign Up" onPress={register} />
                 <View style={styles.viewText}>
@@ -65,8 +65,8 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   image: {
-    width: 300,
-    height: 300,
+    width: 150,
+    height: 150,
   },
   text: {
     fontSize: 25,

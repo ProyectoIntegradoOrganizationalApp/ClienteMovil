@@ -1,7 +1,7 @@
 import { StyleSheet, TextInput } from "react-native";
 
-const StyledTextInputComponent = ({ style = {}, error = {}, ...props }) => {
-  const inputStyle = [styles.textInput, style, error && styles.error];
+const StyledTextInputComponent = ({ style = {}, ...props }) => {
+  const inputStyle = [styles.textInput, style];
   return <TextInput style={inputStyle} {...props} />;
 };
 
@@ -13,9 +13,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     marginBottom: 1,
-  },
-  error: {
-    borderColor: "red",
   },
 });
 

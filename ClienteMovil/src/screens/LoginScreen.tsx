@@ -9,6 +9,7 @@ import {
 import LoginInputComponent from "../components/LoginInputComponent";
 import { Formik } from "formik";
 import { loginValidationSchema } from "../utils/loginValidationSchema";
+import theme from "../utils/theme";
 
 function login() {}
 
@@ -39,9 +40,13 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
               <Text style={styles.text}>Email</Text>
               <LoginInputComponent name="email" />
               <Text style={styles.text}>Password</Text>
-              <LoginInputComponent name="password" secureTextEntry />
-              <View style={styles.button}>
-                <Button title="Sign In" onPress={login} />
+              <LoginInputComponent name="password" />
+              <View style={styles.viewButton}>
+                <Button
+                  title="Sign In"
+                  color={theme.colors.grey800}
+                  onPress={login}
+                />
                 <View style={styles.viewText}>
                   <Text onPress={() => navigation.navigate("Register")}>
                     You do not have an account? Sign up here
@@ -57,12 +62,9 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
 };
 
 const styles = StyleSheet.create({
-  button: {
-    margin: 20,
-  },
   image: {
-    width: 300,
-    height: 300,
+    width: 150,
+    height: 150,
   },
   text: {
     fontSize: 25,
@@ -70,6 +72,9 @@ const styles = StyleSheet.create({
   view: {
     padding: 20,
     marginTop: 50,
+  },
+  viewButton: {
+    margin: 20,
   },
   viewImage: {
     alignItems: "center",

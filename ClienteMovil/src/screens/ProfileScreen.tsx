@@ -1,19 +1,49 @@
-import { View, StyleSheet } from "react-native";
-import { Text } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
+import { Avatar, Card, List } from "react-native-paper";
+import theme from "../utils/theme";
 
 const ProfileScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text variant="headlineMedium">Profile Screen</Text>
+    <View>
+      <Card style={styles.profile}>
+        <Card.Title
+          title={"Pepe Pepin"}
+          left={() => (
+            <Avatar.Image
+              size={40}
+              source={{ uri: "https://picsum.photos/331" }}
+            />
+          )}
+        />
+      </Card>
+      <List.Section>
+        <List.Item
+          title="Friends"
+          left={() => (
+            <List.Icon icon="account-supervisor" color={theme.colors.grey600} />
+          )}
+          onPress={() => console.log("hi")}
+          style={styles.listItem}
+        />
+        <List.Item
+          title="Projects"
+          left={() => (
+            <List.Icon icon="view-dashboard" color={theme.colors.grey600} />
+          )}
+          onPress={() => console.log("bye")}
+          style={styles.listItem}
+        />
+      </List.Section>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+  profile: {
+    borderRadius: 0,
+  },
+  listItem: {
+    padding: 25,
   },
 });
 

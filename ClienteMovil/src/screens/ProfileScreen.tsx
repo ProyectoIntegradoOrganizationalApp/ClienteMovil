@@ -1,11 +1,11 @@
 import { StyleSheet, View } from "react-native";
 import { Avatar, Card, List } from "react-native-paper";
-import theme from "../utils/theme";
+import styles from "../styles/styles";
 
 const ProfileScreen = () => {
   return (
     <View>
-      <Card style={styles.profile}>
+      <Card style={styleScript.profile}>
         <Card.Title
           title={"Pepe Pepin"}
           left={() => (
@@ -20,25 +20,28 @@ const ProfileScreen = () => {
         <List.Item
           title="Friends"
           left={() => (
-            <List.Icon icon="account-supervisor" color={theme.colors.grey600} />
+            <List.Icon
+              icon="account-supervisor"
+              color={styles.colors.grey600}
+            />
           )}
           onPress={() => console.log("hi")}
-          style={styles.listItem}
+          style={styleScript.listItem}
         />
         <List.Item
           title="Projects"
           left={() => (
-            <List.Icon icon="view-dashboard" color={theme.colors.grey600} />
+            <List.Icon icon="view-dashboard" color={styles.colors.grey600} />
           )}
           onPress={() => console.log("bye")}
-          style={styles.listItem}
+          style={styleScript.listItem}
         />
       </List.Section>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
+const styleScript = StyleSheet.create({
   profile: {
     borderRadius: 0,
   },

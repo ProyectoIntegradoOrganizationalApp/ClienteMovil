@@ -4,7 +4,7 @@ import MainNavigationComponent from "./src/components/MainNavigationComponent";
 import AccountStack from "./src/stack/AccountStack";
 
 export default function App() {
-  const isUserLoggedIn = true;
+  const isUserLoggedIn = false;
   return (
     <>
       <StatusBar />

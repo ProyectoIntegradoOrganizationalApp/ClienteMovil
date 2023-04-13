@@ -1,14 +1,9 @@
-import {
-  Button,
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Button, Image, ScrollView, Text, View } from "react-native";
+import { Divider } from "react-native-paper";
 import LoginInputComponent from "../components/LoginInputComponent";
 import { Formik } from "formik";
 import { loginValidationSchema } from "../utils/loginValidationSchema";
+import styles from "../styles/styles";
 
 function register() {}
 
@@ -26,32 +21,49 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
     >
       {({ handleChange, handleSubmit, values }) => {
         return (
-          <View style={styles.view}>
-            <ScrollView>
-              <View style={styles.viewImage}>
+          <View style={styles.loginStyles.viewContainer}>
+            <ScrollView contentContainerStyle={styles.loginStyles.scrollView}>
+              <View style={styles.loginStyles.viewImage}>
                 <Image
-                  source={{
-                    uri: "https://picsum.photos/777",
-                  }}
-                  style={styles.image}
+                  source={require("../assets/logo.png")}
+                  style={styles.loginStyles.image}
                 />
               </View>
-              <Text style={styles.text}>Email</Text>
-              <LoginInputComponent name="email" />
-              <Text style={styles.text}>User</Text>
-              <LoginInputComponent name="user" />
-              <Text style={styles.text}>Password</Text>
-              <LoginInputComponent name="password" />
-              <Text style={styles.text}>Confirm password</Text>
-              <LoginInputComponent name="passwordConfirm" />
-              <View style={styles.button}>
-                <Button title="Sign Up" onPress={register} />
-                <View style={styles.viewText}>
-                  <Text onPress={() => navigation.navigate("Login")}>
-                    Already have an account? Sign in here
-                  </Text>
-                </View>
+              <View style={styles.loginStyles.viewContainerChild}>
+                <LoginInputComponent name="email" label="Email" />
               </View>
+              <View style={styles.loginStyles.viewContainerChild}>
+                <LoginInputComponent name="user" label="User" />
+              </View>
+              <View style={styles.loginStyles.viewContainerChild}>
+                <LoginInputComponent name="password" label="Password" />
+              </View>
+              <View style={styles.loginStyles.viewContainerChild}>
+                <LoginInputComponent
+                  name="passwordConfirm"
+                  label="Confirm password"
+                />
+              </View>
+              <View style={styles.loginStyles.viewContainerChild}>
+                <Button
+                  title="Sign Up"
+                  onPress={register}
+                  color={styles.colors.grey800}
+                />
+              </View>
+              <Text
+                style={styles.loginStyles.text}
+                onPress={() => navigation.navigate("Login")}
+              >
+                Already have an account? Login
+              </Text>
+              <Divider style={styles.loginStyles.divider}></Divider>
+              <Text
+                style={styles.loginStyles.text}
+                onPress={() => navigation.navigate("Register")}
+              >
+                Lost password?
+              </Text>
             </ScrollView>
           </View>
         );
@@ -59,30 +71,5 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
     </Formik>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    margin: 20,
-  },
-  image: {
-    width: 150,
-    height: 150,
-  },
-  text: {
-    fontSize: 25,
-  },
-  view: {
-    padding: 20,
-    marginTop: 50,
-  },
-  viewImage: {
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  viewText: {
-    alignItems: "center",
-    marginTop: 15,
-  },
-});
 
 export default RegisterScreen;

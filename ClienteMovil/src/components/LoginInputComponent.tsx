@@ -1,30 +1,32 @@
 import { useField } from "formik";
-import StyledTextInputComponent from "./StyledTextInputComponent";
-import { StyleSheet, Text } from "react-native";
+import { HelperText, TextInput } from "react-native-paper";
+import styles from "../styles/styles";
 
-const LoginInputComponent = ({ name, ...props }: { name: any }) => {
+const LoginInputComponent = ({
+  name,
+  label,
+  ...props
+}: {
+  name: any;
+  label: any;
+}) => {
   const [field, meta, helpers] = useField(name);
   return (
     <>
-      <StyledTextInputComponent
-        error={meta.error}
+      <TextInput
+        mode="outlined"
+        label={label}
+        error={meta.error != undefined}
         value={field.value}
         onChangeText={(value: any) => helpers.setValue(value)}
         secureTextEntry={field.name.includes("password")}
+        activeOutlineColor={styles.colors.grey800}
+        outlineColor={styles.colors.grey800}
         {...props}
       />
-      {meta.error && <Text style={styles.error}>{meta.error}</Text>}
+      {meta.error && <HelperText type="error">{meta.error}</HelperText>}
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  error: {
-    color: "red",
-    fontSize: 12,
-    marginBottom: 20,
-    marginTop: 5,
-  },
-});
 
 export default LoginInputComponent;

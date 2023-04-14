@@ -9,7 +9,9 @@ function register() {}
 
 const initialValues = {
   email: "",
+  user: "",
   password: "",
+  passwordConfirm: "",
 };
 
 const RegisterScreen = ({ navigation }: { navigation: any }) => {
@@ -60,7 +62,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
               <Divider style={styles.loginStyles.divider}></Divider>
               <Text
                 style={styles.loginStyles.text}
-                onPress={() => navigation.navigate("Register")}
+                onPress={() => navigation.navigate("RecoverPassword")}
               >
                 Lost password?
               </Text>

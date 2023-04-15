@@ -1,12 +1,13 @@
 import { StyleSheet } from "react-native";
+import colors from "tailwindcss/colors";
 
 const styles = {
   colors: {
-    grey400: "#94a3b8",
-    grey500: "#64748b",
-    grey600: "#475569",
-    grey700: "#334155",
-    grey800: "#1e293b",
+    grey400: colors.slate[400],
+    grey500: colors.slate[500],
+    grey600: colors.slate[600],
+    grey700: colors.slate[700],
+    grey800: colors.slate[800],
   },
   loginStyles: StyleSheet.create({
     viewContainer: {

@@ -1,6 +1,7 @@
 import { Button, Image, ScrollView, Text, View } from "react-native";
 import { Divider } from "react-native-paper";
 import LoginInputComponent from "../components/LoginInputComponent";
+import LoginInputPassComponent from "../components/LoginInputPassComponent";
 import { Formik } from "formik";
 import { loginValidationSchema } from "../utils/loginValidationSchema";
 import styles from "../styles/styles";
@@ -38,10 +39,10 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
                 <LoginInputComponent name="user" label="User" />
               </View>
               <View style={styles.loginStyles.viewContainerChild}>
-                <LoginInputComponent name="password" label="Password" />
+                <LoginInputPassComponent name="password" label="Password" />
               </View>
               <View style={styles.loginStyles.viewContainerChild}>
-                <LoginInputComponent
+                <LoginInputPassComponent
                   name="passwordConfirm"
                   label="Confirm password"
                 />

@@ -1,5 +1,5 @@
 import { Button, Image, ScrollView, Text, View } from "react-native";
-import LoginInputComponent from "../components/LoginInputComponent";
+import LoginInputPassComponent from "../components/LoginInputPassComponent";
 import { Formik } from "formik";
 import { loginValidationSchema } from "../utils/loginValidationSchema";
 import styles from "../styles/styles";
@@ -34,10 +34,10 @@ const NewPasswordScreen = ({ navigation }: { navigation: any }) => {
                 </Text>
               </View>
               <View style={styles.loginStyles.viewContainerChild}>
-                <LoginInputComponent name="password" label="Password" />
+                <LoginInputPassComponent name="password" label="Password" />
               </View>
               <View style={styles.loginStyles.viewContainerChild}>
-                <LoginInputComponent
+                <LoginInputPassComponent
                   name="passwordConfirm"
                   label="Confirm password"
                 />

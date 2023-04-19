@@ -1,10 +1,11 @@
-import { Button, Image, ScrollView, Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
 import { Divider } from "react-native-paper";
 import LoginInputComponent from "../components/LoginInputComponent";
 import LoginInputPassComponent from "../components/LoginInputPassComponent";
 import { Formik } from "formik";
 import { loginValidationSchema } from "../utils/loginValidationSchema";
 import styles from "../styles/styles";
+import ButtonComponent from "../components/ButtonComponent";
 
 function register() {}
 
@@ -28,31 +29,30 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
             <ScrollView contentContainerStyle={styles.loginStyles.scrollView}>
               <View style={styles.loginStyles.viewImage}>
                 <Image
-                  source={require("../assets/logo.png")}
+                  source={require("../assets/images/logo.png")}
                   style={styles.loginStyles.image}
                 />
               </View>
               <View style={styles.loginStyles.viewContainerChild}>
-                <LoginInputComponent name="email" label="Email" />
+                <LoginInputComponent name="email" label="Enter email" />
               </View>
               <View style={styles.loginStyles.viewContainerChild}>
-                <LoginInputComponent name="user" label="User" />
+                <LoginInputComponent name="user" label="Enter username" />
               </View>
               <View style={styles.loginStyles.viewContainerChild}>
-                <LoginInputPassComponent name="password" label="Password" />
+                <LoginInputPassComponent
+                  name="password"
+                  label="Enter password"
+                />
               </View>
               <View style={styles.loginStyles.viewContainerChild}>
                 <LoginInputPassComponent
                   name="passwordConfirm"
-                  label="Confirm password"
+                  label="Repeat password"
                 />
               </View>
               <View style={styles.loginStyles.viewContainerChild}>
-                <Button
-                  title="Sign Up"
-                  onPress={register}
-                  color={styles.colors.grey800}
-                />
+                <ButtonComponent title="Sign Up" onPress={register} />
               </View>
               <Text
                 style={styles.loginStyles.text}
@@ -61,12 +61,6 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
                 Already have an account? Login
               </Text>
               <Divider style={styles.loginStyles.divider}></Divider>
-              <Text
-                style={styles.loginStyles.text}
-                onPress={() => navigation.navigate("RecoverPassword")}
-              >
-                Lost password?
-              </Text>
             </ScrollView>
           </View>
         );

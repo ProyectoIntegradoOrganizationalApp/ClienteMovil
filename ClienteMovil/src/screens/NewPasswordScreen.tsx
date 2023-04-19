@@ -1,8 +1,9 @@
-import { Button, Image, ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import LoginInputPassComponent from "../components/LoginInputPassComponent";
 import { Formik } from "formik";
 import { loginValidationSchema } from "../utils/loginValidationSchema";
 import styles from "../styles/styles";
+import ButtonComponent from "../components/ButtonComponent";
 
 function newPassword() {}
 
@@ -22,15 +23,15 @@ const NewPasswordScreen = ({ navigation }: { navigation: any }) => {
         return (
           <View style={styles.loginStyles.viewContainer}>
             <ScrollView contentContainerStyle={styles.loginStyles.scrollView}>
-              <View style={styles.loginStyles.viewImage}>
-                <Image
-                  source={require("../assets/logo.png")}
-                  style={styles.loginStyles.image}
-                />
+              <View style={styles.loginStyles.viewContainerChild}>
+                <Text style={styles.loginStyles.textTitle}>
+                  Change Password
+                </Text>
               </View>
               <View style={styles.loginStyles.viewContainerChild}>
-                <Text style={styles.loginStyles.text}>
-                  Your identity has been verified. Set your new password
+                <Text style={styles.loginStyles.textsubTitle}>
+                  Create a strong and unique password to protect your
+                  information
                 </Text>
               </View>
               <View style={styles.loginStyles.viewContainerChild}>
@@ -39,13 +40,19 @@ const NewPasswordScreen = ({ navigation }: { navigation: any }) => {
               <View style={styles.loginStyles.viewContainerChild}>
                 <LoginInputPassComponent
                   name="passwordConfirm"
-                  label="Confirm password"
+                  label="Repeat password"
                 />
               </View>
-              <Button
-                title="Update Password"
-                onPress={newPassword}
-                color={styles.colors.grey800}
+              <View style={styles.loginStyles.viewContainerChild}>
+                <ButtonComponent
+                  title="Change Password"
+                  onPress={newPassword}
+                />
+              </View>
+              <ButtonComponent
+                title="Cancel"
+                type="secondary"
+                onPress={() => navigation.navigate("RecoverPassword")}
               />
             </ScrollView>
           </View>

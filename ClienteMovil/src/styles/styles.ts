@@ -19,6 +19,7 @@ const styles = {
     },
     viewImage: {
       alignItems: "center",
+      marginLeft: 25,
     },
     image: {
       width: 300,
@@ -29,6 +30,17 @@ const styles = {
     },
     text: {
       textAlign: "center",
+      fontSize: 16,
+    },
+    textTitle: {
+      textAlign: "left",
+      fontSize: 30,
+      fontWeight: "bold",
+      fontFamily: "Mulish",
+    },
+    textsubTitle: {
+      textAlign: "left",
+      fontSize: 16,
     },
     divider: {
       height: 1,

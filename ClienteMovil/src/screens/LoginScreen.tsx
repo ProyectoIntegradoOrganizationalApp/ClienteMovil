@@ -1,10 +1,11 @@
-import { Button, Image, ScrollView, Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
 import { Divider } from "react-native-paper";
 import LoginInputComponent from "../components/LoginInputComponent";
 import LoginInputPassComponent from "../components/LoginInputPassComponent";
 import { Formik } from "formik";
 import { loginValidationSchema } from "../utils/loginValidationSchema";
 import styles from "../styles/styles";
+import ButtonComponent from "../components/ButtonComponent";
 
 function login() {}
 
@@ -26,35 +27,34 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
             <ScrollView contentContainerStyle={styles.loginStyles.scrollView}>
               <View style={styles.loginStyles.viewImage}>
                 <Image
-                  source={require("../assets/logo.png")}
+                  source={require("../assets/images/logo.png")}
                   style={styles.loginStyles.image}
                 />
               </View>
               <View style={styles.loginStyles.viewContainerChild}>
-                <LoginInputComponent name="email" label="Email" />
+                <LoginInputComponent name="email" label="Enter email" />
               </View>
               <View style={styles.loginStyles.viewContainerChild}>
-                <LoginInputPassComponent name="password" label="Password" />
-              </View>
-              <View style={styles.loginStyles.viewContainerChild}>
-                <Button
-                  title="Sign In"
-                  onPress={login}
-                  color={styles.colors.grey800}
+                <LoginInputPassComponent
+                  name="password"
+                  label="Enter password"
                 />
               </View>
+              <View style={styles.loginStyles.viewContainerChild}>
+                <Text
+                  style={styles.loginStyles.text}
+                  onPress={() => navigation.navigate("RecoverPassword")}
+                >
+                  Recovery password
+                </Text>
+              </View>
+              <ButtonComponent title="Log In" onPress={login} />
+              <Divider style={styles.loginStyles.divider}></Divider>
               <Text
                 style={styles.loginStyles.text}
                 onPress={() => navigation.navigate("Register")}
               >
                 You do not have an account? Register
-              </Text>
-              <Divider style={styles.loginStyles.divider}></Divider>
-              <Text
-                style={styles.loginStyles.text}
-                onPress={() => navigation.navigate("RecoverPassword")}
-              >
-                Lost password?
               </Text>
             </ScrollView>
           </View>

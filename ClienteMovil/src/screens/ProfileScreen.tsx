@@ -5,7 +5,7 @@ import styles from "../styles/styles";
 const ProfileScreen = () => {
   return (
     <View>
-      <Card style={styleScript.profile}>
+      <Card style={styleScript.profileCard}>
         <Card.Title
           title={"Pepe Pepin"}
           left={() => (
@@ -42,7 +42,7 @@ const ProfileScreen = () => {
 };
 
 const styleScript = StyleSheet.create({
-  profile: {
+  profileCard: {
     borderRadius: 0,
   },
   listItem: {

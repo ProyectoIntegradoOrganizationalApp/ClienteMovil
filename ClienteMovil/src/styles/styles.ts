@@ -36,7 +36,7 @@ const styles = {
       textAlign: "left",
       fontSize: 30,
       fontWeight: "bold",
-      fontFamily: "Mulish",
+      //fontFamily: "Mulish",
     },
     textsubTitle: {
       textAlign: "left",

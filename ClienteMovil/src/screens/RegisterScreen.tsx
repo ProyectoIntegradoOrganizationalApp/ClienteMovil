@@ -1,11 +1,11 @@
 import { Image, ScrollView, Text, View } from "react-native";
-import { Divider } from "react-native-paper";
 import LoginInputComponent from "../components/LoginInputComponent";
 import LoginInputPassComponent from "../components/LoginInputPassComponent";
 import { Formik } from "formik";
 import { loginValidationSchema } from "../utils/loginValidationSchema";
 import styles from "../styles/styles";
 import ButtonComponent from "../components/ButtonComponent";
+import DividerComponent from "../components/DividerComponent";
 
 function register() {}
 
@@ -37,9 +37,6 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
                 <LoginInputComponent name="email" label="Enter email" />
               </View>
               <View style={styles.loginStyles.viewContainerChild}>
-                <LoginInputComponent name="user" label="Enter username" />
-              </View>
-              <View style={styles.loginStyles.viewContainerChild}>
                 <LoginInputPassComponent
                   name="password"
                   label="Enter password"
@@ -54,13 +51,28 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
               <View style={styles.loginStyles.viewContainerChild}>
                 <ButtonComponent title="Sign Up" onPress={register} />
               </View>
+              <View style={styles.loginStyles.viewContainerChild}>
+                <DividerComponent content="or" />
+              </View>
+              <View style={styles.loginStyles.viewContainerChild}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <View style={{ flex: 5 }}>
+                    <ButtonComponent type="google" />
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <></>
+                  </View>
+                  <View style={{ flex: 5 }}>
+                    <ButtonComponent type="github" />
+                  </View>
+                </View>
+              </View>
               <Text
                 style={styles.loginStyles.text}
                 onPress={() => navigation.navigate("Login")}
               >
                 Already have an account? Login
               </Text>
-              <Divider style={styles.loginStyles.divider}></Divider>
             </ScrollView>
           </View>
         );

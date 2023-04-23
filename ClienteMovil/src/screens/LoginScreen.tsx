@@ -1,11 +1,11 @@
 import { Image, ScrollView, Text, View } from "react-native";
-import { Divider } from "react-native-paper";
 import LoginInputComponent from "../components/LoginInputComponent";
 import LoginInputPassComponent from "../components/LoginInputPassComponent";
 import { Formik } from "formik";
 import { loginValidationSchema } from "../utils/loginValidationSchema";
 import styles from "../styles/styles";
 import ButtonComponent from "../components/ButtonComponent";
+import DividerComponent from "../components/DividerComponent";
 
 function login() {}
 
@@ -48,8 +48,12 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
                   Recovery password
                 </Text>
               </View>
-              <ButtonComponent title="Log In" onPress={login} />
-              <Divider style={styles.loginStyles.divider}></Divider>
+              <View style={styles.loginStyles.viewContainerChild}>
+                <ButtonComponent title="Log In" onPress={login} />
+              </View>
+              <View style={styles.loginStyles.viewContainerChild}>
+                <DividerComponent content="or" />
+              </View>
               <Text
                 style={styles.loginStyles.text}
                 onPress={() => navigation.navigate("Register")}

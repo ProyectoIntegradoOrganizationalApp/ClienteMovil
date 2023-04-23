@@ -1,17 +1,33 @@
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Image, Pressable, StyleSheet, Text } from "react-native";
 import customStyles from "../styles/styles";
 
 function LoginButtonComponent(props: any) {
   const { title, type = "primary", onPress } = props;
+  let buttonContent = <Text style={styles.text}>{title}</Text>;
+  let buttonType;
+  switch (type) {
+    case "primary":
+      buttonType = styles.buttonPrimary;
+      break;
+    case "secondary":
+      buttonType = styles.buttonSecondary;
+      break;
+    case "google":
+      buttonContent = (
+        <Image source={require("../assets/images/icon-google.png")} />
+      );
+      buttonType = styles.buttonGoogle;
+      break;
+    case "github":
+      buttonContent = (
+        <Image source={require("../assets/images/icon-github.png")} />
+      );
+      buttonType = styles.buttonGithub;
+      break;
+  }
   return (
-    <Pressable
-      style={[
-        styles.button,
-        type == "primary" ? styles.buttonPrimary : styles.buttonSecondary,
-      ]}
-      onPress={onPress}
-    >
-      <Text style={styles.text}>{title}</Text>
+    <Pressable style={[styles.button, buttonType]} onPress={onPress}>
+      {buttonContent}
     </Pressable>
   );
 }
@@ -30,6 +46,14 @@ const styles = StyleSheet.create({
   },
   buttonSecondary: {
     backgroundColor: customStyles.colors.grey500,
+  },
+  buttonGoogle: {
+    height: 50,
+    backgroundColor: "#ffffff",
+  },
+  buttonGithub: {
+    height: 50,
+    backgroundColor: "#1b1f23",
   },
   text: {
     fontSize: 16,

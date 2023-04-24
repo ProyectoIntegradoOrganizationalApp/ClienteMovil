@@ -48,11 +48,11 @@ const styles = StyleSheet.create({
     backgroundColor: customStyles.colors.grey500,
   },
   buttonGoogle: {
-    height: 50,
+    height: 48,
     backgroundColor: "#ffffff",
   },
   buttonGithub: {
-    height: 50,
+    height: 48,
     backgroundColor: "#1b1f23",
   },
   text: {

@@ -23,8 +23,8 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
     >
       {({ handleChange, handleSubmit, values }) => {
         return (
-          <View style={styles.loginStyles.viewContainer}>
-            <ScrollView contentContainerStyle={styles.loginStyles.scrollView}>
+          <ScrollView contentContainerStyle={styles.loginStyles.scrollView}>
+            <View style={styles.loginStyles.viewContainer}>
               <View style={styles.loginStyles.viewImage}>
                 <Image
                   source={require("../assets/images/logo.png")}
@@ -54,14 +54,35 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
               <View style={styles.loginStyles.viewContainerChild}>
                 <DividerComponent content="or" />
               </View>
-              <Text
-                style={styles.loginStyles.text}
+              <View style={styles.loginStyles.viewContainerChild}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <View style={{ flex: 5 }}>
+                    <ButtonComponent type="google" />
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <></>
+                  </View>
+                  <View style={{ flex: 5 }}>
+                    <ButtonComponent type="github" />
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View style={styles.loginStyles.viewNavigateContainer}>
+              <View style={styles.loginStyles.viewContainerChild}>
+                <Text style={styles.loginStyles.textTitle}>New Here?</Text>
+              </View>
+              <View style={styles.loginStyles.viewContainerChild}>
+                <Text style={styles.loginStyles.textsubTitle}>
+                  Sign up and discover a great amount of new opportunities!
+                </Text>
+              </View>
+              <ButtonComponent
+                title="Sign up"
                 onPress={() => navigation.navigate("Register")}
-              >
-                You do not have an account? Register
-              </Text>
-            </ScrollView>
-          </View>
+              />
+            </View>
+          </ScrollView>
         );
       }}
     </Formik>

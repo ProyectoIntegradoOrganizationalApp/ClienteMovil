@@ -25,8 +25,23 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
     >
       {({ handleChange, handleSubmit, values }) => {
         return (
-          <View style={styles.loginStyles.viewContainer}>
-            <ScrollView contentContainerStyle={styles.loginStyles.scrollView}>
+          <ScrollView contentContainerStyle={styles.loginStyles.scrollView}>
+            <View style={styles.loginStyles.viewNavigateContainer}>
+              <View style={styles.loginStyles.viewContainerChild}>
+                <Text style={styles.loginStyles.textTitle}>Registered?</Text>
+              </View>
+              <View style={styles.loginStyles.viewContainerChild}>
+                <Text style={styles.loginStyles.textsubTitle}>
+                  If you already have an account, just sign in. We've missed
+                  you!
+                </Text>
+              </View>
+              <ButtonComponent
+                title="Log in"
+                onPress={() => navigation.navigate("Login")}
+              />
+            </View>
+            <View style={styles.loginStyles.viewContainer}>
               <View style={styles.loginStyles.viewImage}>
                 <Image
                   source={require("../assets/images/logo.png")}
@@ -67,14 +82,8 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
                   </View>
                 </View>
               </View>
-              <Text
-                style={styles.loginStyles.text}
-                onPress={() => navigation.navigate("Login")}
-              >
-                Already have an account? Login
-              </Text>
-            </ScrollView>
-          </View>
+            </View>
+          </ScrollView>
         );
       }}
     </Formik>

@@ -10,12 +10,16 @@ const styles = {
     grey800: colors.slate[800],
   },
   loginStyles: StyleSheet.create({
-    viewContainer: {
-      padding: 20,
-    },
     scrollView: {
       height: "100%",
-      justifyContent: "center",
+      justifyContent: "flex-end",
+    },
+    viewNavigateContainer: {
+      padding: 20,
+      backgroundColor: "#e2e8f0",
+    },
+    viewContainer: {
+      padding: 20,
     },
     viewImage: {
       alignItems: "center",

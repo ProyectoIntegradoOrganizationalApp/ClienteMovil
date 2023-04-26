@@ -1,4 +1,4 @@
-import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import AchievementComponent from "../components/AchievementComponent";
 
 const achievements = [
@@ -46,8 +46,10 @@ const AchievementsScreen = () => {
           <Text>Newbie</Text>
         </View>
       </View>
-      <View>
+      <View style={{ height: "70%" }}>
         <FlatList
+          horizontal={false}
+          scrollEnabled={true}
           data={achievements}
           renderItem={({ item: ach }) => <AchievementComponent {...ach} />}
         />
@@ -66,7 +68,6 @@ const scriptStyles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 100,
     backgroundColor: "#089f7b",
-    borderColor: "#089f7b",
     zIndex: 1,
     elevation: 1,
   },

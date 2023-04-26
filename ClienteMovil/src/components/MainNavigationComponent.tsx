@@ -1,23 +1,54 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import MainStack from "../stack/MainStack";
+import FriendsScreen from "../screens/FriendsScreen";
 import NotificationScreen from "../screens/NotificationScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import { StyleSheet, View } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
 const MainNavigationComponent = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+    /*screenOptions={({ navigation }: { navigation: any }) => ({
+      headerRight: ({ tintColor }) => (
+          <View style={{ flexDirection: "row" }}>
+            <Icon
+              name="bell"
+              size={20}
+              color={tintColor}
+              onPress={() => navigation.navigate("Notification")}
+            />
+            <Icon
+              name="bell"
+              size={20}
+              color={tintColor}
+              onPress={() => navigation.navigate("Notification")}
+            />
+          </View>
+        ),
+      })}*/
+    >
       <Tab.Screen
         name="MainStack"
         component={MainStack}
         options={{
           headerShown: false,
-          //tabBarLabel: "Home",
           tabBarShowLabel: false,
           tabBarIcon: ({ color, size }) => {
             return <Icon name="home" size={size} color={color} />;
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Friends"
+        component={FriendsScreen}
+        options={{
+          title: "Friends",
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color, size }) => {
+            return <Icon name="account-multiple" size={size} color={color} />;
           },
         }}
       />
@@ -26,11 +57,11 @@ const MainNavigationComponent = () => {
         component={NotificationScreen}
         options={{
           title: "Notifications",
-          //tabBarLabel: "Notifications",
           tabBarShowLabel: false,
-          tabBarBadge: 3, // TODO: Obtener notificaciones
-          tabBarIcon: ({ color, size }) => {
-            return <Icon name="bell" size={size} color={color} />;
+          //tabBarBadge: "",
+          tabBarBadgeStyle: scriptStyles.tabBarBadgeStyle,
+          tabBarIcon: ({ color }) => {
+            return <Icon name="bell" size={22} color={color} />;
           },
         }}
       />
@@ -47,5 +78,13 @@ const MainNavigationComponent = () => {
     </Tab.Navigator>
   );
 };
+
+const scriptStyles = StyleSheet.create({
+  tabBarBadgeStyle: {
+    minWidth: 10,
+    maxHeight: 10,
+    borderRadius: 100,
+  },
+});
 
 export default MainNavigationComponent;

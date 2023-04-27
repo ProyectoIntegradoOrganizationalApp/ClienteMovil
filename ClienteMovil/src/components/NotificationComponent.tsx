@@ -31,7 +31,9 @@ function NotificationComponent(props: INotification) {
 
 const styles = StyleSheet.create({
   notification: {
-    borderRadius: 0,
+    borderRadius: 5,
+    marginTop: 15,
+    marginHorizontal: 10,
   },
 });
 

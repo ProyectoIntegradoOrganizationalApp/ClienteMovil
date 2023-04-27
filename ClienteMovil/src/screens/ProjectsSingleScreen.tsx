@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from "react-native";
+import { FlatList, View } from "react-native";
 import BoardComponent from "../components/BoardComponent";
 
 const boards = [
@@ -19,16 +19,15 @@ const boards = [
   },
 ];
 
-const OrganizationScreen = () => {
+const ProjectsSingleScreen = () => {
   return (
     <View>
       <FlatList
         data={boards}
-        ItemSeparatorComponent={() => <Text></Text>}
         renderItem={({ item: board }) => <BoardComponent {...board} />}
       />
     </View>
   );
 };
 
-export default OrganizationScreen;
+export default ProjectsSingleScreen;

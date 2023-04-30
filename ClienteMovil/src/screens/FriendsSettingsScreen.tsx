@@ -1,6 +1,8 @@
 import { View, StyleSheet } from "react-native";
 import { Text } from "react-native-paper";
 
+// TODO: Code file
+
 const FriendsSettingsScreen = () => {
   return (
     <View style={styles.container}>

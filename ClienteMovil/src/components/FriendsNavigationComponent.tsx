@@ -20,3 +20,5 @@ const FriendsNavigationComponent = () => {
 };
 
 export default FriendsNavigationComponent;
+
+// TODO: Remove file

@@ -1,6 +1,7 @@
 import { Avatar, Card } from "react-native-paper";
 import { FlatList, StyleSheet, View } from "react-native";
-import ProfileProjectComponent from "../components/ProfileProjectComponent";
+//import ProfileProjectComponent from "../components/ProfileProjectComponent";
+import ProjectComponent from "../components/ProjectComponent";
 import styles from "../styles/styles";
 
 const projects = [
@@ -50,9 +51,7 @@ const ProfileProjectsScreen = () => {
               horizontal={false}
               scrollEnabled={true}
               data={projects}
-              renderItem={({ item: pro }) => (
-                <ProfileProjectComponent {...pro} />
-              )}
+              renderItem={({ item: pro }) => <ProjectComponent {...pro} />}
             />
           </View>
         </Card.Content>

@@ -64,3 +64,5 @@ const scriptStyles = StyleSheet.create({
 });
 
 export default ProfileProjectComponent;
+
+// TODO: Remove file

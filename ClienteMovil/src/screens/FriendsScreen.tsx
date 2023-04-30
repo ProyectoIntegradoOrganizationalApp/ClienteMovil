@@ -1,8 +1,23 @@
-import FriendsNavigationComponent from "../components/FriendsNavigationComponent";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import FriendsListScreen from "../screens/FriendsListScreen";
+import AddFriendScreen from "../screens/AddFriendScreen";
+import FriendsSettingsScreen from "../screens/FriendsSettingsScreen";
 import { StyleSheet } from "react-native";
 
+const Tab = createMaterialTopTabNavigator();
+
 const FriendsScreen = () => {
-  return <FriendsNavigationComponent />;
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="FriendsList"
+        options={{ title: "Friends" }}
+        component={FriendsListScreen}
+      />
+      <Tab.Screen name="Add Friend" component={AddFriendScreen} />
+      <Tab.Screen name="Settings" component={FriendsSettingsScreen} />
+    </Tab.Navigator>
+  );
 };
 
 const scriptStyles = StyleSheet.create({});

@@ -1,7 +1,7 @@
 import { Image, Pressable, StyleSheet, Text } from "react-native";
 import customStyles from "../styles/styles";
 
-function LoginButtonComponent(props: any) {
+function ButtonComponent(props: any) {
   const { title, type = "primary", onPress } = props;
   let buttonContent = <Text style={styles.text}>{title}</Text>;
   let buttonType;
@@ -23,6 +23,9 @@ function LoginButtonComponent(props: any) {
         <Image source={require("../assets/images/icon-github.png")} />
       );
       buttonType = styles.buttonGithub;
+      break;
+    case "confirm":
+      buttonType = styles.buttonConfirm;
       break;
   }
   return (
@@ -55,6 +58,9 @@ const styles = StyleSheet.create({
     height: 48,
     backgroundColor: "#1b1f23",
   },
+  buttonConfirm: {
+    backgroundColor: "#008f39",
+  },
   text: {
     fontSize: 16,
     lineHeight: 21,
@@ -63,4 +69,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginButtonComponent;
+export default ButtonComponent;

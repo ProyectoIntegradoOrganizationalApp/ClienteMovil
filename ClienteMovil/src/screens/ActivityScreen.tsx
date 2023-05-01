@@ -1,6 +1,7 @@
-import { Avatar, Card } from "react-native-paper";
+import { Avatar, Card, IconButton } from "react-native-paper";
 import { StyleSheet, Text, View } from "react-native";
 import styles from "../styles/styles";
+import ModalConfirmComponent from "../components/ModalConfirmComponent";
 
 const ActivityScreen = () => {
   return (
@@ -44,18 +45,35 @@ const ActivityScreen = () => {
           title="Daily Activity"
           titleStyle={{ textAlign: "center" }}
           left={() => (
-            <Avatar.Icon
+            <IconButton
               icon="help-circle"
               size={35}
-              color="grey"
+              iconColor="grey"
               style={scriptStyles.cardIconActivity}
+              onPress={() => {
+                // TODO: Try component
+                <ModalConfirmComponent
+                  message={
+                    <Text>
+                      Are you sure you want to
+                      <span style={{ color: "#e45f5f" }}>
+                        proceed with this action
+                      </span>
+                      ?
+                    </Text>
+                  }
+                  confirmText="Confirm"
+                  dimissText="Cancel"
+                  isVisible="true"
+                />;
+              }}
             />
           )}
           right={() => (
-            <Avatar.Icon
+            <IconButton
               icon="cog"
               size={35}
-              color="grey"
+              iconColor="grey"
               style={[scriptStyles.cardIconActivity, { marginRight: 15 }]}
             />
           )}

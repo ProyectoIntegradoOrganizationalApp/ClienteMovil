@@ -1,28 +1,27 @@
-import { FlatList, View } from "react-native";
-import ProjectComponent from "../components/ProjectComponent";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import ProjectsListScreen from "./ProjectsListScreen";
+import ProjectsSettingsScreen from "./ProjectsSettingsScreen";
+import { StyleSheet } from "react-native";
 
-const projects = [
-  {
-    id: "1",
-    title: "IntegratedProject",
-    description:
-      "Proyecto para crear una página para administrar tareas y projectos",
-  },
-  {
-    id: "2",
-    title: "proyectoDEePrueba",
-  },
-];
+const Tab = createMaterialTopTabNavigator();
 
 const ProjectsScreen = () => {
   return (
-    <View>
-      <FlatList
-        data={projects}
-        renderItem={({ item: pro }) => <ProjectComponent {...pro} />}
+    <Tab.Navigator>
+      <Tab.Screen
+        name="ProjectsList"
+        options={{ title: "Projects" }}
+        component={ProjectsListScreen}
       />
-    </View>
+      <Tab.Screen
+        name="ProjectsSettings"
+        options={{ title: "Settings" }}
+        component={ProjectsSettingsScreen}
+      />
+    </Tab.Navigator>
   );
 };
+
+const scriptStyles = StyleSheet.create({});
 
 export default ProjectsScreen;

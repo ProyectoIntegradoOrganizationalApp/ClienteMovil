@@ -1,7 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ProjectsScreen from "../screens/ProjectsScreen";
 import ProjectsSingleScreen from "../screens/ProjectsSingleScreen";
-import BoardScreen from "../screens/BoardScreen";
+import BoardsSingleScreen from "../screens/BoardsSingleScreen";
+import ProjectsAppsScreen from "../screens/ProjectsAppsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,9 +19,16 @@ const MainStack = () => {
       />
       <Stack.Screen
         name="Board"
-        component={BoardScreen}
+        component={BoardsSingleScreen}
         options={({ route }: { route: any }) => ({
           title: route.params.boardTitle,
+        })}
+      />
+      <Stack.Screen
+        name="ProjectsApps"
+        component={ProjectsAppsScreen}
+        options={() => ({
+          title: "Apps for install",
         })}
       />
     </Stack.Navigator>

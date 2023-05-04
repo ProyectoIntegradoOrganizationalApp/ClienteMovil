@@ -32,7 +32,7 @@ function MemberComponent(props: IMember) {
     <Card style={scriptStyles.member}>
       <Card.Title
         title={
-          <View style={{ flexDirection: "row" }}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
             {isMemberAdmin(props.role)}
             <Text>{props.user}</Text>
           </View>

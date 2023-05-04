@@ -1,22 +1,44 @@
-import { View, StyleSheet } from "react-native";
-import { Text } from "react-native-paper";
+import * as React from "react";
+import { FlatList, StyleSheet, View } from "react-native";
+import MemberComponent from "../components/MemberComponent";
 
 // TODO: Code file
 
+const friends = [
+  {
+    id: "1",
+    profile: "https://picsum.photos/163",
+    user: "Pepe Pepín",
+    status: "Deja de leer mi estado",
+    role: "Admin",
+  },
+  {
+    id: "2",
+    profile: "https://picsum.photos/490",
+    user: "Juan Juanete",
+    status: "Vive sin límites",
+    role: "Partner",
+  },
+  {
+    id: "3",
+    profile: "https://picsum.photos/501",
+    user: "Manolo Manolín",
+    status: "El interior es lo que cuesta",
+    role: "Editor",
+  },
+];
+
 const ProjectsMembersScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text variant="headlineMedium">Projects Members Screen</Text>
+    <View>
+      <FlatList
+        data={friends}
+        renderItem={({ item: member }) => <MemberComponent {...member} />}
+      />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
+const scriptStyles = StyleSheet.create({});
 
 export default ProjectsMembersScreen;

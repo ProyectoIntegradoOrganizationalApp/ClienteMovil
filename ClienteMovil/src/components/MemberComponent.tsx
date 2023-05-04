@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { Avatar, Card } from "react-native-paper";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 
 interface IMember {
@@ -12,6 +12,19 @@ interface IMember {
 
 const roles = ["Admin", "Editor", "Author", "Partner"];
 
+function isMemberAdmin(role: string) {
+  if (role === "Admin") {
+    return (
+      <Avatar.Icon
+        icon="crown"
+        color="#ec9d27"
+        size={30}
+        style={scriptStyles.crownIcon}
+      />
+    );
+  }
+}
+
 function MemberComponent(props: IMember) {
   //const navigation = useNavigation<any>();
 
@@ -19,30 +32,21 @@ function MemberComponent(props: IMember) {
     <Card style={scriptStyles.member}>
       <Card.Title
         title={
-          <View>
-            {props.user}
-            {props.role === "Admin" ? (
-              <Avatar.Icon
-                icon="crown"
-                color="#ec9d27"
-                size={30}
-                style={scriptStyles.crownIcon}
-              />
-            ) : (
-              ""
-            )}
+          <View style={{ flexDirection: "row" }}>
+            {isMemberAdmin(props.role)}
+            <Text>{props.user}</Text>
           </View>
         }
         subtitle={props.status}
         left={() => <Avatar.Image size={40} source={{ uri: props.profile }} />}
         right={() => (
           <View style={{ flexDirection: "row" }}>
-            <SelectDropdown
+            {/*<SelectDropdown
               data={roles}
               onSelect={(selectedItem, index) => {
                 console.log(selectedItem, index);
               }}
-            />
+            />*/}
             <Avatar.Icon
               icon="message"
               color="#fff"

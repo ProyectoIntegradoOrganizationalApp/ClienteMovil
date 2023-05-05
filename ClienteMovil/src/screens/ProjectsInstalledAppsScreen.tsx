@@ -1,31 +1,59 @@
-import { View, StyleSheet } from "react-native";
-import { IconButton, Text } from "react-native-paper";
+import { FlatList, StyleSheet, View } from "react-native";
+import { IconButton } from "react-native-paper";
+import AppComponent from "../components/AppComponent copy";
 
-// TODO: Code file
+const apps = [
+  {
+    id: "1",
+    icon: "https://picsum.photos/268",
+    name: "Taskman",
+    description: "Work Managment",
+    installed: true,
+    added: true,
+    premium: false,
+  },
+];
 
 const ProjectsInstalledAppsScreen = ({ navigation }: { navigation: any }) => {
   return (
-    <View style={scriptStyles.container}>
-      <Text variant="headlineMedium">Projects Installed Apps Screen</Text>
-      <IconButton
-        icon="basket"
-        size={30}
-        iconColor="#fff"
-        style={scriptStyles.basketIcon}
-        onPress={() => navigation.navigate("ProjectsApps")}
+    <View style={{ marginTop: 15 }}>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "flex-end",
+          alignItems: "center",
+        }}
+      >
+        <IconButton
+          icon="basket"
+          size={20}
+          iconColor="#fff"
+          style={scriptStyles.basketIcon}
+          onPress={() => navigation.navigate("ProjectsApps")}
+        />
+        <IconButton
+          icon="cog"
+          size={25}
+          iconColor="grey"
+          style={scriptStyles.settingsIcon}
+        />
+      </View>
+      <FlatList
+        data={apps}
+        renderItem={({ item: app }) => <AppComponent {...app} />}
       />
     </View>
   );
 };
 
 const scriptStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
   basketIcon: {
-    backgroundColor: "#008f39",
+    borderRadius: 5,
+    backgroundColor: "#3c6db2",
+  },
+  settingsIcon: {
+    borderRadius: 5,
+    backgroundColor: "transparent",
   },
 });
 

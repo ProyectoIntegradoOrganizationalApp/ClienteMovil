@@ -2,8 +2,6 @@ import * as React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import MemberComponent from "../components/MemberComponent";
 
-// TODO: Code file
-
 const friends = [
   {
     id: "1",

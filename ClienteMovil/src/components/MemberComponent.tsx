@@ -10,8 +10,6 @@ interface IMember {
   role: string;
 }
 
-const roles = ["Admin", "Editor", "Author", "Partner"];
-
 function isMemberAdmin(role: string) {
   if (role === "Admin") {
     return (
@@ -33,20 +31,20 @@ function MemberComponent(props: IMember) {
       <Card.Title
         title={
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            {isMemberAdmin(props.role)}
             <Text>{props.user}</Text>
+            {isMemberAdmin(props.role)}
           </View>
         }
         subtitle={props.status}
         left={() => <Avatar.Image size={40} source={{ uri: props.profile }} />}
         right={() => (
-          <View style={{ flexDirection: "row" }}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
             {/*<SelectDropdown
-              data={roles}
-              onSelect={(selectedItem, index) => {
-                console.log(selectedItem, index);
-              }}
-            />*/}
+                data={["Admin", "Editor", "Author", "Partner"]}
+                onSelect={(selectedItem, index) => {
+                  console.log(selectedItem, index);
+                }}
+              />*/}
             <Avatar.Icon
               icon="message"
               color="#fff"

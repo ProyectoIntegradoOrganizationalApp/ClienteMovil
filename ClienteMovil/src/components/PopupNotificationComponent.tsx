@@ -17,14 +17,27 @@ const PopupNotificationComponent = (props: any) => {
   let icon;
   switch (type) {
     case "success":
-      icon = <Avatar.Icon icon="check-circle" color="#6dcf81" size={24} />;
+      icon = (
+        <Avatar.Icon
+          icon="check-circle"
+          color="#6dcf81"
+          size={30}
+          style={styles.avatarIcon}
+        />
+      );
       break;
     case "error":
-      icon = <Avatar.Icon icon="close-circle" color="#bf6060" size={24} />;
+      icon = (
+        <Avatar.Icon
+          icon="close-circle"
+          color="#bf6060"
+          size={30}
+          style={styles.avatarIcon}
+        />
+      );
       break;
   }
 
-  // TODO: Try component
   const popIn = () => {
     Animated.timing(popAnim, {
       toValue: windowHeight * 0.35 * -1,
@@ -67,7 +80,12 @@ const PopupNotificationComponent = (props: any) => {
           <Text style={{ fontSize: 12 }}>{message}</Text>
         </View>
         <TouchableOpacity onPress={instantPopOut}>
-          <Avatar.Icon icon="close" color="#000000" size={24} />
+          <Avatar.Icon
+            icon="close"
+            color="#000000"
+            size={30}
+            style={styles.avatarIcon}
+          />
         </TouchableOpacity>
       </View>
     </Animated.View>
@@ -100,6 +118,9 @@ const styles = StyleSheet.create({
   toastText: {
     width: "70%",
     padding: 2,
+  },
+  avatarIcon: {
+    backgroundColor: "transparent",
   },
 });
 

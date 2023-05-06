@@ -2,13 +2,14 @@ import { Avatar, Card, IconButton } from "react-native-paper";
 import { StyleSheet, Text, View } from "react-native";
 import styles from "../styles/styles";
 import ModalConfirmComponent from "../components/ModalConfirmComponent";
+import PopupNotificationComponent from "../components/PopupNotificationComponent";
 
 const ActivityScreen = () => {
   return (
     <View>
       <Card style={scriptStyles.card}>
         <Card.Title
-          title="Finished Tasksthis Week"
+          title="Finished Tasks this Week"
           left={() => (
             <Avatar.Icon
               icon="xml"
@@ -51,21 +52,7 @@ const ActivityScreen = () => {
               iconColor="grey"
               style={scriptStyles.cardIconActivity}
               onPress={() => {
-                // TODO: Try component
-                <ModalConfirmComponent
-                  message={
-                    <Text>
-                      Are you sure you want to
-                      <span style={{ color: "#e45f5f" }}>
-                        proceed with this action
-                      </span>
-                      ?
-                    </Text>
-                  }
-                  confirmText="Confirm"
-                  dimissText="Cancel"
-                  isVisible="true"
-                />;
+                //popIn;
               }}
             />
           )}
@@ -85,6 +72,27 @@ const ActivityScreen = () => {
           </View>
         </Card.Content>
       </Card>
+      <PopupNotificationComponent
+        type="success"
+        title="Project Created"
+        message="Project 'algo' was created"
+      />
+      {/*
+        <ModalConfirmComponent
+          message={
+          <Text>
+            Are you sure you want to
+            <span style={{ color: "#e45f5f" }}>
+            proceed with this action
+            </span>
+            ?
+          </Text>
+          }
+          confirmText="Confirm"
+          dimissText="Cancel"
+          isVisible="true"
+        />; 
+      */}
     </View>
   );
 };

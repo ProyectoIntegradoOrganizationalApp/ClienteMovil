@@ -1,5 +1,6 @@
 import * as React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
+import { IconButton } from "react-native-paper";
 import MemberComponent from "../components/MemberComponent";
 
 const friends = [
@@ -28,7 +29,21 @@ const friends = [
 
 const ProjectsMembersScreen = () => {
   return (
-    <View>
+    <View style={{ marginTop: 15 }}>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "flex-end",
+          alignItems: "center",
+        }}
+      >
+        <IconButton
+          icon="cog"
+          size={25}
+          iconColor="grey"
+          style={scriptStyles.settingsIcon}
+        />
+      </View>
       <FlatList
         data={friends}
         renderItem={({ item: member }) => <MemberComponent {...member} />}
@@ -37,6 +52,11 @@ const ProjectsMembersScreen = () => {
   );
 };
 
-const scriptStyles = StyleSheet.create({});
+const scriptStyles = StyleSheet.create({
+  settingsIcon: {
+    borderRadius: 5,
+    backgroundColor: "transparent",
+  },
+});
 
 export default ProjectsMembersScreen;

@@ -72,12 +72,13 @@ const ActivityScreen = () => {
           </View>
         </Card.Content>
       </Card>
+      {/*
       <PopupNotificationComponent
         type="success"
         title="Project Created"
         message="Project 'algo' was created"
       />
-      {/*
+      
         <ModalConfirmComponent
           message={
           <Text>

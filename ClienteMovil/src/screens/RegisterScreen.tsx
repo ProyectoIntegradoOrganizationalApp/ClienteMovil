@@ -26,7 +26,12 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
       {({ handleChange, handleSubmit, values }) => {
         return (
           <ScrollView contentContainerStyle={styles.loginStyles.scrollView}>
-            <View style={styles.loginStyles.viewNavigateContainer}>
+            {/*<View
+              style={[
+                styles.loginStyles.viewNavigateContainer,
+                styles.loginStyles.scrollViewRegister,
+              ]}
+            >
               <View style={styles.loginStyles.viewContainerChild}>
                 <Text style={styles.loginStyles.textTitle}>Registered?</Text>
               </View>
@@ -40,7 +45,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
                 title="Log in"
                 onPress={() => navigation.navigate("Login")}
               />
-            </View>
+            </View>*/}
             <View style={styles.loginStyles.viewContainer}>
               <View style={styles.loginStyles.viewImage}>
                 <Image
@@ -82,6 +87,13 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
                   </View>
                 </View>
               </View>
+              <Text
+                style={styles.loginStyles.text}
+                onPress={() => navigation.navigate("Login")}
+              >
+                Registered?{" "}
+                <Text style={{ color: styles.colors.grey800 }}>Log in</Text>
+              </Text>
             </View>
           </ScrollView>
         );

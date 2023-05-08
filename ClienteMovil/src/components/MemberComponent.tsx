@@ -1,7 +1,8 @@
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Avatar, Card } from "react-native-paper";
 import { StyleSheet, Text, View } from "react-native";
-import SelectDropdown from "react-native-select-dropdown";
+import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
 
 interface IMember {
   profile: string;
@@ -23,8 +24,13 @@ function isMemberAdmin(role: string) {
   }
 }
 
+const roles = ["Admin", "Editor", "Author", "Partner"];
+
 function MemberComponent(props: IMember) {
   //const navigation = useNavigation<any>();
+  const [selectedIndex, setSelectedIndex] = React.useState<
+    IndexPath | IndexPath[]
+  >(new IndexPath(0));
 
   return (
     <Card style={scriptStyles.member}>
@@ -39,12 +45,6 @@ function MemberComponent(props: IMember) {
         left={() => <Avatar.Image size={40} source={{ uri: props.profile }} />}
         right={() => (
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            {/*<SelectDropdown
-                data={["Admin", "Editor", "Author", "Partner"]}
-                onSelect={(selectedItem, index) => {
-                  console.log(selectedItem, index);
-                }}
-              />*/}
             <Avatar.Icon
               icon="message"
               color="#fff"
@@ -60,6 +60,23 @@ function MemberComponent(props: IMember) {
           </View>
         )}
       />
+      <Card.Content style={{ marginTop: 10 }}>
+        <Select
+          value={roles[selectedIndex.row]}
+          selectedIndex={selectedIndex}
+          onSelect={(index: IndexPath | IndexPath[]) => setSelectedIndex(index)}
+        >
+          {roles.map(
+            (title: string, index: number): React.ReactElement => (
+              <SelectItem
+                id={index.toString() + 1}
+                title={title}
+                {...(title === props.role ? { selected: true } : {})}
+              />
+            )
+          )}
+        </Select>
+      </Card.Content>
     </Card>
   );
 }

@@ -67,8 +67,15 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
                   </View>
                 </View>
               </View>
+              <Text
+                style={styles.loginStyles.text}
+                onPress={() => navigation.navigate("Register")}
+              >
+                New Here?{" "}
+                <Text style={{ color: styles.colors.grey800 }}>Sign up</Text>
+              </Text>
             </View>
-            <View style={styles.loginStyles.viewNavigateContainer}>
+            {/*<View style={styles.loginStyles.viewNavigateContainer}>
               <View style={styles.loginStyles.viewContainerChild}>
                 <Text style={styles.loginStyles.textTitle}>New Here?</Text>
               </View>
@@ -81,7 +88,7 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
                 title="Sign up"
                 onPress={() => navigation.navigate("Register")}
               />
-            </View>
+        </View>*/}
           </ScrollView>
         );
       }}

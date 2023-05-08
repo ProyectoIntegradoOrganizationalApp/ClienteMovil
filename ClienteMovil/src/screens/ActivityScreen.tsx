@@ -1,10 +1,13 @@
+import React from "react";
 import { Avatar, Card, IconButton } from "react-native-paper";
 import { StyleSheet, Text, View } from "react-native";
+import { Calendar } from "@ui-kitten/components";
 import styles from "../styles/styles";
 import ModalConfirmComponent from "../components/ModalConfirmComponent";
 import PopupNotificationComponent from "../components/PopupNotificationComponent";
 
 const ActivityScreen = () => {
+  const [date, setDate] = React.useState(new Date());
   return (
     <View>
       <Card style={scriptStyles.card}>
@@ -70,6 +73,16 @@ const ActivityScreen = () => {
           <View style={{ padding: 10 }}>
             <Text>Graficas</Text>
           </View>
+        </Card.Content>
+      </Card>
+      <Card style={scriptStyles.card}>
+        <Card.Title
+          title="April - 2023"
+          titleStyle={{ textAlign: "center" }}
+          style={{ borderBottomWidth: 2, borderBottomColor: "#ffffff" }}
+        />
+        <Card.Content>
+          <Calendar date={date} onSelect={(nextDate) => setDate(nextDate)} />
         </Card.Content>
       </Card>
       {/*

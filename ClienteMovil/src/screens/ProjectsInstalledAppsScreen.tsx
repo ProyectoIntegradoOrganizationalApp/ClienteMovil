@@ -1,6 +1,6 @@
 import { FlatList, StyleSheet, View } from "react-native";
 import { IconButton } from "react-native-paper";
-import AppComponent from "../components/AppComponent copy";
+import AppComponent from "../components/AppComponent";
 
 const apps = [
   {

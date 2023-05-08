@@ -1,6 +1,7 @@
+import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import SelectDropdown from "react-native-select-dropdown";
-import AppComponent from "../components/AppComponent copy";
+import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
+import AppComponent from "../components/AppComponent";
 
 const apps = [
   {
@@ -50,26 +51,30 @@ const apps = [
   },
 ];
 
+const orders = ["Recently", "Older", "Alphabetical"];
+
 const ProjectsAppsScreen = () => {
+  const [selectedIndex, setSelectedIndex] = React.useState<
+    IndexPath | IndexPath[]
+  >(new IndexPath(0));
+
   return (
     <View>
-      {
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "flex-end",
-            alignItems: "center",
-          }}
+      <View style={scriptStyles.filterView}>
+        <Text style={scriptStyles.filterText}>Order by:</Text>
+        <Select
+          value={orders[selectedIndex.row]}
+          selectedIndex={selectedIndex}
+          onSelect={(index: IndexPath | IndexPath[]) => setSelectedIndex(index)}
+          style={scriptStyles.filterSelect}
         >
-          <Text>Order by:</Text>
-          <SelectDropdown
-            data={["Recently", "Older", "Alphabetical"]}
-            onSelect={(selectedItem, index) => {
-              console.log(selectedItem, index);
-            }}
-          />
-        </View>
-      }
+          {orders.map(
+            (title: string, index: number): React.ReactElement => (
+              <SelectItem id={index.toString()} title={title} />
+            )
+          )}
+        </Select>
+      </View>
       <FlatList
         data={apps}
         renderItem={({ item: app }) => <AppComponent {...app} />}
@@ -78,6 +83,20 @@ const ProjectsAppsScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({});
+const scriptStyles = StyleSheet.create({
+  filterView: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    marginTop: 15,
+    marginHorizontal: 10,
+  },
+  filterText: {
+    marginRight: 15,
+  },
+  filterSelect: {
+    flex: 1,
+  },
+});
 
 export default ProjectsAppsScreen;

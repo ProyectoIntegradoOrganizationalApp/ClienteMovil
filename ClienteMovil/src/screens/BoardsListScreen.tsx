@@ -1,4 +1,5 @@
-import { FlatList, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
+import { IconButton } from "react-native-paper";
 import BoardComponent from "../components/BoardComponent";
 
 const boards = [
@@ -22,12 +23,35 @@ const boards = [
 const BoardsListScreen = () => {
   return (
     <View>
-      <FlatList
-        data={boards}
-        renderItem={({ item: board }) => <BoardComponent {...board} />}
-      />
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "flex-end",
+          alignItems: "center",
+        }}
+      >
+        <IconButton
+          icon="cog"
+          size={25}
+          iconColor="grey"
+          style={scriptStyles.settingsIcon}
+        />
+      </View>
+      <View style={{ height: "90%" }}>
+        <FlatList
+          data={boards}
+          renderItem={({ item: board }) => <BoardComponent {...board} />}
+        />
+      </View>
     </View>
   );
 };
+
+const scriptStyles = StyleSheet.create({
+  settingsIcon: {
+    borderRadius: 5,
+    backgroundColor: "transparent",
+  },
+});
 
 export default BoardsListScreen;

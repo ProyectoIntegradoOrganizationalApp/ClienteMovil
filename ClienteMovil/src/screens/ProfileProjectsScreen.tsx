@@ -1,6 +1,5 @@
-import { Avatar, Card } from "react-native-paper";
+import { Avatar, Card, FAB } from "react-native-paper";
 import { FlatList, StyleSheet, View } from "react-native";
-//import ProfileProjectComponent from "../components/ProfileProjectComponent";
 import ProjectComponent from "../components/ProjectComponent";
 import styles from "../styles/styles";
 
@@ -19,7 +18,7 @@ const projects = [
 
 const ProfileProjectsScreen = () => {
   return (
-    <View>
+    <View style={{ height: "100%" }}>
       <Card style={scriptStyles.card}>
         <Card.Title
           title="Your Projects"
@@ -56,6 +55,12 @@ const ProfileProjectsScreen = () => {
           </View>
         </Card.Content>
       </Card>
+      <FAB
+        icon="plus"
+        color="#ffffff"
+        style={scriptStyles.fab}
+        onPress={() => {}}
+      />
     </View>
   );
 };
@@ -68,6 +73,14 @@ const scriptStyles = StyleSheet.create({
   },
   cardIconActivity: {
     backgroundColor: "transparent",
+  },
+  fab: {
+    position: "absolute",
+    margin: 15,
+    right: 0,
+    bottom: 0,
+    borderRadius: 15,
+    backgroundColor: styles.colors.grey800,
   },
 });
 

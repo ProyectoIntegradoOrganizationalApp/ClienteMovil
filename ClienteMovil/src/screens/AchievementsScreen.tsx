@@ -1,4 +1,5 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
+import { IconButton } from "react-native-paper";
 import AchievementComponent from "../components/AchievementComponent";
 
 const achievements = [
@@ -35,6 +36,26 @@ const achievements = [
 const AchievementsScreen = () => {
   return (
     <View>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <IconButton
+          icon="help-circle"
+          size={25}
+          iconColor="grey"
+          style={scriptStyles.icon}
+        />
+        <IconButton
+          icon="cog"
+          size={25}
+          iconColor="grey"
+          style={scriptStyles.icon}
+        />
+      </View>
       <View style={{ alignItems: "center", marginBottom: 31 }}>
         <View style={scriptStyles.level}>
           <View style={scriptStyles.levelContent}>
@@ -46,7 +67,7 @@ const AchievementsScreen = () => {
           <Text>Newbie</Text>
         </View>
       </View>
-      <View style={{ height: "70%" }}>
+      <View style={{ height: "60%" }}>
         <FlatList
           horizontal={false}
           scrollEnabled={true}
@@ -59,6 +80,10 @@ const AchievementsScreen = () => {
 };
 
 const scriptStyles = StyleSheet.create({
+  icon: {
+    borderRadius: 5,
+    backgroundColor: "transparent",
+  },
   level: {
     height: 120,
     width: 120,

@@ -69,7 +69,7 @@ function MemberComponent(props: IMember) {
           {roles.map(
             (title: string, index: number): React.ReactElement => (
               <SelectItem
-                id={index.toString() + 1}
+                key={index.toString() + 1}
                 title={title}
                 {...(title === props.role ? { selected: true } : {})}
               />

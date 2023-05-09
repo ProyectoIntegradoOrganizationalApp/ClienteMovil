@@ -1,6 +1,12 @@
 import React from "react";
 import { Avatar, Card, IconButton } from "react-native-paper";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Calendar } from "@ui-kitten/components";
 import styles from "../styles/styles";
 import ModalConfirmComponent from "../components/ModalConfirmComponent";
@@ -9,7 +15,7 @@ import PopupNotificationComponent from "../components/PopupNotificationComponent
 const ActivityScreen = () => {
   const [date, setDate] = React.useState(new Date());
   return (
-    <View>
+    <ScrollView>
       <Card style={scriptStyles.card}>
         <Card.Title
           title="Finished Tasks this Week"
@@ -75,7 +81,7 @@ const ActivityScreen = () => {
           </View>
         </Card.Content>
       </Card>
-      <Card style={scriptStyles.card}>
+      <Card style={[scriptStyles.card, { marginBottom: 15 }]}>
         <Card.Title
           title="April - 2023"
           titleStyle={{ textAlign: "center" }}
@@ -107,7 +113,7 @@ const ActivityScreen = () => {
           isVisible="true"
         />; 
       */}
-    </View>
+    </ScrollView>
   );
 };
 

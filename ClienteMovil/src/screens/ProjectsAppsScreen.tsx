@@ -70,7 +70,7 @@ const ProjectsAppsScreen = () => {
         >
           {orders.map(
             (title: string, index: number): React.ReactElement => (
-              <SelectItem id={index.toString()} title={title} />
+              <SelectItem key={index.toString()} title={title} />
             )
           )}
         </Select>

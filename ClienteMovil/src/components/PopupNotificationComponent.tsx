@@ -1,7 +1,8 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { Avatar } from "react-native-paper";
 import {
   Animated,
+  Button,
   Dimensions,
   StyleSheet,
   Text,
@@ -9,110 +10,77 @@ import {
   View,
 } from "react-native";
 
-const pageWidth = Dimensions.get("window").width;
+const PopupNotificationComponent = (props: any) => {
+  const { type, title, message } = props;
+  const windowHeight = Dimensions.get("window").height;
+  const popAnim = useRef(new Animated.Value(windowHeight * -1)).current;
 
-class PopupNotificationComponent {
-  type: string;
-  title: string;
-  message: string;
-
-  modalShown: boolean;
-  animatedValue: Animated.Value;
-
-  constructor(type: string, title: string, message: string) {
-    this.type = type;
-    this.title = title;
-    this.message = message;
-
-    this.modalShown = false;
-    this.animatedValue = useRef(new Animated.Value(0.0)).current;
+  let icon;
+  switch (type) {
+    case "success":
+      icon = <Avatar.Icon icon="check-circle" color="#6dcf81" size={24} />;
+      break;
+    case "error":
+      icon = <Avatar.Icon icon="close-circle" color="#bf6060" size={24} />;
+      break;
   }
 
-  callToast() {
-    if (this.modalShown) return;
-    this.setNotificationType(this.type);
-    this.modalShown = true;
-    Animated.timing(this.animatedValue, {
-      toValue: 1,
-      duration: 350,
+  const popIn = () => {
+    Animated.timing(popAnim, {
+      toValue: windowHeight * 0.35 * -1,
+      duration: 300,
       useNativeDriver: true,
-    }).start(this.closeToast);
-  }
+    }).start(popOut);
+  };
 
-  closeToast() {
+  const popOut = () => {
     setTimeout(() => {
-      this.modalShown = false;
-      Animated.timing(this.animatedValue, {
-        toValue: 0,
-        duration: 350,
+      Animated.timing(popAnim, {
+        toValue: windowHeight * -1,
+        duration: 300,
         useNativeDriver: true,
       }).start();
     }, 2000);
-  }
+  };
 
-  setNotificationType(type: string) {
-    let icon;
-    switch (type) {
-      case "success":
-        icon = (
-          <Avatar.Icon
-            icon="check-circle"
-            color="#6dcf81"
-            size={30}
-            style={styles.avatarIcon}
-          />
-        );
-        break;
-      case "error":
-        icon = (
-          <Avatar.Icon
-            icon="close-circle"
-            color="#bf6060"
-            size={30}
-            style={styles.avatarIcon}
-          />
-        );
-        break;
-    }
-    return icon;
-  }
+  const instantPopOut = () => {
+    Animated.timing(popAnim, {
+      toValue: windowHeight * -1,
+      duration: 150,
+      useNativeDriver: true,
+    }).start();
+  };
 
-  render() {
-    let animation = this.animatedValue.interpolate({
-      inputRange: [0, 0.3, 1],
-      outputRange: [-70, -10, 0],
-    });
-
-    return (
+  return (
+    <View>
       <Animated.View
         style={[
           styles.toastContainer,
           {
-            transform: [{ translateY: animation }],
+            transform: [{ translateY: popAnim }],
           },
         ]}
       >
         <View style={styles.toastRow}>
-          {this.setNotificationType(this.type)}
+          {icon}
           <View style={styles.toastText}>
-            <Text style={{ fontWeight: "bold", fontSize: 15 }}>
-              {this.title}
-            </Text>
-            <Text style={{ fontSize: 12 }}>{this.message}</Text>
+            <Text style={{ fontWeight: "bold", fontSize: 15 }}>{title}</Text>
+            <Text style={{ fontSize: 12 }}>{message}</Text>
           </View>
-          <TouchableOpacity onPress={this.closeToast}>
-            <Avatar.Icon
-              icon="close"
-              color="#000000"
-              size={30}
-              style={styles.avatarIcon}
-            />
+          <TouchableOpacity onPress={instantPopOut}>
+            <Avatar.Icon icon="close" color="#000000" size={24} />
           </TouchableOpacity>
         </View>
       </Animated.View>
-    );
-  }
-}
+      <Button
+        title="Success Message"
+        onPress={() => {
+          popIn();
+        }}
+      ></Button>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   toastContainer: {
@@ -132,7 +100,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   toastRow: {
-    width: pageWidth,
+    width: "90%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
@@ -140,9 +108,6 @@ const styles = StyleSheet.create({
   toastText: {
     width: "70%",
     padding: 2,
-  },
-  avatarIcon: {
-    backgroundColor: "transparent",
   },
 });
 

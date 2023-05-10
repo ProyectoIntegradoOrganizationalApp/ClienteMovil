@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Avatar, Card, IconButton } from "react-native-paper";
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { Calendar } from "@ui-kitten/components";
 import styles from "../styles/styles";
+import ModalComponent from "../components/ModalComponent";
 import ModalConfirmComponent from "../components/ModalConfirmComponent";
 import PopupNotificationComponent from "../components/PopupNotificationComponent";
 
 const ActivityScreen = () => {
+  const [modalConfirmVisible, setModalConfirmVisible] = React.useState(false);
+  const handleModalConfirmState = (e: boolean) => {
+    setModalConfirmVisible(e);
+  };
+
+  const [modalVisible, setModalVisible] = React.useState(false);
+  const handleModalState = (e: boolean) => {
+    setModalVisible(e);
+  };
+
   const [date, setDate] = React.useState(new Date());
   return (
     <ScrollView>
@@ -61,7 +66,7 @@ const ActivityScreen = () => {
               iconColor="grey"
               style={scriptStyles.cardIconActivity}
               onPress={() => {
-                //popIn;
+                setModalVisible(true);
               }}
             />
           )}
@@ -91,28 +96,24 @@ const ActivityScreen = () => {
           <Calendar date={date} onSelect={(nextDate) => setDate(nextDate)} />
         </Card.Content>
       </Card>
-      {/*
-      <PopupNotificationComponent
-        type="success"
-        title="Project Created"
-        message="Project 'algo' was created"
+      <ModalComponent
+        isVisible={modalVisible}
+        setModalVisible={handleModalState}
       />
-      
-        <ModalConfirmComponent
-          message={
+      <ModalConfirmComponent
+        message={
           <Text>
             Are you sure you want to
-            <span style={{ color: "#e45f5f" }}>
-            proceed with this action
-            </span>
-            ?
+            <Text style={{ color: "#e45f5f" }}>proceed with this action</Text>?
           </Text>
-          }
-          confirmText="Confirm"
-          dimissText="Cancel"
-          isVisible="true"
-        />; 
-      */}
+        }
+        confirmText="Confirm"
+        dimissText="Cancel"
+        isVisible={modalConfirmVisible}
+        setModalConfirmVisible={handleModalConfirmState}
+      />
+      {/*
+      <PopupNotificationComponent />*/}
     </ScrollView>
   );
 };

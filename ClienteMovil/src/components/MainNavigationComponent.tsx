@@ -1,10 +1,31 @@
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import MainStack from "../stack/MainStack";
 import FriendsScreen from "../screens/FriendsScreen";
 import NotificationScreen from "../screens/NotificationScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import SettingsScreen from "../screens/SettingsScreen";
 import { StyleSheet, View } from "react-native";
+
+const Stack = createNativeStackNavigator();
+
+const ProfileStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="ProfileStack"
+        component={ProfileScreen}
+        options={{ title: "Profile", headerShadowVisible: false }}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{ headerShadowVisible: false }}
+      />
+    </Stack.Navigator>
+  );
+};
 
 const Tab = createBottomTabNavigator();
 
@@ -67,12 +88,13 @@ const MainNavigationComponent = () => {
       />
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={ProfileStack}
         options={{
           tabBarShowLabel: false,
           tabBarIcon: ({ color, size }) => {
             return <Icon name="account" size={size} color={color} />;
           },
+          headerShown: false,
         }}
       />
     </Tab.Navigator>

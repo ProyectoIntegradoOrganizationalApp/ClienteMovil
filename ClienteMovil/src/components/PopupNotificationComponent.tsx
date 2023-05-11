@@ -1,8 +1,7 @@
 import { useRef } from "react";
-import { Avatar } from "react-native-paper";
+import { IconButton } from "react-native-paper";
 import {
   Animated,
-  Button,
   Dimensions,
   StyleSheet,
   Text,
@@ -18,10 +17,24 @@ const PopupNotificationComponent = (props: any) => {
   let icon;
   switch (type) {
     case "success":
-      icon = <Avatar.Icon icon="check-circle" color="#6dcf81" size={24} />;
+      icon = (
+        <IconButton
+          icon="check-circle"
+          iconColor="#6dcf81"
+          size={35}
+          style={scriptStyles.toastIcon}
+        />
+      );
       break;
     case "error":
-      icon = <Avatar.Icon icon="close-circle" color="#bf6060" size={24} />;
+      icon = (
+        <IconButton
+          icon="close-circle"
+          iconColor="#bf6060"
+          size={35}
+          style={scriptStyles.toastIcon}
+        />
+      );
       break;
   }
 
@@ -52,40 +65,43 @@ const PopupNotificationComponent = (props: any) => {
   };
 
   return (
-    <View>
-      <Animated.View
-        style={[
-          styles.toastContainer,
-          {
-            transform: [{ translateY: popAnim }],
-          },
-        ]}
-      >
-        <View style={styles.toastRow}>
-          {icon}
-          <View style={styles.toastText}>
-            <Text style={{ fontWeight: "bold", fontSize: 15 }}>{title}</Text>
-            <Text style={{ fontSize: 12 }}>{message}</Text>
-          </View>
-          <TouchableOpacity onPress={instantPopOut}>
-            <Avatar.Icon icon="close" color="#000000" size={24} />
-          </TouchableOpacity>
+    <Animated.View
+      style={[
+        scriptStyles.toastContainer,
+        {
+          transform: [{ translateY: popAnim }],
+        },
+      ]}
+    >
+      <View style={scriptStyles.toastRow}>
+        {icon}
+        <View style={scriptStyles.toastText}>
+          <Text style={{ fontWeight: "bold", fontSize: 16, marginBottom: 5 }}>
+            {title}
+          </Text>
+          <Text style={{ fontSize: 15 }}>{message}</Text>
         </View>
-      </Animated.View>
-      <Button
-        title="Success Message"
-        onPress={() => {
-          popIn();
-        }}
-      ></Button>
-    </View>
+        <TouchableOpacity
+          style={{ marginBottom: 20, marginLeft: 15 }}
+          onPress={instantPopOut}
+        >
+          <IconButton
+            icon="close"
+            iconColor="#000000"
+            size={20}
+            style={scriptStyles.toastIcon}
+          />
+        </TouchableOpacity>
+      </View>
+    </Animated.View>
   );
 };
 
-const styles = StyleSheet.create({
+const scriptStyles = StyleSheet.create({
   toastContainer: {
-    height: 60,
+    height: 80,
     width: 350,
+    marginLeft: 22,
     backgroundColor: "#f5f5f5",
     justifyContent: "center",
     alignItems: "center",
@@ -108,6 +124,10 @@ const styles = StyleSheet.create({
   toastText: {
     width: "70%",
     padding: 2,
+    marginLeft: 20,
+  },
+  toastIcon: {
+    backgroundColor: "transparent",
   },
 });
 

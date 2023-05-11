@@ -30,21 +30,37 @@ const ModalConfirmComponent = (props: any): React.ReactElement => {
           >
             <Card style={scriptStyles.card}>
               <Card.Title
-                title={
+                title=""
+                left={() => (
                   <Avatar.Icon
                     icon="alert-circle"
-                    size={35}
+                    size={90}
                     color="#ffc048"
                     style={scriptStyles.cardIconActivity}
                   />
-                }
-                style={{ borderBottomWidth: 2, borderBottomColor: "#ffffff" }}
+                )}
+                leftStyle={{
+                  flex: 45,
+                  alignItems: "center",
+                }}
+                style={scriptStyles.cardTitle}
               />
               <Card.Content>
                 <View style={{ padding: 10 }}>
+                  <View style={{ marginTop: 10 }} />
                   {message}
+                  <View style={{ marginVertical: 10 }} />
                   <ButtonComponent type="confirm" title={confirmText} />
-                  <ButtonComponent type="primary" title={dimissText} />
+                  <View style={{ marginVertical: 10 }} />
+                  <ButtonComponent
+                    type="primary"
+                    title={dimissText}
+                    onPress={() => {
+                      if (isVisible) {
+                        setModalConfirmVisible(false);
+                      }
+                    }}
+                  />
                 </View>
               </Card.Content>
             </Card>
@@ -60,6 +76,11 @@ const scriptStyles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 15,
     marginHorizontal: 10,
+  },
+  cardTitle: {
+    marginTop: 10,
+    borderBottomWidth: 2,
+    borderBottomColor: "#ffffff",
   },
   cardIconActivity: {
     backgroundColor: "transparent",

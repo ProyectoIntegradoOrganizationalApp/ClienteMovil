@@ -1,6 +1,8 @@
+import React, { useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { IconButton } from "react-native-paper";
 import AchievementComponent from "../components/AchievementComponent";
+import ModalConfirmComponent from "../components/ModalConfirmComponent";
 
 const achievements = [
   {
@@ -33,7 +35,11 @@ const achievements = [
   },
 ];
 
-const AchievementsScreen = () => {
+const AchievementsScreen = ({ navigation }: { navigation: any }) => {
+  const [modalConfirmVisible, setModalConfirmVisible] = React.useState(false);
+  const handleModalConfirmState = (e: boolean) => {
+    setModalConfirmVisible(e);
+  };
   return (
     <View>
       <View
@@ -48,12 +54,16 @@ const AchievementsScreen = () => {
           size={25}
           iconColor="grey"
           style={scriptStyles.icon}
+          onPress={() => {
+            setModalConfirmVisible(true);
+          }}
         />
         <IconButton
           icon="cog"
           size={25}
           iconColor="grey"
           style={scriptStyles.icon}
+          onPress={() => navigation.navigate("Settings")}
         />
       </View>
       <View style={{ alignItems: "center", marginBottom: 31 }}>
@@ -75,6 +85,18 @@ const AchievementsScreen = () => {
           renderItem={({ item: ach }) => <AchievementComponent {...ach} />}
         />
       </View>
+      <ModalConfirmComponent
+        message={
+          <Text style={{ fontSize: 16 }}>
+            Are you sure you want{" "}
+            <Text style={{ color: "#e45f5f" }}>proceed with this action</Text>?
+          </Text>
+        }
+        confirmText="Confirm"
+        dimissText="Cancel"
+        isVisible={modalConfirmVisible}
+        setModalConfirmVisible={handleModalConfirmState}
+      />
     </View>
   );
 };

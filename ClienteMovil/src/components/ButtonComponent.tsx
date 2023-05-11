@@ -2,7 +2,7 @@ import { Image, Pressable, StyleSheet, Text } from "react-native";
 import customStyles from "../styles/styles";
 
 function ButtonComponent(props: any) {
-  const { title, type = "primary", onPress } = props;
+  const { title, type = "primary", size = "normal", onPress } = props;
   let buttonContent = <Text style={styles.text}>{title}</Text>;
   let buttonType;
   switch (type) {
@@ -28,8 +28,13 @@ function ButtonComponent(props: any) {
       buttonType = styles.buttonConfirm;
       break;
   }
+  let buttonSize =
+    size === "small" ? styles.buttonSmallSize : styles.buttonNormalSize;
   return (
-    <Pressable style={[styles.button, buttonType]} onPress={onPress}>
+    <Pressable
+      style={[styles.button, buttonType, buttonSize]}
+      onPress={onPress}
+    >
       {buttonContent}
     </Pressable>
   );
@@ -60,6 +65,10 @@ const styles = StyleSheet.create({
   },
   buttonConfirm: {
     backgroundColor: "#008f39",
+  },
+  buttonNormalSize: {},
+  buttonSmallSize: {
+    width: 160,
   },
   text: {
     fontSize: 16,

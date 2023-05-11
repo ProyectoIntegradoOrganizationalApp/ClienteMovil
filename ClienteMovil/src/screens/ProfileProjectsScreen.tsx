@@ -1,6 +1,7 @@
-import { Avatar, Card, FAB } from "react-native-paper";
+import { Avatar, Card, FAB, IconButton } from "react-native-paper";
 import { FlatList, StyleSheet, View } from "react-native";
 import ProjectComponent from "../components/ProjectComponent";
+import PopupNotificationComponent from "../components/PopupNotificationComponent";
 import styles from "../styles/styles";
 
 const projects = [
@@ -24,18 +25,18 @@ const ProfileProjectsScreen = () => {
           title="Your Projects"
           titleStyle={{ textAlign: "center" }}
           left={() => (
-            <Avatar.Icon
+            <IconButton
               icon="help-circle"
-              size={35}
-              color="grey"
+              size={25}
+              iconColor="grey"
               style={scriptStyles.cardIconActivity}
             />
           )}
           right={() => (
-            <Avatar.Icon
+            <IconButton
               icon="cog"
-              size={35}
-              color="grey"
+              size={25}
+              iconColor="grey"
               style={[scriptStyles.cardIconActivity, { marginRight: 15 }]}
             />
           )}
@@ -60,6 +61,11 @@ const ProfileProjectsScreen = () => {
         color="#ffffff"
         style={scriptStyles.fab}
         onPress={() => {}}
+      />
+      <PopupNotificationComponent
+        type="success"
+        title="Project Created"
+        message="Project 'algo' was created"
       />
     </View>
   );

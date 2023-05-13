@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { AuthContext } from "./src/context/AuthContext";
 import { ApplicationProvider } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
 import { StatusBar } from "expo-status-bar";
@@ -6,12 +8,13 @@ import MainNavigationComponent from "./src/components/MainNavigationComponent";
 import AccountStack from "./src/stack/AccountStack";
 
 export default function App() {
-  const isUserLoggedIn = true;
+  const { user } = useContext(AuthContext);
+
   return (
     <ApplicationProvider {...eva} theme={eva.light}>
       <StatusBar />
       <NavigationContainer>
-        {isUserLoggedIn ? <MainNavigationComponent /> : <AccountStack />}
+        {user ? <MainNavigationComponent /> : <AccountStack />}
       </NavigationContainer>
     </ApplicationProvider>
   );

@@ -1,4 +1,4 @@
-import { Avatar, Card, FAB, IconButton } from "react-native-paper";
+import { Card, FAB, IconButton } from "react-native-paper";
 import { FlatList, StyleSheet, View } from "react-native";
 import ProjectComponent from "../components/ProjectComponent";
 import PopupNotificationComponent from "../components/PopupNotificationComponent";
@@ -18,6 +18,14 @@ const projects = [
 ];
 
 const ProfileProjectsScreen = () => {
+  const handlePress = () => {
+    PopupNotificationComponent(
+      "success",
+      "Project Created",
+      "Project 'algo' was created"
+    );
+  };
+
   return (
     <View style={{ height: "100%" }}>
       <Card style={scriptStyles.card}>
@@ -60,12 +68,7 @@ const ProfileProjectsScreen = () => {
         icon="plus"
         color="#ffffff"
         style={scriptStyles.fab}
-        onPress={() => {}}
-      />
-      <PopupNotificationComponent
-        type="success"
-        title="Project Created"
-        message="Project 'algo' was created"
+        onPress={handlePress}
       />
     </View>
   );

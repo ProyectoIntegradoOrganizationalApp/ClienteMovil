@@ -54,9 +54,9 @@ const apps = [
 const orders = ["Recently", "Older", "Alphabetical"];
 
 const ProjectsAppsScreen = () => {
-  const [selectedIndex, setSelectedIndex] = React.useState<
-    IndexPath | IndexPath[]
-  >(new IndexPath(0));
+  const [selectedIndex, setSelectedIndex] = React.useState<IndexPath>(
+    new IndexPath(0)
+  );
 
   return (
     <View>
@@ -65,7 +65,7 @@ const ProjectsAppsScreen = () => {
         <Select
           value={orders[selectedIndex.row]}
           selectedIndex={selectedIndex}
-          onSelect={(index: IndexPath | IndexPath[]) => setSelectedIndex(index)}
+          onSelect={(index: any) => setSelectedIndex(index)}
           style={scriptStyles.filterSelect}
         >
           {orders.map(

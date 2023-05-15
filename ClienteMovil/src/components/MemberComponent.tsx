@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState, ReactElement } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Avatar, Card } from "react-native-paper";
 import { StyleSheet, Text, View } from "react-native";
@@ -8,11 +8,11 @@ interface IMember {
   profile: string;
   user: string;
   status: string;
-  role: string;
+  role: number;
 }
 
-function isMemberAdmin(role: string) {
-  if (role === "Admin") {
+function isMemberAdmin(role: number) {
+  if (roles[role].name === "Admin") {
     return (
       <Avatar.Icon
         icon="crown"
@@ -24,13 +24,23 @@ function isMemberAdmin(role: string) {
   }
 }
 
-const roles = ["Admin", "Editor", "Author", "Partner"];
+const roles = [
+  { id: 0, name: "Admin" },
+  { id: 1, name: "Editor" },
+  { id: 2, name: "Author" },
+  { id: 3, name: "Partner" },
+];
 
 function MemberComponent(props: IMember) {
   //const navigation = useNavigation<any>();
-  const [selectedIndex, setSelectedIndex] = React.useState<
-    IndexPath | IndexPath[]
-  >(new IndexPath(0));
+
+  const [selectedIndex, setSelectedIndex] = useState<IndexPath>(
+    new IndexPath(0)
+  );
+
+  useEffect(() => {
+    setSelectedIndex(new IndexPath(props.role));
+  }, []);
 
   return (
     <Card style={scriptStyles.member}>
@@ -61,21 +71,21 @@ function MemberComponent(props: IMember) {
         )}
       />
       <Card.Content style={{ marginTop: 10 }}>
-        <Select
-          value={roles[selectedIndex.row]}
-          selectedIndex={selectedIndex}
-          onSelect={(index: IndexPath | IndexPath[]) => setSelectedIndex(index)}
-        >
-          {roles.map(
-            (title: string, index: number): React.ReactElement => (
-              <SelectItem
-                key={index.toString() + 1}
-                title={title}
-                {...(title === props.role ? { selected: true } : {})}
-              />
-            )
-          )}
-        </Select>
+        <View style={scriptStyles.roleView}>
+          <Text style={{ marginRight: 15 }}>Role:</Text>
+          <Select
+            value={roles[selectedIndex.row].name}
+            selectedIndex={selectedIndex}
+            onSelect={(index: any) => setSelectedIndex(index)}
+            style={{ flex: 1 }}
+          >
+            {roles.map(
+              (role): ReactElement => (
+                <SelectItem key={role.id} title={role.name} />
+              )
+            )}
+          </Select>
+        </View>
       </Card.Content>
     </Card>
   );
@@ -89,6 +99,13 @@ const scriptStyles = StyleSheet.create({
   },
   crownIcon: {
     backgroundColor: "transparent",
+  },
+  roleView: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    marginTop: 15,
+    marginHorizontal: 10,
   },
   messageIcon: {
     marginLeft: 10,

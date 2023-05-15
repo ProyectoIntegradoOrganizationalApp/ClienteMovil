@@ -16,7 +16,17 @@ const ProfileStack = () => {
       <Stack.Screen
         name="ProfileStack"
         component={ProfileScreen}
-        options={{ title: "Profile", headerShadowVisible: false }}
+        options={({ navigation }: { navigation: any }) => ({
+          title: "Profile",
+          headerShadowVisible: false,
+          headerRight: () => (
+            <Icon
+              name="cog"
+              size={23}
+              onPress={() => navigation.navigate("Settings")}
+            />
+          ),
+        })}
       />
       <Stack.Screen
         name="Settings"
@@ -31,26 +41,7 @@ const Tab = createBottomTabNavigator();
 
 const MainNavigationComponent = () => {
   return (
-    <Tab.Navigator
-    /*screenOptions={({ navigation }: { navigation: any }) => ({
-      headerRight: ({ tintColor }) => (
-          <View style={{ flexDirection: "row" }}>
-            <Icon
-              name="bell"
-              size={20}
-              color={tintColor}
-              onPress={() => navigation.navigate("Notification")}
-            />
-            <Icon
-              name="bell"
-              size={20}
-              color={tintColor}
-              onPress={() => navigation.navigate("Notification")}
-            />
-          </View>
-        ),
-      })}*/
-    >
+    <Tab.Navigator>
       <Tab.Screen
         name="MainStack"
         component={MainStack}

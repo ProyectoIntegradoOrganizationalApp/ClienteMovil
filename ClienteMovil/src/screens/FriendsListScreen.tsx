@@ -28,9 +28,9 @@ const friends = [
 const orders = ["All", "Online", "Pending", "Blocked"];
 
 const FriendsListScreen = () => {
-  const [selectedIndex, setSelectedIndex] = React.useState<
-    IndexPath | IndexPath[]
-  >(new IndexPath(0));
+  const [selectedIndex, setSelectedIndex] = React.useState<IndexPath>(
+    new IndexPath(0)
+  );
 
   const [searchQuery, setSearchQuery] = React.useState("");
   const onChangeSearch = (query: any) => setSearchQuery(query);
@@ -42,7 +42,7 @@ const FriendsListScreen = () => {
         <Select
           value={orders[selectedIndex.row]}
           selectedIndex={selectedIndex}
-          onSelect={(index: IndexPath | IndexPath[]) => setSelectedIndex(index)}
+          onSelect={(index: any) => setSelectedIndex(index)}
           style={scriptStyles.filterSelect}
         >
           {orders.map(

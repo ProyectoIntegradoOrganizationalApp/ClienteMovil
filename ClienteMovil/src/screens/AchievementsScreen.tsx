@@ -63,7 +63,6 @@ const AchievementsScreen = ({ navigation }: { navigation: any }) => {
           size={25}
           iconColor="grey"
           style={scriptStyles.icon}
-          onPress={() => navigation.navigate("Settings")}
         />
       </View>
       <View style={{ alignItems: "center", marginBottom: 31 }}>

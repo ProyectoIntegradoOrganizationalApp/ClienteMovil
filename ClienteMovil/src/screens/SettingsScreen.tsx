@@ -10,28 +10,39 @@ const Tab = createMaterialTopTabNavigator();
 
 const SettingsScreen = () => {
   return (
-    <>
-      <Tab.Navigator>
-        <Tab.Screen
-          name="GeneralSettings"
-          options={{ title: "General" }}
-          component={GeneralSettingsScreen}
-        />
-        <Tab.Screen
-          name="SecuritySettings"
-          options={{ title: "Security" }}
-          component={SecuritySettingsScreen}
-        />
-      </Tab.Navigator>
-      <View style={{ padding: 10 }}>
-        <ButtonComponent type="confirm" title="Save Settings" />
-      </View>
-    </>
+    <Tab.Navigator>
+      <Tab.Screen
+        name="GeneralSettings"
+        options={{ title: "General" }}
+        component={GeneralSettingsScreen}
+      />
+      <Tab.Screen
+        name="SecuritySettings"
+        options={{ title: "Security" }}
+        component={SecuritySettingsScreen}
+      />
+    </Tab.Navigator>
   );
 };
 
 const GeneralSettingsScreen = () => {
-  return <View></View>;
+  const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+  const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+  return (
+    <ScrollView style={scriptStyles.generalView}>
+      <View style={scriptStyles.viewRow}>
+        <View style={{ flex: 2 }}>
+          <Text style={scriptStyles.title}>Dark Mode</Text>
+          <Text style={scriptStyles.text}>
+            Active this to enable and disabled dark mode.
+          </Text>
+        </View>
+        <View style={{ flex: 1 }}>
+          <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
+        </View>
+      </View>
+    </ScrollView>
+  );
 };
 
 const SecuritySettingsScreen = () => {
@@ -39,9 +50,9 @@ const SecuritySettingsScreen = () => {
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
   const visibilityOptions = ["None", "Friends Only", "All"];
-  const [selectedIndex, setSelectedIndex] = React.useState<
-    IndexPath | IndexPath[]
-  >(new IndexPath(0));
+  const [selectedIndex, setSelectedIndex] = React.useState<IndexPath>(
+    new IndexPath(0)
+  );
 
   return (
     <ScrollView style={scriptStyles.generalView}>
@@ -67,9 +78,7 @@ const SecuritySettingsScreen = () => {
           <Select
             value={visibilityOptions[selectedIndex.row]}
             selectedIndex={selectedIndex}
-            onSelect={(index: IndexPath | IndexPath[]) =>
-              setSelectedIndex(index)
-            }
+            onSelect={(index: any) => setSelectedIndex(index)}
           >
             {visibilityOptions.map(
               (title: string, index: number): React.ReactElement => (

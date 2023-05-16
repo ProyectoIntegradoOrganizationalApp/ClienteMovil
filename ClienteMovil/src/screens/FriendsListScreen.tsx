@@ -8,7 +8,7 @@ const friends = [
   {
     id: "1",
     profile: "https://picsum.photos/163",
-    user: "Pepe Pepín",
+    user: "Pepe Pepino",
     status: "Deja de leer mi estado",
   },
   {

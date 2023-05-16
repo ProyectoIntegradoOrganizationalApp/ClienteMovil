@@ -15,7 +15,11 @@ const FriendsScreen = () => {
         component={FriendsListScreen}
       />
       <Tab.Screen name="Add Friend" component={AddFriendScreen} />
-      <Tab.Screen name="Settings" component={FriendsSettingsScreen} />
+      <Tab.Screen
+        name="FriendsSettings"
+        options={{ title: "Settings" }}
+        component={FriendsSettingsScreen}
+      />
     </Tab.Navigator>
   );
 };

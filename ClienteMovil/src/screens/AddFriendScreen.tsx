@@ -27,8 +27,8 @@ const AddFriendScreen = () => {
     <View>
       <FlatList
         data={friends}
-        renderItem={({ item: chat }) => (
-          <FriendComponent type="add" {...chat} />
+        renderItem={({ item: request }) => (
+          <FriendComponent type="add" {...request} />
         )}
       />
     </View>

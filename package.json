@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "react-native-select-dropdown": "^3.3.3",
     "react-native-web": "^0.19.4"
   }
 }

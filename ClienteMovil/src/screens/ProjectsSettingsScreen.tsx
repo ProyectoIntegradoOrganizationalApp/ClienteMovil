@@ -3,10 +3,10 @@ import { Text } from "react-native-paper";
 
 // TODO: Code file
 
-const BoardScreen = () => {
+const ProjectsSettingsScreen = () => {
   return (
     <View style={styles.container}>
-      <Text variant="headlineMedium">Board Screen</Text>
+      <Text variant="headlineMedium">Projects Settings Screen</Text>
     </View>
   );
 };
@@ -19,4 +19,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BoardScreen;
+export default ProjectsSettingsScreen;

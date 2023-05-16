@@ -1,14 +1,16 @@
-import { Avatar, Card, IconButton } from "react-native-paper";
-import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { Avatar, Card } from "react-native-paper";
+import { ScrollView, StyleSheet, Text } from "react-native";
+import { Calendar } from "@ui-kitten/components";
 import styles from "../styles/styles";
-import ModalConfirmComponent from "../components/ModalConfirmComponent";
 
 const ActivityScreen = () => {
+  const [date, setDate] = React.useState(new Date());
   return (
-    <View>
+    <ScrollView>
       <Card style={scriptStyles.card}>
         <Card.Title
-          title="Finished Tasksthis Week"
+          title="Finished Tasks this Week"
           left={() => (
             <Avatar.Icon
               icon="xml"
@@ -40,52 +42,17 @@ const ActivityScreen = () => {
           )}
         />
       </Card>
-      <Card style={scriptStyles.card}>
+      <Card style={[scriptStyles.card, { marginBottom: 15 }]}>
         <Card.Title
-          title="Daily Activity"
+          title="April - 2023"
           titleStyle={{ textAlign: "center" }}
-          left={() => (
-            <IconButton
-              icon="help-circle"
-              size={35}
-              iconColor="grey"
-              style={scriptStyles.cardIconActivity}
-              onPress={() => {
-                // TODO: Try component
-                <ModalConfirmComponent
-                  message={
-                    <Text>
-                      Are you sure you want to
-                      <span style={{ color: "#e45f5f" }}>
-                        proceed with this action
-                      </span>
-                      ?
-                    </Text>
-                  }
-                  confirmText="Confirm"
-                  dimissText="Cancel"
-                  isVisible="true"
-                />;
-              }}
-            />
-          )}
-          right={() => (
-            <IconButton
-              icon="cog"
-              size={35}
-              iconColor="grey"
-              style={[scriptStyles.cardIconActivity, { marginRight: 15 }]}
-            />
-          )}
           style={{ borderBottomWidth: 2, borderBottomColor: "#ffffff" }}
         />
         <Card.Content>
-          <View style={{ padding: 10 }}>
-            <Text>Graficas</Text>
-          </View>
+          <Calendar date={date} onSelect={(nextDate) => setDate(nextDate)} />
         </Card.Content>
       </Card>
-    </View>
+    </ScrollView>
   );
 };
 

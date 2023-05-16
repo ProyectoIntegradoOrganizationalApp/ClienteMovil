@@ -1,39 +1,62 @@
-import * as React from "react";
+import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
-import { Searchbar } from "react-native-paper";
-import FriendComponent from "../components/FriendComponent";
+import AppComponent from "../components/AppComponent";
 
-const friends = [
+const apps = [
   {
     id: "1",
-    profile: "https://picsum.photos/163",
-    user: "Pepe Pepín",
-    status: "Deja de leer mi estado",
+    icon: "https://picsum.photos/268",
+    name: "Taskman",
+    description: "Work Managment",
+    installed: true,
+    added: false,
+    premium: false,
   },
   {
     id: "2",
-    profile: "https://picsum.photos/490",
-    user: "Juan Juanete",
-    status: "Vive sin límites",
+    icon: "https://picsum.photos/193",
+    name: "Yesse",
+    description: "Music",
+    installed: false,
+    added: false,
+    premium: true,
   },
   {
     id: "3",
-    profile: "https://picsum.photos/501",
-    user: "Manolo Manolín",
-    status: "El interior es lo que cuesta",
+    icon: "https://picsum.photos/343",
+    name: "Engroup",
+    description: "Friends Groups",
+    installed: false,
+    added: false,
+    premium: true,
+  },
+  {
+    id: "4",
+    icon: "https://picsum.photos/444",
+    name: "Pinsave",
+    description: "Save Remote Projects",
+    installed: false,
+    added: false,
+    premium: true,
+  },
+  {
+    id: "5",
+    icon: "https://picsum.photos/777",
+    name: "BNP",
+    description: "Financial Advisor",
+    installed: false,
+    added: false,
+    premium: true,
   },
 ];
 
-const orders = ["All", "Online", "Pending", "Blocked"];
+const orders = ["Recently", "Older", "Alphabetical"];
 
-const FriendsListScreen = () => {
+const ProjectsAppsScreen = () => {
   const [selectedIndex, setSelectedIndex] = React.useState<IndexPath>(
     new IndexPath(0)
   );
-
-  const [searchQuery, setSearchQuery] = React.useState("");
-  const onChangeSearch = (query: any) => setSearchQuery(query);
 
   return (
     <View>
@@ -52,17 +75,9 @@ const FriendsListScreen = () => {
           )}
         </Select>
       </View>
-      <Searchbar
-        placeholder="Search friends..."
-        onChangeText={onChangeSearch}
-        value={searchQuery}
-        style={scriptStyles.searchbar}
-      />
       <FlatList
-        data={friends}
-        renderItem={({ item: chat }) => (
-          <FriendComponent type="chat" {...chat} />
-        )}
+        data={apps}
+        renderItem={({ item: app }) => <AppComponent {...app} />}
       />
     </View>
   );
@@ -82,11 +97,6 @@ const scriptStyles = StyleSheet.create({
   filterSelect: {
     flex: 1,
   },
-  searchbar: {
-    borderRadius: 0,
-    marginTop: 15,
-    marginHorizontal: 10,
-  },
 });
 
-export default FriendsListScreen;
+export default ProjectsAppsScreen;

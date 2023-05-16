@@ -1,5 +1,8 @@
+import React, { useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
+import { IconButton } from "react-native-paper";
 import AchievementComponent from "../components/AchievementComponent";
+import ModalConfirmComponent from "../components/ModalConfirmComponent";
 
 const achievements = [
   {
@@ -32,9 +35,36 @@ const achievements = [
   },
 ];
 
-const AchievementsScreen = () => {
+const AchievementsScreen = ({ navigation }: { navigation: any }) => {
+  const [modalConfirmVisible, setModalConfirmVisible] = React.useState(false);
+  const handleModalConfirmState = (e: boolean) => {
+    setModalConfirmVisible(e);
+  };
   return (
     <View>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <IconButton
+          icon="help-circle"
+          size={25}
+          iconColor="grey"
+          style={scriptStyles.icon}
+          onPress={() => {
+            setModalConfirmVisible(true);
+          }}
+        />
+        <IconButton
+          icon="cog"
+          size={25}
+          iconColor="grey"
+          style={scriptStyles.icon}
+        />
+      </View>
       <View style={{ alignItems: "center", marginBottom: 31 }}>
         <View style={scriptStyles.level}>
           <View style={scriptStyles.levelContent}>
@@ -46,7 +76,7 @@ const AchievementsScreen = () => {
           <Text>Newbie</Text>
         </View>
       </View>
-      <View style={{ height: "70%" }}>
+      <View style={{ height: "60%" }}>
         <FlatList
           horizontal={false}
           scrollEnabled={true}
@@ -54,11 +84,27 @@ const AchievementsScreen = () => {
           renderItem={({ item: ach }) => <AchievementComponent {...ach} />}
         />
       </View>
+      <ModalConfirmComponent
+        message={
+          <Text style={{ fontSize: 16 }}>
+            Are you sure you want{" "}
+            <Text style={{ color: "#e45f5f" }}>proceed with this action</Text>?
+          </Text>
+        }
+        confirmText="Confirm"
+        dimissText="Cancel"
+        isVisible={modalConfirmVisible}
+        setModalConfirmVisible={handleModalConfirmState}
+      />
     </View>
   );
 };
 
 const scriptStyles = StyleSheet.create({
+  icon: {
+    borderRadius: 5,
+    backgroundColor: "transparent",
+  },
   level: {
     height: 120,
     width: 120,

@@ -1,35 +1,47 @@
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import MainStack from "../stack/MainStack";
 import FriendsScreen from "../screens/FriendsScreen";
 import NotificationScreen from "../screens/NotificationScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import SettingsScreen from "../screens/SettingsScreen";
 import { StyleSheet, View } from "react-native";
+
+const Stack = createNativeStackNavigator();
+
+const ProfileStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="ProfileStack"
+        component={ProfileScreen}
+        options={({ navigation }: { navigation: any }) => ({
+          title: "Profile",
+          headerShadowVisible: false,
+          headerRight: () => (
+            <Icon
+              name="cog"
+              size={23}
+              onPress={() => navigation.navigate("Settings")}
+            />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{ headerShadowVisible: false }}
+      />
+    </Stack.Navigator>
+  );
+};
 
 const Tab = createBottomTabNavigator();
 
 const MainNavigationComponent = () => {
   return (
-    <Tab.Navigator
-    /*screenOptions={({ navigation }: { navigation: any }) => ({
-      headerRight: ({ tintColor }) => (
-          <View style={{ flexDirection: "row" }}>
-            <Icon
-              name="bell"
-              size={20}
-              color={tintColor}
-              onPress={() => navigation.navigate("Notification")}
-            />
-            <Icon
-              name="bell"
-              size={20}
-              color={tintColor}
-              onPress={() => navigation.navigate("Notification")}
-            />
-          </View>
-        ),
-      })}*/
-    >
+    <Tab.Navigator>
       <Tab.Screen
         name="MainStack"
         component={MainStack}
@@ -67,12 +79,13 @@ const MainNavigationComponent = () => {
       />
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={ProfileStack}
         options={{
           tabBarShowLabel: false,
           tabBarIcon: ({ color, size }) => {
             return <Icon name="account" size={size} color={color} />;
           },
+          headerShown: false,
         }}
       />
     </Tab.Navigator>

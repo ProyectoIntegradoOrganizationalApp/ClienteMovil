@@ -1,33 +1,33 @@
-import { FlatList, View } from "react-native";
-import BoardComponent from "../components/BoardComponent";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import BoardsListScreen from "./BoardsListScreen";
+import ProjectsInstalledAppsScreen from "./ProjectsInstalledAppsScreen";
+import ProjectsMembersScreen from "./ProjectsMembersScreen";
+import { StyleSheet } from "react-native";
 
-const boards = [
-  {
-    id: "1",
-    title: "Tablero 1",
-    cover: "https://picsum.photos/600",
-  },
-  {
-    id: "2",
-    title: "Tablero 2",
-    cover: "https://picsum.photos/700",
-  },
-  {
-    id: "3",
-    title: "Tablero 3",
-    cover: "https://picsum.photos/800",
-  },
-];
+const Tab = createMaterialTopTabNavigator();
 
 const ProjectsSingleScreen = () => {
   return (
-    <View>
-      <FlatList
-        data={boards}
-        renderItem={({ item: board }) => <BoardComponent {...board} />}
+    <Tab.Navigator>
+      <Tab.Screen
+        name="BoardsList"
+        options={{ title: "Boards" }}
+        component={BoardsListScreen}
       />
-    </View>
+      <Tab.Screen
+        name="ProjectsInstalledApps"
+        options={{ title: "Apps" }}
+        component={ProjectsInstalledAppsScreen}
+      />
+      <Tab.Screen
+        name="ProjectsMembers"
+        options={{ title: "Members" }}
+        component={ProjectsMembersScreen}
+      />
+    </Tab.Navigator>
   );
 };
+
+const scriptStyles = StyleSheet.create({});
 
 export default ProjectsSingleScreen;

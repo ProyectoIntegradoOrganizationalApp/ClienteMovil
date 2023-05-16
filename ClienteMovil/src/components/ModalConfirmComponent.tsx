@@ -1,36 +1,73 @@
 import * as React from "react";
-import { Avatar, Card, Modal, Portal } from "react-native-paper";
+import { Modal } from "@ui-kitten/components";
+import { Avatar, Card, Portal, Provider } from "react-native-paper";
 import ButtonComponent from "./ButtonComponent";
-import { StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, View } from "react-native";
 
-const ModalConfirmComponent = (props: any) => {
-  const { message, confirmText, dimissText, isVisible = false } = props;
+const ModalConfirmComponent = (props: any): React.ReactElement => {
+  const {
+    message,
+    confirmText,
+    dimissText,
+    isVisible,
+    setModalConfirmVisible: setModalConfirmVisible,
+  } = props;
 
   return (
-    <Portal>
-      <Modal visible={isVisible} onDismiss={() => {}}>
-        <Card style={scriptStyles.card}>
-          <Card.Title
-            title={
-              <Avatar.Icon
-                icon="alert-circle"
-                size={35}
-                color="#ffc048"
-                style={scriptStyles.cardIconActivity}
+    <View>
+      <Provider>
+        <Portal>
+          <Modal
+            visible={isVisible}
+            backdropStyle={{
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+            }}
+            onBackdropPress={() => {
+              if (isVisible) {
+                setModalConfirmVisible(false);
+              }
+            }}
+          >
+            <Card style={scriptStyles.card}>
+              <Card.Title
+                title=""
+                left={() => (
+                  <Avatar.Icon
+                    icon="alert-circle"
+                    size={90}
+                    color="#ffc048"
+                    style={scriptStyles.cardIconActivity}
+                  />
+                )}
+                leftStyle={{
+                  flex: 45,
+                  alignItems: "center",
+                }}
+                style={scriptStyles.cardTitle}
               />
-            }
-            style={{ borderBottomWidth: 2, borderBottomColor: "#ffffff" }}
-          />
-          <Card.Content>
-            <View style={{ padding: 10 }}>
-              {message}
-              <ButtonComponent type="confirm" title={confirmText} />
-              <ButtonComponent type="primary" title={dimissText} />
-            </View>
-          </Card.Content>
-        </Card>
-      </Modal>
-    </Portal>
+              <Card.Content>
+                <View style={{ padding: 10 }}>
+                  <View style={{ marginTop: 10 }} />
+                  {message}
+                  <View style={{ marginVertical: 10 }} />
+                  <ButtonComponent type="confirm" title={confirmText} />
+                  <View style={{ marginVertical: 10 }} />
+                  <ButtonComponent
+                    type="primary"
+                    title={dimissText}
+                    onPress={() => {
+                      if (isVisible) {
+                        setModalConfirmVisible(false);
+                      }
+                    }}
+                  />
+                </View>
+              </Card.Content>
+            </Card>
+          </Modal>
+        </Portal>
+      </Provider>
+    </View>
   );
 };
 
@@ -39,6 +76,11 @@ const scriptStyles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 15,
     marginHorizontal: 10,
+  },
+  cardTitle: {
+    marginTop: 10,
+    borderBottomWidth: 2,
+    borderBottomColor: "#ffffff",
   },
   cardIconActivity: {
     backgroundColor: "transparent",

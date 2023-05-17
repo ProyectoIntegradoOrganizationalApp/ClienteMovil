@@ -1,41 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { IconButton } from "react-native-paper";
 import AchievementComponent from "../components/AchievementComponent";
 import ModalConfirmComponent from "../components/ModalConfirmComponent";
-
-const achievements = [
-  {
-    id: "1",
-    image: "https://picsum.photos/163",
-    title: "First Steps",
-    description: "Finish 5 tasks",
-    progess: 40,
-  },
-  {
-    id: "2",
-    image: "https://picsum.photos/490",
-    title: "Invite a Member",
-    description: "Invite a member to a...",
-    progess: 100,
-  },
-  {
-    id: "3",
-    image: "https://picsum.photos/741",
-    title: "Get a Friend",
-    description: "Get at least one friend",
-    progess: 0,
-  },
-  {
-    id: "4",
-    image: "https://picsum.photos/858",
-    title: "Create a Project",
-    description: "Create one project",
-    progess: 100,
-  },
-];
+import useAchievements from "../hooks/useAchievements";
 
 const AchievementsScreen = ({ navigation }: { navigation: any }) => {
+  const { achievements } = useAchievements();
+
   const [modalConfirmVisible, setModalConfirmVisible] = React.useState(false);
   const handleModalConfirmState = (e: boolean) => {
     setModalConfirmVisible(e);

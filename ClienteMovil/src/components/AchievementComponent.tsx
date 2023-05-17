@@ -4,9 +4,10 @@ import { StyleSheet, Text } from "react-native";
 import styles from "../styles/styles";
 
 interface IAchievement {
-  image: string;
+  id: number;
   title: string;
   description: string;
+  icon: string;
   progess: number;
 }
 
@@ -16,7 +17,7 @@ function AchievementComponent(props: IAchievement) {
       <Card.Title
         title={props.title}
         subtitle={props.description}
-        left={() => <Avatar.Image size={50} source={{ uri: props.image }} />}
+        left={() => <Avatar.Image size={50} source={{ uri: props.icon }} />}
         right={() => <Text style={{ marginRight: 15 }}>{props.progess}%</Text>}
       />
       <Card.Content style={{ marginTop: 10 }}>

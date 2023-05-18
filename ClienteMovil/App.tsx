@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "./src/context/AuthContext";
+import { AuthContext } from "./src/domain/context/AuthContext";
 import { ApplicationProvider } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
 import { StatusBar } from "expo-status-bar";
@@ -52,7 +52,7 @@ export default function App() {
     <ApplicationProvider {...eva} theme={eva.light}>
       <StatusBar />
       <NavigationContainer>
-        {!user ? <MainNavigationComponent /> : <AccountStack />}
+        {user ? <MainNavigationComponent /> : <AccountStack />}
       </NavigationContainer>
       <Toast config={toastConfig} />
     </ApplicationProvider>

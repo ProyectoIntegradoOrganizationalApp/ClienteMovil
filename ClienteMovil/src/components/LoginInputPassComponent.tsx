@@ -1,36 +1,49 @@
-import { useState } from "react";
-import { useField } from "formik";
+import React, { useState } from "react";
 import { HelperText, TextInput } from "react-native-paper";
 import styles from "../styles/styles";
 
-const LoginInputPassComponent = ({
+interface LoginInputPassComponentProps {
+  name: string;
+  label: string;
+  value: string;
+  onChangeText: (text: string) => void;
+}
+
+const LoginInputPassComponent: React.FC<LoginInputPassComponentProps> = ({
   name,
   label,
-  ...props
-}: {
-  name: any;
-  label: any;
+  value,
+  onChangeText,
 }) => {
-  const [field, meta, helpers] = useField(name);
-  const [hidePass, setHidePass] = useState(true);
-  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleInputChange = (text: string) => {
+    onChangeText(text);
+    setError("");
+  };
+
+  const validateInput = () => {
+    if (value.length === 0) {
+      setError("This field is required");
+    } else {
+      setError("");
+    }
+  };
+
   return (
     <>
       <TextInput
         mode="outlined"
         label={label}
-        error={meta.error != undefined}
-        value={field.value}
-        onChangeText={(value: any) => helpers.setValue(value)}
-        secureTextEntry={hidePass ? true : false}
+        error={error !== ""}
+        value={value}
+        onChangeText={handleInputChange}
+        onBlur={validateInput}
         activeOutlineColor={styles.colors.grey800}
         outlineColor={styles.colors.grey800}
-        right={
-          <TextInput.Icon icon="eye" onPress={() => setHidePass(!hidePass)} />
-        }
-        {...props}
+        secureTextEntry // Agrega esta línea si se trata de un campo de contraseña
       />
-      {meta.error && <HelperText type="error">{meta.error}</HelperText>}
+      {error !== "" && <HelperText type="error">{error}</HelperText>}
     </>
   );
 };

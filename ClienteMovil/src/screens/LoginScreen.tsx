@@ -1,117 +1,126 @@
-import React, { useContext, useState } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { useApi } from "../api/useApi";
+// React
+import React, { useContext, useEffect, useState } from "react";
+
+// Contexto
+import { AuthContext } from "../domain/context/AuthContext";
+
+// Hooks
+import { useUserApi } from "../adapters/api/useUserApi";
+import { useAuth } from "../hooks/useAuth";
+
+// Componentes
+import { User } from "../domain/user/User.interface";
+import { UserMapper } from "../adapters/mappers/UserMapper";
 import LoadingComponent from "../components/LoadingComponent";
-import { Formik } from "formik";
-import { loginValidationSchema } from "../utils/loginValidationSchema";
-import { Image, ScrollView, Text, TextInput, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
 import LoginInputComponent from "../components/LoginInputComponent";
 import LoginInputPassComponent from "../components/LoginInputPassComponent";
 import ButtonComponent from "../components/ButtonComponent";
 import DividerComponent from "../components/DividerComponent";
+import PopupNotificationComponent from "../components/PopupNotificationComponent";
+
+// Estilos
 import styles from "../styles/styles";
-import axios from "axios";
 
 const LoginScreen = ({ navigation }: { navigation: any }) => {
-  /*const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   if (user) {
-    return navigation.navigate("");
-  }*/
+    return navigation.navigate(""); // TODO: Navigate to Home
+  }
 
-  const { loading, fetchUser } = useApi();
+  const { login } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { data, error, loading, fetchUser } = useUserApi();
+
+  useEffect(() => {
+    if (!error?.error && data && "_token" in data && !user) {
+      const user: User = UserMapper.prototype.mapTo(data);
+      login(user);
+    }
+  }, [data?.id]);
+
+  useEffect(() => {
+    if (error && error.message != "") {
+      PopupNotificationComponent("error", "Error", "{error}");
+    }
+  }, [error]);
+
   const handleLogin = async () => {
-    const data = { email, password };
-    const headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      //'Authorization': 'Bearer ',
-    };
-    console.log(data);
-    try {
-      const response = await axios.post(
-        "http://192.168.56.1:8000/login",
-        data,
-        { headers }
-      );
-      console.log(response);
-    } catch (error) {
-      console.error(error);
+    await fetchUser({ email, password });
+  };
+
+  const sendForm = () => {
+    if (email.length > 10 && password.length > 5) {
+      handleLogin();
     }
   };
 
-  const handleFormSubmit = () => {
-    handleLogin();
-  };
-
   return (
-    <>
+    <ScrollView contentContainerStyle={styles.loginStyles.scrollView}>
       <LoadingComponent state={loading} />
-
-      <ScrollView contentContainerStyle={styles.loginStyles.scrollView}>
-        <View style={styles.loginStyles.viewContainer}>
-          <View style={styles.loginStyles.viewImage}>
-            <Image
-              source={require("../assets/images/logo.png")}
-              style={styles.loginStyles.image}
-            />
-          </View>
-          <View style={styles.loginStyles.viewContainerChild}>
-            <TextInput
-              placeholder="Enter email"
-              value={email}
-              onChangeText={setEmail}
-            />
-          </View>
-          <View style={styles.loginStyles.viewContainerChild}>
-            <TextInput
-              placeholder="Enter password"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-            />
-          </View>
-          <View style={styles.loginStyles.viewContainerChild}>
-            <Text
-              style={styles.loginStyles.text}
-              onPress={() => navigation.navigate("RecoverPassword")}
-            >
-              Recovery password
-            </Text>
-          </View>
-          <View style={styles.loginStyles.viewContainerChild}>
-            <ButtonComponent title="Log In" onPress={handleFormSubmit} />
-          </View>
-          <View style={styles.loginStyles.viewContainerChild}>
-            <DividerComponent content="or" />
-          </View>
-          <View style={styles.loginStyles.viewContainerChild}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <View style={{ flex: 5 }}>
-                <ButtonComponent type="google" />
-              </View>
-              <View style={{ flex: 1 }}>
-                <></>
-              </View>
-              <View style={{ flex: 5 }}>
-                <ButtonComponent type="github" />
-              </View>
-            </View>
-          </View>
+      <View style={styles.loginStyles.viewContainer}>
+        <View style={styles.loginStyles.viewImage}>
+          <Image
+            source={require("../assets/images/logo.png")}
+            style={styles.loginStyles.image}
+          />
+        </View>
+        <View style={styles.loginStyles.viewContainerChild}>
+          <LoginInputComponent
+            name="email"
+            label="Enter email"
+            value={email}
+            onChangeText={(text: string) => setEmail(text)}
+          />
+        </View>
+        <View style={styles.loginStyles.viewContainerChild}>
+          <LoginInputPassComponent
+            name="password"
+            label="Enter password"
+            value={password}
+            onChangeText={(text: string) => setPassword(text)}
+          />
+        </View>
+        <View style={styles.loginStyles.viewContainerChild}>
           <Text
             style={styles.loginStyles.text}
-            onPress={() => navigation.navigate("Register")}
+            onPress={() => navigation.navigate("RecoverPassword")}
           >
-            New Here?{" "}
-            <Text style={{ color: styles.colors.grey800 }}>Sign up</Text>
+            Recovery password
           </Text>
         </View>
-      </ScrollView>
-    </>
+        <View style={styles.loginStyles.viewContainerChild}>
+          <ButtonComponent title="Log In" onPress={sendForm} />
+        </View>
+        <View style={styles.loginStyles.viewContainerChild}>
+          <DividerComponent content="or" />
+        </View>
+        <View style={styles.loginStyles.viewContainerChild}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View style={{ flex: 5 }}>
+              <ButtonComponent type="google" />
+            </View>
+            <View style={{ flex: 1 }}>
+              <></>
+            </View>
+            <View style={{ flex: 5 }}>
+              <ButtonComponent type="github" />
+            </View>
+          </View>
+        </View>
+        <Text
+          style={styles.loginStyles.text}
+          onPress={() => navigation.navigate("Register")}
+        >
+          New Here?{" "}
+          <Text style={{ color: styles.colors.grey800 }}>Sign up</Text>
+        </Text>
+      </View>
+    </ScrollView>
   );
 };
 

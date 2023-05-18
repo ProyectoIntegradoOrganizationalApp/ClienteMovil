@@ -1,4 +1,4 @@
-import { Image, Pressable, StyleSheet, Text } from "react-native";
+import { Image, TouchableHighlight, StyleSheet, Text } from "react-native";
 import customStyles from "../styles/styles";
 
 function ButtonComponent(props: any) {
@@ -31,12 +31,12 @@ function ButtonComponent(props: any) {
   let buttonSize =
     size === "small" ? styles.buttonSmallSize : styles.buttonNormalSize;
   return (
-    <Pressable
+    <TouchableHighlight
       style={[styles.button, buttonType, buttonSize]}
       onPress={onPress}
     >
       {buttonContent}
-    </Pressable>
+    </TouchableHighlight>
   );
 }
 

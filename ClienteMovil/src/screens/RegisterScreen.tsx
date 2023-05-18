@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { useApi } from "../api/useApi";
+import { AuthContext } from "../domain/context/AuthContext";
+import { useApi } from "../adapters/api/useUserApi";
 import LoadingComponent from "../components/LoadingComponent";
 import { Formik } from "formik";
 import { loginValidationSchema } from "../utils/loginValidationSchema";

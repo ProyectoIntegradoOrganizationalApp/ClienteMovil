@@ -7,26 +7,30 @@ interface LoginInputPassComponentProps {
   label: string;
   value: string;
   onChangeText: (text: string) => void;
+  onError: (error: string) => void;
 }
 
 const LoginInputPassComponent: React.FC<LoginInputPassComponentProps> = ({
-  name,
   label,
   value,
   onChangeText,
+  onError,
 }) => {
   const [error, setError] = useState("");
 
   const handleInputChange = (text: string) => {
     onChangeText(text);
     setError("");
+    onError("");
   };
 
   const validateInput = () => {
     if (value.length === 0) {
       setError("This field is required");
+      onError("This field is required");
     } else {
       setError("");
+      onError("");
     }
   };
 

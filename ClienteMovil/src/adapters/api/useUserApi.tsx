@@ -6,6 +6,7 @@ import { ApiError } from "../../domain/ApiError.interface";
 import { Register } from "./Register.interface";
 import { useErrorHandler } from "../../hooks/useErrorHandler";
 import { UserDTO } from "../../domain/user/UserDTO";
+import { API_URL } from "@env";
 
 interface FormProps {
   name?: string;
@@ -20,7 +21,7 @@ export const useUserApi = () => {
   const [error, setError] = useState<ApiError | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const API = "http://192.168.56.1:8000"; // TODO: env
+  const API = API_URL;
 
   const { setInternalError } = useErrorHandler();
 
@@ -38,6 +39,7 @@ export const useUserApi = () => {
         body,
         {
           headers: {
+            Accept: "application/json",
             "Content-Type": "application/json",
           },
         }
@@ -47,7 +49,7 @@ export const useUserApi = () => {
         handleData(response.data);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
 
     setLoading(false);
@@ -84,7 +86,7 @@ export const useUserApi = () => {
         handleData(response.data, props);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
 
     setLoading(false);

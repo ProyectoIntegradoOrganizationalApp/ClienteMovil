@@ -11,13 +11,8 @@ const styles = {
   },
   loginStyles: StyleSheet.create({
     scrollView: {
-      height: "100%",
       justifyContent: "center",
-      //justifyContent: "flex-end",
     },
-    /*scrollViewRegister: {
-      paddingTop: 700,
-    },*/
     viewNavigateContainer: {
       padding: 20,
       backgroundColor: "#e2e8f0",

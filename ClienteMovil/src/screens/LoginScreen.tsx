@@ -26,6 +26,7 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
   const { user } = useContext(AuthContext);
 
   if (user) {
+    console.log("Logueado");
     return navigation.navigate(""); // TODO: Navigate to Home
   }
 
@@ -33,6 +34,7 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [inputError, setInputError] = useState("");
 
   const { data, error, loading, fetchUser } = useUserApi();
 
@@ -49,13 +51,14 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
     }
   }, [error]);
 
-  const handleLogin = async () => {
-    await fetchUser({ email, password });
+  const handleInputError = (error: string) => {
+    setInputError(error);
   };
 
-  const sendForm = () => {
-    if (email.length > 10 && password.length > 5) {
-      handleLogin();
+  const sendForm = (event: SubmitEvent | any) => {
+    event.preventDefault();
+    if (inputError.length === 0) {
+      fetchUser({ email, password });
     }
   };
 
@@ -75,6 +78,7 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
             label="Enter email"
             value={email}
             onChangeText={(text: string) => setEmail(text)}
+            onError={handleInputError}
           />
         </View>
         <View style={styles.loginStyles.viewContainerChild}>
@@ -83,6 +87,7 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
             label="Enter password"
             value={password}
             onChangeText={(text: string) => setPassword(text)}
+            onError={handleInputError}
           />
         </View>
         <View style={styles.loginStyles.viewContainerChild}>

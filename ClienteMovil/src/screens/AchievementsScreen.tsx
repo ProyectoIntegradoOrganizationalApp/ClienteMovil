@@ -7,6 +7,7 @@ import useAchievements from "../hooks/useAchievements";
 
 const AchievementsScreen = ({ navigation }: { navigation: any }) => {
   const { achievements } = useAchievements();
+  console.log(achievements);
 
   const [modalConfirmVisible, setModalConfirmVisible] = React.useState(false);
   const handleModalConfirmState = (e: boolean) => {

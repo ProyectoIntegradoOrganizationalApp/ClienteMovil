@@ -34,6 +34,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
   const [email, setEmail] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [last_name, setLastName] = useState<string>("");
+  const [prefix, setPrefix] = useState<string>("+34");
   const [phone_number, setPhoneNumber] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmpass, setConfirmPass] = useState<string>("");
@@ -52,7 +53,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
     if (error && error.message != "") {
       PopupNotificationComponent("error", "Error", "{error}");
     }
-  }, [error]);
+  }, [error?.message]);
 
   const handleInputError = (error: string) => {
     setInputError(error);
@@ -64,6 +65,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
       registerUser({
         name,
         last_name,
+        prefix,
         phone_number,
         email,
         password,
@@ -96,6 +98,15 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
             label="Enter last name"
             value={last_name}
             onChangeText={(text: string) => setLastName(text)}
+            onError={handleInputError}
+          />
+        </View>
+        <View style={styles.loginStyles.viewContainerChild}>
+          <LoginInputComponent
+            name="prefix"
+            label="Enter prefix"
+            value={prefix}
+            onChangeText={(text: string) => setPhoneNumber(text)}
             onError={handleInputError}
           />
         </View>

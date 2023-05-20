@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { HelperText, TextInput } from "react-native-paper";
-import styles from "../styles/styles";
 import { loginValidationSchema } from "../utils/loginValidationSchema";
+import styles from "../styles/styles";
 
 interface LoginInputComponentProps {
   name: string;
@@ -26,19 +26,12 @@ const LoginInputComponent: React.FC<LoginInputComponentProps> = ({
     onError("");
   };
 
-  const validateInput = () => {
-    // TODO: Implement validate
+  const validateInput = async () => {
     let errorMessage = "";
-    if (value.length === 0) {
-      errorMessage = "This field is required";
-    } else {
-      switch (name) {
-        case "email":
-          if (value.length <= 10) {
-            errorMessage = "Invalid format";
-          }
-          break;
-      }
+    try {
+      await loginValidationSchema.validateAt(name, { [name]: value });
+    } catch (error: any) {
+      errorMessage = error.message;
     }
     setError(errorMessage);
     onError(errorMessage);

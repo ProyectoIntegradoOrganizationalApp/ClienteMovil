@@ -6,13 +6,16 @@ import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import MainNavigationComponent from "./src/components/MainNavigationComponent";
 import AccountStack from "./src/stack/AccountStack";
-import Toast from "react-native-toast-message";
+import Toast, {
+  ToastConfig,
+  ToastConfigParams,
+} from "react-native-toast-message";
 import { IconButton } from "react-native-paper";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function App() {
-  const toastConfig = {
-    success: ({ text1, text2 }: { text1: string; text2: string }) => (
+  const toastConfig: ToastConfig = {
+    success: ({ text1, text2 }: ToastConfigParams<string>) => (
       <View style={scriptStyles.toastRow}>
         <IconButton
           icon="check-circle"
@@ -28,7 +31,7 @@ export default function App() {
         </View>
       </View>
     ),
-    error: ({ text1, text2 }: { text1: string; text2: string }) => (
+    error: ({ text1, text2 }: ToastConfigParams<string>) => (
       <View style={scriptStyles.toastRow}>
         <IconButton
           icon="close-circle"
@@ -52,7 +55,7 @@ export default function App() {
     <ApplicationProvider {...eva} theme={eva.light}>
       <StatusBar />
       <NavigationContainer>
-        {user ? <MainNavigationComponent /> : <AccountStack />}
+        {!user ? <MainNavigationComponent /> : <AccountStack />}
       </NavigationContainer>
       <Toast config={toastConfig} />
     </ApplicationProvider>

@@ -5,17 +5,32 @@ export const loginValidationSchema = yup.object().shape({
     .string()
     .min(5, "Too short!")
     .max(1000, "To long!")
-    .required("User is required"),
+    .required("Name is required"),
+  last_name: yup
+    .string()
+    .min(5, "Too short!")
+    .max(1000, "To long!")
+    .required("Last name is required"),
+  prefix: yup
+    .string()
+    .min(3, "Too short!")
+    .max(3, "To long!")
+    .required("Prefix is required"),
+  phone_number: yup
+    .string()
+    .min(9, "Too short!")
+    .max(9, "To long!")
+    .required("Phone is required"),
   email: yup
     .string()
     .email("Email must be a valid")
     .required("Email is required"),
   password: yup
     .string()
-    .min(5, "Too short!")
+    .min(3, "Too short!")
     .max(1000, "To long!")
     .required("Password is required"),
-  passwordConfirm: yup
+  confirmpass: yup
     .string()
     .required("Please retype your password.")
     .oneOf([yup.ref("password")], "Your passwords do not match."),

@@ -49,7 +49,7 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
     if (error && error.message != "") {
       PopupNotificationComponent("error", "Error", "{error}");
     }
-  }, [error]);
+  }, [error?.message]);
 
   const handleInputError = (error: string) => {
     setInputError(error);

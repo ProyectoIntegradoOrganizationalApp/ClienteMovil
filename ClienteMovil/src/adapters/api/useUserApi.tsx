@@ -4,28 +4,32 @@ import axios from "axios";
 
 import { ApiError } from "../../domain/ApiError.interface";
 import { Register } from "./Register.interface";
-import { useErrorHandler } from "../../hooks/useErrorHandler";
 import { UserDTO } from "../../domain/user/UserDTO";
+
 import { API_URL } from "@env";
 
+/**
+ *  Interfaz de props del formulario de la UI, tiene los campos opcionales
+ *  para también controlar tanto el login como el register.
+ */
 interface FormProps {
   name?: string;
   last_name?: string;
+  prefix?: string;
   phone_number?: string;
   email: string;
   password: string;
+  confirmPass?: string;
 }
 
 export const useUserApi = () => {
-  const [data, setData] = useState<UserDTO | null>(null);
-  const [error, setError] = useState<ApiError | null>(null);
+  const [data, setData] = useState<UserDTO>();
+  const [error, setError] = useState<ApiError>();
   const [loading, setLoading] = useState<boolean>(false);
 
   const API = API_URL;
 
-  const { setInternalError } = useErrorHandler();
-
-  const fetchUser = async (props: FormProps) => {
+  const fetchUser = (props: FormProps) => {
     setLoading(true);
 
     const body = JSON.stringify({
@@ -33,63 +37,64 @@ export const useUserApi = () => {
       password: props.password,
     });
 
-    try {
-      const response = await axios.post<UserDTO | ApiError>(
-        `${API}/login`,
-        body,
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
-      );
+    axios
+      .post<UserDTO | ApiError>(`${API}/login`, body, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((data) => {
+        handleData(data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
 
-      if (response.status === 200) {
-        handleData(response.data);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-
-    setLoading(false);
+    return () => {
+      setLoading(false);
+    };
   };
 
-  const registerUser = async (props: FormProps) => {
+  const registerUser = (props: FormProps) => {
     setLoading(true);
 
-    if (!props.name || !props.last_name) {
-      setLoading(false);
+    if (
+      !props.name ||
+      !props.last_name ||
+      !props.confirmPass ||
+      !props.phone_number ||
+      !props.prefix
+    ) {
       return;
     }
 
+    let phone = props.prefix + props.phone_number;
+
     const body = JSON.stringify({
       email: props.email,
-      phone: props.phone_number,
+      phone: phone,
       first_name: props.name,
       last_name: props.last_name,
       password: props.password,
+      confirmpass: props.confirmPass,
     });
 
-    try {
-      const response = await axios.post<Register | ApiError>(
-        `${API}/register`,
-        body,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        handleData(response.data, props);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-
-    setLoading(false);
+    axios
+      .post<Register | ApiError>(`${API}/register`, body, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((data) => {
+        handleData(data.data, props);
+      })
+      .catch((err) => {
+        const error: ApiError = { error: true, message: err };
+        handleData(error);
+        //setLoading(false);
+      });
   };
 
   const handleData = (
@@ -97,23 +102,28 @@ export const useUserApi = () => {
     props?: FormProps
   ) => {
     // Limpiamos errores
-    setError(null);
+    setError({ error: false, message: "" });
 
-    if ("error" in data) {
+    // Register & error
+    if (data && "error" in data) {
       // Error
       if (data.error) {
         setError(data);
+        //setLoading(false);
       }
 
       // Register
-      if (!data.error) {
-        fetchUser({ email: props!.email, password: props!.password });
+      if (!data.error && props) {
+        fetchUser({ email: props.email, password: props.password });
       }
     }
 
-    if ("id" in data) {
+    // Login
+    if (data && "id" in data) {
       setData(data as UserDTO);
     }
+
+    setLoading(false);
   };
 
   return { data, error, loading, fetchUser, registerUser };

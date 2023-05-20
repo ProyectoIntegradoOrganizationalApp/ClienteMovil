@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "@env";
 
 interface Achievement {
   id: number;
@@ -17,16 +18,16 @@ const useAchievements = () => {
       Accept: "application/json",
       "Content-Type": "application/json",
       Authorization:
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlMmFjZjBhMy0xZTM5LTQ1ZjAtOGI5Ni1hMWU1MTIyY2VkYTMiLCJyb2xlIjoidXNlciIsImV4cCI6MTY4NDM0Njg4OH0.t8gEYLpypSJ7QQQAc3DYjU-A4l0vJNbKW6i--x3V_1hYDSKta8qgDW8QVulYVcgymLcFgxapu3n_gquM8kXp4Q",
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlMmFjZjBhMy0xZTM5LTQ1ZjAtOGI5Ni1hMWU1MTIyY2VkYTMiLCJyb2xlIjoidXNlciIsImV4cCI6MTY4NDYxNDU5MX0.aAUC4CcPjmf1gWvVgQhGka1Yy9aVWVTNMf4rhsofBkV_QbdZ2X2ckCQ6ugB4IC3tJu3bPCepRr1dhB7cVoJEYg",
     };
     try {
       const response = await axios.get<Achievement[]>(
-        "http://192.168.56.1:8000/achievements",
+        `${API_URL}/achievements`,
         { headers }
       );
       setAchievements(response.data);
     } catch (error) {
-      console.error(error);
+      console.error("Error al cargar logros: " + error);
     }
   };
 

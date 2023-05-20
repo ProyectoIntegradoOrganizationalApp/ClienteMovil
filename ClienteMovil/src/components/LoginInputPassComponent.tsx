@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { HelperText, TextInput } from "react-native-paper";
+import { loginValidationSchema } from "../utils/loginValidationSchema";
 import styles from "../styles/styles";
 
 interface LoginInputPassComponentProps {
@@ -11,6 +12,7 @@ interface LoginInputPassComponentProps {
 }
 
 const LoginInputPassComponent: React.FC<LoginInputPassComponentProps> = ({
+  name,
   label,
   value,
   onChangeText,
@@ -24,14 +26,15 @@ const LoginInputPassComponent: React.FC<LoginInputPassComponentProps> = ({
     onError("");
   };
 
-  const validateInput = () => {
-    if (value.length === 0) {
-      setError("This field is required");
-      onError("This field is required");
-    } else {
-      setError("");
-      onError("");
+  const validateInput = async () => {
+    let errorMessage = "";
+    try {
+      await loginValidationSchema.validateAt(name, { [name]: value });
+    } catch (error: any) {
+      errorMessage = error.message;
     }
+    setError(errorMessage);
+    onError(errorMessage);
   };
 
   return (
@@ -45,7 +48,7 @@ const LoginInputPassComponent: React.FC<LoginInputPassComponentProps> = ({
         onBlur={validateInput}
         activeOutlineColor={styles.colors.grey800}
         outlineColor={styles.colors.grey800}
-        secureTextEntry // Agrega esta línea si se trata de un campo de contraseña
+        secureTextEntry
       />
       {error !== "" && <HelperText type="error">{error}</HelperText>}
     </>

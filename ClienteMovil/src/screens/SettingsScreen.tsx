@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { Card, Switch } from "react-native-paper";
+import { Switch } from "react-native-paper";
 import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
 import ButtonComponent from "../components/ButtonComponent";
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";

@@ -30,8 +30,5 @@ export const loginValidationSchema = yup.object().shape({
     .min(3, "Too short!")
     .max(1000, "To long!")
     .required("Password is required"),
-  confirmpass: yup
-    .string()
-    .required("Please retype your password.")
-    .oneOf([yup.ref("password")], "Your passwords do not match."),
+  confirmpass: yup.string().required("Please retype your password."),
 });

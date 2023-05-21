@@ -25,11 +25,6 @@ import styles from "../styles/styles";
 const LoginScreen = ({ navigation }: { navigation: any }) => {
   const { user } = useContext(AuthContext);
 
-  if (user) {
-    console.log("Logueado");
-    return navigation.navigate(""); // TODO: Navigate to Home
-  }
-
   const { login } = useAuth();
 
   const [email, setEmail] = useState("");
@@ -47,7 +42,7 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
 
   useEffect(() => {
     if (error && error.message != "") {
-      PopupNotificationComponent("error", "Error", "{error}");
+      PopupNotificationComponent("error", "Error", error.message);
     }
   }, [error?.message]);
 

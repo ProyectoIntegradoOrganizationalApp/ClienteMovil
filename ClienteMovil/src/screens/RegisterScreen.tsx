@@ -25,10 +25,6 @@ import styles from "../styles/styles";
 const RegisterScreen = ({ navigation }: { navigation: any }) => {
   const { user } = useContext(AuthContext);
 
-  if (user) {
-    return navigation.navigate(""); // TODO: Navigate to Home
-  }
-
   const { login } = useAuth();
 
   const [email, setEmail] = useState<string>("");
@@ -51,7 +47,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
 
   useEffect(() => {
     if (error && error.message != "") {
-      PopupNotificationComponent("error", "Error", "{error}");
+      PopupNotificationComponent("error", "Error", error.message);
     }
   }, [error?.message]);
 
@@ -62,14 +58,22 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
   const sendForm = (event: SubmitEvent | any) => {
     event.preventDefault();
     if (inputError.length === 0) {
-      registerUser({
-        name,
-        last_name,
-        prefix,
-        phone_number,
-        email,
-        password,
-      });
+      if (password === confirmpass) {
+        registerUser({
+          name,
+          last_name,
+          prefix,
+          phone_number,
+          email,
+          password,
+        });
+      } else {
+        PopupNotificationComponent(
+          "error",
+          "Error",
+          "Your passwords do not match"
+        );
+      }
     }
   };
 
@@ -106,7 +110,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
             name="prefix"
             label="Enter prefix"
             value={prefix}
-            onChangeText={(text: string) => setPhoneNumber(text)}
+            onChangeText={(text: string) => setPrefix(text)}
             onError={handleInputError}
           />
         </View>

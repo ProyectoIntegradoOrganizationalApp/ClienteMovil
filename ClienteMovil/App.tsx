@@ -55,7 +55,7 @@ export default function App() {
     <ApplicationProvider {...eva} theme={eva.light}>
       <StatusBar />
       <NavigationContainer>
-        {!user ? <MainNavigationComponent /> : <AccountStack />}
+        {!user !== null ? <MainNavigationComponent /> : <AccountStack />}
       </NavigationContainer>
       <Toast config={toastConfig} />
     </ApplicationProvider>

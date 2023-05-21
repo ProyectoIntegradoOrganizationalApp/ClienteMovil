@@ -63,10 +63,10 @@ export const useUserApi = () => {
     if (
       !props.name ||
       !props.last_name ||
-      !props.confirmPass ||
       !props.phone_number ||
       !props.prefix
     ) {
+      setLoading(false);
       return;
     }
 
@@ -89,11 +89,13 @@ export const useUserApi = () => {
       })
       .then((data) => {
         handleData(data.data, props);
+        setLoading(false);
       })
       .catch((err) => {
         const error: ApiError = { error: true, message: err };
+        console.error(error);
         handleData(error);
-        //setLoading(false);
+        setLoading(false);
       });
   };
 

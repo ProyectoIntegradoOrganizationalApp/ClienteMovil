@@ -1,4 +1,5 @@
-import { useContext } from "react";
+import { useState } from "react";
+import { User } from "./src/domain/user/User.interface";
 import { AuthContext } from "./src/domain/context/AuthContext";
 import { ApplicationProvider } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
@@ -49,14 +50,16 @@ export default function App() {
     ),
   };
 
-  const { user } = useContext(AuthContext);
+  const [user, setUser] = useState<User | null>(null);
 
   return (
     <ApplicationProvider {...eva} theme={eva.light}>
-      <StatusBar />
-      <NavigationContainer>
-        {!user !== null ? <MainNavigationComponent /> : <AccountStack />}
-      </NavigationContainer>
+      <AuthContext.Provider value={{ user, setUser }}>
+        <StatusBar />
+        <NavigationContainer>
+          {user !== null ? <MainNavigationComponent /> : <AccountStack />}
+        </NavigationContainer>
+      </AuthContext.Provider>
       <Toast config={toastConfig} />
     </ApplicationProvider>
   );

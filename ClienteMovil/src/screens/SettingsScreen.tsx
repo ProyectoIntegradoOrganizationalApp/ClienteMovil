@@ -5,6 +5,8 @@ import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
 import ButtonComponent from "../components/ButtonComponent";
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import styles from "../styles/styles";
+import ModalConfirmComponent from "../components/ModalConfirmComponent";
+import { useAuth } from "../hooks/useAuth";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -26,8 +28,15 @@ const SettingsScreen = () => {
 };
 
 const GeneralSettingsScreen = () => {
+  const { logout } = useAuth();
+
   const [isSwitchOn, setIsSwitchOn] = React.useState(false);
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+
+  const [modalConfirmVisible, setModalConfirmVisible] = React.useState(false);
+  const handleModalConfirmState = (e: boolean) => {
+    setModalConfirmVisible(e);
+  };
   return (
     <ScrollView style={scriptStyles.generalView}>
       <View style={scriptStyles.viewRow}>
@@ -41,6 +50,30 @@ const GeneralSettingsScreen = () => {
           <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
         </View>
       </View>
+      <View style={scriptStyles.viewRow}>
+        <ButtonComponent
+          type="primary"
+          title="Log out"
+          size="small"
+          onPress={() => {
+            setModalConfirmVisible(true);
+          }}
+        />
+      </View>
+      <ModalConfirmComponent
+        message={
+          <Text style={{ fontSize: 16 }}>
+            Are you sure you want to log out of Teamer?
+          </Text>
+        }
+        confirmText="Confirm"
+        dimissText="Cancel"
+        isVisible={modalConfirmVisible}
+        setModalConfirmVisible={handleModalConfirmState}
+        onConfirm={() => {
+          logout();
+        }}
+      />
     </ScrollView>
   );
 };

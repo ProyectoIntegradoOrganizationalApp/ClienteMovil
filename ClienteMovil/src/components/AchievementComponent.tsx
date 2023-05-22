@@ -8,7 +8,7 @@ interface IAchievement {
   title: string;
   description: string;
   icon: string;
-  progess: number;
+  progress: number;
 }
 
 function AchievementComponent(props: IAchievement) {
@@ -18,11 +18,11 @@ function AchievementComponent(props: IAchievement) {
         title={props.title}
         subtitle={props.description}
         left={() => <Avatar.Image size={50} source={{ uri: props.icon }} />}
-        right={() => <Text style={{ marginRight: 15 }}>{props.progess}%</Text>}
+        right={() => <Text style={{ marginRight: 15 }}>{props.progress}%</Text>}
       />
       <Card.Content style={{ marginTop: 10 }}>
         <ProgressBar
-          progress={props.progess / 100}
+          progress={props.progress / 100}
           color={styles.colors.grey800}
         />
       </Card.Content>

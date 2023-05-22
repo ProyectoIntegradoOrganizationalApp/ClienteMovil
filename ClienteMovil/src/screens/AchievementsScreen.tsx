@@ -2,17 +2,11 @@ import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { IconButton } from "react-native-paper";
 import AchievementComponent from "../components/AchievementComponent";
-import ModalConfirmComponent from "../components/ModalConfirmComponent";
 import useAchievements from "../hooks/useAchievements";
 
 const AchievementsScreen = ({ navigation }: { navigation: any }) => {
   const { achievements } = useAchievements();
-  console.log(achievements);
 
-  const [modalConfirmVisible, setModalConfirmVisible] = React.useState(false);
-  const handleModalConfirmState = (e: boolean) => {
-    setModalConfirmVisible(e);
-  };
   return (
     <View>
       <View
@@ -27,9 +21,6 @@ const AchievementsScreen = ({ navigation }: { navigation: any }) => {
           size={25}
           iconColor="grey"
           style={scriptStyles.icon}
-          onPress={() => {
-            setModalConfirmVisible(true);
-          }}
         />
         <IconButton
           icon="cog"
@@ -57,18 +48,6 @@ const AchievementsScreen = ({ navigation }: { navigation: any }) => {
           renderItem={({ item: ach }) => <AchievementComponent {...ach} />}
         />
       </View>
-      <ModalConfirmComponent
-        message={
-          <Text style={{ fontSize: 16 }}>
-            Are you sure you want{" "}
-            <Text style={{ color: "#e45f5f" }}>proceed with this action</Text>?
-          </Text>
-        }
-        confirmText="Confirm"
-        dimissText="Cancel"
-        isVisible={modalConfirmVisible}
-        setModalConfirmVisible={handleModalConfirmState}
-      />
     </View>
   );
 };

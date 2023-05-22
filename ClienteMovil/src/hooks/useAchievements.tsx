@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useContext, useState } from "react";
+import { AuthContext } from "../domain/context/AuthContext";
 import axios from "axios";
 import { API_URL } from "@env";
 
@@ -7,33 +8,54 @@ interface Achievement {
   title: string;
   description: string;
   icon: string;
-  progess: number;
+  progress: number;
 }
 
 const useAchievements = () => {
+  const { user } = useContext(AuthContext);
   const [achievements, setAchievements] = useState<Achievement[]>([]);
 
-  const fetchAchievements = async () => {
-    const headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization:
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlMmFjZjBhMy0xZTM5LTQ1ZjAtOGI5Ni1hMWU1MTIyY2VkYTMiLCJyb2xlIjoidXNlciIsImV4cCI6MTY4NDY3ODMzNH0.AJUIcmzyj7_nj82DDEA4Tilfr_h6fzh2s6_AxEw45rcV_otbw0HMQNj3hoPhaVjEuj9Arw8dU2ze-vMRKPJ-UA",
-    };
-    try {
-      const response = await axios.get<Achievement[]>(
-        `${API_URL}/achievements`,
-        { headers }
-      );
-      setAchievements(response.data);
-    } catch (error) {
-      console.error("Error al cargar logros: " + error);
-    }
-  };
-
   useEffect(() => {
+    const fetchAchievements = async () => {
+      try {
+        const headers = {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user?._token}`,
+        };
+
+        const responseList = await axios.get<Achievement[]>(
+          `${API_URL}/achievements`,
+          { headers }
+        );
+        const responseUser = await axios.get<any[]>(
+          `${API_URL}/profile/${user?.id}/achievements`,
+          { headers }
+        );
+
+        const achievementsList = responseList.data;
+        const achievementsUser = responseUser.data;
+
+        const combinedAchievements: any = {};
+
+        Object.keys(achievementsList).forEach((key) => {
+          combinedAchievements[key] = achievementsList[key];
+        });
+
+        Object.keys(achievementsUser).forEach((key) => {
+          if (key !== "idachievement") {
+            combinedAchievements[key] = achievementsUser[key];
+          }
+        });
+
+        setAchievements(combinedAchievements);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     fetchAchievements();
-  }, []);
+  }, [user]);
 
   return { achievements };
 };

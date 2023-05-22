@@ -11,6 +11,7 @@ const ModalConfirmComponent = (props: any): React.ReactElement => {
     dimissText,
     isVisible,
     setModalConfirmVisible: setModalConfirmVisible,
+    onConfirm,
   } = props;
 
   return (
@@ -50,7 +51,16 @@ const ModalConfirmComponent = (props: any): React.ReactElement => {
                   <View style={{ marginTop: 10 }} />
                   {message}
                   <View style={{ marginVertical: 10 }} />
-                  <ButtonComponent type="confirm" title={confirmText} />
+                  <ButtonComponent
+                    type="confirm"
+                    title={confirmText}
+                    onPress={() => {
+                      onConfirm();
+                      if (isVisible) {
+                        setModalConfirmVisible(false);
+                      }
+                    }}
+                  />
                   <View style={{ marginVertical: 10 }} />
                   <ButtonComponent
                     type="primary"

@@ -1,26 +1,36 @@
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import FriendsListScreen from "../screens/FriendsListScreen";
 import AddFriendScreen from "../screens/AddFriendScreen";
 import FriendsSettingsScreen from "../screens/FriendsSettingsScreen";
 import { StyleSheet } from "react-native";
 
-const Tab = createMaterialTopTabNavigator();
+const Stack = createNativeStackNavigator();
 
-const FriendsScreen = () => {
+const FriendsScreen = ({ navigation }: { navigation: any }) => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen
+    <Stack.Navigator>
+      <Stack.Screen
         name="FriendsList"
-        options={{ title: "Friends" }}
         component={FriendsListScreen}
+        options={{
+          title: "Friends",
+          headerRight: () => (
+            <Icon
+              name="cog"
+              size={23}
+              onPress={() => navigation.navigate("FriendsSettings")}
+            />
+          ),
+        }}
       />
-      <Tab.Screen name="Add Friend" component={AddFriendScreen} />
-      <Tab.Screen
+      <Stack.Screen name="Add Friend" component={AddFriendScreen} />
+      <Stack.Screen
         name="FriendsSettings"
-        options={{ title: "Settings" }}
         component={FriendsSettingsScreen}
+        options={{ title: "Friends Settings" }}
       />
-    </Tab.Navigator>
+    </Stack.Navigator>
   );
 };
 

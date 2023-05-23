@@ -16,16 +16,9 @@ const ProfileStack = () => {
       <Stack.Screen
         name="ProfileStack"
         component={ProfileScreen}
-        options={({ navigation }: { navigation: any }) => ({
-          title: "Profile",
+        options={() => ({
+          headerShown: false,
           headerShadowVisible: false,
-          headerRight: () => (
-            <Icon
-              name="cog"
-              size={23}
-              onPress={() => navigation.navigate("Settings")}
-            />
-          ),
         })}
       />
       <Stack.Screen
@@ -58,6 +51,7 @@ const MainNavigationComponent = () => {
         component={FriendsScreen}
         options={{
           title: "Friends",
+          headerShown: false,
           tabBarShowLabel: false,
           tabBarIcon: ({ color, size }) => {
             return <Icon name="account-multiple" size={size} color={color} />;

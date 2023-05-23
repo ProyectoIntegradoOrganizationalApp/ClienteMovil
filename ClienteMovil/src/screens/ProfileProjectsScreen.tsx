@@ -28,42 +28,14 @@ const ProfileProjectsScreen = () => {
 
   return (
     <View style={{ height: "100%" }}>
-      <Card style={scriptStyles.card}>
-        <Card.Title
-          title="Your Projects"
-          titleStyle={{ textAlign: "center" }}
-          left={() => (
-            <IconButton
-              icon="help-circle"
-              size={25}
-              iconColor="grey"
-              style={scriptStyles.cardIconActivity}
-            />
-          )}
-          right={() => (
-            <IconButton
-              icon="cog"
-              size={25}
-              iconColor="grey"
-              style={[scriptStyles.cardIconActivity, { marginRight: 15 }]}
-            />
-          )}
-          style={{
-            borderBottomWidth: 2,
-            borderBottomColor: "#ffffff",
-          }}
+      <View>
+        <FlatList
+          horizontal={false}
+          scrollEnabled={true}
+          data={projects}
+          renderItem={({ item: pro }) => <ProjectComponent {...pro} />}
         />
-        <Card.Content>
-          <View>
-            <FlatList
-              horizontal={false}
-              scrollEnabled={true}
-              data={projects}
-              renderItem={({ item: pro }) => <ProjectComponent {...pro} />}
-            />
-          </View>
-        </Card.Content>
-      </Card>
+      </View>
       <FAB
         icon="plus"
         color="#ffffff"

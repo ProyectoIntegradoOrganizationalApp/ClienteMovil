@@ -12,7 +12,7 @@ const MainStack = () => {
       <Stack.Screen
         name="Projects"
         component={ProjectsScreen}
-        options={{ headerShadowVisible: false }}
+        options={{ headerShown: false, headerShadowVisible: false }}
       />
       <Stack.Screen
         name="ProjectsSingle"

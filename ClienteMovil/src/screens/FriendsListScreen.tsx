@@ -1,7 +1,7 @@
 import * as React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
-import { Searchbar } from "react-native-paper";
+import { IconButton, Searchbar } from "react-native-paper";
 import FriendComponent from "../components/FriendComponent";
 
 const friends = [
@@ -27,7 +27,7 @@ const friends = [
 
 const orders = ["All", "Online", "Pending", "Blocked"];
 
-const FriendsListScreen = () => {
+const FriendsListScreen = ({ navigation }: { navigation: any }) => {
   const [selectedIndex, setSelectedIndex] = React.useState<IndexPath>(
     new IndexPath(0)
   );
@@ -36,39 +36,61 @@ const FriendsListScreen = () => {
   const onChangeSearch = (query: any) => setSearchQuery(query);
 
   return (
-    <View>
-      <View style={scriptStyles.filterView}>
-        <Text style={scriptStyles.filterText}>Order by:</Text>
-        <Select
-          value={orders[selectedIndex.row]}
-          selectedIndex={selectedIndex}
-          onSelect={(index: any) => setSelectedIndex(index)}
-          style={scriptStyles.filterSelect}
+    <>
+      <View style={{ marginTop: 15 }}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "flex-end",
+            alignItems: "center",
+          }}
         >
-          {orders.map(
-            (title: string, index: number): React.ReactElement => (
-              <SelectItem key={index.toString()} title={title} />
-            )
+          <IconButton
+            icon="account-multiple-plus"
+            size={20}
+            iconColor="#fff"
+            style={scriptStyles.basketIcon}
+            onPress={() => navigation.navigate("Add Friend")}
+          />
+        </View>
+        <View style={scriptStyles.filterView}>
+          <Text style={scriptStyles.filterText}>Order by:</Text>
+          <Select
+            value={orders[selectedIndex.row]}
+            selectedIndex={selectedIndex}
+            onSelect={(index: any) => setSelectedIndex(index)}
+            style={scriptStyles.filterSelect}
+          >
+            {orders.map(
+              (title: string, index: number): React.ReactElement => (
+                <SelectItem key={index.toString()} title={title} />
+              )
+            )}
+          </Select>
+        </View>
+        <Searchbar
+          placeholder="Search friends..."
+          onChangeText={onChangeSearch}
+          value={searchQuery}
+          style={scriptStyles.searchbar}
+        />
+        <FlatList
+          data={friends}
+          renderItem={({ item: chat }) => (
+            <FriendComponent type="chat" {...chat} />
           )}
-        </Select>
+        />
       </View>
-      <Searchbar
-        placeholder="Search friends..."
-        onChangeText={onChangeSearch}
-        value={searchQuery}
-        style={scriptStyles.searchbar}
-      />
-      <FlatList
-        data={friends}
-        renderItem={({ item: chat }) => (
-          <FriendComponent type="chat" {...chat} />
-        )}
-      />
-    </View>
+    </>
   );
 };
 
 const scriptStyles = StyleSheet.create({
+  basketIcon: {
+    borderRadius: 5,
+    backgroundColor: "#3c6db2",
+    marginRight: 15,
+  },
   filterView: {
     flexDirection: "row",
     justifyContent: "flex-end",

@@ -43,13 +43,12 @@ const ActivityScreen = () => {
         />
       </Card>
       <Card style={[scriptStyles.card, { marginBottom: 15 }]}>
-        <Card.Title
-          title="April - 2023"
-          titleStyle={{ textAlign: "center" }}
-          style={{ borderBottomWidth: 2, borderBottomColor: "#ffffff" }}
-        />
         <Card.Content>
-          <Calendar date={date} onSelect={(nextDate) => setDate(nextDate)} />
+          <Calendar
+            date={date}
+            onSelect={(nextDate) => setDate(nextDate)}
+            style={{ borderWidth: 0 }}
+          />
         </Card.Content>
       </Card>
     </ScrollView>

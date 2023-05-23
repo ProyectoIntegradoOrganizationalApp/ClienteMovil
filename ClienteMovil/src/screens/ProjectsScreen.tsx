@@ -1,27 +1,34 @@
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ProjectsListScreen from "./ProjectsListScreen";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ProjectsSettingsScreen from "./ProjectsSettingsScreen";
-import { StyleSheet } from "react-native";
 
-const Tab = createMaterialTopTabNavigator();
+const Stack = createNativeStackNavigator();
 
-const ProjectsScreen = () => {
+const ProjectsScreen = ({ navigation }: { navigation: any }) => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen
+    <Stack.Navigator>
+      <Stack.Screen
         name="ProjectsList"
-        options={{ title: "Projects" }}
+        options={{
+          title: "Projects",
+          headerRight: () => (
+            <Icon
+              name="cog"
+              size={23}
+              onPress={() => navigation.navigate("ProjectsSettings")}
+            />
+          ),
+        }}
         component={ProjectsListScreen}
       />
-      <Tab.Screen
+      <Stack.Screen
         name="ProjectsSettings"
         options={{ title: "Settings" }}
         component={ProjectsSettingsScreen}
       />
-    </Tab.Navigator>
+    </Stack.Navigator>
   );
 };
-
-const scriptStyles = StyleSheet.create({});
 
 export default ProjectsScreen;

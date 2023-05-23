@@ -4,7 +4,7 @@ import { StyleSheet, Text } from "react-native";
 import styles from "../styles/styles";
 
 interface IAchievement {
-  id: number;
+  id: string;
   title: string;
   description: string;
   icon: string;

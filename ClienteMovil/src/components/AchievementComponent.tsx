@@ -1,4 +1,3 @@
-import { useNavigation } from "@react-navigation/native";
 import { Avatar, Card, ProgressBar } from "react-native-paper";
 import { StyleSheet, Text } from "react-native";
 import styles from "../styles/styles";
@@ -17,7 +16,12 @@ function AchievementComponent(props: IAchievement) {
       <Card.Title
         title={props.title}
         subtitle={props.description}
-        left={() => <Avatar.Image size={50} source={{ uri: props.icon }} />}
+        left={() => (
+          <Avatar.Image
+            size={50}
+            source={require(`../assets/images/achievements/icon-achievement-1.png`)}
+          />
+        )}
         right={() => <Text style={{ marginRight: 15 }}>{props.progress}%</Text>}
       />
       <Card.Content style={{ marginTop: 10 }}>

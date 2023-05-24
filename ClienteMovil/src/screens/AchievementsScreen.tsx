@@ -10,18 +10,16 @@ const AchievementsScreen = ({ navigation }: { navigation: any }) => {
   const { achievements } = useAchievements();
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <View style={{ alignItems: "center", marginVertical: 15 }}>
         <LevelProgressComponent
           level={user?.level}
-          progress={5}
+          progress={25}
           radius={75}
           strokeWidth={15}
-          barColor="#089f7b"
-          textColor="black"
         />
       </View>
-      <View style={{ height: "73%" }}>
+      <View style={{ flex: 1, paddingBottom: 15 }}>
         <FlatList
           horizontal={false}
           scrollEnabled={true}

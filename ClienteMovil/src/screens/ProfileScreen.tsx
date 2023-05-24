@@ -24,23 +24,24 @@ const ProfileDataScreen = ({ navigation }: { navigation: any }) => {
           )}
         />
         <Card.Content style={{ marginTop: 10 }}>
-          <View>
-            <Menu.Item
-              leadingIcon="trophy"
-              onPress={() => navigation.navigate("Achievements")}
-              title="Achievements"
-            />
-            <Menu.Item
-              leadingIcon="chart-line"
-              onPress={() => navigation.navigate("Activity")}
-              title="Activity"
-            />
-            <Menu.Item
-              leadingIcon="view-dashboard"
-              onPress={() => navigation.navigate("My Projects")}
-              title="My Projects"
-            />
-          </View>
+          <Menu.Item
+            leadingIcon="trophy"
+            onPress={() => navigation.navigate("Achievements")}
+            title="Achievements"
+            style={{ marginVertical: 5 }}
+          />
+          <Menu.Item
+            leadingIcon="chart-line"
+            onPress={() => navigation.navigate("Activity")}
+            title="Activity"
+            style={{ marginVertical: 5 }}
+          />
+          <Menu.Item
+            leadingIcon="view-dashboard"
+            onPress={() => navigation.navigate("My Projects")}
+            title="My Projects"
+            style={{ marginVertical: 5 }}
+          />
         </Card.Content>
       </Card>
     </View>

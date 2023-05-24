@@ -30,8 +30,6 @@ const ProfileProjectsScreen = () => {
     <View style={{ height: "100%" }}>
       <View>
         <FlatList
-          horizontal={false}
-          scrollEnabled={true}
           data={projects}
           renderItem={({ item: pro }) => <ProjectComponent {...pro} />}
         />

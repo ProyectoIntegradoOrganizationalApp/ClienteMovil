@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
-import { Svg, Circle, Text as SVGText } from "react-native-svg";
+import { View } from "react-native";
+import { Svg, Circle, Text } from "react-native-svg";
 
 interface LevelProgressComponentProps {
   level: number | undefined;
   progress: number;
   radius: number;
   strokeWidth: number;
-  barColor: string;
-  textColor: string;
 }
 
 const LevelProgressComponent: React.FC<LevelProgressComponentProps> = ({
@@ -16,8 +13,6 @@ const LevelProgressComponent: React.FC<LevelProgressComponentProps> = ({
   progress,
   radius,
   strokeWidth,
-  barColor,
-  textColor,
 }) => {
   const circumference = 2 * Math.PI * radius;
   const progressValue = (progress / 100) * circumference;
@@ -29,7 +24,7 @@ const LevelProgressComponent: React.FC<LevelProgressComponentProps> = ({
           cx={radius}
           cy={radius}
           r={radius - strokeWidth / 2}
-          stroke={barColor}
+          stroke="#033e30"
           strokeWidth={strokeWidth}
           fill="transparent"
         />
@@ -37,21 +32,30 @@ const LevelProgressComponent: React.FC<LevelProgressComponentProps> = ({
           cx={radius}
           cy={radius}
           r={radius - strokeWidth / 2}
-          stroke="rgba(0, 0, 0, 0.55)"
+          stroke="#089f7b"
           strokeWidth={strokeWidth}
           fill="transparent"
           strokeDasharray={`${progressValue}, ${circumference}`}
           strokeDashoffset={0}
         />
-        <SVGText
+        <Text
           x="50%"
-          y="50%"
+          y="40%"
           textAnchor="middle"
-          fontSize={radius / 2.5}
-          fill={textColor}
+          fontSize={radius / 2.75}
+          fill="#000000"
         >
-          {`${level}`}
-        </SVGText>
+          LEVEL
+        </Text>
+        <Text
+          x="50%"
+          y="70%"
+          textAnchor="middle"
+          fontSize={radius / 2}
+          fill="#000000"
+        >
+          {level}
+        </Text>
       </Svg>
     </View>
   );

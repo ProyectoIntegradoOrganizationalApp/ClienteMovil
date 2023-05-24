@@ -1,5 +1,7 @@
-import { FlatList, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import ProjectComponent from "../components/ProjectComponent";
+import { FAB } from "react-native-paper";
+import styles from "../styles/styles";
 
 const projects = [
   {
@@ -17,12 +19,31 @@ const projects = [
 const ProjectsListScreen = () => {
   return (
     <View>
-      <FlatList
-        data={projects}
-        renderItem={({ item: pro }) => <ProjectComponent {...pro} />}
-      />
+      <View style={{ height: "100%" }}>
+        <FlatList
+          data={projects}
+          renderItem={({ item: pro }) => <ProjectComponent {...pro} />}
+        />
+        <FAB
+          icon="plus"
+          color="#ffffff"
+          style={scriptStyles.fab}
+          onPress={() => {}}
+        />
+      </View>
     </View>
   );
 };
+
+const scriptStyles = StyleSheet.create({
+  fab: {
+    position: "absolute",
+    margin: 15,
+    right: 0,
+    bottom: 0,
+    borderRadius: 15,
+    backgroundColor: styles.colors.grey800,
+  },
+});
 
 export default ProjectsListScreen;

@@ -17,6 +17,8 @@ const projects = [
 ];
 
 const ProjectsListScreen = () => {
+  const { components } = styles();
+
   return (
     <View>
       <View style={{ height: "100%" }}>
@@ -27,23 +29,12 @@ const ProjectsListScreen = () => {
         <FAB
           icon="plus"
           color="#ffffff"
-          style={scriptStyles.fab}
+          style={[components.fab, { position: "absolute" }]}
           onPress={() => {}}
         />
       </View>
     </View>
   );
 };
-
-const scriptStyles = StyleSheet.create({
-  fab: {
-    position: "absolute",
-    margin: 15,
-    right: 0,
-    bottom: 0,
-    borderRadius: 15,
-    backgroundColor: styles.colors.grey800,
-  },
-});
 
 export default ProjectsListScreen;

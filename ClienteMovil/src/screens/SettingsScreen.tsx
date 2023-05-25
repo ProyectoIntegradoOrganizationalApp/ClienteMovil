@@ -1,12 +1,16 @@
-import * as React from "react";
+import React, { useContext } from "react";
+import {
+  ThemeContext,
+  ThemeContextProps,
+} from "../domain/context/ThemeContext";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { Switch } from "react-native-paper";
 import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
 import ButtonComponent from "../components/ButtonComponent";
-import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
-import styles from "../styles/styles";
+import { ScrollView, Text, TextInput, View } from "react-native";
 import ModalConfirmComponent from "../components/ModalConfirmComponent";
 import { useAuth } from "../hooks/useAuth";
+import styles from "../styles/styles";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -28,29 +32,37 @@ const SettingsScreen = () => {
 };
 
 const GeneralSettingsScreen = () => {
-  const { logout } = useAuth();
+  const { theme, setTheme } = useContext<ThemeContextProps>(ThemeContext);
 
-  const [isSwitchOn, setIsSwitchOn] = React.useState(false);
-  const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+  const toggleTheme = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    console.log(theme);
+  };
 
   const [modalConfirmVisible, setModalConfirmVisible] = React.useState(false);
   const handleModalConfirmState = (e: boolean) => {
     setModalConfirmVisible(e);
   };
+
+  const { logout } = useAuth();
+
+  const { settingsStyles } = styles();
+
   return (
-    <ScrollView style={scriptStyles.generalView}>
-      <View style={scriptStyles.viewRow}>
+    <ScrollView style={settingsStyles.generalView}>
+      <View style={settingsStyles.viewRow}>
         <View style={{ flex: 2 }}>
-          <Text style={scriptStyles.title}>Dark Mode</Text>
-          <Text style={scriptStyles.text}>
+          <Text style={settingsStyles.title}>Dark Mode</Text>
+          <Text style={settingsStyles.text}>
             Active this to enable and disabled dark mode.
           </Text>
         </View>
         <View style={{ flex: 1 }}>
-          <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
+          <Switch value={theme === "light"} onValueChange={toggleTheme} />
         </View>
       </View>
-      <View style={scriptStyles.viewRow}>
+      <View style={settingsStyles.viewRow}>
         <ButtonComponent
           type="primary"
           title="Log out"
@@ -87,12 +99,14 @@ const SecuritySettingsScreen = () => {
     new IndexPath(0)
   );
 
+  const { colors, settingsStyles } = styles();
+
   return (
-    <ScrollView style={scriptStyles.generalView}>
-      <View style={scriptStyles.viewRow}>
+    <ScrollView style={settingsStyles.generalView}>
+      <View style={settingsStyles.viewRow}>
         <View style={{ flex: 2 }}>
-          <Text style={scriptStyles.title}>Enable Notifications</Text>
-          <Text style={scriptStyles.text}>
+          <Text style={settingsStyles.title}>Enable Notifications</Text>
+          <Text style={settingsStyles.text}>
             Active this to enable and disabled notifications.
           </Text>
         </View>
@@ -100,10 +114,10 @@ const SecuritySettingsScreen = () => {
           <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
         </View>
       </View>
-      <View style={scriptStyles.viewRow}>
+      <View style={settingsStyles.viewRow}>
         <View style={{ flex: 3 }}>
-          <Text style={scriptStyles.title}>Profile Visibility</Text>
-          <Text style={scriptStyles.text}>
+          <Text style={settingsStyles.title}>Profile Visibility</Text>
+          <Text style={settingsStyles.text}>
             Whetever users can see your profile or not.
           </Text>
         </View>
@@ -122,59 +136,29 @@ const SecuritySettingsScreen = () => {
         </View>
       </View>
       <View style={{ marginTop: 25 }}>
-        <Text style={scriptStyles.title}>Change Password</Text>
-        <Text style={[scriptStyles.text, { marginBottom: 12 }]}>
+        <Text style={settingsStyles.title}>Change Password</Text>
+        <Text style={[settingsStyles.text, { marginBottom: 12 }]}>
           Change password to secure your account
         </Text>
         <TextInput
           placeholder="Old Password"
-          placeholderTextColor={styles.colors.grey800}
-          style={scriptStyles.input}
+          placeholderTextColor={colors.grey800}
+          style={settingsStyles.input}
         ></TextInput>
         <TextInput
           placeholder="New Password"
-          placeholderTextColor={styles.colors.grey800}
-          style={scriptStyles.input}
+          placeholderTextColor={colors.grey800}
+          style={settingsStyles.input}
         ></TextInput>
         <TextInput
           placeholder="Repeat Password"
-          placeholderTextColor={styles.colors.grey800}
-          style={scriptStyles.input}
+          placeholderTextColor={colors.grey800}
+          style={settingsStyles.input}
         ></TextInput>
         <ButtonComponent type="primary" title="Change" size="small" />
       </View>
     </ScrollView>
   );
 };
-
-const scriptStyles = StyleSheet.create({
-  generalView: {
-    marginTop: 15,
-    marginHorizontal: 20,
-  },
-  title: {
-    fontSize: 15,
-    textAlign: "left",
-    fontWeight: "600",
-    marginBottom: 5,
-  },
-  text: {
-    fontSize: 14,
-    textAlign: "left",
-  },
-  viewRow: {
-    marginTop: 25,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  input: {
-    height: 50,
-    padding: 12,
-    marginBottom: 12,
-    borderWidth: 2,
-    borderColor: styles.colors.grey500,
-    backgroundColor: styles.colors.grey400,
-  },
-});
 
 export default SettingsScreen;

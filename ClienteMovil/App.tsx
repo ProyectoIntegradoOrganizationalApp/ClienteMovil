@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ThemeContextProvider } from "./src/domain/context/ThemeContext";
 import { User } from "./src/domain/user/User.interface";
 import { AuthContext } from "./src/domain/context/AuthContext";
 import { ApplicationProvider } from "@ui-kitten/components";
@@ -54,13 +55,15 @@ export default function App() {
 
   return (
     <ApplicationProvider {...eva} theme={eva.light}>
-      <AuthContext.Provider value={{ user, setUser }}>
-        <StatusBar />
-        <NavigationContainer>
-          {user !== null ? <MainNavigationComponent /> : <AccountStack />}
-        </NavigationContainer>
-      </AuthContext.Provider>
-      <Toast config={toastConfig} />
+      <ThemeContextProvider>
+        <AuthContext.Provider value={{ user, setUser }}>
+          <StatusBar />
+          <NavigationContainer>
+            {user !== null ? <MainNavigationComponent /> : <AccountStack />}
+          </NavigationContainer>
+        </AuthContext.Provider>
+        <Toast config={toastConfig} />
+      </ThemeContextProvider>
     </ApplicationProvider>
   );
 }

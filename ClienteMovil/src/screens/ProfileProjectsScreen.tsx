@@ -18,6 +18,8 @@ const projects = [
 ];
 
 const ProfileProjectsScreen = () => {
+  const { components } = styles();
+
   const handlePress = () => {
     PopupNotificationComponent(
       "success",
@@ -37,30 +39,11 @@ const ProfileProjectsScreen = () => {
       <FAB
         icon="plus"
         color="#ffffff"
-        style={scriptStyles.fab}
+        style={[components.fab, { position: "absolute" }]}
         onPress={handlePress}
       />
     </View>
   );
 };
-
-const scriptStyles = StyleSheet.create({
-  card: {
-    borderRadius: 5,
-    marginTop: 15,
-    marginHorizontal: 10,
-  },
-  cardIconActivity: {
-    backgroundColor: "transparent",
-  },
-  fab: {
-    position: "absolute",
-    margin: 15,
-    right: 0,
-    bottom: 0,
-    borderRadius: 15,
-    backgroundColor: styles.colors.grey800,
-  },
-});
 
 export default ProfileProjectsScreen;

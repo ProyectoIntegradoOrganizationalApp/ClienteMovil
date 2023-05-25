@@ -2,7 +2,7 @@ import React from "react";
 import { Avatar, Card } from "react-native-paper";
 import { ScrollView, StyleSheet, Text } from "react-native";
 import { Calendar } from "@ui-kitten/components";
-import styles from "../styles/styles";
+import getStyles from "../styles/styles";
 
 const ActivityScreen = () => {
   const [date, setDate] = React.useState(new Date());

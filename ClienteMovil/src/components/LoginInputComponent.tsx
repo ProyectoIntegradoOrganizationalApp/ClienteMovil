@@ -37,6 +37,8 @@ const LoginInputComponent: React.FC<LoginInputComponentProps> = ({
     onError(errorMessage);
   };
 
+  const { colors } = styles();
+
   return (
     <>
       <TextInput
@@ -46,8 +48,8 @@ const LoginInputComponent: React.FC<LoginInputComponentProps> = ({
         value={value}
         onChangeText={handleInputChange}
         onBlur={validateInput}
-        activeOutlineColor={styles.colors.grey800}
-        outlineColor={styles.colors.grey800}
+        activeOutlineColor={colors.grey800}
+        outlineColor={colors.grey800}
       />
       {error !== "" && <HelperText type="error">{error}</HelperText>}
     </>

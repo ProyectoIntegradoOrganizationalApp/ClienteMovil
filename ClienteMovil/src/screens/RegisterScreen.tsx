@@ -23,7 +23,7 @@ import PopupNotificationComponent from "../components/PopupNotificationComponent
 import styles from "../styles/styles";
 
 const RegisterScreen = ({ navigation }: { navigation: any }) => {
-  const { colors, loginStyles } = styles();
+  const { colors, screens } = styles();
 
   const { user } = useContext(AuthContext);
 
@@ -80,16 +80,16 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={loginStyles.scrollView}>
+    <ScrollView contentContainerStyle={screens.accountManagement.scrollView}>
       <LoadingComponent state={loading} />
-      <View style={loginStyles.viewContainer}>
-        <View style={loginStyles.viewImage}>
+      <View style={screens.accountManagement.viewContainer}>
+        <View style={screens.accountManagement.viewImage}>
           <Image
             source={require("../assets/images/logo.png")}
-            style={loginStyles.image}
+            style={screens.accountManagement.image}
           />
         </View>
-        <View style={loginStyles.viewContainerChild}>
+        <View style={screens.accountManagement.viewContainerChild}>
           <LoginInputComponent
             name="name"
             label="Enter name"
@@ -98,7 +98,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
             onError={handleInputError}
           />
         </View>
-        <View style={loginStyles.viewContainerChild}>
+        <View style={screens.accountManagement.viewContainerChild}>
           <LoginInputComponent
             name="last_name"
             label="Enter last name"
@@ -107,7 +107,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
             onError={handleInputError}
           />
         </View>
-        <View style={loginStyles.viewContainerChild}>
+        <View style={screens.accountManagement.viewContainerChild}>
           <LoginInputComponent
             name="prefix"
             label="Enter prefix"
@@ -116,7 +116,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
             onError={handleInputError}
           />
         </View>
-        <View style={loginStyles.viewContainerChild}>
+        <View style={screens.accountManagement.viewContainerChild}>
           <LoginInputComponent
             name="phone_number"
             label="Enter phone"
@@ -125,7 +125,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
             onError={handleInputError}
           />
         </View>
-        <View style={loginStyles.viewContainerChild}>
+        <View style={screens.accountManagement.viewContainerChild}>
           <LoginInputComponent
             name="email"
             label="Enter email"
@@ -134,7 +134,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
             onError={handleInputError}
           />
         </View>
-        <View style={loginStyles.viewContainerChild}>
+        <View style={screens.accountManagement.viewContainerChild}>
           <LoginInputPassComponent
             name="password"
             label="Enter password"
@@ -143,7 +143,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
             onError={handleInputError}
           />
         </View>
-        <View style={loginStyles.viewContainerChild}>
+        <View style={screens.accountManagement.viewContainerChild}>
           <LoginInputPassComponent
             name="confirmpass"
             label="Repeat password"
@@ -152,13 +152,13 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
             onError={handleInputError}
           />
         </View>
-        <View style={loginStyles.viewContainerChild}>
+        <View style={screens.accountManagement.viewContainerChild}>
           <ButtonComponent title="Sign Up" onPress={sendForm} />
         </View>
-        <View style={loginStyles.viewContainerChild}>
+        <View style={screens.accountManagement.viewContainerChild}>
           <DividerComponent content="or" />
         </View>
-        <View style={loginStyles.viewContainerChild}>
+        <View style={screens.accountManagement.viewContainerChild}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <View style={{ flex: 5 }}>
               <ButtonComponent type="google" />
@@ -172,7 +172,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
           </View>
         </View>
         <Text
-          style={loginStyles.text}
+          style={screens.accountManagement.text}
           onPress={() => navigation.navigate("Login")}
         >
           Registered? <Text style={{ color: colors.grey800 }}>Log in</Text>

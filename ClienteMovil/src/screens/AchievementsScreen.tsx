@@ -1,17 +1,30 @@
+// React
 import { useContext } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
-import AchievementComponent from "../components/AchievementComponent";
+
+// Contexto
 import { AuthContext } from "../domain/context/AuthContext";
+
+// Hooks
 import useAchievements from "../hooks/useAchievements";
+
+// Componentes
+import { FlatList, View } from "react-native";
+import AchievementComponent from "../components/AchievementComponent";
 import LevelProgressComponent from "../components/LevelProgressComponent";
+
+// Estilos
+import styles from "../styles/styles";
 
 const AchievementsScreen = ({ navigation }: { navigation: any }) => {
   const { user } = useContext(AuthContext);
+
   const { achievements } = useAchievements();
 
+  const { screens } = styles();
+
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ alignItems: "center", marginVertical: 15 }}>
+    <View style={screens.achievements.container}>
+      <View style={screens.achievements.levelContainer}>
         <LevelProgressComponent
           level={user?.level}
           progress={25}
@@ -19,7 +32,7 @@ const AchievementsScreen = ({ navigation }: { navigation: any }) => {
           strokeWidth={15}
         />
       </View>
-      <View style={{ flex: 1, paddingBottom: 15 }}>
+      <View style={screens.achievements.flatListContainer}>
         <FlatList
           horizontal={false}
           scrollEnabled={true}
@@ -30,7 +43,5 @@ const AchievementsScreen = ({ navigation }: { navigation: any }) => {
     </View>
   );
 };
-
-const scriptStyles = StyleSheet.create({});
 
 export default AchievementsScreen;

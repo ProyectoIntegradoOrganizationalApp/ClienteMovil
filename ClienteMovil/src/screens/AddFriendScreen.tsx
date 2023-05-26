@@ -1,3 +1,4 @@
+// Componentes
 import { FlatList, View } from "react-native";
 import FriendComponent from "../components/FriendComponent";
 

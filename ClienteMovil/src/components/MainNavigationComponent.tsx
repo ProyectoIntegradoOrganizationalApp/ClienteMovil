@@ -1,12 +1,17 @@
+// Componentes
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import MainStack from "../stack/MainStack";
+
+// Pantallas
 import FriendsScreen from "../screens/FriendsScreen";
 import NotificationScreen from "../screens/NotificationScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
-import { StyleSheet, View } from "react-native";
+
+// Estilos
+import styles from "../styles/styles";
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +38,8 @@ const ProfileStack = () => {
 const Tab = createBottomTabNavigator();
 
 const MainNavigationComponent = () => {
+  const { components } = styles();
+
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -65,7 +72,7 @@ const MainNavigationComponent = () => {
           title: "Notifications",
           tabBarShowLabel: false,
           //tabBarBadge: "",
-          tabBarBadgeStyle: scriptStyles.tabBarBadgeStyle,
+          tabBarBadgeStyle: components.badge,
           tabBarIcon: ({ color }) => {
             return <Icon name="bell" size={22} color={color} />;
           },
@@ -85,13 +92,5 @@ const MainNavigationComponent = () => {
     </Tab.Navigator>
   );
 };
-
-const scriptStyles = StyleSheet.create({
-  tabBarBadgeStyle: {
-    minWidth: 10,
-    maxHeight: 10,
-    borderRadius: 100,
-  },
-});
 
 export default MainNavigationComponent;

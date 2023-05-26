@@ -1,6 +1,10 @@
+// Componentes
 import { useNavigation } from "@react-navigation/native";
 import { Avatar, Card } from "react-native-paper";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
+
+// Estilos
+import styles from "../styles/styles";
 
 interface IApp {
   icon: string;
@@ -12,13 +16,15 @@ interface IApp {
 }
 
 function isAppPremium(premium: boolean) {
+  const { components } = styles();
+
   if (premium) {
     return (
       <Avatar.Icon
         icon="crown"
         color="#ec9d27"
         size={30}
-        style={scriptStyles.crownIcon}
+        style={components.icons.crownIcon}
       />
     );
   }
@@ -27,6 +33,8 @@ function isAppPremium(premium: boolean) {
 function AppComponent(props: IApp) {
   const navigation = useNavigation<any>();
 
+  const { components } = styles();
+
   let componentOptions: JSX.Element;
   if (!props.installed) {
     componentOptions = (
@@ -34,7 +42,10 @@ function AppComponent(props: IApp) {
         icon="basket"
         color="#fff"
         size={30}
-        style={scriptStyles.basketIcon}
+        style={[
+          components.icons.basketIcon,
+          { marginLeft: 10, marginRight: 15 },
+        ]}
       />
     );
   } else {
@@ -44,7 +55,7 @@ function AppComponent(props: IApp) {
           icon="delete"
           color="#fff"
           size={30}
-          style={scriptStyles.deleteIcon}
+          style={components.icons.deleteIcon}
         />
       );
     } else {
@@ -53,14 +64,14 @@ function AppComponent(props: IApp) {
           icon="plus"
           color="#fff"
           size={30}
-          style={scriptStyles.addIcon}
+          style={components.icons.addIcon}
         />
       );
     }
   }
 
   return (
-    <Card style={scriptStyles.app}>
+    <Card style={components.card}>
       <Card.Title
         title={
           <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -76,7 +87,7 @@ function AppComponent(props: IApp) {
               icon="eye"
               color="#fff"
               size={30}
-              style={scriptStyles.eyeIcon}
+              style={components.icons.eyeIcon}
             />
             {componentOptions}
           </View>
@@ -85,38 +96,5 @@ function AppComponent(props: IApp) {
     </Card>
   );
 }
-
-const scriptStyles = StyleSheet.create({
-  app: {
-    borderRadius: 5,
-    marginTop: 15,
-    marginHorizontal: 10,
-  },
-  crownIcon: {
-    backgroundColor: "transparent",
-  },
-  eyeIcon: {
-    borderRadius: 5,
-    backgroundColor: "grey",
-  },
-  basketIcon: {
-    marginLeft: 10,
-    marginRight: 15,
-    borderRadius: 5,
-    backgroundColor: "#3c6db2",
-  },
-  deleteIcon: {
-    marginLeft: 10,
-    marginRight: 15,
-    borderRadius: 5,
-    backgroundColor: "#d54f4f",
-  },
-  addIcon: {
-    marginLeft: 10,
-    marginRight: 15,
-    borderRadius: 5,
-    backgroundColor: "#008f39",
-  },
-});
 
 export default AppComponent;

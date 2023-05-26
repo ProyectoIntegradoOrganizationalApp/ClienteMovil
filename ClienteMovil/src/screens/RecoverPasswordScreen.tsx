@@ -10,7 +10,7 @@ import ButtonComponent from "../components/ButtonComponent";
 import styles from "../styles/styles";
 
 const RecoverPasswordScreen = ({ navigation }: { navigation: any }) => {
-  const { loginStyles } = styles();
+  const { screens } = styles();
 
   const [email, setEmail] = useState("");
   const [inputError, setInputError] = useState("");
@@ -27,16 +27,18 @@ const RecoverPasswordScreen = ({ navigation }: { navigation: any }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={loginStyles.scrollView}>
-      <View style={loginStyles.viewContainerChild}>
-        <Text style={loginStyles.textTitle}>Recovery Password</Text>
+    <ScrollView contentContainerStyle={screens.accountManagement.scrollView}>
+      <View style={screens.accountManagement.viewContainerChild}>
+        <Text style={screens.accountManagement.textTitle}>
+          Recovery Password
+        </Text>
       </View>
-      <View style={loginStyles.viewContainerChild}>
-        <Text style={loginStyles.textsubTitle}>
+      <View style={screens.accountManagement.viewContainerChild}>
+        <Text style={screens.accountManagement.textsubTitle}>
           No worries, we'll send you reset instructions
         </Text>
       </View>
-      <View style={loginStyles.viewContainerChild}>
+      <View style={screens.accountManagement.viewContainerChild}>
         <LoginInputComponent
           name="email"
           label="Enter your email"
@@ -45,7 +47,7 @@ const RecoverPasswordScreen = ({ navigation }: { navigation: any }) => {
           onError={handleInputError}
         />
       </View>
-      <View style={loginStyles.viewContainerChild}>
+      <View style={screens.accountManagement.viewContainerChild}>
         <ButtonComponent title="Recovery Password" onPress={sendForm} />
       </View>
       <ButtonComponent

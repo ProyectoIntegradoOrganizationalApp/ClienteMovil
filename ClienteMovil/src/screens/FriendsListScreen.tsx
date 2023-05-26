@@ -1,8 +1,14 @@
+// React
 import * as React from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
+
+// Componentes
 import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
 import { IconButton, Searchbar } from "react-native-paper";
 import FriendComponent from "../components/FriendComponent";
+
+// Estilos
+import styles from "../styles/styles";
 
 const friends = [
   {
@@ -35,6 +41,8 @@ const FriendsListScreen = ({ navigation }: { navigation: any }) => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const onChangeSearch = (query: any) => setSearchQuery(query);
 
+  const { components } = styles();
+
   return (
     <>
       <View style={{ marginTop: 15 }}>
@@ -49,17 +57,17 @@ const FriendsListScreen = ({ navigation }: { navigation: any }) => {
             icon="account-multiple-plus"
             size={20}
             iconColor="#fff"
-            style={scriptStyles.basketIcon}
+            style={components.icons.basketIcon}
             onPress={() => navigation.navigate("Add Friend")}
           />
         </View>
-        <View style={scriptStyles.filterView}>
-          <Text style={scriptStyles.filterText}>Order by:</Text>
+        <View style={components.filter.filterView}>
+          <Text style={components.filter.filterText}>Order by:</Text>
           <Select
             value={orders[selectedIndex.row]}
             selectedIndex={selectedIndex}
             onSelect={(index: any) => setSelectedIndex(index)}
-            style={scriptStyles.filterSelect}
+            style={components.filter.filterSelect}
           >
             {orders.map(
               (title: string, index: number): React.ReactElement => (
@@ -72,7 +80,7 @@ const FriendsListScreen = ({ navigation }: { navigation: any }) => {
           placeholder="Search friends..."
           onChangeText={onChangeSearch}
           value={searchQuery}
-          style={scriptStyles.searchbar}
+          style={components.searchbar.searchbar}
         />
         <FlatList
           data={friends}
@@ -84,31 +92,5 @@ const FriendsListScreen = ({ navigation }: { navigation: any }) => {
     </>
   );
 };
-
-const scriptStyles = StyleSheet.create({
-  basketIcon: {
-    borderRadius: 5,
-    backgroundColor: "#3c6db2",
-    marginRight: 15,
-  },
-  filterView: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "center",
-    marginTop: 15,
-    marginHorizontal: 10,
-  },
-  filterText: {
-    marginRight: 15,
-  },
-  filterSelect: {
-    flex: 1,
-  },
-  searchbar: {
-    borderRadius: 0,
-    marginTop: 15,
-    marginHorizontal: 10,
-  },
-});
 
 export default FriendsListScreen;

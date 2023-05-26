@@ -23,7 +23,7 @@ import PopupNotificationComponent from "../components/PopupNotificationComponent
 import styles from "../styles/styles";
 
 const LoginScreen = ({ navigation }: { navigation: any }) => {
-  const { colors, loginStyles } = styles();
+  const { colors, screens } = styles();
 
   const { user } = useContext(AuthContext);
 
@@ -60,16 +60,16 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={loginStyles.scrollView}>
+    <ScrollView contentContainerStyle={screens.accountManagement.scrollView}>
       <LoadingComponent state={loading} />
-      <View style={loginStyles.viewContainer}>
-        <View style={loginStyles.viewImage}>
+      <View style={screens.accountManagement.viewContainer}>
+        <View style={screens.accountManagement.viewImage}>
           <Image
             source={require("../assets/images/logo.png")}
-            style={loginStyles.image}
+            style={screens.accountManagement.image}
           />
         </View>
-        <View style={loginStyles.viewContainerChild}>
+        <View style={screens.accountManagement.viewContainerChild}>
           <LoginInputComponent
             name="email"
             label="Enter email"
@@ -78,7 +78,7 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
             onError={handleInputError}
           />
         </View>
-        <View style={loginStyles.viewContainerChild}>
+        <View style={screens.accountManagement.viewContainerChild}>
           <LoginInputPassComponent
             name="password"
             label="Enter password"
@@ -87,21 +87,21 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
             onError={handleInputError}
           />
         </View>
-        <View style={loginStyles.viewContainerChild}>
+        <View style={screens.accountManagement.viewContainerChild}>
           <Text
-            style={loginStyles.text}
+            style={screens.accountManagement.text}
             onPress={() => navigation.navigate("RecoverPassword")}
           >
             Recovery password
           </Text>
         </View>
-        <View style={loginStyles.viewContainerChild}>
+        <View style={screens.accountManagement.viewContainerChild}>
           <ButtonComponent title="Log In" onPress={sendForm} />
         </View>
-        <View style={loginStyles.viewContainerChild}>
+        <View style={screens.accountManagement.viewContainerChild}>
           <DividerComponent content="or" />
         </View>
-        <View style={loginStyles.viewContainerChild}>
+        <View style={screens.accountManagement.viewContainerChild}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <View style={{ flex: 5 }}>
               <ButtonComponent type="google" />
@@ -115,7 +115,7 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
           </View>
         </View>
         <Text
-          style={loginStyles.text}
+          style={screens.accountManagement.text}
           onPress={() => navigation.navigate("Register")}
         >
           New Here? <Text style={{ color: colors.grey600 }}>Sign up</Text>

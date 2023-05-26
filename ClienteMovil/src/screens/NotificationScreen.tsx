@@ -1,4 +1,5 @@
-import { FlatList, Text, View } from "react-native";
+// Componentes
+import { FlatList, View } from "react-native";
 import { Divider } from "react-native-paper";
 import NotificationComponent from "../components/NotificationComponent";
 

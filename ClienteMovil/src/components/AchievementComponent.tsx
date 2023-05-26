@@ -1,5 +1,8 @@
+// Componentes
 import { Avatar, Card, ProgressBar } from "react-native-paper";
-import { StyleSheet, Text } from "react-native";
+import { Text } from "react-native";
+
+// Estilos
 import styles from "../styles/styles";
 
 interface IAchievement {
@@ -30,10 +33,10 @@ const achievementsIcons = [
 ];
 
 function AchievementComponent(props: IAchievement) {
-  const { colors } = styles();
+  const { colors, components } = styles();
 
   return (
-    <Card style={scriptStyles.achievement}>
+    <Card style={components.card}>
       <Card.Title
         title={props.title}
         subtitle={props.description}
@@ -58,13 +61,5 @@ function AchievementComponent(props: IAchievement) {
     </Card>
   );
 }
-
-const scriptStyles = StyleSheet.create({
-  achievement: {
-    borderRadius: 5,
-    marginTop: 15,
-    marginHorizontal: 10,
-  },
-});
 
 export default AchievementComponent;

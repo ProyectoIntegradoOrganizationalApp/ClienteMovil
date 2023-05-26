@@ -1,6 +1,9 @@
+// Componentes
 import { useNavigation } from "@react-navigation/native";
 import { Card, IconButton, Text } from "react-native-paper";
-import { StyleSheet } from "react-native";
+
+// Estilos
+import styles from "../styles/styles";
 
 interface IBoard {
   title: string;
@@ -9,17 +12,20 @@ interface IBoard {
 
 function BoardComponent(props: IBoard) {
   const navigation = useNavigation<any>();
+
+  const { components } = styles();
+
   return (
-    <Card style={scriptStyles.board}>
+    <Card style={components.board.board}>
       <Card.Cover
         source={{ uri: props.cover }}
-        style={scriptStyles.boardCover}
+        style={components.board.boardCover}
       />
       <Card.Actions>
         <Text variant="titleLarge">{props.title}</Text>
         <IconButton
           icon="chevron-right"
-          style={scriptStyles.boardChevronIcon}
+          style={components.board.boardChevronIcon}
           onPress={() =>
             navigation.navigate("Board", { boardTitle: props.title })
           }
@@ -28,17 +34,5 @@ function BoardComponent(props: IBoard) {
     </Card>
   );
 }
-
-const scriptStyles = StyleSheet.create({
-  board: {
-    borderRadius: 5,
-    marginTop: 15,
-    marginHorizontal: 10,
-  },
-  boardCover: { borderRadius: 0, resizeMode: "cover" },
-  boardChevronIcon: {
-    backgroundColor: "transparent",
-  },
-});
 
 export default BoardComponent;

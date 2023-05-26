@@ -1,7 +1,13 @@
+// React
 import React from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+
+// Componentes
+import { FlatList, Text, View } from "react-native";
 import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
 import AppComponent from "../components/AppComponent";
+
+// Estilos
+import styles from "../styles/styles";
 
 const apps = [
   {
@@ -58,15 +64,17 @@ const ProjectsAppsScreen = () => {
     new IndexPath(0)
   );
 
+  const { components } = styles();
+
   return (
     <View>
-      <View style={scriptStyles.filterView}>
-        <Text style={scriptStyles.filterText}>Order by:</Text>
+      <View style={components.filter.filterView}>
+        <Text style={components.filter.filterText}>Order by:</Text>
         <Select
           value={orders[selectedIndex.row]}
           selectedIndex={selectedIndex}
           onSelect={(index: any) => setSelectedIndex(index)}
-          style={scriptStyles.filterSelect}
+          style={components.filter.filterSelect}
         >
           {orders.map(
             (title: string, index: number): React.ReactElement => (
@@ -82,21 +90,5 @@ const ProjectsAppsScreen = () => {
     </View>
   );
 };
-
-const scriptStyles = StyleSheet.create({
-  filterView: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "center",
-    marginTop: 15,
-    marginHorizontal: 10,
-  },
-  filterText: {
-    marginRight: 15,
-  },
-  filterSelect: {
-    flex: 1,
-  },
-});
 
 export default ProjectsAppsScreen;

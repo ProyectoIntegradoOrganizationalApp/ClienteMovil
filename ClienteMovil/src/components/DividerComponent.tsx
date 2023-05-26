@@ -1,13 +1,19 @@
+// Componentes
 import { View, Text } from "react-native";
 
+// Estilos
+import styles from "../styles/styles";
+
 const DividerComponent = ({ content }: { content: string }) => {
+  const { components } = styles();
+
   return (
-    <View style={{ flexDirection: "row", alignItems: "center" }}>
-      <View style={{ flex: 1, height: 1, backgroundColor: "black" }} />
+    <View style={components.divider.container}>
+      <View style={components.divider.subcontainer} />
       <View>
-        <Text style={{ width: 50, textAlign: "center" }}>{content}</Text>
+        <Text style={components.divider.text}>{content}</Text>
       </View>
-      <View style={{ flex: 1, height: 1, backgroundColor: "black" }} />
+      <View style={components.divider.subcontainer} />
     </View>
   );
 };

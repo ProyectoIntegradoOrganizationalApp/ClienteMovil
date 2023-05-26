@@ -1,6 +1,9 @@
-import { FlatList, StyleSheet, View } from "react-native";
+// Componentes
+import { FlatList, View } from "react-native";
 import ProjectComponent from "../components/ProjectComponent";
 import { FAB } from "react-native-paper";
+
+// Estilos
 import styles from "../styles/styles";
 
 const projects = [

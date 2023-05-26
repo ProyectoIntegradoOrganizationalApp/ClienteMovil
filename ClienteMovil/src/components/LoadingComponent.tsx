@@ -1,5 +1,7 @@
+// Componentes
 import { ActivityIndicator } from "react-native-paper";
-import { StyleSheet } from "react-native";
+
+// Estilos
 import styles from "../styles/styles";
 
 const LoadingComponent = ({ state }: { state: boolean }) => {
@@ -10,13 +12,9 @@ const LoadingComponent = ({ state }: { state: boolean }) => {
       animating={state}
       size={"large"}
       color={colors.grey500}
-      style={scriptStyles.loader}
+      style={{ zIndex: 10, top: 260 }}
     />
   );
 };
-
-const scriptStyles = StyleSheet.create({
-  loader: { zIndex: 10, top: 260 },
-});
 
 export default LoadingComponent;

@@ -1,3 +1,4 @@
+// Componentes
 import { View } from "react-native";
 import { Svg, Circle, Text } from "react-native-svg";
 

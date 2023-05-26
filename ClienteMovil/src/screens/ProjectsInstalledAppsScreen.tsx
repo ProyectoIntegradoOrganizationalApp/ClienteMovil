@@ -1,6 +1,10 @@
-import { FlatList, StyleSheet, View } from "react-native";
+// Componentes
+import { FlatList, View } from "react-native";
 import { IconButton } from "react-native-paper";
 import AppComponent from "../components/AppComponent";
+
+// Estilos
+import styles from "../styles/styles";
 
 const apps = [
   {
@@ -15,6 +19,8 @@ const apps = [
 ];
 
 const ProjectsInstalledAppsScreen = ({ navigation }: { navigation: any }) => {
+  const { components } = styles();
+
   return (
     <View style={{ marginTop: 15 }}>
       <View
@@ -28,14 +34,14 @@ const ProjectsInstalledAppsScreen = ({ navigation }: { navigation: any }) => {
           icon="basket"
           size={20}
           iconColor="#fff"
-          style={scriptStyles.basketIcon}
+          style={components.icons.basketIcon}
           onPress={() => navigation.navigate("ProjectsApps")}
         />
         <IconButton
           icon="cog"
           size={25}
           iconColor="grey"
-          style={scriptStyles.settingsIcon}
+          style={components.icons.settingsIcon}
         />
       </View>
       <FlatList
@@ -45,16 +51,5 @@ const ProjectsInstalledAppsScreen = ({ navigation }: { navigation: any }) => {
     </View>
   );
 };
-
-const scriptStyles = StyleSheet.create({
-  basketIcon: {
-    borderRadius: 5,
-    backgroundColor: "#3c6db2",
-  },
-  settingsIcon: {
-    borderRadius: 5,
-    backgroundColor: "transparent",
-  },
-});
 
 export default ProjectsInstalledAppsScreen;

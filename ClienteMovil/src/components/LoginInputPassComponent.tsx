@@ -1,6 +1,13 @@
+// React
 import React, { useState } from "react";
+
+// Componentes
 import { HelperText, TextInput } from "react-native-paper";
+
+// Utils
 import { loginValidationSchema } from "../utils/loginValidationSchema";
+
+// Estilos
 import styles from "../styles/styles";
 
 interface LoginInputPassComponentProps {

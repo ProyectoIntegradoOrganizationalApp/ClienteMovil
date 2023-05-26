@@ -1,3 +1,4 @@
+// Componentes
 import Toast from "react-native-toast-message";
 
 const PopupNotificationComponent = (

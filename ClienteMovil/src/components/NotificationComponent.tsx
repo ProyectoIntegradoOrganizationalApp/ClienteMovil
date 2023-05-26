@@ -1,6 +1,9 @@
+// Componentes
 import { useNavigation } from "@react-navigation/native";
 import { Avatar, IconButton, Card } from "react-native-paper";
-import { StyleSheet } from "react-native";
+
+// Estilos
+import styles from "../styles/styles";
 
 interface INotification {
   user: string;
@@ -10,9 +13,12 @@ interface INotification {
 
 function NotificationComponent(props: INotification) {
   //const navigation = useNavigation<any>();
+
+  const { components } = styles();
+
   const isNotificationNew = true;
   return (
-    <Card style={styles.notification}>
+    <Card style={components.card}>
       <Card.Title
         title={props.message}
         subtitle={props.date}
@@ -28,13 +34,5 @@ function NotificationComponent(props: INotification) {
     </Card>
   );
 }
-
-const styles = StyleSheet.create({
-  notification: {
-    borderRadius: 5,
-    marginTop: 15,
-    marginHorizontal: 10,
-  },
-});
 
 export default NotificationComponent;

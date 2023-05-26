@@ -1,72 +1,60 @@
+// React
 import React from "react";
+
+// Componentes
 import { Avatar, Card } from "react-native-paper";
-import { ScrollView, StyleSheet, Text } from "react-native";
+import { ScrollView, Text } from "react-native";
 import { Calendar } from "@ui-kitten/components";
-import getStyles from "../styles/styles";
+
+// Estilos
+import styles from "../styles/styles";
 
 const ActivityScreen = () => {
   const [date, setDate] = React.useState(new Date());
+
+  const { components } = styles();
+
   return (
     <ScrollView>
-      <Card style={scriptStyles.card}>
+      <Card style={components.card}>
         <Card.Title
           title="Finished Tasks this Week"
           left={() => (
             <Avatar.Icon
               icon="xml"
               size={45}
-              style={scriptStyles.cardIconTask}
+              style={components.icons.taskIcon}
             />
           )}
           right={() => (
-            <Text style={{ marginRight: 20, fontSize: 32, fontWeight: "800" }}>
-              15
-            </Text>
+            <Text style={components.activityIndicator.text}>15</Text>
           )}
         />
       </Card>
-      <Card style={scriptStyles.card}>
+      <Card style={components.card}>
         <Card.Title
           title="Finished Tasks this Day"
           left={() => (
             <Avatar.Icon
               icon="xml"
               size={45}
-              style={scriptStyles.cardIconTask}
+              style={components.icons.taskIcon}
             />
           )}
-          right={() => (
-            <Text style={{ marginRight: 20, fontSize: 32, fontWeight: "800" }}>
-              2
-            </Text>
-          )}
+          right={() => <Text style={components.activityIndicator.text}>2</Text>}
         />
       </Card>
-      <Card style={[scriptStyles.card, { marginBottom: 15 }]}>
+      <Card style={[components.card, { marginBottom: 15 }]}>
         <Card.Content>
           <Calendar
             date={date}
             onSelect={(nextDate) => setDate(nextDate)}
-            style={{ borderWidth: 0 }}
+            style={components.calendar}
           />
         </Card.Content>
       </Card>
     </ScrollView>
   );
 };
-
-const scriptStyles = StyleSheet.create({
-  card: {
-    borderRadius: 5,
-    marginTop: 15,
-    marginHorizontal: 10,
-  },
-  cardIconTask: {
-    backgroundColor: "white",
-  },
-  cardIconActivity: {
-    backgroundColor: "transparent",
-  },
-});
 
 export default ActivityScreen;

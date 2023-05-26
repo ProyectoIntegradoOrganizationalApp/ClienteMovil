@@ -1,6 +1,9 @@
+// Componentes
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ProjectsListScreen from "./ProjectsListScreen";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+
+// Pantallas
+import ProjectsListScreen from "./ProjectsListScreen";
 import ProjectsSettingsScreen from "./ProjectsSettingsScreen";
 
 const Stack = createNativeStackNavigator();

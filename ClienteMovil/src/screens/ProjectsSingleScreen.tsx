@@ -1,8 +1,10 @@
+// Componentes
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+
+// Pantallas
 import BoardsListScreen from "./BoardsListScreen";
 import ProjectsInstalledAppsScreen from "./ProjectsInstalledAppsScreen";
 import ProjectsMembersScreen from "./ProjectsMembersScreen";
-import { StyleSheet } from "react-native";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -27,7 +29,5 @@ const ProjectsSingleScreen = () => {
     </Tab.Navigator>
   );
 };
-
-const scriptStyles = StyleSheet.create({});
 
 export default ProjectsSingleScreen;

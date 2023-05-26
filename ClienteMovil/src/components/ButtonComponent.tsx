@@ -1,4 +1,7 @@
-import { Image, TouchableHighlight, StyleSheet, Text } from "react-native";
+// Componentes
+import { Image, TouchableHighlight, Text } from "react-native";
+
+// Estilos
 import styles from "../styles/styles";
 
 function ButtonComponent(props: any) {

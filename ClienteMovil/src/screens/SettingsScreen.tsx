@@ -1,15 +1,24 @@
+// React
 import React, { useContext } from "react";
+
+// Contexto
 import {
   ThemeContext,
   ThemeContextProps,
 } from "../domain/context/ThemeContext";
+
+// Hooks
+import { useAuth } from "../hooks/useAuth";
+
+// Componentes
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { Switch } from "react-native-paper";
 import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
 import ButtonComponent from "../components/ButtonComponent";
 import { ScrollView, Text, TextInput, View } from "react-native";
 import ModalConfirmComponent from "../components/ModalConfirmComponent";
-import { useAuth } from "../hooks/useAuth";
+
+// Estilos
 import styles from "../styles/styles";
 
 const Tab = createMaterialTopTabNavigator();
@@ -47,14 +56,14 @@ const GeneralSettingsScreen = () => {
 
   const { logout } = useAuth();
 
-  const { settingsStyles } = styles();
+  const { screens } = styles();
 
   return (
-    <ScrollView style={settingsStyles.generalView}>
-      <View style={settingsStyles.viewRow}>
+    <ScrollView style={screens.settings.generalView}>
+      <View style={screens.settings.viewRow}>
         <View style={{ flex: 2 }}>
-          <Text style={settingsStyles.title}>Dark Mode</Text>
-          <Text style={settingsStyles.text}>
+          <Text style={screens.settings.title}>Dark Mode</Text>
+          <Text style={screens.settings.text}>
             Active this to enable and disabled dark mode.
           </Text>
         </View>
@@ -62,7 +71,7 @@ const GeneralSettingsScreen = () => {
           <Switch value={theme === "light"} onValueChange={toggleTheme} />
         </View>
       </View>
-      <View style={settingsStyles.viewRow}>
+      <View style={screens.settings.viewRow}>
         <ButtonComponent
           type="primary"
           title="Log out"
@@ -99,14 +108,14 @@ const SecuritySettingsScreen = () => {
     new IndexPath(0)
   );
 
-  const { colors, settingsStyles } = styles();
+  const { colors, screens } = styles();
 
   return (
-    <ScrollView style={settingsStyles.generalView}>
-      <View style={settingsStyles.viewRow}>
+    <ScrollView style={screens.settings.generalView}>
+      <View style={screens.settings.viewRow}>
         <View style={{ flex: 2 }}>
-          <Text style={settingsStyles.title}>Enable Notifications</Text>
-          <Text style={settingsStyles.text}>
+          <Text style={screens.settings.title}>Enable Notifications</Text>
+          <Text style={screens.settings.text}>
             Active this to enable and disabled notifications.
           </Text>
         </View>
@@ -114,10 +123,10 @@ const SecuritySettingsScreen = () => {
           <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
         </View>
       </View>
-      <View style={settingsStyles.viewRow}>
+      <View style={screens.settings.viewRow}>
         <View style={{ flex: 3 }}>
-          <Text style={settingsStyles.title}>Profile Visibility</Text>
-          <Text style={settingsStyles.text}>
+          <Text style={screens.settings.title}>Profile Visibility</Text>
+          <Text style={screens.settings.text}>
             Whetever users can see your profile or not.
           </Text>
         </View>
@@ -136,24 +145,24 @@ const SecuritySettingsScreen = () => {
         </View>
       </View>
       <View style={{ marginTop: 25 }}>
-        <Text style={settingsStyles.title}>Change Password</Text>
-        <Text style={[settingsStyles.text, { marginBottom: 12 }]}>
+        <Text style={screens.settings.title}>Change Password</Text>
+        <Text style={[screens.settings.text, { marginBottom: 12 }]}>
           Change password to secure your account
         </Text>
         <TextInput
           placeholder="Old Password"
           placeholderTextColor={colors.grey800}
-          style={settingsStyles.input}
+          style={screens.settings.input}
         ></TextInput>
         <TextInput
           placeholder="New Password"
           placeholderTextColor={colors.grey800}
-          style={settingsStyles.input}
+          style={screens.settings.input}
         ></TextInput>
         <TextInput
           placeholder="Repeat Password"
           placeholderTextColor={colors.grey800}
-          style={settingsStyles.input}
+          style={screens.settings.input}
         ></TextInput>
         <ButtonComponent type="primary" title="Change" size="small" />
       </View>

@@ -1,9 +1,11 @@
+// Componentes
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+
+// Pantallas
 import FriendsListScreen from "../screens/FriendsListScreen";
 import AddFriendScreen from "../screens/AddFriendScreen";
 import FriendsSettingsScreen from "../screens/FriendsSettingsScreen";
-import { StyleSheet } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
@@ -33,7 +35,5 @@ const FriendsScreen = ({ navigation }: { navigation: any }) => {
     </Stack.Navigator>
   );
 };
-
-const scriptStyles = StyleSheet.create({});
 
 export default FriendsScreen;

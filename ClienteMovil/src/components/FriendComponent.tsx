@@ -1,6 +1,10 @@
+// Componentes
 import { useNavigation } from "@react-navigation/native";
 import { Avatar, Card } from "react-native-paper";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
+
+// Estilos
+import styles from "../styles/styles";
 
 interface IFriend {
   type: string;
@@ -11,6 +15,9 @@ interface IFriend {
 
 function FriendComponent(props: IFriend) {
   //const navigation = useNavigation<any>();
+
+  const { components } = styles();
+
   let componentOptions: JSX.Element;
   switch (props.type) {
     case "chat":
@@ -20,13 +27,13 @@ function FriendComponent(props: IFriend) {
             icon="message"
             color="#fff"
             size={30}
-            style={scriptStyles.messageIcon}
+            style={components.icons.messageIcon}
           />
           <Avatar.Icon
             icon="delete"
             color="#fff"
             size={30}
-            style={scriptStyles.deleteIcon}
+            style={components.icons.deleteIcon}
           />
         </View>
       );
@@ -37,14 +44,14 @@ function FriendComponent(props: IFriend) {
           icon="plus"
           color="#fff"
           size={30}
-          style={scriptStyles.addIcon}
+          style={components.icons.addIcon}
         />
       );
       break;
   }
 
   return (
-    <Card style={scriptStyles.friend}>
+    <Card style={components.card}>
       <Card.Title
         title={props.user}
         subtitle={props.status}
@@ -54,29 +61,5 @@ function FriendComponent(props: IFriend) {
     </Card>
   );
 }
-
-const scriptStyles = StyleSheet.create({
-  friend: {
-    borderRadius: 5,
-    marginTop: 15,
-    marginHorizontal: 10,
-  },
-  messageIcon: {
-    borderRadius: 5,
-    backgroundColor: "grey",
-  },
-  deleteIcon: {
-    marginLeft: 10,
-    marginRight: 15,
-    borderRadius: 5,
-    backgroundColor: "#d54f4f",
-  },
-  addIcon: {
-    marginLeft: 10,
-    marginRight: 15,
-    borderRadius: 5,
-    backgroundColor: "#008f39",
-  },
-});
 
 export default FriendComponent;

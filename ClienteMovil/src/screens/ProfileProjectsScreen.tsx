@@ -1,7 +1,10 @@
-import { Card, FAB, IconButton } from "react-native-paper";
-import { FlatList, StyleSheet, View } from "react-native";
+// Componentes
+import { FAB } from "react-native-paper";
+import { FlatList, View } from "react-native";
 import ProjectComponent from "../components/ProjectComponent";
 import PopupNotificationComponent from "../components/PopupNotificationComponent";
+
+// Estilos
 import styles from "../styles/styles";
 
 const projects = [

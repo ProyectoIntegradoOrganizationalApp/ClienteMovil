@@ -1,8 +1,14 @@
+// React
 import * as React from "react";
+
+// Componentes
 import { Modal } from "@ui-kitten/components";
 import { Avatar, Card, Portal, Provider } from "react-native-paper";
 import ButtonComponent from "./ButtonComponent";
-import { Button, StyleSheet, View } from "react-native";
+import { View } from "react-native";
+
+// Estilos
+import styles from "../styles/styles";
 
 const ModalConfirmComponent = (props: any): React.ReactElement => {
   const {
@@ -13,6 +19,8 @@ const ModalConfirmComponent = (props: any): React.ReactElement => {
     setModalConfirmVisible: setModalConfirmVisible,
     onConfirm,
   } = props;
+
+  const { components } = styles();
 
   return (
     <View>
@@ -29,7 +37,7 @@ const ModalConfirmComponent = (props: any): React.ReactElement => {
               }
             }}
           >
-            <Card style={scriptStyles.card}>
+            <Card style={components.modal.modal}>
               <Card.Title
                 title=""
                 left={() => (
@@ -37,14 +45,14 @@ const ModalConfirmComponent = (props: any): React.ReactElement => {
                     icon="alert-circle"
                     size={90}
                     color="#ffc048"
-                    style={scriptStyles.cardIconActivity}
+                    style={components.modal.modal}
                   />
                 )}
                 leftStyle={{
                   flex: 45,
                   alignItems: "center",
                 }}
-                style={scriptStyles.cardTitle}
+                style={components.modal.modal}
               />
               <Card.Content>
                 <View style={{ padding: 10 }}>
@@ -80,21 +88,5 @@ const ModalConfirmComponent = (props: any): React.ReactElement => {
     </View>
   );
 };
-
-const scriptStyles = StyleSheet.create({
-  card: {
-    borderRadius: 5,
-    marginTop: 15,
-    marginHorizontal: 10,
-  },
-  cardTitle: {
-    marginTop: 10,
-    borderBottomWidth: 2,
-    borderBottomColor: "#ffffff",
-  },
-  cardIconActivity: {
-    backgroundColor: "transparent",
-  },
-});
 
 export default ModalConfirmComponent;

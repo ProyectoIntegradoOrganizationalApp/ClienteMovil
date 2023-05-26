@@ -11,7 +11,7 @@ import PopupNotificationComponent from "../components/PopupNotificationComponent
 import styles from "../styles/styles";
 
 const NewPasswordScreen = ({ navigation }: { navigation: any }) => {
-  const { loginStyles } = styles();
+  const { screens } = styles();
 
   const [password, setPassword] = useState<string>("");
   const [confirmpass, setConfirmPass] = useState<string>("");
@@ -37,16 +37,16 @@ const NewPasswordScreen = ({ navigation }: { navigation: any }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={loginStyles.scrollView}>
-      <View style={loginStyles.viewContainerChild}>
-        <Text style={loginStyles.textTitle}>Change Password</Text>
+    <ScrollView contentContainerStyle={screens.accountManagement.scrollView}>
+      <View style={screens.accountManagement.viewContainerChild}>
+        <Text style={screens.accountManagement.textTitle}>Change Password</Text>
       </View>
-      <View style={loginStyles.viewContainerChild}>
-        <Text style={loginStyles.textsubTitle}>
+      <View style={screens.accountManagement.viewContainerChild}>
+        <Text style={screens.accountManagement.textsubTitle}>
           Create a strong and unique password to protect your information
         </Text>
       </View>
-      <View style={loginStyles.viewContainerChild}>
+      <View style={screens.accountManagement.viewContainerChild}>
         <LoginInputPassComponent
           name="password"
           label="Enter password"
@@ -55,7 +55,7 @@ const NewPasswordScreen = ({ navigation }: { navigation: any }) => {
           onError={handleInputError}
         />
       </View>
-      <View style={loginStyles.viewContainerChild}>
+      <View style={screens.accountManagement.viewContainerChild}>
         <LoginInputPassComponent
           name="confirmpass"
           label="Repeat password"
@@ -64,7 +64,7 @@ const NewPasswordScreen = ({ navigation }: { navigation: any }) => {
           onError={handleInputError}
         />
       </View>
-      <View style={loginStyles.viewContainerChild}>
+      <View style={screens.accountManagement.viewContainerChild}>
         <ButtonComponent title="Change Password" onPress={sendForm} />
       </View>
       <ButtonComponent

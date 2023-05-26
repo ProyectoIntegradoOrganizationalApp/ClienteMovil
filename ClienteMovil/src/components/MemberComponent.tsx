@@ -1,8 +1,14 @@
+// React
 import { useEffect, useState, ReactElement } from "react";
+
+// Components
 import { useNavigation } from "@react-navigation/native";
 import { Avatar, Card } from "react-native-paper";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
+
+// Estilos
+import styles from "../styles/styles";
 
 interface IMember {
   profile: string;
@@ -12,13 +18,15 @@ interface IMember {
 }
 
 function isMemberAdmin(role: number) {
+  const { components } = styles();
+
   if (roles[role].name === "Admin") {
     return (
       <Avatar.Icon
         icon="crown"
         color="#ec9d27"
         size={30}
-        style={scriptStyles.crownIcon}
+        style={components.icons.crownIcon}
       />
     );
   }
@@ -42,8 +50,10 @@ function MemberComponent(props: IMember) {
     setSelectedIndex(new IndexPath(props.role));
   }, []);
 
+  const { components } = styles();
+
   return (
-    <Card style={scriptStyles.member}>
+    <Card style={components.card}>
       <Card.Title
         title={
           <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -59,19 +69,19 @@ function MemberComponent(props: IMember) {
               icon="message"
               color="#fff"
               size={30}
-              style={scriptStyles.messageIcon}
+              style={[components.icons.messageIcon, { marginLeft: 10 }]}
             />
             <Avatar.Icon
               icon="exit-to-app"
               color="#fff"
               size={30}
-              style={scriptStyles.exitIcon}
+              style={components.icons.exitIcon}
             />
           </View>
         )}
       />
       <Card.Content style={{ marginTop: 10 }}>
-        <View style={scriptStyles.roleView}>
+        <View style={components.filter.filterView}>
           <Text style={{ marginRight: 15 }}>Role:</Text>
           <Select
             value={roles[selectedIndex.row].name}
@@ -90,34 +100,5 @@ function MemberComponent(props: IMember) {
     </Card>
   );
 }
-
-const scriptStyles = StyleSheet.create({
-  member: {
-    borderRadius: 5,
-    marginTop: 15,
-    marginHorizontal: 10,
-  },
-  crownIcon: {
-    backgroundColor: "transparent",
-  },
-  roleView: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    alignItems: "center",
-    marginTop: 15,
-    marginHorizontal: 10,
-  },
-  messageIcon: {
-    marginLeft: 10,
-    borderRadius: 5,
-    backgroundColor: "grey",
-  },
-  exitIcon: {
-    marginLeft: 10,
-    marginRight: 15,
-    borderRadius: 5,
-    backgroundColor: "#d54f4f",
-  },
-});
 
 export default MemberComponent;

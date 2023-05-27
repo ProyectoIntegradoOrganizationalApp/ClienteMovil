@@ -11,20 +11,24 @@ import {
 import colors from "tailwindcss/colors";
 import { StyleSheet } from "react-native";
 
-const lightColors = {
-  primary: "red",
-  secondary: "#F2F2F2",
-};
-
 const darkColors = {
+  background: colors.slate[700],
   primary: "green",
   secondary: "#1C1C1C",
 };
 
+const lightColors = {
+  background: colors.slate[50],
+  primary: "red",
+  secondary: "#F2F2F2",
+};
+
 const getColors = (theme: string) => {
-  const colorPalette = theme === "light" ? lightColors : darkColors;
+  console.log(theme);
+  const colorPalette = theme === "dark" ? darkColors : lightColors;
 
   return {
+    background: colorPalette.background,
     primary: colorPalette.primary,
     grey400: colors.slate[400],
     grey500: colors.slate[500],
@@ -40,6 +44,7 @@ const styles = () => {
 
   return {
     colors: {
+      background: colors.background,
       primary: colors.primary,
       grey400: colors.grey400,
       grey500: colors.grey500,
@@ -200,6 +205,9 @@ const styles = () => {
           backgroundColor: "white",
         },
       },
+      input: {
+        backgroundColor: colors.background,
+      },
       modal: StyleSheet.create({
         modal: {
           borderRadius: 5,
@@ -226,6 +234,7 @@ const styles = () => {
     screens: {
       accountManagement: StyleSheet.create({
         scrollView: {
+          backgroundColor: colors.background,
           justifyContent: "center",
         },
         viewNavigateContainer: {

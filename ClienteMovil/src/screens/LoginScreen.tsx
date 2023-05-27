@@ -60,7 +60,12 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={screens.accountManagement.scrollView}>
+    <ScrollView
+      contentContainerStyle={[
+        screens.accountManagement.scrollView,
+        { height: "100%" },
+      ]}
+    >
       <LoadingComponent state={loading} />
       <View style={screens.accountManagement.viewContainer}>
         <View style={screens.accountManagement.viewImage}>

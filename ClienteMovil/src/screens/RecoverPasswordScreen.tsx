@@ -22,39 +22,46 @@ const RecoverPasswordScreen = ({ navigation }: { navigation: any }) => {
   const sendForm = (event: SubmitEvent | any) => {
     event.preventDefault();
     if (inputError.length === 0) {
-      // TODO: navigation.navigate("NewPassword")
+      navigation.navigate("NewPassword"); // TODO
     }
   };
 
   return (
-    <ScrollView contentContainerStyle={screens.accountManagement.scrollView}>
-      <View style={screens.accountManagement.viewContainerChild}>
-        <Text style={screens.accountManagement.textTitle}>
-          Recovery Password
-        </Text>
-      </View>
-      <View style={screens.accountManagement.viewContainerChild}>
-        <Text style={screens.accountManagement.textsubTitle}>
-          No worries, we'll send you reset instructions
-        </Text>
-      </View>
-      <View style={screens.accountManagement.viewContainerChild}>
-        <LoginInputComponent
-          name="email"
-          label="Enter your email"
-          value={email}
-          onChangeText={(text: string) => setEmail(text)}
-          onError={handleInputError}
+    <ScrollView
+      contentContainerStyle={[
+        screens.accountManagement.scrollView,
+        { height: "100%" },
+      ]}
+    >
+      <View style={screens.accountManagement.viewContainer}>
+        <View style={screens.accountManagement.viewContainerChild}>
+          <Text style={screens.accountManagement.textTitle}>
+            Recovery Password
+          </Text>
+        </View>
+        <View style={screens.accountManagement.viewContainerChild}>
+          <Text style={screens.accountManagement.textsubTitle}>
+            No worries, we'll send you reset instructions
+          </Text>
+        </View>
+        <View style={screens.accountManagement.viewContainerChild}>
+          <LoginInputComponent
+            name="email"
+            label="Enter your email"
+            value={email}
+            onChangeText={(text: string) => setEmail(text)}
+            onError={handleInputError}
+          />
+        </View>
+        <View style={screens.accountManagement.viewContainerChild}>
+          <ButtonComponent title="Recovery Password" onPress={sendForm} />
+        </View>
+        <ButtonComponent
+          title="Back To Log In"
+          type="secondary"
+          onPress={() => navigation.navigate("Login")}
         />
       </View>
-      <View style={screens.accountManagement.viewContainerChild}>
-        <ButtonComponent title="Recovery Password" onPress={sendForm} />
-      </View>
-      <ButtonComponent
-        title="Back To Log In"
-        type="secondary"
-        onPress={() => navigation.navigate("Login")}
-      />
     </ScrollView>
   );
 };

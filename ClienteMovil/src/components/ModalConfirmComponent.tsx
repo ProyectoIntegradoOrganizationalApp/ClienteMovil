@@ -45,14 +45,14 @@ const ModalConfirmComponent = (props: any): React.ReactElement => {
                     icon="alert-circle"
                     size={90}
                     color="#ffc048"
-                    style={components.modal.modal}
+                    style={components.modal.cardIconActivity}
                   />
                 )}
                 leftStyle={{
                   flex: 45,
                   alignItems: "center",
                 }}
-                style={components.modal.modal}
+                style={components.modal.cardTitle}
               />
               <Card.Content>
                 <View style={{ padding: 10 }}>

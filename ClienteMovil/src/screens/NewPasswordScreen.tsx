@@ -37,41 +37,50 @@ const NewPasswordScreen = ({ navigation }: { navigation: any }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={screens.accountManagement.scrollView}>
-      <View style={screens.accountManagement.viewContainerChild}>
-        <Text style={screens.accountManagement.textTitle}>Change Password</Text>
-      </View>
-      <View style={screens.accountManagement.viewContainerChild}>
-        <Text style={screens.accountManagement.textsubTitle}>
-          Create a strong and unique password to protect your information
-        </Text>
-      </View>
-      <View style={screens.accountManagement.viewContainerChild}>
-        <LoginInputPassComponent
-          name="password"
-          label="Enter password"
-          value={password}
-          onChangeText={(text: string) => setPassword(text)}
-          onError={handleInputError}
+    <ScrollView
+      contentContainerStyle={[
+        screens.accountManagement.scrollView,
+        { height: "100%" },
+      ]}
+    >
+      <View style={screens.accountManagement.viewContainer}>
+        <View style={screens.accountManagement.viewContainerChild}>
+          <Text style={screens.accountManagement.textTitle}>
+            Change Password
+          </Text>
+        </View>
+        <View style={screens.accountManagement.viewContainerChild}>
+          <Text style={screens.accountManagement.textsubTitle}>
+            Create a strong and unique password to protect your information
+          </Text>
+        </View>
+        <View style={screens.accountManagement.viewContainerChild}>
+          <LoginInputPassComponent
+            name="password"
+            label="Enter password"
+            value={password}
+            onChangeText={(text: string) => setPassword(text)}
+            onError={handleInputError}
+          />
+        </View>
+        <View style={screens.accountManagement.viewContainerChild}>
+          <LoginInputPassComponent
+            name="confirmpass"
+            label="Repeat password"
+            value={confirmpass}
+            onChangeText={(text: string) => setConfirmPass(text)}
+            onError={handleInputError}
+          />
+        </View>
+        <View style={screens.accountManagement.viewContainerChild}>
+          <ButtonComponent title="Change Password" onPress={sendForm} />
+        </View>
+        <ButtonComponent
+          title="Cancel"
+          type="secondary"
+          onPress={() => navigation.navigate("RecoverPassword")}
         />
       </View>
-      <View style={screens.accountManagement.viewContainerChild}>
-        <LoginInputPassComponent
-          name="confirmpass"
-          label="Repeat password"
-          value={confirmpass}
-          onChangeText={(text: string) => setConfirmPass(text)}
-          onError={handleInputError}
-        />
-      </View>
-      <View style={screens.accountManagement.viewContainerChild}>
-        <ButtonComponent title="Change Password" onPress={sendForm} />
-      </View>
-      <ButtonComponent
-        title="Cancel"
-        type="secondary"
-        onPress={() => navigation.navigate("RecoverPassword")}
-      />
     </ScrollView>
   );
 };

@@ -68,7 +68,7 @@ const GeneralSettingsScreen = () => {
           </Text>
         </View>
         <View style={{ flex: 1 }}>
-          <Switch value={theme === "light"} onValueChange={toggleTheme} />
+          <Switch value={theme === "dark"} onValueChange={toggleTheme} />
         </View>
       </View>
       <View style={screens.settings.viewRow}>

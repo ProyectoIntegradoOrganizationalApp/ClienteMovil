@@ -44,7 +44,7 @@ const LoginInputPassComponent: React.FC<LoginInputPassComponentProps> = ({
     onError(errorMessage);
   };
 
-  const { colors } = styles();
+  const { colors, components } = styles();
 
   return (
     <>
@@ -58,6 +58,7 @@ const LoginInputPassComponent: React.FC<LoginInputPassComponentProps> = ({
         activeOutlineColor={colors.grey800}
         outlineColor={colors.grey800}
         secureTextEntry
+        style={components.input}
       />
       {error !== "" && <HelperText type="error">{error}</HelperText>}
     </>

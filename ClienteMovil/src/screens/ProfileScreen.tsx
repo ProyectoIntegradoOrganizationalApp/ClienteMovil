@@ -21,14 +21,16 @@ import styles from "../styles/styles";
 const ProfileDataScreen = ({ navigation }: { navigation: any }) => {
   const { user } = useContext(AuthContext);
 
-  const { components, screens } = styles();
+  const { colors, components, screens } = styles();
 
   return (
     <View>
       <Card style={components.card}>
         <Card.Title
           title={user?.name + " " + user?.lastname}
+          titleStyle={{ color: colors.text }}
           subtitle={user?.email}
+          subtitleStyle={{ color: colors.text }}
           left={() => (
             <Avatar.Image
               size={50}

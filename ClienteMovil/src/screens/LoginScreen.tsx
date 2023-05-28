@@ -3,6 +3,10 @@ import { useContext, useEffect, useState } from "react";
 
 // Contexto
 import { AuthContext } from "../domain/context/AuthContext";
+import {
+  ThemeContext,
+  ThemeContextProps,
+} from "../domain/context/ThemeContext";
 
 // Hooks
 import { useUserApi } from "../adapters/api/useUserApi";
@@ -23,7 +27,7 @@ import PopupNotificationComponent from "../components/PopupNotificationComponent
 import styles from "../styles/styles";
 
 const LoginScreen = ({ navigation }: { navigation: any }) => {
-  const { colors, screens } = styles();
+  const { components, screens } = styles();
 
   const { user } = useContext(AuthContext);
 
@@ -59,6 +63,8 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
     }
   };
 
+  const { theme } = useContext<ThemeContextProps>(ThemeContext);
+
   return (
     <ScrollView
       contentContainerStyle={[
@@ -70,7 +76,11 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
       <View style={screens.accountManagement.viewContainer}>
         <View style={screens.accountManagement.viewImage}>
           <Image
-            source={require("../assets/images/logo.png")}
+            source={
+              theme === "light"
+                ? require("../assets/images/logo-light.png")
+                : require("../assets/images/logo-dark.png")
+            }
             style={screens.accountManagement.image}
           />
         </View>
@@ -123,7 +133,7 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
           style={screens.accountManagement.text}
           onPress={() => navigation.navigate("Register")}
         >
-          New Here? <Text style={{ color: colors.grey600 }}>Sign up</Text>
+          New Here? <Text style={components.link}>Sign up</Text>
         </Text>
       </View>
     </ScrollView>

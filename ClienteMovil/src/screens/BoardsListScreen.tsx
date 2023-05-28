@@ -25,9 +25,9 @@ const boards = [
 ];
 
 const BoardsListScreen = () => {
-  const { components } = styles();
+  const { components, screens } = styles();
   return (
-    <View>
+    <View style={screens.boardsList.background}>
       <View
         style={{
           flexDirection: "row",

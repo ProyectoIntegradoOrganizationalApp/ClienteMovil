@@ -20,10 +20,10 @@ const projects = [
 ];
 
 const ProjectsListScreen = () => {
-  const { components } = styles();
+  const { components, screens } = styles();
 
   return (
-    <View>
+    <View style={screens.projectsList.background}>
       <View style={{ height: "100%" }}>
         <FlatList
           data={projects}

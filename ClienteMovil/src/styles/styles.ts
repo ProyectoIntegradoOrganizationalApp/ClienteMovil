@@ -12,29 +12,34 @@ import colors from "tailwindcss/colors";
 import { StyleSheet } from "react-native";
 
 const darkColors = {
-  background: colors.slate[700],
-  primary: "green",
-  secondary: "#1C1C1C",
+  background: colors.slate[600],
+  primary: colors.slate[800],
+  secondary: colors.slate[700],
+  text: "#ffffff",
+  card: colors.slate[700],
+  taskIconBackground: colors.slate[600],
 };
 
 const lightColors = {
   background: colors.slate[50],
-  primary: "red",
-  secondary: "#F2F2F2",
+  primary: colors.slate[800],
+  secondary: colors.slate[700],
+  text: "#000000",
+  card: colors.slate[200],
+  taskIconBackground: colors.slate[100],
 };
 
 const getColors = (theme: string) => {
-  console.log(theme);
   const colorPalette = theme === "dark" ? darkColors : lightColors;
 
   return {
     background: colorPalette.background,
     primary: colorPalette.primary,
-    grey400: colors.slate[400],
-    grey500: colors.slate[500],
-    grey600: colors.slate[600],
-    grey700: colors.slate[700],
-    grey800: colors.slate[800],
+    secondary: colorPalette.secondary,
+    text: colorPalette.text,
+    card: colorPalette.card,
+    taskIconBackground: colorPalette.taskIconBackground,
+    loader: colors.slate[500],
   };
 };
 
@@ -46,11 +51,9 @@ const styles = () => {
     colors: {
       background: colors.background,
       primary: colors.primary,
-      grey400: colors.grey400,
-      grey500: colors.grey500,
-      grey600: colors.grey600,
-      grey700: colors.grey700,
-      grey800: colors.grey800,
+      text: colors.text,
+      card: colors.card,
+      loader: colors.loader,
     },
     components: {
       activityIndicator: StyleSheet.create({
@@ -58,6 +61,7 @@ const styles = () => {
           marginRight: 20,
           fontSize: 32,
           fontWeight: "800",
+          color: colors.text,
         },
       }),
       badge: {
@@ -86,10 +90,10 @@ const styles = () => {
           elevation: 3,
         },
         buttonPrimary: {
-          backgroundColor: colors.grey800,
+          backgroundColor: colors.primary,
         },
         buttonSecondary: {
-          backgroundColor: colors.grey500,
+          backgroundColor: colors.secondary,
         },
         buttonGoogle: {
           height: 48,
@@ -120,6 +124,7 @@ const styles = () => {
         borderRadius: 5,
         marginTop: 15,
         marginHorizontal: 10,
+        backgroundColor: colors.card,
       },
       divider: StyleSheet.create({
         container: {
@@ -129,11 +134,12 @@ const styles = () => {
         subcontainer: {
           flex: 1,
           height: 1,
-          backgroundColor: "black",
+          backgroundColor: colors.text,
         },
         text: {
           width: 50,
           textAlign: "center",
+          color: colors.text,
         },
       }),
       fab: {
@@ -141,7 +147,7 @@ const styles = () => {
         right: 0,
         bottom: 0,
         borderRadius: 15,
-        backgroundColor: colors.grey800,
+        backgroundColor: colors.primary,
       },
       filter: StyleSheet.create({
         filterView: {
@@ -202,11 +208,15 @@ const styles = () => {
           backgroundColor: "transparent",
         },
         taskIcon: {
-          backgroundColor: "white",
+          backgroundColor: colors.taskIconBackground,
+          color: colors.text,
         },
       },
       input: {
         backgroundColor: colors.background,
+      },
+      link: {
+        color: colors.primary,
       },
       modal: StyleSheet.create({
         modal: {
@@ -256,24 +266,25 @@ const styles = () => {
           marginBottom: 20,
         },
         text: {
-          //fontFamily: "Mulish",
           textAlign: "center",
           fontSize: 16,
+          color: colors.text,
         },
         textTitle: {
           textAlign: "left",
           fontSize: 30,
           fontWeight: "bold",
+          color: colors.text,
         },
         textsubTitle: {
           textAlign: "left",
           fontSize: 16,
+          color: colors.text,
         },
         divider: {
           height: 1,
           marginVertical: 20,
           marginHorizontal: 60,
-          backgroundColor: "#94a3b8",
         },
       }),
       achievements: StyleSheet.create({
@@ -289,12 +300,22 @@ const styles = () => {
           paddingBottom: 15,
         },
       }),
+      boardsList: StyleSheet.create({
+        background: {
+          backgroundColor: colors.background,
+        },
+      }),
       profile: StyleSheet.create({
         cardContent: {
           marginTop: 10,
         },
         menuItem: {
           marginVertical: 5,
+        },
+      }),
+      projectsList: StyleSheet.create({
+        background: {
+          backgroundColor: colors.background,
         },
       }),
       projectsMembers: StyleSheet.create({
@@ -329,8 +350,7 @@ const styles = () => {
           padding: 12,
           marginBottom: 12,
           borderWidth: 2,
-          borderColor: colors.grey500,
-          backgroundColor: colors.grey400,
+          borderColor: colors.primary,
         },
       }),
     },

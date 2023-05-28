@@ -11,7 +11,7 @@ const LoadingComponent = ({ state }: { state: boolean }) => {
     <ActivityIndicator
       animating={state}
       size={"large"}
-      color={colors.grey500}
+      color={colors.loader}
       style={{ zIndex: 10, top: 260 }}
     />
   );

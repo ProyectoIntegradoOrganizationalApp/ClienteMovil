@@ -50,18 +50,19 @@ function MemberComponent(props: IMember) {
     setSelectedIndex(new IndexPath(props.role));
   }, []);
 
-  const { components } = styles();
+  const { colors, components } = styles();
 
   return (
     <Card style={components.card}>
       <Card.Title
         title={
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text>{props.user}</Text>
+            <Text style={{ color: colors.text }}>{props.user}</Text>
             {isMemberAdmin(props.role)}
           </View>
         }
         subtitle={props.status}
+        subtitleStyle={{ color: colors.text }}
         left={() => <Avatar.Image size={40} source={{ uri: props.profile }} />}
         right={() => (
           <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -82,7 +83,7 @@ function MemberComponent(props: IMember) {
       />
       <Card.Content style={{ marginTop: 10 }}>
         <View style={components.filter.filterView}>
-          <Text style={{ marginRight: 15 }}>Role:</Text>
+          <Text style={{ color: colors.text, marginRight: 15 }}>Role:</Text>
           <Select
             value={roles[selectedIndex.row].name}
             selectedIndex={selectedIndex}

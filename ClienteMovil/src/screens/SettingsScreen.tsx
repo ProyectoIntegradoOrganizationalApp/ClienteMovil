@@ -46,7 +46,6 @@ const GeneralSettingsScreen = () => {
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
-    console.log(theme);
   };
 
   const [modalConfirmVisible, setModalConfirmVisible] = React.useState(false);
@@ -151,17 +150,17 @@ const SecuritySettingsScreen = () => {
         </Text>
         <TextInput
           placeholder="Old Password"
-          placeholderTextColor={colors.grey800}
+          placeholderTextColor={colors.primary}
           style={screens.settings.input}
         ></TextInput>
         <TextInput
           placeholder="New Password"
-          placeholderTextColor={colors.grey800}
+          placeholderTextColor={colors.primary}
           style={screens.settings.input}
         ></TextInput>
         <TextInput
           placeholder="Repeat Password"
-          placeholderTextColor={colors.grey800}
+          placeholderTextColor={colors.primary}
           style={screens.settings.input}
         ></TextInput>
         <ButtonComponent type="primary" title="Change" size="small" />

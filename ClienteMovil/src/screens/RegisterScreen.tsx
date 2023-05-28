@@ -3,6 +3,10 @@ import { useContext, useEffect, useState } from "react";
 
 // Contexto
 import { AuthContext } from "../domain/context/AuthContext";
+import {
+  ThemeContext,
+  ThemeContextProps,
+} from "../domain/context/ThemeContext";
 
 // Hooks
 import { useUserApi } from "../adapters/api/useUserApi";
@@ -23,7 +27,7 @@ import PopupNotificationComponent from "../components/PopupNotificationComponent
 import styles from "../styles/styles";
 
 const RegisterScreen = ({ navigation }: { navigation: any }) => {
-  const { colors, screens } = styles();
+  const { components, screens } = styles();
 
   const { user } = useContext(AuthContext);
 
@@ -32,7 +36,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
   const [email, setEmail] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [last_name, setLastName] = useState<string>("");
-  const [prefix, setPrefix] = useState<string>("+34");
+  const [prefix, setPrefix] = useState<string>("");
   const [phone_number, setPhoneNumber] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmpass, setConfirmPass] = useState<string>("");
@@ -79,13 +83,19 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
     }
   };
 
+  const { theme } = useContext<ThemeContextProps>(ThemeContext);
+
   return (
     <ScrollView contentContainerStyle={screens.accountManagement.scrollView}>
       <LoadingComponent state={loading} />
       <View style={screens.accountManagement.viewContainer}>
         <View style={screens.accountManagement.viewImage}>
           <Image
-            source={require("../assets/images/logo.png")}
+            source={
+              theme === "light"
+                ? require("../assets/images/logo-light.png")
+                : require("../assets/images/logo-dark.png")
+            }
             style={screens.accountManagement.image}
           />
         </View>
@@ -175,7 +185,7 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
           style={screens.accountManagement.text}
           onPress={() => navigation.navigate("Login")}
         >
-          Registered? <Text style={{ color: colors.grey800 }}>Log in</Text>
+          Registered? <Text style={components.link}>Log in</Text>
         </Text>
       </View>
     </ScrollView>

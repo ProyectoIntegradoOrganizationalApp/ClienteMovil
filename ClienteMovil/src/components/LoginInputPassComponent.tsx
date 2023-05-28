@@ -55,10 +55,14 @@ const LoginInputPassComponent: React.FC<LoginInputPassComponentProps> = ({
         value={value}
         onChangeText={handleInputChange}
         onBlur={validateInput}
-        activeOutlineColor={colors.grey800}
-        outlineColor={colors.grey800}
-        secureTextEntry
+        activeOutlineColor={colors.primary}
+        outlineColor={colors.primary}
+        textColor={colors.text}
         style={components.input}
+        secureTextEntry
+        theme={{
+          colors: { onSurfaceVariant: colors.primary },
+        }}
       />
       {error !== "" && <HelperText type="error">{error}</HelperText>}
     </>

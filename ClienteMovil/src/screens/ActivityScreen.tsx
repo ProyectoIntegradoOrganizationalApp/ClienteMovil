@@ -12,13 +12,14 @@ import styles from "../styles/styles";
 const ActivityScreen = () => {
   const [date, setDate] = React.useState(new Date());
 
-  const { components } = styles();
+  const { colors, components } = styles();
 
   return (
     <ScrollView>
       <Card style={components.card}>
         <Card.Title
           title="Finished Tasks this Week"
+          titleStyle={{ color: colors.text }}
           left={() => (
             <Avatar.Icon
               icon="xml"
@@ -34,6 +35,7 @@ const ActivityScreen = () => {
       <Card style={components.card}>
         <Card.Title
           title="Finished Tasks this Day"
+          titleStyle={{ color: colors.text }}
           left={() => (
             <Avatar.Icon
               icon="xml"

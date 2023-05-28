@@ -16,7 +16,7 @@ interface IFriend {
 function FriendComponent(props: IFriend) {
   //const navigation = useNavigation<any>();
 
-  const { components } = styles();
+  const { components, colors } = styles();
 
   let componentOptions: JSX.Element;
   switch (props.type) {
@@ -54,7 +54,9 @@ function FriendComponent(props: IFriend) {
     <Card style={components.card}>
       <Card.Title
         title={props.user}
+        titleStyle={{ color: colors.text }}
         subtitle={props.status}
+        subtitleStyle={{ color: colors.text }}
         left={() => <Avatar.Image size={40} source={{ uri: props.profile }} />}
         right={() => componentOptions}
       />

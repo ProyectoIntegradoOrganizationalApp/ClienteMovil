@@ -39,7 +39,9 @@ function AchievementComponent(props: IAchievement) {
     <Card style={components.card}>
       <Card.Title
         title={props.title}
+        titleStyle={{ color: colors.text }}
         subtitle={props.description}
+        subtitleStyle={{ color: colors.text }}
         left={() =>
           achievementsIcons.map((achievementIcon) =>
             achievementIcon.id === props.id ? (
@@ -56,7 +58,7 @@ function AchievementComponent(props: IAchievement) {
         right={() => <Text style={{ marginRight: 15 }}>{props.progress}%</Text>}
       />
       <Card.Content style={{ marginTop: 10 }}>
-        <ProgressBar progress={props.progress / 100} color={colors.grey800} />
+        <ProgressBar progress={props.progress / 100} color={colors.primary} />
       </Card.Content>
     </Card>
   );

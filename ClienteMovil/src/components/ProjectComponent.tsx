@@ -14,7 +14,7 @@ interface IProject {
 function ProjectComponent(props: IProject) {
   const navigation = useNavigation<any>();
 
-  const { components } = styles();
+  const { colors, components } = styles();
 
   return (
     <Card
@@ -27,7 +27,9 @@ function ProjectComponent(props: IProject) {
     >
       <Card.Title
         title={props.title}
+        titleStyle={{ color: colors.text }}
         subtitle={props.description}
+        subtitleStyle={{ color: colors.text }}
         right={() => (
           <View style={{ flexDirection: "row" }}>
             <Avatar.Icon

@@ -14,14 +14,16 @@ interface INotification {
 function NotificationComponent(props: INotification) {
   //const navigation = useNavigation<any>();
 
-  const { components } = styles();
+  const { colors, components } = styles();
 
   const isNotificationNew = true;
   return (
     <Card style={components.card}>
       <Card.Title
         title={props.message}
+        titleStyle={{ color: colors.text }}
         subtitle={props.date}
+        subtitleStyle={{ color: colors.text }}
         left={() => <Avatar.Image size={40} source={{ uri: props.user }} />}
         right={() =>
           isNotificationNew ? (

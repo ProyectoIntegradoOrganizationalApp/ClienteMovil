@@ -55,9 +55,13 @@ const LoginInputComponent: React.FC<LoginInputComponentProps> = ({
         value={value}
         onChangeText={handleInputChange}
         onBlur={validateInput}
-        activeOutlineColor={colors.grey800}
-        outlineColor={colors.grey800}
+        activeOutlineColor={colors.primary}
+        outlineColor={colors.primary}
+        textColor={colors.text}
         style={components.input}
+        theme={{
+          colors: { onSurfaceVariant: colors.primary },
+        }}
       />
       {error !== "" && <HelperText type="error">{error}</HelperText>}
     </>

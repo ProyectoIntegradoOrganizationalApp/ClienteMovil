@@ -33,7 +33,7 @@ function isAppPremium(premium: boolean) {
 function AppComponent(props: IApp) {
   const navigation = useNavigation<any>();
 
-  const { components } = styles();
+  const { colors, components } = styles();
 
   let componentOptions: JSX.Element;
   if (!props.installed) {
@@ -75,11 +75,12 @@ function AppComponent(props: IApp) {
       <Card.Title
         title={
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text>{props.name}</Text>
+            <Text style={{ color: colors.text }}>{props.name}</Text>
             {isAppPremium(props.premium)}
           </View>
         }
         subtitle={props.description}
+        subtitleStyle={{ color: colors.text }}
         left={() => <Avatar.Image size={40} source={{ uri: props.icon }} />}
         right={() => (
           <View style={{ flexDirection: "row" }}>

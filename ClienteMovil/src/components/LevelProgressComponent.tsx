@@ -2,6 +2,9 @@
 import { View } from "react-native";
 import { Svg, Circle, Text } from "react-native-svg";
 
+// Estilos
+import styles from "../styles/styles";
+
 interface LevelProgressComponentProps {
   level: number | undefined;
   progress: number;
@@ -17,6 +20,8 @@ const LevelProgressComponent: React.FC<LevelProgressComponentProps> = ({
 }) => {
   const circumference = 2 * Math.PI * radius;
   const progressValue = (progress / 100) * circumference;
+
+  const { colors } = styles();
 
   return (
     <View>
@@ -44,7 +49,7 @@ const LevelProgressComponent: React.FC<LevelProgressComponentProps> = ({
           y="40%"
           textAnchor="middle"
           fontSize={radius / 2.75}
-          fill="#000000"
+          fill={colors.text}
         >
           LEVEL
         </Text>
@@ -53,7 +58,7 @@ const LevelProgressComponent: React.FC<LevelProgressComponentProps> = ({
           y="70%"
           textAnchor="middle"
           fontSize={radius / 2}
-          fill="#000000"
+          fill={colors.text}
         >
           {level}
         </Text>

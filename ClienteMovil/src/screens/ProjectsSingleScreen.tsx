@@ -6,11 +6,21 @@ import BoardsListScreen from "./BoardsListScreen";
 import ProjectsInstalledAppsScreen from "./ProjectsInstalledAppsScreen";
 import ProjectsMembersScreen from "./ProjectsMembersScreen";
 
+// Estilos
+import styles from "../styles/styles";
+
 const Tab = createMaterialTopTabNavigator();
 
 const ProjectsSingleScreen = () => {
+  const { colors } = styles();
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarStyle: { backgroundColor: colors.tabNavigator },
+        tabBarLabelStyle: { color: colors.text },
+        tabBarIndicatorStyle: { backgroundColor: colors.primary },
+      }}
+    >
       <Tab.Screen
         name="BoardsList"
         options={{ title: "Boards" }}

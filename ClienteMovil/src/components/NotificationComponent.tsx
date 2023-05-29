@@ -27,7 +27,7 @@ function NotificationComponent(props: INotification) {
         left={() => <Avatar.Image size={40} source={{ uri: props.user }} />}
         right={() =>
           isNotificationNew ? (
-            <IconButton icon="circle" size={15} iconColor="red" />
+            <IconButton icon="circle" size={15} iconColor={colors.primary} />
           ) : (
             ""
           )

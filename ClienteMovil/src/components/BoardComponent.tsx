@@ -13,18 +13,18 @@ interface IBoard {
 function BoardComponent(props: IBoard) {
   const navigation = useNavigation<any>();
 
-  const { components } = styles();
+  const { colors, components } = styles();
 
   return (
     <Card style={components.board.board}>
-      <Card.Cover
-        source={{ uri: props.cover }}
-        style={components.board.boardCover}
-      />
+      <Card.Cover source={{ uri: props.cover }} />
       <Card.Actions>
-        <Text variant="titleLarge">{props.title}</Text>
+        <Text variant="titleLarge" style={{ color: colors.text }}>
+          {props.title}
+        </Text>
         <IconButton
           icon="chevron-right"
+          iconColor={colors.text}
           style={components.board.boardChevronIcon}
           onPress={() =>
             navigation.navigate("Board", { boardTitle: props.title })

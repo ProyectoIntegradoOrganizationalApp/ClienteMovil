@@ -3,7 +3,13 @@ import React from "react";
 
 // Componentes
 import { FlatList, Text, View } from "react-native";
-import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
+import {
+  ApplicationProvider,
+  IndexPath,
+  Select,
+  SelectItem,
+} from "@ui-kitten/components";
+import { mapping } from "@eva-design/eva";
 import AppComponent from "../components/AppComponent";
 
 // Estilos
@@ -64,29 +70,36 @@ const ProjectsAppsScreen = () => {
     new IndexPath(0)
   );
 
-  const { components } = styles();
+  const { components, screens } = styles();
 
   return (
-    <View>
+    <View style={[screens.projectsApps.background, { flex: 1 }]}>
       <View style={components.filter.filterView}>
         <Text style={components.filter.filterText}>Order by:</Text>
-        <Select
-          value={orders[selectedIndex.row]}
-          selectedIndex={selectedIndex}
-          onSelect={(index: any) => setSelectedIndex(index)}
-          style={components.filter.filterSelect}
+        <ApplicationProvider
+          mapping={mapping}
+          theme={components.filter.filterSelectTheme}
         >
-          {orders.map(
-            (title: string, index: number): React.ReactElement => (
-              <SelectItem key={index.toString()} title={title} />
-            )
-          )}
-        </Select>
+          <Select
+            value={orders[selectedIndex.row]}
+            selectedIndex={selectedIndex}
+            onSelect={(index: any) => setSelectedIndex(index)}
+            style={components.filter.filterSelect}
+          >
+            {orders.map(
+              (title: string, index: number): React.ReactElement => (
+                <SelectItem key={index.toString()} title={title} />
+              )
+            )}
+          </Select>
+        </ApplicationProvider>
       </View>
-      <FlatList
-        data={apps}
-        renderItem={({ item: app }) => <AppComponent {...app} />}
-      />
+      <View style={{ flex: 1 }}>
+        <FlatList
+          data={apps}
+          renderItem={({ item: app }) => <AppComponent {...app} />}
+        />
+      </View>
     </View>
   );
 };

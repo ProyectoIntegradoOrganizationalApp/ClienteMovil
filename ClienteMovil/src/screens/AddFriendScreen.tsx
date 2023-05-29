@@ -2,6 +2,9 @@
 import { FlatList, View } from "react-native";
 import FriendComponent from "../components/FriendComponent";
 
+// Estilos
+import styles from "../styles/styles";
+
 const friends = [
   {
     id: "1",
@@ -24,8 +27,10 @@ const friends = [
 ];
 
 const AddFriendScreen = () => {
+  const { screens } = styles();
+
   return (
-    <View>
+    <View style={[screens.addFriends.background, { flex: 1 }]}>
       <FlatList
         data={friends}
         renderItem={({ item: request }) => (

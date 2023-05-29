@@ -3,7 +3,13 @@ import * as React from "react";
 import { FlatList, Text, View } from "react-native";
 
 // Componentes
-import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
+import {
+  ApplicationProvider,
+  IndexPath,
+  Select,
+  SelectItem,
+} from "@ui-kitten/components";
+import { mapping } from "@eva-design/eva";
 import { IconButton, Searchbar } from "react-native-paper";
 import FriendComponent from "../components/FriendComponent";
 
@@ -41,11 +47,11 @@ const FriendsListScreen = ({ navigation }: { navigation: any }) => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const onChangeSearch = (query: any) => setSearchQuery(query);
 
-  const { components } = styles();
+  const { colors, components, screens } = styles();
 
   return (
     <>
-      <View style={{ marginTop: 15 }}>
+      <View style={[screens.friendsList.background, { flex: 1 }]}>
         <View
           style={{
             flexDirection: "row",
@@ -63,31 +69,44 @@ const FriendsListScreen = ({ navigation }: { navigation: any }) => {
         </View>
         <View style={components.filter.filterView}>
           <Text style={components.filter.filterText}>Order by:</Text>
-          <Select
-            value={orders[selectedIndex.row]}
-            selectedIndex={selectedIndex}
-            onSelect={(index: any) => setSelectedIndex(index)}
-            style={components.filter.filterSelect}
+          <ApplicationProvider
+            mapping={mapping}
+            theme={components.filter.filterSelectTheme}
           >
-            {orders.map(
-              (title: string, index: number): React.ReactElement => (
-                <SelectItem key={index.toString()} title={title} />
-              )
-            )}
-          </Select>
+            <Select
+              value={orders[selectedIndex.row]}
+              selectedIndex={selectedIndex}
+              onSelect={(index: any) => setSelectedIndex(index)}
+              style={components.filter.filterSelect}
+            >
+              {orders.map(
+                (title: string, index: number): React.ReactElement => (
+                  <SelectItem key={index.toString()} title={title} />
+                )
+              )}
+            </Select>
+          </ApplicationProvider>
         </View>
         <Searchbar
           placeholder="Search friends..."
           onChangeText={onChangeSearch}
           value={searchQuery}
+          iconColor={colors.text}
+          cursorColor={colors.text}
+          placeholderTextColor={colors.text}
           style={components.searchbar.searchbar}
+          theme={{
+            colors: { onSurfaceVariant: colors.text },
+          }}
         />
-        <FlatList
-          data={friends}
-          renderItem={({ item: chat }) => (
-            <FriendComponent type="chat" {...chat} />
-          )}
-        />
+        <View style={{ flex: 1 }}>
+          <FlatList
+            data={friends}
+            renderItem={({ item: chat }) => (
+              <FriendComponent type="chat" {...chat} />
+            )}
+          />
+        </View>
       </View>
     </>
   );

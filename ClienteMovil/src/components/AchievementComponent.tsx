@@ -55,10 +55,18 @@ function AchievementComponent(props: IAchievement) {
             )
           )
         }
-        right={() => <Text style={{ marginRight: 15 }}>{props.progress}%</Text>}
+        right={() => (
+          <Text style={{ marginRight: 15, color: colors.text }}>
+            {props.progress}%
+          </Text>
+        )}
       />
       <Card.Content style={{ marginTop: 10 }}>
-        <ProgressBar progress={props.progress / 100} color={colors.primary} />
+        <ProgressBar
+          progress={props.progress / 100}
+          color={colors.primary}
+          style={{ backgroundColor: colors.loader }}
+        />
       </Card.Content>
     </Card>
   );

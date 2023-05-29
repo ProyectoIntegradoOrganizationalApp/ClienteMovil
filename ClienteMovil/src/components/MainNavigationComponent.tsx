@@ -16,6 +16,8 @@ import styles from "../styles/styles";
 const Stack = createNativeStackNavigator();
 
 const ProfileStack = () => {
+  const { colors } = styles();
+
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -29,7 +31,13 @@ const ProfileStack = () => {
       <Stack.Screen
         name="Settings"
         component={SettingsScreen}
-        options={{ headerShadowVisible: false }}
+        options={{
+          headerShadowVisible: false,
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        }}
       />
     </Stack.Navigator>
   );
@@ -38,17 +46,26 @@ const ProfileStack = () => {
 const Tab = createBottomTabNavigator();
 
 const MainNavigationComponent = () => {
-  const { components } = styles();
+  const { colors, components } = styles();
 
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.text,
+        tabBarStyle: {
+          backgroundColor: colors.tabNavigator,
+          borderTopWidth: 0,
+        },
+      }}
+    >
       <Tab.Screen
         name="MainStack"
         component={MainStack}
         options={{
           headerShown: false,
           tabBarShowLabel: false,
-          tabBarIcon: ({ color, size }) => {
+          tabBarIcon: ({ size, color }) => {
             return <Icon name="home" size={size} color={color} />;
           },
         }}
@@ -60,7 +77,7 @@ const MainNavigationComponent = () => {
           title: "Friends",
           headerShown: false,
           tabBarShowLabel: false,
-          tabBarIcon: ({ color, size }) => {
+          tabBarIcon: ({ size, color }) => {
             return <Icon name="account-multiple" size={size} color={color} />;
           },
         }}
@@ -76,6 +93,10 @@ const MainNavigationComponent = () => {
           tabBarIcon: ({ color }) => {
             return <Icon name="bell" size={22} color={color} />;
           },
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
         }}
       />
       <Tab.Screen
@@ -83,7 +104,7 @@ const MainNavigationComponent = () => {
         component={ProfileStack}
         options={{
           tabBarShowLabel: false,
-          tabBarIcon: ({ color, size }) => {
+          tabBarIcon: ({ size, color }) => {
             return <Icon name="account" size={size} color={color} />;
           },
           headerShown: false,

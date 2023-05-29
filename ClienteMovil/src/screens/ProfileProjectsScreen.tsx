@@ -21,7 +21,7 @@ const projects = [
 ];
 
 const ProfileProjectsScreen = () => {
-  const { components } = styles();
+  const { components, screens } = styles();
 
   const handlePress = () => {
     PopupNotificationComponent(
@@ -32,8 +32,8 @@ const ProfileProjectsScreen = () => {
   };
 
   return (
-    <View style={{ height: "100%" }}>
-      <View>
+    <View style={[screens.projectsList.background, { flex: 1 }]}>
+      <View style={{ flex: 1 }}>
         <FlatList
           data={projects}
           renderItem={({ item: pro }) => <ProjectComponent {...pro} />}

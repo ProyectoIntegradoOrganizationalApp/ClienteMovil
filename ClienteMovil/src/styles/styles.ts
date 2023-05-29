@@ -10,6 +10,7 @@ import {
 // Componentes
 import colors from "tailwindcss/colors";
 import { StyleSheet } from "react-native";
+import { light as lightTheme } from "@eva-design/eva";
 
 const darkColors = {
   background: colors.slate[600],
@@ -18,15 +19,19 @@ const darkColors = {
   text: "#ffffff",
   card: colors.slate[700],
   taskIconBackground: colors.slate[600],
+  tabNavigator: colors.slate[700],
+  uikittenSecondary: colors.slate[700],
 };
 
 const lightColors = {
   background: colors.slate[50],
-  primary: colors.slate[800],
-  secondary: colors.slate[700],
-  text: "#000000",
+  primary: colors.slate[600],
+  secondary: colors.slate[500],
+  text: colors.slate[800],
   card: colors.slate[200],
   taskIconBackground: colors.slate[100],
+  tabNavigator: colors.slate[100],
+  uikittenSecondary: colors.slate[300],
 };
 
 const getColors = (theme: string) => {
@@ -39,7 +44,10 @@ const getColors = (theme: string) => {
     text: colorPalette.text,
     card: colorPalette.card,
     taskIconBackground: colorPalette.taskIconBackground,
+    tabNavigator: colorPalette.tabNavigator,
     loader: colors.slate[500],
+    uikittenPrimary: colors.slate[400],
+    uikittenSecondary: colorPalette.uikittenSecondary,
   };
 };
 
@@ -51,8 +59,10 @@ const styles = () => {
     colors: {
       background: colors.background,
       primary: colors.primary,
+      secondary: colors.secondary,
       text: colors.text,
       card: colors.card,
+      tabNavigator: colors.tabNavigator,
       loader: colors.loader,
     },
     components: {
@@ -74,9 +84,10 @@ const styles = () => {
           borderRadius: 5,
           marginTop: 15,
           marginHorizontal: 10,
+          backgroundColor: colors.card,
         },
-        boardCover: { borderRadius: 0, resizeMode: "cover" },
         boardChevronIcon: {
+          color: colors.text,
           backgroundColor: "transparent",
         },
       }),
@@ -119,6 +130,13 @@ const styles = () => {
       },
       calendar: {
         borderWidth: 0,
+        theme: {
+          ...lightTheme,
+          "text-basic-color": colors.text,
+          "text-disabled-color": colors.uikittenPrimary,
+          "text-hint-color": colors.uikittenPrimary,
+          "color-primary-500": colors.primary,
+        },
       },
       card: {
         borderRadius: 5,
@@ -159,9 +177,20 @@ const styles = () => {
         },
         filterText: {
           marginRight: 15,
+          color: colors.text,
         },
         filterSelect: {
           flex: 1,
+        },
+        filterSelectTheme: {
+          ...lightTheme,
+          "text-basic-color": colors.text,
+          "text-disabled-color": colors.uikittenPrimary,
+          "text-hint-color": colors.uikittenPrimary,
+          "border-basic-color-4": colors.primary,
+          "background-basic-color-1": colors.uikittenSecondary,
+          "background-basic-color-2": colors.uikittenSecondary,
+          "color-primary-500": colors.primary,
         },
       }),
       icons: {
@@ -223,11 +252,12 @@ const styles = () => {
           borderRadius: 5,
           marginTop: 15,
           marginHorizontal: 10,
+          backgroundColor: colors.card,
         },
         cardTitle: {
           marginTop: 10,
           borderBottomWidth: 2,
-          borderBottomColor: "#ffffff",
+          borderBottomColor: colors.loader,
         },
         cardIconActivity: {
           backgroundColor: "transparent",
@@ -238,6 +268,7 @@ const styles = () => {
           borderRadius: 0,
           marginTop: 15,
           marginHorizontal: 10,
+          backgroundColor: colors.uikittenSecondary,
         },
       }),
     },
@@ -290,6 +321,7 @@ const styles = () => {
       achievements: StyleSheet.create({
         container: {
           flex: 1,
+          backgroundColor: colors.background,
         },
         levelContainer: {
           alignItems: "center",
@@ -300,17 +332,76 @@ const styles = () => {
           paddingBottom: 15,
         },
       }),
+      activity: StyleSheet.create({
+        background: {
+          backgroundColor: colors.background,
+        },
+      }),
+      addFriends: StyleSheet.create({
+        background: {
+          backgroundColor: colors.background,
+        },
+      }),
+      app: StyleSheet.create({
+        toastRow: {
+          width: "90%",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-evenly",
+          borderRadius: 5,
+          backgroundColor: colors.card,
+          borderWidth: 0.2,
+        },
+        toastText: {
+          width: "70%",
+          padding: 2,
+          marginLeft: 20,
+        },
+        toastIcon: {
+          backgroundColor: "transparent",
+        },
+      }),
       boardsList: StyleSheet.create({
         background: {
           backgroundColor: colors.background,
         },
       }),
+      friendsList: StyleSheet.create({
+        background: {
+          paddingTop: 15,
+          backgroundColor: colors.background,
+        },
+      }),
+      notifications: StyleSheet.create({
+        background: {
+          backgroundColor: colors.background,
+        },
+      }),
       profile: StyleSheet.create({
+        background: {
+          backgroundColor: colors.background,
+        },
         cardContent: {
           marginTop: 10,
         },
         menuItem: {
           marginVertical: 5,
+        },
+      }),
+      profileProjects: StyleSheet.create({
+        background: {
+          backgroundColor: colors.background,
+        },
+      }),
+      projectsApps: StyleSheet.create({
+        background: {
+          backgroundColor: colors.background,
+        },
+      }),
+      projectsInstalledApps: StyleSheet.create({
+        background: {
+          paddingTop: 15,
+          backgroundColor: colors.background,
         },
       }),
       projectsList: StyleSheet.create({
@@ -319,6 +410,10 @@ const styles = () => {
         },
       }),
       projectsMembers: StyleSheet.create({
+        background: {
+          paddingTop: 15,
+          backgroundColor: colors.background,
+        },
         container: {
           flexDirection: "row",
           justifyContent: "flex-end",
@@ -327,18 +422,21 @@ const styles = () => {
       }),
       settings: StyleSheet.create({
         generalView: {
-          marginTop: 15,
-          marginHorizontal: 20,
+          paddingTop: 15,
+          paddingHorizontal: 20,
+          backgroundColor: colors.background,
         },
         title: {
           fontSize: 15,
           textAlign: "left",
           fontWeight: "600",
           marginBottom: 5,
+          color: colors.text,
         },
         text: {
           fontSize: 14,
           textAlign: "left",
+          color: colors.text,
         },
         viewRow: {
           marginTop: 25,
@@ -351,6 +449,7 @@ const styles = () => {
           marginBottom: 12,
           borderWidth: 2,
           borderColor: colors.primary,
+          color: colors.text,
         },
       }),
     },

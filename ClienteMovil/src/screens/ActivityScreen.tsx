@@ -4,7 +4,8 @@ import React from "react";
 // Componentes
 import { Avatar, Card } from "react-native-paper";
 import { ScrollView, Text } from "react-native";
-import { Calendar } from "@ui-kitten/components";
+import { ApplicationProvider, Calendar } from "@ui-kitten/components";
+import { mapping } from "@eva-design/eva";
 
 // Estilos
 import styles from "../styles/styles";
@@ -12,10 +13,10 @@ import styles from "../styles/styles";
 const ActivityScreen = () => {
   const [date, setDate] = React.useState(new Date());
 
-  const { colors, components } = styles();
+  const { colors, components, screens } = styles();
 
   return (
-    <ScrollView>
+    <ScrollView style={screens.activity.background}>
       <Card style={components.card}>
         <Card.Title
           title="Finished Tasks this Week"
@@ -48,11 +49,16 @@ const ActivityScreen = () => {
       </Card>
       <Card style={[components.card, { marginBottom: 15 }]}>
         <Card.Content>
-          <Calendar
-            date={date}
-            onSelect={(nextDate) => setDate(nextDate)}
-            style={components.calendar}
-          />
+          <ApplicationProvider
+            mapping={mapping}
+            theme={components.calendar.theme}
+          >
+            <Calendar
+              date={date}
+              onSelect={(nextDate) => setDate(nextDate)}
+              style={components.calendar}
+            />
+          </ApplicationProvider>
         </Card.Content>
       </Card>
     </ScrollView>

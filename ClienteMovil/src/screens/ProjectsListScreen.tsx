@@ -23,8 +23,8 @@ const ProjectsListScreen = () => {
   const { components, screens } = styles();
 
   return (
-    <View style={screens.projectsList.background}>
-      <View style={{ height: "100%" }}>
+    <View style={[screens.projectsList.background, { flex: 1 }]}>
+      <View style={{ flex: 1 }}>
         <FlatList
           data={projects}
           renderItem={({ item: pro }) => <ProjectComponent {...pro} />}

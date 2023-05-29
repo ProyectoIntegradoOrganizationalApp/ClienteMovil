@@ -5,7 +5,13 @@ import { useEffect, useState, ReactElement } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Avatar, Card } from "react-native-paper";
 import { Text, View } from "react-native";
-import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
+import {
+  ApplicationProvider,
+  IndexPath,
+  Select,
+  SelectItem,
+} from "@ui-kitten/components";
+import { mapping } from "@eva-design/eva";
 
 // Estilos
 import styles from "../styles/styles";
@@ -84,18 +90,23 @@ function MemberComponent(props: IMember) {
       <Card.Content style={{ marginTop: 10 }}>
         <View style={components.filter.filterView}>
           <Text style={{ color: colors.text, marginRight: 15 }}>Role:</Text>
-          <Select
-            value={roles[selectedIndex.row].name}
-            selectedIndex={selectedIndex}
-            onSelect={(index: any) => setSelectedIndex(index)}
-            style={{ flex: 1 }}
+          <ApplicationProvider
+            mapping={mapping}
+            theme={components.filter.filterSelectTheme}
           >
-            {roles.map(
-              (role): ReactElement => (
-                <SelectItem key={role.id} title={role.name} />
-              )
-            )}
-          </Select>
+            <Select
+              value={roles[selectedIndex.row].name}
+              selectedIndex={selectedIndex}
+              onSelect={(index: any) => setSelectedIndex(index)}
+              style={{ flex: 1 }}
+            >
+              {roles.map(
+                (role): ReactElement => (
+                  <SelectItem key={role.id} title={role.name} />
+                )
+              )}
+            </Select>
+          </ApplicationProvider>
         </View>
       </Card.Content>
     </Card>

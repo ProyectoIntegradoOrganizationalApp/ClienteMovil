@@ -5,7 +5,7 @@ import * as React from "react";
 import { Modal } from "@ui-kitten/components";
 import { Avatar, Card, Portal, Provider } from "react-native-paper";
 import ButtonComponent from "./ButtonComponent";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 // Estilos
 import styles from "../styles/styles";
@@ -20,7 +20,7 @@ const ModalConfirmComponent = (props: any): React.ReactElement => {
     onConfirm,
   } = props;
 
-  const { components } = styles();
+  const { colors, components } = styles();
 
   return (
     <View>
@@ -57,7 +57,9 @@ const ModalConfirmComponent = (props: any): React.ReactElement => {
               <Card.Content>
                 <View style={{ padding: 10 }}>
                   <View style={{ marginTop: 10 }} />
-                  {message}
+                  <Text style={{ fontSize: 16, color: colors.text }}>
+                    {message}
+                  </Text>
                   <View style={{ marginVertical: 10 }} />
                   <ButtonComponent
                     type="confirm"

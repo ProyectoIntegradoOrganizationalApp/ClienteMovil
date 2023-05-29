@@ -6,9 +6,13 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ProjectsListScreen from "./ProjectsListScreen";
 import ProjectsSettingsScreen from "./ProjectsSettingsScreen";
 
+// Estilos
+import styles from "../styles/styles";
+
 const Stack = createNativeStackNavigator();
 
 const ProjectsScreen = ({ navigation }: { navigation: any }) => {
+  const { colors } = styles();
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -18,16 +22,27 @@ const ProjectsScreen = ({ navigation }: { navigation: any }) => {
           headerRight: () => (
             <Icon
               name="cog"
+              color={colors.primary}
               size={23}
               onPress={() => navigation.navigate("ProjectsSettings")}
             />
           ),
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
         }}
         component={ProjectsListScreen}
       />
       <Stack.Screen
         name="ProjectsSettings"
-        options={{ title: "Settings" }}
+        options={{
+          title: "Settings",
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        }}
         component={ProjectsSettingsScreen}
       />
     </Stack.Navigator>

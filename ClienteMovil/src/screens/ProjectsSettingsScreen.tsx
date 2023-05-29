@@ -1,17 +1,27 @@
+// Componentes
 import { View, StyleSheet } from "react-native";
 import { Text } from "react-native-paper";
 
+// Estilos
+import styles from "../styles/styles";
+
 // TODO: Code file
 
-const ProjectsSettingsScreen = () => {
+const BoardsSingleScreen = () => {
+  const { colors } = styles();
+
   return (
-    <View style={styles.container}>
-      <Text variant="headlineMedium">Projects Settings Screen</Text>
+    <View
+      style={[scriptStyles.container, { backgroundColor: colors.background }]}
+    >
+      <Text variant="headlineMedium" style={{ color: colors.text }}>
+        Projects Settings Screen
+      </Text>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
+const scriptStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
@@ -19,4 +29,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProjectsSettingsScreen;
+export default BoardsSingleScreen;

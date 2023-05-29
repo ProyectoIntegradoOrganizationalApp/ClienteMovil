@@ -24,7 +24,7 @@ const ProfileDataScreen = ({ navigation }: { navigation: any }) => {
   const { colors, components, screens } = styles();
 
   return (
-    <View>
+    <View style={[screens.profile.background, { flex: 1 }]}>
       <Card style={components.card}>
         <Card.Title
           title={user?.name + " " + user?.lastname}
@@ -40,19 +40,30 @@ const ProfileDataScreen = ({ navigation }: { navigation: any }) => {
         />
         <Card.Content style={screens.profile.cardContent}>
           <Menu.Item
-            leadingIcon="trophy"
+            leadingIcon={({ size }) => {
+              return <Icon name="trophy" size={size} color={colors.text} />;
+            }}
+            titleStyle={{ color: colors.text }}
             onPress={() => navigation.navigate("Achievements")}
             title="Achievements"
             style={screens.profile.menuItem}
           />
           <Menu.Item
-            leadingIcon="chart-line"
+            leadingIcon={({ size }) => {
+              return <Icon name="chart-line" size={size} color={colors.text} />;
+            }}
+            titleStyle={{ color: colors.text }}
             onPress={() => navigation.navigate("Activity")}
             title="Activity"
             style={screens.profile.menuItem}
           />
           <Menu.Item
-            leadingIcon="view-dashboard"
+            leadingIcon={({ size }) => {
+              return (
+                <Icon name="view-dashboard" size={size} color={colors.text} />
+              );
+            }}
+            titleStyle={{ color: colors.text }}
             onPress={() => navigation.navigate("My Projects")}
             title="My Projects"
             style={screens.profile.menuItem}
@@ -66,6 +77,8 @@ const ProfileDataScreen = ({ navigation }: { navigation: any }) => {
 const Stack = createNativeStackNavigator();
 
 const ProfileScreen = ({ navigation }: { navigation: any }) => {
+  const { colors } = styles();
+
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -76,15 +89,47 @@ const ProfileScreen = ({ navigation }: { navigation: any }) => {
           headerRight: () => (
             <Icon
               name="cog"
+              color={colors.primary}
               size={23}
               onPress={() => navigation.navigate("Settings")}
             />
           ),
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
         }}
       />
-      <Stack.Screen name="Achievements" component={AchievementsScreen} />
-      <Stack.Screen name="Activity" component={ActivityScreen} />
-      <Stack.Screen name="My Projects" component={ProfileProjectsScreen} />
+      <Stack.Screen
+        name="Achievements"
+        component={AchievementsScreen}
+        options={{
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Activity"
+        component={ActivityScreen}
+        options={{
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="My Projects"
+        component={ProfileProjectsScreen}
+        options={{
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        }}
+      />
     </Stack.Navigator>
   );
 };

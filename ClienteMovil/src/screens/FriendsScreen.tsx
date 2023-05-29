@@ -7,9 +7,14 @@ import FriendsListScreen from "../screens/FriendsListScreen";
 import AddFriendScreen from "../screens/AddFriendScreen";
 import FriendsSettingsScreen from "../screens/FriendsSettingsScreen";
 
+// Estilos
+import styles from "../styles/styles";
+
 const Stack = createNativeStackNavigator();
 
 const FriendsScreen = ({ navigation }: { navigation: any }) => {
+  const { colors } = styles();
+
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -20,17 +25,37 @@ const FriendsScreen = ({ navigation }: { navigation: any }) => {
           headerRight: () => (
             <Icon
               name="cog"
+              color={colors.primary}
               size={23}
               onPress={() => navigation.navigate("FriendsSettings")}
             />
           ),
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
         }}
       />
-      <Stack.Screen name="Add Friend" component={AddFriendScreen} />
+      <Stack.Screen
+        name="Add Friend"
+        component={AddFriendScreen}
+        options={{
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        }}
+      />
       <Stack.Screen
         name="FriendsSettings"
         component={FriendsSettingsScreen}
-        options={{ title: "Friends Settings" }}
+        options={{
+          title: "Friends Settings",
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        }}
       />
     </Stack.Navigator>
   );

@@ -1,12 +1,20 @@
+// Componentes
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+// Pantallas
 import ProjectsScreen from "../screens/ProjectsScreen";
 import ProjectsSingleScreen from "../screens/ProjectsSingleScreen";
 import BoardsSingleScreen from "../screens/BoardsSingleScreen";
 import ProjectsAppsScreen from "../screens/ProjectsAppsScreen";
 
+// Estilos
+import styles from "../styles/styles";
+
 const Stack = createNativeStackNavigator();
 
 const MainStack = () => {
+  const { colors } = styles();
+
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -20,6 +28,10 @@ const MainStack = () => {
         options={({ route }: { route: any }) => ({
           title: route.params.projectTitle,
           headerShadowVisible: false,
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
         })}
       />
       <Stack.Screen
@@ -28,6 +40,10 @@ const MainStack = () => {
         options={({ route }: { route: any }) => ({
           title: route.params.boardTitle,
           headerShadowVisible: false,
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
         })}
       />
       <Stack.Screen
@@ -36,6 +52,10 @@ const MainStack = () => {
         options={() => ({
           title: "Apps for install",
           headerShadowVisible: false,
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
         })}
       />
     </Stack.Navigator>

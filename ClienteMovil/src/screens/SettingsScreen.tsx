@@ -13,7 +13,13 @@ import { useAuth } from "../hooks/useAuth";
 // Componentes
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { Switch } from "react-native-paper";
-import { IndexPath, Select, SelectItem } from "@ui-kitten/components";
+import {
+  ApplicationProvider,
+  IndexPath,
+  Select,
+  SelectItem,
+} from "@ui-kitten/components";
+import { mapping } from "@eva-design/eva";
 import ButtonComponent from "../components/ButtonComponent";
 import { ScrollView, Text, TextInput, View } from "react-native";
 import ModalConfirmComponent from "../components/ModalConfirmComponent";
@@ -24,8 +30,16 @@ import styles from "../styles/styles";
 const Tab = createMaterialTopTabNavigator();
 
 const SettingsScreen = () => {
+  const { colors } = styles();
+
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarStyle: { backgroundColor: colors.tabNavigator },
+        tabBarLabelStyle: { color: colors.text },
+        tabBarIndicatorStyle: { backgroundColor: colors.primary },
+      }}
+    >
       <Tab.Screen
         name="GeneralSettings"
         options={{ title: "General" }}
@@ -55,7 +69,7 @@ const GeneralSettingsScreen = () => {
 
   const { logout } = useAuth();
 
-  const { screens } = styles();
+  const { colors, screens } = styles();
 
   return (
     <ScrollView style={screens.settings.generalView}>
@@ -67,7 +81,11 @@ const GeneralSettingsScreen = () => {
           </Text>
         </View>
         <View style={{ flex: 1 }}>
-          <Switch value={theme === "dark"} onValueChange={toggleTheme} />
+          <Switch
+            value={theme === "dark"}
+            onValueChange={toggleTheme}
+            color={colors.primary}
+          />
         </View>
       </View>
       <View style={screens.settings.viewRow}>
@@ -81,11 +99,7 @@ const GeneralSettingsScreen = () => {
         />
       </View>
       <ModalConfirmComponent
-        message={
-          <Text style={{ fontSize: 16 }}>
-            Are you sure you want to log out of Teamer?
-          </Text>
-        }
+        message="Are you sure you want to log out of Teamer?"
         confirmText="Confirm"
         dimissText="Cancel"
         isVisible={modalConfirmVisible}
@@ -107,7 +121,7 @@ const SecuritySettingsScreen = () => {
     new IndexPath(0)
   );
 
-  const { colors, screens } = styles();
+  const { colors, components, screens } = styles();
 
   return (
     <ScrollView style={screens.settings.generalView}>
@@ -119,7 +133,11 @@ const SecuritySettingsScreen = () => {
           </Text>
         </View>
         <View style={{ flex: 1 }}>
-          <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
+          <Switch
+            value={isSwitchOn}
+            onValueChange={onToggleSwitch}
+            color={colors.primary}
+          />
         </View>
       </View>
       <View style={screens.settings.viewRow}>
@@ -130,17 +148,22 @@ const SecuritySettingsScreen = () => {
           </Text>
         </View>
         <View style={{ flex: 2 }}>
-          <Select
-            value={visibilityOptions[selectedIndex.row]}
-            selectedIndex={selectedIndex}
-            onSelect={(index: any) => setSelectedIndex(index)}
+          <ApplicationProvider
+            mapping={mapping}
+            theme={components.filter.filterSelectTheme}
           >
-            {visibilityOptions.map(
-              (title: string, index: number): React.ReactElement => (
-                <SelectItem key={index.toString() + 1} title={title} />
-              )
-            )}
-          </Select>
+            <Select
+              value={visibilityOptions[selectedIndex.row]}
+              selectedIndex={selectedIndex}
+              onSelect={(index: any) => setSelectedIndex(index)}
+            >
+              {visibilityOptions.map(
+                (title: string, index: number): React.ReactElement => (
+                  <SelectItem key={index.toString() + 1} title={title} />
+                )
+              )}
+            </Select>
+          </ApplicationProvider>
         </View>
       </View>
       <View style={{ marginTop: 25 }}>

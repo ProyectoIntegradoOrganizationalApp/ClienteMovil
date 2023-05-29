@@ -1,7 +1,9 @@
 // Componentes
 import { FlatList, View } from "react-native";
-import { Divider } from "react-native-paper";
 import NotificationComponent from "../components/NotificationComponent";
+
+// Estilos
+import styles from "../styles/styles";
 
 const notifications = [
   {
@@ -25,11 +27,12 @@ const notifications = [
 ];
 
 const NotificationScreen = () => {
+  const { screens } = styles();
+
   return (
-    <View>
+    <View style={[screens.notifications.background, { flex: 1 }]}>
       <FlatList
         data={notifications}
-        ItemSeparatorComponent={() => <Divider></Divider>}
         renderItem={({ item: org }) => <NotificationComponent {...org} />}
       />
     </View>

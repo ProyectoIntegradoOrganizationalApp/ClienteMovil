@@ -19,10 +19,10 @@ const apps = [
 ];
 
 const ProjectsInstalledAppsScreen = ({ navigation }: { navigation: any }) => {
-  const { components } = styles();
+  const { colors, components, screens } = styles();
 
   return (
-    <View style={{ marginTop: 15 }}>
+    <View style={[screens.projectsInstalledApps.background, { flex: 1 }]}>
       <View
         style={{
           flexDirection: "row",
@@ -40,14 +40,16 @@ const ProjectsInstalledAppsScreen = ({ navigation }: { navigation: any }) => {
         <IconButton
           icon="cog"
           size={25}
-          iconColor="grey"
+          iconColor={colors.primary}
           style={components.icons.settingsIcon}
         />
       </View>
-      <FlatList
-        data={apps}
-        renderItem={({ item: app }) => <AppComponent {...app} />}
-      />
+      <View style={{ flex: 1, marginBottom: 15 }}>
+        <FlatList
+          data={apps}
+          renderItem={({ item: app }) => <AppComponent {...app} />}
+        />
+      </View>
     </View>
   );
 };

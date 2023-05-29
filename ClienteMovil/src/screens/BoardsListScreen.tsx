@@ -25,9 +25,9 @@ const boards = [
 ];
 
 const BoardsListScreen = () => {
-  const { components, screens } = styles();
+  const { colors, components, screens } = styles();
   return (
-    <View style={screens.boardsList.background}>
+    <View style={[screens.boardsList.background, { flex: 1 }]}>
       <View
         style={{
           flexDirection: "row",
@@ -38,11 +38,11 @@ const BoardsListScreen = () => {
         <IconButton
           icon="cog"
           size={25}
-          iconColor="grey"
+          iconColor={colors.primary}
           style={components.icons.settingsIcon}
         />
       </View>
-      <View style={{ height: "90%" }}>
+      <View style={{ flex: 1, marginBottom: 15 }}>
         <FlatList
           data={boards}
           renderItem={({ item: board }) => <BoardComponent {...board} />}

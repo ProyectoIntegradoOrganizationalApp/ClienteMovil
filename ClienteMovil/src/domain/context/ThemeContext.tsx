@@ -1,4 +1,5 @@
-import React, { createContext, useState, ReactNode } from "react";
+import React, { createContext, useState, useEffect, ReactNode } from "react";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 interface ThemeContextProps {
   theme: string;
@@ -6,7 +7,7 @@ interface ThemeContextProps {
 }
 
 const ThemeContext = createContext<ThemeContextProps>({
-  theme: "dark",
+  theme: "light",
   setTheme: () => {},
 });
 
@@ -17,7 +18,22 @@ interface ThemeContextProviderProps {
 const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({
   children,
 }) => {
-  const [theme, setTheme] = useState<string>("dark");
+  const { getItem } = useLocalStorage();
+  const [theme, setTheme] = useState<string>("");
+
+  useEffect(() => {
+    const getStoredTheme = async () => {
+      try {
+        const storedTheme = await getItem("theme");
+        if (storedTheme) {
+          setTheme(storedTheme.slice(1, -1));
+        }
+      } catch (error) {
+        setTheme("light");
+      }
+    };
+    getStoredTheme();
+  }, []);
 
   const contextValue: ThemeContextProps = {
     theme,

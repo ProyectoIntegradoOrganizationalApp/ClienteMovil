@@ -27,8 +27,6 @@ export const useUserApi = () => {
   const [error, setError] = useState<ApiError>();
   const [loading, setLoading] = useState<boolean>(false);
 
-  const API = API_URL;
-
   const fetchUser = (props: FormProps) => {
     setLoading(true);
 
@@ -38,7 +36,7 @@ export const useUserApi = () => {
     });
 
     axios
-      .post<UserDTO | ApiError>(`${API}/login`, body, {
+      .post<UserDTO | ApiError>(`${API_URL}/login`, body, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -82,7 +80,7 @@ export const useUserApi = () => {
     });
 
     axios
-      .post<Register | ApiError>(`${API}/register`, body, {
+      .post<Register | ApiError>(`${API_URL}/register`, body, {
         headers: {
           "Content-Type": "application/json",
         },

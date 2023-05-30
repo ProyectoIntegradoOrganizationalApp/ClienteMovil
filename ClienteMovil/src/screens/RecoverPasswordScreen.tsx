@@ -2,9 +2,10 @@
 import { useState } from "react";
 
 // Componentes
-import { ScrollView, Text, View } from "react-native";
+import { Keyboard, ScrollView, Text, View } from "react-native";
 import LoginInputComponent from "../components/LoginInputComponent";
 import ButtonComponent from "../components/ButtonComponent";
+import PopupNotificationComponent from "../components/PopupNotificationComponent";
 
 // Estilos
 import styles from "../styles/styles";
@@ -21,8 +22,13 @@ const RecoverPasswordScreen = ({ navigation }: { navigation: any }) => {
 
   const sendForm = (event: SubmitEvent | any) => {
     event.preventDefault();
-    if (inputError.length === 0) {
-      navigation.navigate("NewPassword"); // TODO
+    Keyboard.dismiss();
+    if (email.length <= 0) {
+      PopupNotificationComponent("error", "Error", "Please fill in the field");
+    } else {
+      if (inputError.length === 0) {
+        navigation.navigate("NewPassword", { email: email });
+      }
     }
   };
 
@@ -49,7 +55,9 @@ const RecoverPasswordScreen = ({ navigation }: { navigation: any }) => {
             name="email"
             label="Enter your email"
             value={email}
-            onChangeText={(text: string) => setEmail(text)}
+            onChangeText={(text: string) => {
+              setEmail(text);
+            }}
             onError={handleInputError}
           />
         </View>

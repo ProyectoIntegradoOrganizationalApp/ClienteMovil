@@ -9,6 +9,7 @@ import {
 
 // Hooks
 import { useAuth } from "../hooks/useAuth";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 // Componentes
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
@@ -56,10 +57,12 @@ const SettingsScreen = () => {
 
 const GeneralSettingsScreen = () => {
   const { theme, setTheme } = useContext<ThemeContextProps>(ThemeContext);
+  const { setItem } = useLocalStorage();
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
+    setItem("theme", JSON.stringify(newTheme));
   };
 
   const [modalConfirmVisible, setModalConfirmVisible] = React.useState(false);

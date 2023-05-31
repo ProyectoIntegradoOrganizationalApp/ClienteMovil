@@ -1,8 +1,5 @@
-// React
-import { useContext } from "react";
-
-// Contexto
-import { AuthContext } from "../context/AuthContext";
+// Hooks
+import useProfile from "../hooks/useProfile";
 
 // Pantallas
 import AchievementsScreen from "../screens/AchievementsScreen";
@@ -19,24 +16,24 @@ import { View } from "react-native";
 import styles from "../styles/styles";
 
 const ProfileDataScreen = ({ navigation }: { navigation: any }) => {
-  const { user } = useContext(AuthContext);
+  const { profile } = useProfile();
 
   const { colors, components, screens } = styles();
+
+  const profilePhoto =
+    profile?.user !== undefined
+      ? profile?.user.photo
+      : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
 
   return (
     <View style={[screens.profile.background, { flex: 1 }]}>
       <Card style={components.card}>
         <Card.Title
-          title={user?.name + " " + user?.lastname}
+          title={profile?.user?.name}
           titleStyle={{ color: colors.text }}
-          subtitle={user?.email}
+          subtitle={profile?.user?.email}
           subtitleStyle={{ color: colors.text }}
-          left={() => (
-            <Avatar.Image
-              size={50}
-              source={{ uri: "https://picsum.photos/777" }} // TODO: Photo
-            />
-          )}
+          left={() => <Avatar.Image size={50} source={{ uri: profilePhoto }} />}
         />
         <Card.Content style={screens.profile.cardContent}>
           <Menu.Item

@@ -1,10 +1,8 @@
 // React
-import React, { useContext } from "react";
-
-// Contexto
-import { AuthContext } from "../context/AuthContext";
+import React from "react";
 
 // Hooks
+import useProfile from "../hooks/useProfile";
 import useAchievements from "../hooks/useAchievements";
 
 // Componentes
@@ -25,7 +23,7 @@ import styles from "../styles/styles";
 const filters = ["All", "App", "Friend", "Project"];
 
 const AchievementsScreen = ({ navigation }: { navigation: any }) => {
-  const { user } = useContext(AuthContext);
+  const { profile } = useProfile();
 
   const { achievements } = useAchievements();
 
@@ -39,7 +37,7 @@ const AchievementsScreen = ({ navigation }: { navigation: any }) => {
     <View style={screens.achievements.container}>
       <View style={screens.achievements.levelContainer}>
         <LevelProgressComponent
-          level={user?.level}
+          level={profile?.user?.level}
           progress={25}
           radius={75}
           strokeWidth={15}

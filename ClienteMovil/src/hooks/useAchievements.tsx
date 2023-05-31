@@ -1,5 +1,10 @@
+// React
 import { useEffect, useContext, useState } from "react";
+
+// Contexto
 import { AuthContext } from "../context/AuthContext";
+
+// Componentes
 import axios from "axios";
 import { API_URL } from "@env";
 

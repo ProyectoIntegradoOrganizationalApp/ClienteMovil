@@ -2,10 +2,7 @@
 import React, { useContext } from "react";
 
 // Contexto
-import {
-  ThemeContext,
-  ThemeContextProps,
-} from "../domain/context/ThemeContext";
+import { ThemeContext, ThemeContextProps } from "../context/ThemeContext";
 
 // Hooks
 import { useAuth } from "../hooks/useAuth";

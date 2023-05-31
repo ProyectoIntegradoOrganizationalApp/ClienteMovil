@@ -2,10 +2,7 @@
 import { useContext } from "react";
 
 // Contexto
-import {
-  ThemeContext,
-  ThemeContextProps,
-} from "../domain/context/ThemeContext";
+import { ThemeContext, ThemeContextProps } from "../context/ThemeContext";
 
 // Componentes
 import colors from "tailwindcss/colors";

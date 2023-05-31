@@ -1,7 +1,8 @@
-import { Mapper } from "./Mapper";
-import { User } from "../../domain/user/User.interface";
-import { UserDTO } from "../../domain/user/UserDTO";
-import { NotificationMapper } from "./NotificationMapper";
+import { Mapper } from "../Mapper";
+import { User } from "../../../domain/user/User.interface";
+import { UserDTO } from "../../../domain/user/UserDTO.interface";
+import { NotificationsMapper } from "../NotificationsMapper";
+import { FriendMapper } from "../FriendMapper";
 
 export class UserMapper extends Mapper<User, UserDTO> {
   mapFrom(data: User): UserDTO {
@@ -15,9 +16,8 @@ export class UserMapper extends Mapper<User, UserDTO> {
       updated_at: data.updated_at,
       level: data.level,
       _token: data._token,
-      notifications: NotificationMapper.prototype.mapArrayFrom(
-        data.notifications
-      ),
+      notifications: NotificationsMapper.prototype.mapFrom(data.notifications),
+      friends: FriendMapper.prototype.mapArrayFrom(data.friends),
     };
   }
 
@@ -32,9 +32,8 @@ export class UserMapper extends Mapper<User, UserDTO> {
       updated_at: data.updated_at,
       level: data.level,
       _token: data._token,
-      notifications: NotificationMapper.prototype.mapArrayTo(
-        data.notifications
-      ),
+      notifications: NotificationsMapper.prototype.mapTo(data.notifications),
+      friends: FriendMapper.prototype.mapArrayTo(data.friends),
     };
   }
 }

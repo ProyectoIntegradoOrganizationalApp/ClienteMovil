@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "../domain/context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import { useLocalStorage } from "./useLocalStorage";
 
 import { User } from "../domain/user/User.interface";

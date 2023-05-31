@@ -3,13 +3,13 @@ import * as yup from "yup";
 export const loginValidationSchema = yup.object().shape({
   name: yup
     .string()
-    .min(5, "Too short!")
-    .max(1000, "To long!")
+    .min(3, "Too short!")
+    .max(50, "To long!")
     .required("Name is required"),
   last_name: yup
     .string()
-    .min(5, "Too short!")
-    .max(1000, "To long!")
+    .min(3, "Too short!")
+    .max(50, "To long!")
     .required("Last name is required"),
   prefix: yup
     .string()
@@ -27,8 +27,8 @@ export const loginValidationSchema = yup.object().shape({
     .required("Email is required"),
   password: yup
     .string()
-    .min(3, "Too short!")
-    .max(1000, "To long!")
+    .min(8, "Too short!")
+    .max(24, "To long!")
     .required("Password is required"),
   confirmpass: yup.string().required("Please retype your password."),
 });

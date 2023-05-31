@@ -2,11 +2,8 @@
 import { useContext, useEffect, useState } from "react";
 
 // Contexto
-import { AuthContext } from "../domain/context/AuthContext";
-import {
-  ThemeContext,
-  ThemeContextProps,
-} from "../domain/context/ThemeContext";
+import { AuthContext } from "../context/AuthContext";
+import { ThemeContext, ThemeContextProps } from "../context/ThemeContext";
 
 // Hooks
 import { useUserApi } from "../adapters/api/useUserApi";
@@ -14,7 +11,7 @@ import { useAuth } from "../hooks/useAuth";
 
 // Componentes
 import { User } from "../domain/user/User.interface";
-import { UserMapper } from "../adapters/mappers/UserMapper";
+import { UserMapper } from "../adapters/mappers/User/UserMapper";
 import LoadingComponent from "../components/LoadingComponent";
 import { Image, ScrollView, Text, View } from "react-native";
 import LoginInputComponent from "../components/LoginInputComponent";
@@ -48,6 +45,7 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
 
   useEffect(() => {
     if (error && error.message != "") {
+      console.error(error.message);
       PopupNotificationComponent("error", "Error", error.message);
     }
   }, [error?.message]);

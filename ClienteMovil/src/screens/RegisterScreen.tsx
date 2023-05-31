@@ -2,11 +2,8 @@
 import { useContext, useEffect, useState } from "react";
 
 // Contexto
-import { AuthContext } from "../domain/context/AuthContext";
-import {
-  ThemeContext,
-  ThemeContextProps,
-} from "../domain/context/ThemeContext";
+import { AuthContext } from "../context/AuthContext";
+import { ThemeContext, ThemeContextProps } from "../context/ThemeContext";
 
 // Hooks
 import { useUserApi } from "../adapters/api/useUserApi";
@@ -14,7 +11,7 @@ import { useAuth } from "../hooks/useAuth";
 
 // Componentes
 import { User } from "../domain/user/User.interface";
-import { UserMapper } from "../adapters/mappers/UserMapper";
+import { UserMapper } from "../adapters/mappers/User/UserMapper";
 import LoadingComponent from "../components/LoadingComponent";
 import { Image, ScrollView, Text, View } from "react-native";
 import LoginInputComponent from "../components/LoginInputComponent";
@@ -72,6 +69,9 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
           phone_number,
           email,
           password,
+          confirmpass,
+          photo:
+            "https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?w=740&t=st=1684609159~exp=1684609759~hmac=700c15129fea8d9ad79baf8e80b38669e4316820469a65febbedcac473740017cd .",
         });
       } else {
         PopupNotificationComponent(

@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 
 import { ApiError } from "../domain/ApiError.interface";
-import { UserDTO } from "../domain/user/UserDTO";
+import { UserDTO } from "../domain/user/UserDTO.interface";
 
 import { API_URL } from "@env";
 

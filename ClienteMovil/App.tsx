@@ -2,8 +2,8 @@
 import { useState } from "react";
 
 // Contexto
-import { ThemeContextProvider } from "./src/domain/context/ThemeContext";
-import { AuthContext } from "./src/domain/context/AuthContext";
+import { ThemeContextProvider } from "./src/context/ThemeContext";
+import { AuthContext } from "./src/context/AuthContext";
 
 // Componentes
 import { User } from "./src/domain/user/User.interface";

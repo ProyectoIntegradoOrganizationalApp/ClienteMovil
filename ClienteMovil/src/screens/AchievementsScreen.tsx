@@ -2,7 +2,7 @@
 import { useContext } from "react";
 
 // Contexto
-import { AuthContext } from "../domain/context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 // Hooks
 import useAchievements from "../hooks/useAchievements";

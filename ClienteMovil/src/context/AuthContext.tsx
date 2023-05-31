@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-import { User } from "../user/User.interface";
+import { User } from "../domain/user/User.interface";
 
 interface AuthContext {
   user: User | null;

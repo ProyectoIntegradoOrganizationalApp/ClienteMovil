@@ -8,6 +8,7 @@ interface AchievementI {
   title: string;
   description: string;
   icon: string;
+  category: string;
   progress: number;
   completed: boolean;
 }

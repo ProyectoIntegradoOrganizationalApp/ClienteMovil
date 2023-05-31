@@ -1,6 +1,7 @@
 // Componentes
 import { Avatar, Card, ProgressBar } from "react-native-paper";
 import { Text } from "react-native";
+//import { achievementsIcons } from "../utils/achievementsIcons"; // TODO: Use this
 
 // Estilos
 import styles from "../styles/styles";
@@ -10,7 +11,9 @@ interface IAchievement {
   title: string;
   description: string;
   icon: string;
+  category: string;
   progress: number;
+  filterBy: string;
 }
 
 const achievementsIcons = [
@@ -35,41 +38,47 @@ const achievementsIcons = [
 function AchievementComponent(props: IAchievement) {
   const { colors, components } = styles();
 
-  return (
-    <Card style={components.card}>
-      <Card.Title
-        title={props.title}
-        titleStyle={{ color: colors.text }}
-        subtitle={props.description}
-        subtitleStyle={{ color: colors.text }}
-        left={() =>
-          achievementsIcons.map((achievementIcon) =>
-            achievementIcon.id === props.id ? (
-              <Avatar.Image
-                key={achievementIcon.id}
-                size={50}
-                source={achievementIcon.icon}
-              />
-            ) : (
-              ""
+  if (
+    props.category === props.filterBy.toLowerCase() ||
+    props.filterBy === "All"
+  ) {
+    return (
+      <Card style={components.card}>
+        <Card.Title
+          title={props.title}
+          titleStyle={{ color: colors.text }}
+          subtitle={props.description}
+          subtitleStyle={{ color: colors.text }}
+          left={() =>
+            achievementsIcons.map((achievementIcon) =>
+              achievementIcon.id === props.id ? (
+                <Avatar.Image
+                  key={achievementIcon.id}
+                  size={50}
+                  source={achievementIcon.icon}
+                />
+              ) : (
+                ""
+              )
             )
-          )
-        }
-        right={() => (
-          <Text style={{ marginRight: 15, color: colors.text }}>
-            {props.progress}%
-          </Text>
-        )}
-      />
-      <Card.Content style={{ marginTop: 10 }}>
-        <ProgressBar
-          progress={props.progress / 100}
-          color={colors.primary}
-          style={{ backgroundColor: colors.loader }}
+          }
+          right={() => (
+            <Text style={{ marginRight: 15, color: colors.text }}>
+              {props.progress}%
+            </Text>
+          )}
         />
-      </Card.Content>
-    </Card>
-  );
+        <Card.Content style={{ marginTop: 10 }}>
+          <ProgressBar
+            progress={props.progress / 100}
+            color={colors.primary}
+            style={{ backgroundColor: colors.loader }}
+          />
+        </Card.Content>
+      </Card>
+    );
+  }
+  return null;
 }
 
 export default AchievementComponent;

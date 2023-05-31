@@ -34,7 +34,7 @@ const ProfileDataScreen = ({ navigation }: { navigation: any }) => {
           left={() => (
             <Avatar.Image
               size={50}
-              source={{ uri: "https://picsum.photos/777" }}
+              source={{ uri: "https://picsum.photos/777" }} // TODO: Photo
             />
           )}
         />

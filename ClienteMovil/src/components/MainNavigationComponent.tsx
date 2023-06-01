@@ -88,6 +88,7 @@ const MainNavigationComponent = () => {
         options={{
           title: "Notifications",
           tabBarShowLabel: false,
+          headerShadowVisible: false,
           //tabBarBadge: "",
           tabBarBadgeStyle: components.badge,
           tabBarIcon: ({ color }) => {

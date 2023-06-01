@@ -4,6 +4,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 // Pantallas
 import ProjectsListScreen from "./ProjectsListScreen";
+import CreateProjectScreen from "./CreateProjectScreen";
 import ProjectsSettingsScreen from "./ProjectsSettingsScreen";
 
 // Estilos
@@ -33,6 +34,16 @@ const ProjectsScreen = ({ navigation }: { navigation: any }) => {
           },
         }}
         component={ProjectsListScreen}
+      />
+      <Stack.Screen
+        name="Create Project"
+        options={{
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        }}
+        component={CreateProjectScreen}
       />
       <Stack.Screen
         name="ProjectsSettings"

@@ -11,7 +11,7 @@ import PopupNotificationComponent from "../components/PopupNotificationComponent
 // Estilos
 import styles from "../styles/styles";
 
-const ProfileProjectsScreen = () => {
+const ProfileProjectsScreen = ({ navigation }: { navigation: any }) => {
   const { data: projects, loading } = useProjectsApi(true);
 
   const { components, screens } = styles();
@@ -40,7 +40,9 @@ const ProfileProjectsScreen = () => {
         icon="plus"
         color="#ffffff"
         style={[components.fab, { position: "absolute" }]}
-        onPress={handlePress}
+        onPress={() => {
+          navigation.navigate("Create Project");
+        }}
       />
     </View>
   );

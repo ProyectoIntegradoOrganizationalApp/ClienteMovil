@@ -1,5 +1,8 @@
 // React
-import React from "react";
+import { useEffect, useState } from "react";
+
+// Hooks
+import useProfile from "../hooks/useProfile";
 
 // Componentes
 import { Avatar, Card } from "react-native-paper";
@@ -7,11 +10,29 @@ import { ScrollView, Text } from "react-native";
 import { ApplicationProvider, Calendar } from "@ui-kitten/components";
 import { mapping } from "@eva-design/eva";
 
+// Hooks
+import { useUtils } from "../hooks/useUtils";
+
 // Estilos
 import styles from "../styles/styles";
 
 const ActivityScreen = () => {
-  const [date, setDate] = React.useState(new Date());
+  const [daily, setDaily] = useState<number>(0);
+  const [weekly, setWeekly] = useState<number>(0);
+
+  const data = useProfile();
+
+  useEffect(() => {
+    if (data?.profile?.activity) {
+      const getUserWork = useUtils(data.profile?.activity);
+      const { commitsDaily, commitsWeekly } = getUserWork.getUserWork();
+
+      setDaily(commitsDaily);
+      setWeekly(commitsWeekly);
+    }
+  }, [data?.profile?.user.id]);
+
+  const [date, setDate] = useState(new Date());
 
   const { colors, components, screens } = styles();
 
@@ -29,7 +50,7 @@ const ActivityScreen = () => {
             />
           )}
           right={() => (
-            <Text style={components.activityIndicator.text}>15</Text>
+            <Text style={components.activityIndicator.text}>{weekly}</Text>
           )}
         />
       </Card>
@@ -44,7 +65,9 @@ const ActivityScreen = () => {
               style={components.icons.taskIcon}
             />
           )}
-          right={() => <Text style={components.activityIndicator.text}>2</Text>}
+          right={() => (
+            <Text style={components.activityIndicator.text}>{daily}</Text>
+          )}
         />
       </Card>
       <Card style={[components.card, { marginBottom: 15 }]}>

@@ -3,14 +3,14 @@ import { useNavigation } from "@react-navigation/native";
 import { Avatar, Card } from "react-native-paper";
 import { View } from "react-native";
 
+// Interfaces
+import { Friend } from "../domain/friend/Friend.interface";
+
 // Estilos
 import styles from "../styles/styles";
 
-interface IFriend {
+interface IFriend extends Friend {
   type: string;
-  profile: string;
-  user: string;
-  status: string;
 }
 
 function FriendComponent(props: IFriend) {
@@ -53,11 +53,10 @@ function FriendComponent(props: IFriend) {
   return (
     <Card style={components.card}>
       <Card.Title
-        title={props.user}
+        title={props.name}
         titleStyle={{ color: colors.text }}
-        subtitle={props.status}
         subtitleStyle={{ color: colors.text }}
-        left={() => <Avatar.Image size={40} source={{ uri: props.profile }} />}
+        left={() => <Avatar.Image size={40} source={{ uri: props.photo }} />}
         right={() => componentOptions}
       />
     </Card>

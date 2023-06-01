@@ -7,7 +7,7 @@ import { View } from "react-native";
 import styles from "../styles/styles";
 
 interface IProject {
-  title: string;
+  name: string;
   description?: string;
 }
 
@@ -20,13 +20,13 @@ function ProjectComponent(props: IProject) {
     <Card
       onPress={() =>
         navigation.navigate("ProjectsSingle", {
-          projectTitle: props.title,
+          projectTitle: props.name,
         })
       }
       style={components.card}
     >
       <Card.Title
-        title={props.title}
+        title={props.name}
         titleStyle={{ color: colors.text }}
         subtitle={props.description}
         subtitleStyle={{ color: colors.text }}

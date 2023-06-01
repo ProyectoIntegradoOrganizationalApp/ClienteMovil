@@ -10,13 +10,13 @@ import styles from "../styles/styles";
 const projects = [
   {
     id: "1",
-    title: "IntegratedProject",
+    name: "IntegratedProject",
     description:
       "Proyecto para crear una página para administrar tareas y projectos",
   },
   {
     id: "2",
-    title: "proyectoDEePrueba",
+    name: "proyectoDEePrueba",
   },
 ];
 

@@ -2,6 +2,9 @@
 import * as React from "react";
 import { FlatList, Text, View } from "react-native";
 
+// Hooks
+import { useUser } from "../hooks/useUser";
+import { useFriendApi } from "../adapters/api/useFriendApi"; // TODO: Do it
 // Componentes
 import {
   ApplicationProvider,
@@ -16,27 +19,6 @@ import FriendComponent from "../components/FriendComponent";
 // Estilos
 import styles from "../styles/styles";
 
-const friends = [
-  {
-    id: "1",
-    profile: "https://picsum.photos/163",
-    user: "Pepe Pepino",
-    status: "Deja de leer mi estado",
-  },
-  {
-    id: "2",
-    profile: "https://picsum.photos/490",
-    user: "Juan Juanete",
-    status: "Vive sin límites",
-  },
-  {
-    id: "3",
-    profile: "https://picsum.photos/501",
-    user: "Manolo Manolín",
-    status: "El interior es lo que cuesta",
-  },
-];
-
 const orders = ["All", "Online", "Pending", "Blocked"];
 
 const FriendsListScreen = ({ navigation }: { navigation: any }) => {
@@ -46,6 +28,8 @@ const FriendsListScreen = ({ navigation }: { navigation: any }) => {
 
   const [searchQuery, setSearchQuery] = React.useState("");
   const onChangeSearch = (query: any) => setSearchQuery(query);
+
+  const { user } = useUser();
 
   const { colors, components, screens } = styles();
 
@@ -101,7 +85,7 @@ const FriendsListScreen = ({ navigation }: { navigation: any }) => {
         />
         <View style={{ flex: 1 }}>
           <FlatList
-            data={friends}
+            data={user?.friends}
             renderItem={({ item: chat }) => (
               <FriendComponent type="chat" {...chat} />
             )}

@@ -1,3 +1,6 @@
+// Hooks
+import { useUser } from "../hooks/useUser";
+
 // Componentes
 import { FlatList, View } from "react-native";
 import NotificationComponent from "../components/NotificationComponent";
@@ -27,12 +30,14 @@ const notifications = [
 ];
 
 const NotificationScreen = () => {
+  const { user } = useUser();
+
   const { screens } = styles();
 
   return (
     <View style={[screens.notifications.background, { flex: 1 }]}>
       <FlatList
-        data={notifications}
+        data={user?.notifications}
         renderItem={({ item: org }) => <NotificationComponent {...org} />}
       />
     </View>

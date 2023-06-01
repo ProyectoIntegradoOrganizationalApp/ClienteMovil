@@ -1,3 +1,6 @@
+// Intefaces
+import { Project } from "../domain/projects/Project.interface";
+
 // Componentes
 import { useNavigation } from "@react-navigation/native";
 import { Avatar, Card } from "react-native-paper";
@@ -6,12 +9,7 @@ import { View } from "react-native";
 // Estilos
 import styles from "../styles/styles";
 
-interface IProject {
-  name: string;
-  description?: string;
-}
-
-function ProjectComponent(props: IProject) {
+function ProjectComponent(props: Project) {
   const navigation = useNavigation<any>();
 
   const { colors, components } = styles();

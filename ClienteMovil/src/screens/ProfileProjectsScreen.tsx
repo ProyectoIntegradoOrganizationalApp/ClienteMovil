@@ -1,26 +1,19 @@
+// Hook
+import { useProjectsApi } from "../adapters/api/useProjectsApi";
+
 // Componentes
-import { FAB } from "react-native-paper";
 import { FlatList, View } from "react-native";
 import ProjectComponent from "../components/ProjectComponent";
+import { FAB } from "react-native-paper";
+import LoadingComponent from "../components/LoadingComponent";
 import PopupNotificationComponent from "../components/PopupNotificationComponent";
 
 // Estilos
 import styles from "../styles/styles";
 
-const projects = [
-  {
-    id: "1",
-    name: "IntegratedProject",
-    description:
-      "Proyecto para crear una página para administrar tareas y projectos",
-  },
-  {
-    id: "2",
-    name: "proyectoDEePrueba",
-  },
-];
-
 const ProfileProjectsScreen = () => {
+  const { data: projects, loading } = useProjectsApi(true);
+
   const { components, screens } = styles();
 
   const handlePress = () => {
@@ -34,10 +27,14 @@ const ProfileProjectsScreen = () => {
   return (
     <View style={[screens.projectsList.background, { flex: 1 }]}>
       <View style={{ flex: 1 }}>
-        <FlatList
-          data={projects}
-          renderItem={({ item: pro }) => <ProjectComponent {...pro} />}
-        />
+        {projects ? (
+          <FlatList
+            data={Array.isArray(projects) ? projects : [projects]}
+            renderItem={({ item: pro }) => <ProjectComponent {...pro} />}
+          />
+        ) : (
+          <LoadingComponent state={loading} />
+        )}
       </View>
       <FAB
         icon="plus"

@@ -4,7 +4,7 @@ import { FlatList, Text, View } from "react-native";
 
 // Hooks
 import { useUser } from "../hooks/useUser";
-import { useFriendApi } from "../adapters/api/useFriendApi"; // TODO: Do it
+
 // Componentes
 import {
   ApplicationProvider,

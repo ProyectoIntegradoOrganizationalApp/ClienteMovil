@@ -1,3 +1,6 @@
+// Hooks
+import { useUser } from "../hooks/useUser";
+
 // Componentes
 import { FlatList, View } from "react-native";
 import FriendComponent from "../components/FriendComponent";
@@ -27,14 +30,16 @@ const friends = [
 ];
 
 const AddFriendScreen = () => {
+  const { user } = useUser();
+
   const { screens } = styles();
 
   return (
     <View style={[screens.addFriends.background, { flex: 1 }]}>
       <FlatList
-        data={friends}
+        data={user?.friends}
         renderItem={({ item: request }) => (
-          <FriendComponent type="add" {...request} />
+          <FriendComponent type="request" {...request} />
         )}
       />
     </View>

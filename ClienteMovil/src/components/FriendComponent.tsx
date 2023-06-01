@@ -1,6 +1,6 @@
 // Componentes
 import { useNavigation } from "@react-navigation/native";
-import { Avatar, Card } from "react-native-paper";
+import { Avatar, Card, IconButton } from "react-native-paper";
 import { View } from "react-native";
 
 // Interfaces
@@ -18,21 +18,31 @@ function FriendComponent(props: IFriend) {
 
   const { components, colors } = styles();
 
+  let requestIcon = "send";
+  let requestIconStyle = components.icons.requestIcon;
+  const sendRequest = () => {
+    requestIcon = requestIcon === "send" ? "cancel" : "send";
+    requestIconStyle =
+      requestIconStyle === components.icons.requestIcon
+        ? components.icons.cancelRequestIcon
+        : components.icons.requestIcon;
+  };
+
   let componentOptions: JSX.Element;
   switch (props.type) {
     case "chat":
       componentOptions = (
         <View style={{ flexDirection: "row" }}>
-          <Avatar.Icon
+          <IconButton
             icon="message"
-            color="#fff"
-            size={30}
+            iconColor="#fff"
+            size={20}
             style={components.icons.messageIcon}
           />
-          <Avatar.Icon
+          <IconButton
             icon="delete"
-            color="#fff"
-            size={30}
+            iconColor="#fff"
+            size={20}
             style={components.icons.deleteIcon}
           />
         </View>
@@ -40,11 +50,30 @@ function FriendComponent(props: IFriend) {
       break;
     case "add":
       componentOptions = (
-        <Avatar.Icon
-          icon="plus"
-          color="#fff"
-          size={30}
-          style={components.icons.addIcon}
+        <View style={{ flexDirection: "row" }}>
+          <IconButton
+            icon="plus"
+            iconColor="#fff"
+            size={20}
+            style={components.icons.addIcon}
+          />
+          <IconButton
+            icon="delete"
+            iconColor="#fff"
+            size={20}
+            style={components.icons.deleteIcon}
+          />
+        </View>
+      );
+      break;
+    case "request":
+      componentOptions = (
+        <IconButton
+          icon={requestIcon}
+          iconColor="#fff"
+          size={20}
+          style={requestIconStyle}
+          onPress={sendRequest}
         />
       );
       break;

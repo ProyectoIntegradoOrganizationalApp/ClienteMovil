@@ -192,14 +192,18 @@ const styles = () => {
       }),
       icons: {
         addIcon: {
-          marginLeft: 10,
-          marginRight: 15,
           borderRadius: 5,
           backgroundColor: "#008f39",
         },
         basketIcon: {
           borderRadius: 5,
           backgroundColor: "#3c6db2",
+        },
+        cancelRequestIcon: {
+          marginLeft: 10,
+          marginRight: 15,
+          borderRadius: 5,
+          backgroundColor: "#d54f4f",
         },
         crownIcon: {
           backgroundColor: "transparent",
@@ -228,6 +232,12 @@ const styles = () => {
         messageIcon: {
           borderRadius: 5,
           backgroundColor: "grey",
+        },
+        requestIcon: {
+          marginLeft: 10,
+          marginRight: 15,
+          borderRadius: 5,
+          backgroundColor: "#008f39",
         },
         settingsIcon: {
           borderRadius: 5,

@@ -1,9 +1,12 @@
 // React
 import { useEffect, useState, ReactElement } from "react";
 
+// Hooks
+import { useAuth } from "../hooks/useAuth";
+
 // Components
 import { useNavigation } from "@react-navigation/native";
-import { Avatar, Card } from "react-native-paper";
+import { Avatar, Card, TouchableRipple } from "react-native-paper";
 import { Text, View } from "react-native";
 import {
   ApplicationProvider,
@@ -46,7 +49,15 @@ const roles = [
 ];
 
 function MemberComponent(props: IMember) {
-  //const navigation = useNavigation<any>();
+  const navigation = useNavigation<any>();
+
+  const navigateToProfile = () => {
+    if (useAuth().user?.name !== props.user) {
+      navigation.navigate("FriendProfile", { friendName: props.user });
+    } else {
+      navigation.navigate("Profile");
+    }
+  };
 
   const [selectedIndex, setSelectedIndex] = useState<IndexPath>(
     new IndexPath(0)
@@ -59,57 +70,61 @@ function MemberComponent(props: IMember) {
   const { colors, components } = styles();
 
   return (
-    <Card style={components.card}>
-      <Card.Title
-        title={
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={{ color: colors.text }}>{props.user}</Text>
-            {isMemberAdmin(props.role)}
-          </View>
-        }
-        subtitle={props.status}
-        subtitleStyle={{ color: colors.text }}
-        left={() => <Avatar.Image size={40} source={{ uri: props.profile }} />}
-        right={() => (
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Avatar.Icon
-              icon="message"
-              color="#fff"
-              size={30}
-              style={[components.icons.messageIcon, { marginLeft: 10 }]}
-            />
-            <Avatar.Icon
-              icon="exit-to-app"
-              color="#fff"
-              size={30}
-              style={components.icons.exitIcon}
-            />
-          </View>
-        )}
-      />
-      <Card.Content style={{ marginTop: 10 }}>
-        <View style={components.filter.filterView}>
-          <Text style={{ color: colors.text, marginRight: 15 }}>Role:</Text>
-          <ApplicationProvider
-            mapping={mapping}
-            theme={components.filter.filterSelectTheme}
-          >
-            <Select
-              value={roles[selectedIndex.row].name}
-              selectedIndex={selectedIndex}
-              onSelect={(index: any) => setSelectedIndex(index)}
-              style={{ flex: 1 }}
+    <TouchableRipple onPress={navigateToProfile}>
+      <Card style={components.card}>
+        <Card.Title
+          title={
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Text style={{ color: colors.text }}>{props.user}</Text>
+              {isMemberAdmin(props.role)}
+            </View>
+          }
+          subtitle={props.status}
+          subtitleStyle={{ color: colors.text }}
+          left={() => (
+            <Avatar.Image size={40} source={{ uri: props.profile }} />
+          )}
+          right={() => (
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Avatar.Icon
+                icon="message"
+                color="#fff"
+                size={30}
+                style={[components.icons.messageIcon, { marginLeft: 10 }]}
+              />
+              <Avatar.Icon
+                icon="exit-to-app"
+                color="#fff"
+                size={30}
+                style={components.icons.exitIcon}
+              />
+            </View>
+          )}
+        />
+        <Card.Content style={{ marginTop: 10 }}>
+          <View style={components.filter.filterView}>
+            <Text style={{ color: colors.text, marginRight: 15 }}>Role:</Text>
+            <ApplicationProvider
+              mapping={mapping}
+              theme={components.filter.filterSelectTheme}
             >
-              {roles.map(
-                (role): ReactElement => (
-                  <SelectItem key={role.id} title={role.name} />
-                )
-              )}
-            </Select>
-          </ApplicationProvider>
-        </View>
-      </Card.Content>
-    </Card>
+              <Select
+                value={roles[selectedIndex.row].name}
+                selectedIndex={selectedIndex}
+                onSelect={(index: any) => setSelectedIndex(index)}
+                style={{ flex: 1 }}
+              >
+                {roles.map(
+                  (role): ReactElement => (
+                    <SelectItem key={role.id} title={role.name} />
+                  )
+                )}
+              </Select>
+            </ApplicationProvider>
+          </View>
+        </Card.Content>
+      </Card>
+    </TouchableRipple>
   );
 }
 

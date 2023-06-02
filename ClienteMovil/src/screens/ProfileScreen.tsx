@@ -6,6 +6,7 @@ import AchievementsScreen from "../screens/AchievementsScreen";
 import ActivityScreen from "../screens/ActivityScreen";
 import ProfileProjectsScreen from "../screens/ProfileProjectsScreen";
 import CreateProjectScreen from "./CreateProjectScreen";
+import EditProjectScreen from "./EditProjectScreen";
 
 // Componentes
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -129,8 +130,18 @@ const ProfileScreen = ({ navigation }: { navigation: any }) => {
         }}
       />
       <Stack.Screen
-        name="Create Project"
+        name="CreateProject"
         component={CreateProjectScreen}
+        options={{
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="EditProject"
+        component={EditProjectScreen}
         options={{
           headerTintColor: colors.text,
           headerStyle: {

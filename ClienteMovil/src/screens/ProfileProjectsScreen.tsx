@@ -41,7 +41,7 @@ const ProfileProjectsScreen = ({ navigation }: { navigation: any }) => {
         color="#ffffff"
         style={[components.fab, { position: "absolute" }]}
         onPress={() => {
-          navigation.navigate("Create Project");
+          navigation.navigate("CreateProject");
         }}
       />
     </View>

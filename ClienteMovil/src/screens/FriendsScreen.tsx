@@ -41,6 +41,7 @@ const FriendsScreen = ({ navigation }: { navigation: any }) => {
         component={AddFriendScreen}
         options={{
           headerTintColor: colors.text,
+          headerShadowVisible: false,
           headerStyle: {
             backgroundColor: colors.tabNavigator,
           },

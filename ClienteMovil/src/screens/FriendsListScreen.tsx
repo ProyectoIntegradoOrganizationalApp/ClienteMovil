@@ -1,6 +1,5 @@
 // React
 import * as React from "react";
-import { FlatList, Text, View } from "react-native";
 
 // Hooks
 import { useUser } from "../hooks/useUser";
@@ -14,6 +13,7 @@ import {
 } from "@ui-kitten/components";
 import { mapping } from "@eva-design/eva";
 import { IconButton, Searchbar } from "react-native-paper";
+import { FlatList, Text, View } from "react-native";
 import FriendComponent from "../components/FriendComponent";
 
 // Estilos

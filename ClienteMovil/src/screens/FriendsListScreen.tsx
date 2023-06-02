@@ -48,7 +48,7 @@ const FriendsListScreen = ({ navigation }: { navigation: any }) => {
             size={20}
             iconColor="#fff"
             style={components.icons.basketIcon}
-            onPress={() => navigation.navigate("Add Friend")}
+            onPress={() => navigation.navigate("AddFriend")}
           />
         </View>
         <View style={components.filter.filterView}>

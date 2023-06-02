@@ -1,6 +1,6 @@
 // Componentes
 import { useNavigation } from "@react-navigation/native";
-import { Avatar, Card, IconButton } from "react-native-paper";
+import { Avatar, Card, IconButton, TouchableRipple } from "react-native-paper";
 import { View } from "react-native";
 
 // Interfaces
@@ -14,7 +14,13 @@ interface IFriend extends Friend {
 }
 
 function FriendComponent(props: IFriend) {
-  //const navigation = useNavigation<any>();
+  const navigation = useNavigation<any>();
+
+  const navigateToProfile = () => {
+    navigation.navigate("FriendProfile", {
+      friendName: props.name,
+    });
+  };
 
   const { components, colors } = styles();
 
@@ -80,15 +86,17 @@ function FriendComponent(props: IFriend) {
   }
 
   return (
-    <Card style={components.card}>
-      <Card.Title
-        title={props.name}
-        titleStyle={{ color: colors.text }}
-        subtitleStyle={{ color: colors.text }}
-        left={() => <Avatar.Image size={40} source={{ uri: props.photo }} />}
-        right={() => componentOptions}
-      />
-    </Card>
+    <TouchableRipple onPress={navigateToProfile}>
+      <Card style={components.card}>
+        <Card.Title
+          title={props.name}
+          titleStyle={{ color: colors.text }}
+          subtitleStyle={{ color: colors.text }}
+          left={() => <Avatar.Image size={40} source={{ uri: props.photo }} />}
+          right={() => componentOptions}
+        />
+      </Card>
+    </TouchableRipple>
   );
 }
 

@@ -103,7 +103,7 @@ const RequestScreen = () => {
       <FlatList
         data={user?.friends} // TODO: Request
         renderItem={({ item: request }) => (
-          <FriendComponent type="request" {...request} />
+          <FriendComponent type="add" {...request} />
         )}
       />
     </View>

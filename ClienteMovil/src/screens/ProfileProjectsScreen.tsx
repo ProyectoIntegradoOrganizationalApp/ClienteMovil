@@ -6,7 +6,6 @@ import { FlatList, View } from "react-native";
 import ProjectComponent from "../components/ProjectComponent";
 import { FAB } from "react-native-paper";
 import LoadingComponent from "../components/LoadingComponent";
-import PopupNotificationComponent from "../components/PopupNotificationComponent";
 
 // Estilos
 import styles from "../styles/styles";
@@ -15,14 +14,6 @@ const ProfileProjectsScreen = ({ navigation }: { navigation: any }) => {
   const { data: projects, loading } = useProjectsApi(true);
 
   const { components, screens } = styles();
-
-  const handlePress = () => {
-    PopupNotificationComponent(
-      "success",
-      "Project Created",
-      "Project 'algo' was created"
-    );
-  };
 
   return (
     <View style={[screens.projectsList.background, { flex: 1 }]}>

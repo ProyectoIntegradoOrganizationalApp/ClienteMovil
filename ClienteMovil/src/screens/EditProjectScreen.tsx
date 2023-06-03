@@ -6,8 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 import { ThemeContext, ThemeContextProps } from "../context/ThemeContext";
 
 // Hooks
-import { useUserApi } from "../adapters/api/useUserApi";
-import { useAuth } from "../hooks/useAuth";
+import { useProjectsApi } from "../adapters/api/useProjectsApi";
 
 // Componentes
 import { TextInput, View } from "react-native";
@@ -17,20 +16,32 @@ import PopupNotificationComponent from "../components/PopupNotificationComponent
 // Estilos
 import styles from "../styles/styles";
 
-const EditProjectScreen = ({ navigation }: { navigation: any }) => {
+const EditProjectScreen = ({
+  route,
+  navigation,
+}: {
+  route: any;
+  navigation: any;
+}) => {
   const { colors, screens } = styles();
 
+  const { props } = route.params;
+
+  const { editProject } = useProjectsApi(true);
+
+  const [newName, setNewName] = useState("");
+  const [newDescription, setNewDescription] = useState("");
+
   const handlePress = () => {
+    editProject(props.idProject, newName, newDescription);
+
+    navigation.goBack();
+
     PopupNotificationComponent(
       "success",
       "Project Edited",
-      "Project 'algo' was edited"
+      `Project ${props.name} was edited`
     );
-  };
-
-  const props = {
-    projectTitle: "Title",
-    projectDescription: "Description",
   };
 
   return (
@@ -38,13 +49,15 @@ const EditProjectScreen = ({ navigation }: { navigation: any }) => {
       <TextInput
         placeholder="Project name"
         placeholderTextColor={colors.primary}
-        defaultValue={props.projectTitle}
+        defaultValue={props.name}
+        onChangeText={(text) => setNewDescription(text)}
         style={screens.createProject.input}
       ></TextInput>
       <TextInput
         placeholder="Project description"
         placeholderTextColor={colors.primary}
-        defaultValue={props.projectDescription}
+        defaultValue={props.description}
+        onChangeText={(text) => setNewName(text)}
         multiline={true}
         numberOfLines={4}
         textAlignVertical="top"

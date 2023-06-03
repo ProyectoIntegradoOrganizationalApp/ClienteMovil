@@ -4,6 +4,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 // Pantallas
 import ProjectsListScreen from "./ProjectsListScreen";
+import FriendProfileScreen from "./FriendProfileScreen";
 import CreateProjectScreen from "./CreateProjectScreen";
 import EditProjectScreen from "./EditProjectScreen";
 import ProjectsSettingsScreen from "./ProjectsSettingsScreen";
@@ -35,6 +36,18 @@ const ProjectsScreen = ({ navigation }: { navigation: any }) => {
           },
         }}
         component={ProjectsListScreen}
+      />
+      <Stack.Screen
+        name="FriendProfile"
+        component={FriendProfileScreen}
+        options={({ route }: { route: any }) => ({
+          title: route.params.friendName,
+          headerTintColor: colors.text,
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        })}
       />
       <Stack.Screen
         name="CreateProject"

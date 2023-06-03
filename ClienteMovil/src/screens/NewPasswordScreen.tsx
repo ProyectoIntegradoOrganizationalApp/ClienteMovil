@@ -27,15 +27,9 @@ const NewPasswordScreen = ({
   const [confirmpass, setConfirmPass] = useState<string>("");
   const [inputError, setInputError] = useState("");
 
-  const { data, error, loading, changePassword } = useChangePassword();
+  const { error, loading, changePassword } = useChangePassword();
 
   const { email } = route.params;
-
-  useEffect(() => {
-    if (!error?.error && data) {
-      navigation.navigate("Login");
-    }
-  }, [data?.id]);
 
   useEffect(() => {
     if (error && error.message != "") {
@@ -56,6 +50,8 @@ const NewPasswordScreen = ({
       if (inputError.length === 0) {
         if (password === confirmpass) {
           changePassword({ email, password, confirmpass });
+          PopupNotificationComponent("success", "Success", "Password change");
+          navigation.navigate("Login");
         } else {
           PopupNotificationComponent(
             "error",

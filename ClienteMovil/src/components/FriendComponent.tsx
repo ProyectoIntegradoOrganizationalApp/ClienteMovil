@@ -25,16 +25,6 @@ function FriendComponent(props: IFriend) {
 
   const { data, error, addUser, removeUser } = useFriendApi();
 
-  useEffect(() => {
-    if (!error) {
-      PopupNotificationComponent("success", "Success", data?.message);
-    }
-
-    if (error) {
-      PopupNotificationComponent("error", "Error", data?.message);
-    }
-  }, [error?.error]);
-
   const { components, colors } = styles();
 
   let componentOptions: JSX.Element;
@@ -45,7 +35,7 @@ function FriendComponent(props: IFriend) {
           <IconButton
             icon="message"
             iconColor="#fff"
-            size={20}
+            size={15}
             style={components.icons.messageIcon}
             onPress={() => {
               navigation.navigate("ChatScreen", {
@@ -56,7 +46,7 @@ function FriendComponent(props: IFriend) {
           <IconButton
             icon="delete"
             iconColor="#fff"
-            size={20}
+            size={15}
             style={components.icons.deleteIcon}
             onPress={() => {
               removeUser(props.id);
@@ -71,7 +61,7 @@ function FriendComponent(props: IFriend) {
           <IconButton
             icon="plus"
             iconColor="#fff"
-            size={20}
+            size={15}
             style={components.icons.addIcon}
             onPress={() => {
               console.log("Accept request");
@@ -80,7 +70,7 @@ function FriendComponent(props: IFriend) {
           <IconButton
             icon="delete"
             iconColor="#fff"
-            size={20}
+            size={15}
             style={components.icons.deleteIcon}
             onPress={() => {
               removeUser(props.id);
@@ -94,7 +84,7 @@ function FriendComponent(props: IFriend) {
         <IconButton
           icon="send"
           iconColor="#fff"
-          size={20}
+          size={15}
           style={components.icons.requestIcon}
           onPress={() => {
             addUser(props.id);
@@ -107,7 +97,7 @@ function FriendComponent(props: IFriend) {
         <IconButton
           icon="cancel"
           iconColor="#fff"
-          size={20}
+          size={15}
           style={components.icons.cancelRequestIcon}
           onPress={() => {
             console.log("Cancel request");
@@ -122,6 +112,7 @@ function FriendComponent(props: IFriend) {
       onPress={() => {
         navigation.navigate("FriendProfile", {
           friendName: props.name,
+          friendId: props.id,
         });
       }}
     >

@@ -6,8 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 import { ThemeContext, ThemeContextProps } from "../context/ThemeContext";
 
 // Hooks
-import { useUserApi } from "../adapters/api/useUserApi";
-import { useAuth } from "../hooks/useAuth";
+import { useProjectsApi } from "../adapters/api/useProjectsApi";
 
 // Componentes
 import { TextInput, View } from "react-native";
@@ -18,13 +17,23 @@ import PopupNotificationComponent from "../components/PopupNotificationComponent
 import styles from "../styles/styles";
 
 const CreateProjectScreen = ({ navigation }: { navigation: any }) => {
+  const { createProject } = useProjectsApi(false);
+
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+
   const { colors, screens } = styles();
 
   const handlePress = () => {
+    createProject(name, description);
+
+    setName("");
+    setDescription("");
+
     PopupNotificationComponent(
       "success",
       "Project Created",
-      "Project 'algo' was created"
+      `Project ${name} was created`
     );
   };
 
@@ -33,11 +42,15 @@ const CreateProjectScreen = ({ navigation }: { navigation: any }) => {
       <TextInput
         placeholder="Project name"
         placeholderTextColor={colors.primary}
+        value={name}
+        onChangeText={(text) => setName(text)}
         style={screens.createProject.input}
       ></TextInput>
       <TextInput
         placeholder="Project description"
         placeholderTextColor={colors.primary}
+        value={description}
+        onChangeText={(text) => setDescription(text)}
         multiline={true}
         numberOfLines={4}
         textAlignVertical="top"

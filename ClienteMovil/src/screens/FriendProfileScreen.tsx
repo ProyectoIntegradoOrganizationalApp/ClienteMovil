@@ -17,10 +17,16 @@ import styles from "../styles/styles";
 
 const Tab = createMaterialTopTabNavigator();
 
-const FriendProfileScreen = () => {
-  const { profile } = useProfile(); // TODO: Get friend profile
+const FriendProfileScreen = ({ route }: { route: any }) => {
+  const { friendId } = route.params;
+  const { profile } = useProfile(friendId);
 
   const { colors, components, screens } = styles();
+
+  const profilePhoto =
+    profile?.user !== undefined
+      ? profile?.user.photo
+      : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
 
   return (
     <>
@@ -39,7 +45,7 @@ const FriendProfileScreen = () => {
                 <Avatar.Image
                   size={50}
                   source={{
-                    uri: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png",
+                    uri: profilePhoto,
                   }}
                 />
               )}
@@ -56,6 +62,7 @@ const FriendProfileScreen = () => {
           <Tab.Screen
             name="Achievements"
             component={AchievementsScreen}
+            initialParams={{ profileId: friendId }}
             options={{
               tabBarShowLabel: false,
               tabBarIcon: () => (
@@ -66,6 +73,7 @@ const FriendProfileScreen = () => {
           <Tab.Screen
             name="Activity"
             component={ActivityScreen}
+            initialParams={{ profileId: friendId }}
             options={{
               tabBarShowLabel: false,
               tabBarIcon: () => (
@@ -76,6 +84,7 @@ const FriendProfileScreen = () => {
           <Tab.Screen
             name="Projects"
             component={ProfileProjectsScreen}
+            initialParams={{ profileId: friendId }}
             options={{
               tabBarShowLabel: false,
               tabBarIcon: () => (

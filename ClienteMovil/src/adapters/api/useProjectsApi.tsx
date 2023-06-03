@@ -122,7 +122,7 @@ export const useProjectsApi = (fetch: boolean) => {
      *  Petición usando el Hook de Axios
      */
     useAxios(props)
-      .then((data) => console.log(data))
+      //.then((data) => console.log(data))
       .catch((err) => {
         const error: ApiError = { error: true, message: err };
         handleData(error);
@@ -151,7 +151,7 @@ export const useProjectsApi = (fetch: boolean) => {
      *  Petición usando el Hook de Axios
      */
     useAxios(props)
-      .then((data) => console.log(data))
+      //.then((data) => console.log(data))
       .catch((err) => {
         const error: ApiError = { error: true, message: err };
         handleData(error);
@@ -161,7 +161,13 @@ export const useProjectsApi = (fetch: boolean) => {
       });
   };
 
-  const editProject = () => {};
+  const editProject = (id: string, newName: string, newDescription: string) => {
+    // TODO: Code axios call
+  };
+
+  const deleteProject = (id: string) => {
+    // TODO: Code axios call
+  };
 
   /**
    *  Función que maneja los datos que salen de la API.
@@ -183,7 +189,7 @@ export const useProjectsApi = (fetch: boolean) => {
       setError(undefined);
 
       // Cambiamos el state
-      console.log(info);
+      //console.log(info);
       let projects: Array<Project> = ProjectMapper.prototype.mapArrayTo(
         info.projects
       );
@@ -209,6 +215,7 @@ export const useProjectsApi = (fetch: boolean) => {
     createProject,
     leaveProject,
     editProject,
+    deleteProject,
   };
 };
 

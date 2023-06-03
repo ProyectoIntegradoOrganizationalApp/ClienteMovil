@@ -1,3 +1,6 @@
+// Hooks
+import { useAuth } from "../hooks/useAuth";
+
 // Componentes
 import { FlatList, View } from "react-native";
 import { IconButton } from "react-native-paper";
@@ -6,31 +9,11 @@ import MemberComponent from "../components/MemberComponent";
 // Estilos
 import styles from "../styles/styles";
 
-const members = [
-  {
-    id: "1",
-    profile: "https://picsum.photos/163",
-    user: "Pepe Pepín",
-    status: "Deja de leer mi estado",
-    role: 0,
-  },
-  {
-    id: "2",
-    profile: "https://picsum.photos/490",
-    user: "Juan Juanete",
-    status: "Vive sin límites",
-    role: 3,
-  },
-  {
-    id: "3",
-    profile: "https://picsum.photos/501",
-    user: "Manolo Manolín",
-    status: "El interior es lo que cuesta",
-    role: 1,
-  },
-];
+const ProjectsMembersScreen = ({ route }: { route: any }) => {
+  const { project } = route.params;
+  const members = project.members;
+  const { user } = useAuth();
 
-const ProjectsMembersScreen = () => {
   const { colors, components, screens } = styles();
 
   return (
@@ -45,8 +28,20 @@ const ProjectsMembersScreen = () => {
       </View>
       <View style={{ flex: 1, marginBottom: 15 }}>
         <FlatList
-          data={members}
-          renderItem={({ item: member }) => <MemberComponent {...member} />}
+          data={members.sort(
+            (a: any, b: any) => parseInt(a.idRole) - parseInt(b.idRole)
+          )}
+          renderItem={({ item: member }) => (
+            <MemberComponent
+              id={member.id}
+              photo={member.photo}
+              name={member.name}
+              role={member.idRole}
+              isUserAdmin={members.find(
+                (member: any) => member.id === user?.id && member.idRole === "1"
+              )}
+            />
+          )}
         />
       </View>
     </View>

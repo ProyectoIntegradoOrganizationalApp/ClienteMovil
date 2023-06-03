@@ -11,8 +11,11 @@ import styles from "../styles/styles";
 
 const Tab = createMaterialTopTabNavigator();
 
-const ProjectsSingleScreen = () => {
+const ProjectsSingleScreen = ({ route }: { route: any }) => {
+  const { project } = route.params;
+
   const { colors } = styles();
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -25,16 +28,19 @@ const ProjectsSingleScreen = () => {
         name="BoardsList"
         options={{ title: "Boards" }}
         component={BoardsListScreen}
+        initialParams={{ project: project }}
       />
       <Tab.Screen
         name="ProjectsInstalledApps"
         options={{ title: "Apps" }}
         component={ProjectsInstalledAppsScreen}
+        initialParams={{ project: project }}
       />
       <Tab.Screen
         name="ProjectsMembers"
         options={{ title: "Members" }}
         component={ProjectsMembersScreen}
+        initialParams={{ project: project }}
       />
     </Tab.Navigator>
   );

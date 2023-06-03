@@ -1,6 +1,6 @@
 // Componentes
 import { useNavigation } from "@react-navigation/native";
-import { Avatar, Card } from "react-native-paper";
+import { Avatar, Card, IconButton } from "react-native-paper";
 import { Text, View } from "react-native";
 
 // Estilos
@@ -38,10 +38,10 @@ function AppComponent(props: IApp) {
   let componentOptions: JSX.Element;
   if (!props.installed) {
     componentOptions = (
-      <Avatar.Icon
+      <IconButton
         icon="basket"
-        color="#fff"
-        size={30}
+        iconColor="#fff"
+        size={15}
         style={[
           components.icons.basketIcon,
           { marginLeft: 10, marginRight: 15 },
@@ -51,20 +51,20 @@ function AppComponent(props: IApp) {
   } else {
     if (props.added) {
       componentOptions = (
-        <Avatar.Icon
+        <IconButton
           icon="delete"
-          color="#fff"
-          size={30}
+          iconColor="#fff"
+          size={15}
           style={components.icons.deleteIcon}
         />
       );
     } else {
       componentOptions = (
-        <Avatar.Icon
+        <IconButton
           icon="plus"
-          color="#fff"
-          size={30}
-          style={components.icons.addIcon}
+          iconColor="#fff"
+          size={15}
+          style={[components.icons.addIcon, { marginRight: 15 }]}
         />
       );
     }
@@ -84,10 +84,10 @@ function AppComponent(props: IApp) {
         left={() => <Avatar.Image size={40} source={{ uri: props.icon }} />}
         right={() => (
           <View style={{ flexDirection: "row" }}>
-            <Avatar.Icon
+            <IconButton
               icon="eye"
-              color="#fff"
-              size={30}
+              iconColor="#fff"
+              size={15}
               style={components.icons.eyeIcon}
             />
             {componentOptions}

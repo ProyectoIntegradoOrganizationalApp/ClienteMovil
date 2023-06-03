@@ -11,7 +11,7 @@ import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import { API_URL } from "@env";
 
-const useProfile = () => {
+const useProfile = (userId: string | undefined) => {
   const { user } = useContext(AuthContext);
   const [profile, setProfile] = useState<Profile>();
 
@@ -25,7 +25,7 @@ const useProfile = () => {
         };
 
         const response = await axios.get<Profile>(
-          `${API_URL}/profile/${user?.id}`,
+          `${API_URL}/profile/${userId}`,
           { headers }
         );
 

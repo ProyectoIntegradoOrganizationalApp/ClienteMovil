@@ -22,8 +22,9 @@ import styles from "../styles/styles";
 
 const filters = ["All", "App", "Friend", "Project"];
 
-const AchievementsScreen = ({ navigation }: { navigation: any }) => {
-  const { profile } = useProfile();
+const AchievementsScreen = ({ route }: { route: any }) => {
+  const { profileId } = route.params;
+  const { profile } = useProfile(profileId);
 
   const { achievements } = useAchievements();
 

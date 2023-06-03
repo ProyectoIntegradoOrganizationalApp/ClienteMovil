@@ -16,11 +16,12 @@ import { useUtils } from "../hooks/useUtils";
 // Estilos
 import styles from "../styles/styles";
 
-const ActivityScreen = () => {
+const ActivityScreen = ({ route }: { route: any }) => {
   const [daily, setDaily] = useState<number>(0);
   const [weekly, setWeekly] = useState<number>(0);
 
-  const data = useProfile();
+  const { profileId } = route.params;
+  const data = useProfile(profileId);
 
   useEffect(() => {
     if (data?.profile?.activity) {

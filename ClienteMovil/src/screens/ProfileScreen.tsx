@@ -1,4 +1,5 @@
 // Hooks
+import { useAuth } from "../hooks/useAuth";
 import useProfile from "../hooks/useProfile";
 
 // Pantallas
@@ -19,7 +20,8 @@ import { View } from "react-native";
 import styles from "../styles/styles";
 
 const ProfileDataScreen = ({ navigation }: { navigation: any }) => {
-  const { profile } = useProfile();
+  const { user } = useAuth();
+  const { profile } = useProfile(user?.id);
 
   const { colors, components, screens } = styles();
 
@@ -55,7 +57,9 @@ const ProfileDataScreen = ({ navigation }: { navigation: any }) => {
               return <Icon name="trophy" size={size} color={colors.text} />;
             }}
             titleStyle={{ color: colors.text }}
-            onPress={() => navigation.navigate("Achievements")}
+            onPress={() =>
+              navigation.navigate("Achievements", { profileId: user?.id })
+            }
             title="Achievements"
             style={screens.profile.menuItem}
           />
@@ -64,7 +68,9 @@ const ProfileDataScreen = ({ navigation }: { navigation: any }) => {
               return <Icon name="chart-line" size={size} color={colors.text} />;
             }}
             titleStyle={{ color: colors.text }}
-            onPress={() => navigation.navigate("Activity")}
+            onPress={() =>
+              navigation.navigate("Activity", { profileId: user?.id })
+            }
             title="Activity"
             style={screens.profile.menuItem}
           />
@@ -75,7 +81,9 @@ const ProfileDataScreen = ({ navigation }: { navigation: any }) => {
               );
             }}
             titleStyle={{ color: colors.text }}
-            onPress={() => navigation.navigate("My Projects")}
+            onPress={() =>
+              navigation.navigate("My Projects", { profileId: user?.id })
+            }
             title="My Projects"
             style={screens.profile.menuItem}
           />

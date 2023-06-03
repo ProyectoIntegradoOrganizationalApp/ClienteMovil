@@ -16,7 +16,6 @@ function NotificationComponent(props: INotification) {
 
   const { colors, components } = styles();
 
-  const isNotificationNew = true;
   return (
     <Card style={components.card}>
       <Card.Title
@@ -25,13 +24,6 @@ function NotificationComponent(props: INotification) {
         subtitle={props.date}
         subtitleStyle={{ color: colors.text }}
         left={() => <Avatar.Image size={40} source={{ uri: props.user }} />}
-        right={() =>
-          isNotificationNew ? (
-            <IconButton icon="circle" size={15} iconColor={colors.primary} />
-          ) : (
-            ""
-          )
-        }
       />
     </Card>
   );

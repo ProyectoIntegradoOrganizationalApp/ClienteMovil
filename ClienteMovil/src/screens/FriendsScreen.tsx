@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 // Pantallas
 import FriendsListScreen from "../screens/FriendsListScreen";
 import FriendProfileScreen from "./FriendProfileScreen";
+import ChatScreen from "./ChatScreen";
 import AddFriendScreen from "../screens/AddFriendScreen";
 import FriendsSettingsScreen from "../screens/FriendsSettingsScreen";
 
@@ -40,6 +41,18 @@ const FriendsScreen = ({ navigation }: { navigation: any }) => {
       <Stack.Screen
         name="FriendProfile"
         component={FriendProfileScreen}
+        options={({ route }: { route: any }) => ({
+          title: route.params.friendName,
+          headerTintColor: colors.text,
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        })}
+      />
+      <Stack.Screen
+        name="ChatScreen"
+        component={ChatScreen}
         options={({ route }: { route: any }) => ({
           title: route.params.friendName,
           headerTintColor: colors.text,

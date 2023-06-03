@@ -1,6 +1,3 @@
-import { FriendDTO } from "../friend/FriendDTO.interface";
-import { NotificationsDTO } from "../notification/NotificationsDTO.interface";
-
 export interface UserDTO {
   id: string;
   email: string;
@@ -11,6 +8,4 @@ export interface UserDTO {
   updated_at: Date;
   level: number;
   _token: string;
-  notifications: NotificationsDTO;
-  friends: Array<FriendDTO>;
 }

@@ -2,6 +2,7 @@
 import useProfile from "../hooks/useProfile";
 
 // Pantallas
+import EditProfileScreen from "./EditProfileScreen";
 import AchievementsScreen from "../screens/AchievementsScreen";
 import ActivityScreen from "../screens/ActivityScreen";
 import ProfileProjectsScreen from "../screens/ProfileProjectsScreen";
@@ -10,7 +11,7 @@ import EditProjectScreen from "./EditProjectScreen";
 
 // Componentes
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Avatar, Card, Menu } from "react-native-paper";
+import { Avatar, Card, IconButton, Menu } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { View } from "react-native";
 
@@ -36,6 +37,17 @@ const ProfileDataScreen = ({ navigation }: { navigation: any }) => {
           subtitle={profile?.user?.email}
           subtitleStyle={{ color: colors.text }}
           left={() => <Avatar.Image size={50} source={{ uri: profilePhoto }} />}
+          right={() => (
+            <IconButton
+              icon="pencil"
+              iconColor="#fff"
+              size={15}
+              style={[components.icons.pencilIcon, { marginRight: 15 }]}
+              onPress={() => {
+                navigation.navigate("EditProfile");
+              }}
+            />
+          )}
         />
         <Card.Content style={screens.profile.cardContent}>
           <Menu.Item
@@ -93,6 +105,16 @@ const ProfileScreen = ({ navigation }: { navigation: any }) => {
               onPress={() => navigation.navigate("Settings")}
             />
           ),
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfileScreen}
+        options={{
           headerTintColor: colors.text,
           headerStyle: {
             backgroundColor: colors.tabNavigator,

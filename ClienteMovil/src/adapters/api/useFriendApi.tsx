@@ -69,9 +69,9 @@ export const useFriendApi = () => {
       });
   };
 
-  const removeUser = () => {
+  const removeUser = (guestId: string) => {
     const props: RequestParams = {
-      url: `${API}/profile/${user?.id}`,
+      url: `${API}/profile/${guestId}`,
       method: "GET",
       headers: new AxiosHeaders({
         "Content-Type": "application/json",

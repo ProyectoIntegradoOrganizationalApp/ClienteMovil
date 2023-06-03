@@ -401,6 +401,26 @@ const styles = () => {
           color: colors.text,
         },
       }),
+      editProfile: StyleSheet.create({
+        view: {
+          paddingTop: 15,
+          paddingHorizontal: 20,
+          backgroundColor: colors.background,
+        },
+        viewRow: {
+          marginTop: 10,
+          flexDirection: "row",
+          justifyContent: "space-between",
+        },
+        input: {
+          height: 50,
+          padding: 12,
+          marginBottom: 12,
+          borderWidth: 2,
+          borderColor: colors.primary,
+          color: colors.text,
+        },
+      }),
       friendsList: StyleSheet.create({
         background: {
           paddingTop: 15,

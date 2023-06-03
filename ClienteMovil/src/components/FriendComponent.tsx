@@ -1,7 +1,14 @@
+// React
+import { useEffect } from "react";
+
+// Hooks
+import { useFriendApi } from "../adapters/api/useFriendApi";
+
 // Componentes
 import { useNavigation } from "@react-navigation/native";
 import { Avatar, Card, IconButton, TouchableRipple } from "react-native-paper";
 import { View } from "react-native";
+import PopupNotificationComponent from "./PopupNotificationComponent";
 
 // Interfaces
 import { Friend } from "../domain/friend/Friend.interface";
@@ -16,23 +23,19 @@ interface IFriend extends Friend {
 function FriendComponent(props: IFriend) {
   const navigation = useNavigation<any>();
 
-  const navigateToProfile = () => {
-    navigation.navigate("FriendProfile", {
-      friendName: props.name,
-    });
-  };
+  const { data, error, addUser, removeUser } = useFriendApi();
+
+  useEffect(() => {
+    if (!error) {
+      PopupNotificationComponent("success", "Success", data?.message);
+    }
+
+    if (error) {
+      PopupNotificationComponent("error", "Error", data?.message);
+    }
+  }, [error?.error]);
 
   const { components, colors } = styles();
-
-  let requestIcon = "send";
-  let requestIconStyle = components.icons.requestIcon;
-  const sendRequest = () => {
-    requestIcon = requestIcon === "send" ? "cancel" : "send";
-    requestIconStyle =
-      requestIconStyle === components.icons.requestIcon
-        ? components.icons.cancelRequestIcon
-        : components.icons.requestIcon;
-  };
 
   let componentOptions: JSX.Element;
   switch (props.type) {
@@ -44,12 +47,20 @@ function FriendComponent(props: IFriend) {
             iconColor="#fff"
             size={20}
             style={components.icons.messageIcon}
+            onPress={() => {
+              navigation.navigate("ChatScreen", {
+                friendName: props.name,
+              });
+            }}
           />
           <IconButton
             icon="delete"
             iconColor="#fff"
             size={20}
             style={components.icons.deleteIcon}
+            onPress={() => {
+              removeUser(props.id);
+            }}
           />
         </View>
       );
@@ -62,12 +73,18 @@ function FriendComponent(props: IFriend) {
             iconColor="#fff"
             size={20}
             style={components.icons.addIcon}
+            onPress={() => {
+              console.log("Accept request");
+            }}
           />
           <IconButton
             icon="delete"
             iconColor="#fff"
             size={20}
             style={components.icons.deleteIcon}
+            onPress={() => {
+              removeUser(props.id);
+            }}
           />
         </View>
       );
@@ -75,18 +92,39 @@ function FriendComponent(props: IFriend) {
     case "request":
       componentOptions = (
         <IconButton
-          icon={requestIcon}
+          icon="send"
           iconColor="#fff"
           size={20}
-          style={requestIconStyle}
-          onPress={sendRequest}
+          style={components.icons.requestIcon}
+          onPress={() => {
+            addUser(props.id);
+          }}
+        />
+      );
+      break;
+    case "cancelRequest":
+      componentOptions = (
+        <IconButton
+          icon="cancel"
+          iconColor="#fff"
+          size={20}
+          style={components.icons.cancelRequestIcon}
+          onPress={() => {
+            console.log("Cancel request");
+          }}
         />
       );
       break;
   }
 
   return (
-    <TouchableRipple onPress={navigateToProfile}>
+    <TouchableRipple
+      onPress={() => {
+        navigation.navigate("FriendProfile", {
+          friendName: props.name,
+        });
+      }}
+    >
       <Card style={components.card}>
         <Card.Title
           title={props.name}

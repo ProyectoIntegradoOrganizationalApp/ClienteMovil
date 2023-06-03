@@ -4,7 +4,7 @@ import Toast from "react-native-toast-message";
 const PopupNotificationComponent = (
   type: string,
   title: string,
-  message: string
+  message: string | undefined
 ) => {
   Toast.show({
     type: type,

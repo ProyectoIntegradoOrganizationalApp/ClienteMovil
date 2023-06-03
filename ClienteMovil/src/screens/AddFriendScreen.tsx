@@ -83,10 +83,13 @@ const PendingRequestScreen = () => {
           colors: { onSurfaceVariant: colors.text },
         }}
       />
+      {
+        // * When search: <FriendComponent type="request" {...request} />
+      }
       <FlatList
-        data={user?.friends} // TODO: Add friends and pending requests
+        data={friends}
         renderItem={({ item: request }) => (
-          <FriendComponent type="request" {...request} />
+          <FriendComponent type="cancelRequest" {...request} />
         )}
       />
     </View>
@@ -101,7 +104,7 @@ const RequestScreen = () => {
   return (
     <View style={[screens.addFriends.background, { flex: 1 }]}>
       <FlatList
-        data={user?.friends} // TODO: Request
+        data={friends}
         renderItem={({ item: request }) => (
           <FriendComponent type="add" {...request} />
         )}

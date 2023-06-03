@@ -6,7 +6,7 @@ import { useAuth } from "../hooks/useAuth";
 
 // Components
 import { useNavigation } from "@react-navigation/native";
-import { Avatar, Card, TouchableRipple } from "react-native-paper";
+import { Avatar, Card, IconButton, TouchableRipple } from "react-native-paper";
 import { Text, View } from "react-native";
 import {
   ApplicationProvider,
@@ -86,15 +86,20 @@ function MemberComponent(props: IMember) {
           )}
           right={() => (
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Avatar.Icon
+              <IconButton
                 icon="message"
-                color="#fff"
+                iconColor="#fff"
                 size={30}
                 style={[components.icons.messageIcon, { marginLeft: 10 }]}
+                onPress={() => {
+                  navigation.navigate("ChatScreen", {
+                    friendName: props.user,
+                  });
+                }}
               />
-              <Avatar.Icon
+              <IconButton
                 icon="exit-to-app"
-                color="#fff"
+                iconColor="#fff"
                 size={30}
                 style={components.icons.exitIcon}
               />

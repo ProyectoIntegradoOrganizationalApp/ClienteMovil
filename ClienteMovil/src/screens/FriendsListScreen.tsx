@@ -21,6 +21,27 @@ import styles from "../styles/styles";
 
 const orders = ["All", "Online", "Pending", "Blocked"];
 
+const friends = [
+  {
+    id: "1",
+    profile: "https://picsum.photos/163",
+    user: "Pepe Pepín",
+    status: "Deja de leer mi estado",
+  },
+  {
+    id: "2",
+    profile: "https://picsum.photos/490",
+    user: "Juan Juanete",
+    status: "Vive sin límites",
+  },
+  {
+    id: "3",
+    profile: "https://picsum.photos/501",
+    user: "Manolo Manolín",
+    status: "El interior es lo que cuesta",
+  },
+];
+
 const FriendsListScreen = ({ navigation }: { navigation: any }) => {
   const [selectedIndex, setSelectedIndex] = React.useState<IndexPath>(
     new IndexPath(0)
@@ -85,7 +106,7 @@ const FriendsListScreen = ({ navigation }: { navigation: any }) => {
         />
         <View style={{ flex: 1 }}>
           <FlatList
-            data={user?.friends}
+            data={friends}
             renderItem={({ item: chat }) => (
               <FriendComponent type="chat" {...chat} />
             )}

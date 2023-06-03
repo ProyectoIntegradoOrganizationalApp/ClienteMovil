@@ -37,7 +37,7 @@ const NotificationScreen = () => {
   return (
     <View style={[screens.notifications.background, { flex: 1 }]}>
       <FlatList
-        data={user?.notifications}
+        data={notifications}
         renderItem={({ item: org }) => <NotificationComponent {...org} />}
       />
     </View>

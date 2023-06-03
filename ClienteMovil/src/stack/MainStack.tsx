@@ -6,6 +6,7 @@ import ProjectsScreen from "../screens/ProjectsScreen";
 import ProjectsSingleScreen from "../screens/ProjectsSingleScreen";
 import BoardsSingleScreen from "../screens/BoardsSingleScreen";
 import ProjectsAppsScreen from "../screens/ProjectsAppsScreen";
+import ChatScreen from "../screens/ChatScreen";
 
 // Estilos
 import styles from "../styles/styles";
@@ -53,6 +54,18 @@ const MainStack = () => {
           title: "Apps for install",
           headerShadowVisible: false,
           headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        })}
+      />
+      <Stack.Screen
+        name="ChatScreen"
+        component={ChatScreen}
+        options={({ route }: { route: any }) => ({
+          title: route.params.friendName,
+          headerTintColor: colors.text,
+          headerShadowVisible: false,
           headerStyle: {
             backgroundColor: colors.tabNavigator,
           },

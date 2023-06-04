@@ -162,11 +162,63 @@ export const useProjectsApi = (fetch: boolean) => {
   };
 
   const editProject = (id: string, newName: string, newDescription: string) => {
-    // TODO: Code axios call
+    setLoading(true);
+
+    /**
+     * Props de la petición
+     */
+    const props: RequestParams = {
+      url: `${API}/project/${id}`,
+      method: "PUT",
+      headers: new AxiosHeaders({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?._token}`,
+      }),
+      data: {
+        ...(newName.length > 0 && { name: newName }),
+        ...(newDescription.length > 0 && { description: newDescription }),
+      },
+    };
+
+    /**
+     *  Petición usando el Hook de Axios
+     */
+    useAxios(props)
+      .catch((err) => {
+        const error: ApiError = { error: true, message: err };
+        handleData(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const deleteProject = (id: string) => {
-    // TODO: Code axios call
+    setLoading(true);
+
+    /**
+     * Props de la petición
+     */
+    const props: RequestParams = {
+      url: `${API}/project/${id}`,
+      method: "DELETE",
+      headers: new AxiosHeaders({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?._token}`,
+      }),
+    };
+
+    /**
+     *  Petición usando el Hook de Axios
+     */
+    useAxios(props)
+      .catch((err) => {
+        const error: ApiError = { error: true, message: err };
+        handleData(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   /**

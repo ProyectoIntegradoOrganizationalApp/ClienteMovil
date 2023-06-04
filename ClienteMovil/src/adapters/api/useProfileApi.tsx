@@ -61,6 +61,38 @@ export const useProfileApi = () => {
       });
   }, []);
 
+  const editProfile = (newName: string, newLastName: string) => {
+    setLoading(true);
+
+    /**
+     * Props de la petición
+     */
+    const props: RequestParams = {
+      url: `${API}/project/${user?.id}`,
+      method: "PUT",
+      headers: new AxiosHeaders({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?._token}`,
+      }),
+      data: {
+        ...(newName.length > 0 && { name: newName }),
+        ...(newLastName.length > 0 && { last_name: newLastName }),
+      },
+    };
+
+    /**
+     *  Petición usando el Hook de Axios
+     */
+    useAxios(props)
+      .catch((err) => {
+        const error: ApiError = { error: true, message: err };
+        handleData(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   /**
    *  Función que maneja los datos que salen de la API.
    *  @param info
@@ -90,5 +122,5 @@ export const useProfileApi = () => {
     setLoading(false);
   };
 
-  return { data, error, loading };
+  return { data, error, loading, editProfile };
 };

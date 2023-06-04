@@ -40,6 +40,7 @@ const ProjectsMembersScreen = ({ route }: { route: any }) => {
               isUserAdmin={members.find(
                 (member: any) => member.id === user?.id && member.idRole === "1"
               )}
+              idProject={project.id}
             />
           )}
         />

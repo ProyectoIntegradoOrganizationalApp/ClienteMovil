@@ -55,7 +55,7 @@ function FriendComponent(props: IFriend) {
         </View>
       );
       break;
-    case "add":
+    case "manageRequest":
       componentOptions = (
         <View style={{ flexDirection: "row" }}>
           <IconButton
@@ -73,7 +73,7 @@ function FriendComponent(props: IFriend) {
             size={15}
             style={components.icons.deleteIcon}
             onPress={() => {
-              removeUser(props.id);
+              console.log("Deny request");
             }}
           />
         </View>
@@ -87,7 +87,7 @@ function FriendComponent(props: IFriend) {
           size={15}
           style={components.icons.requestIcon}
           onPress={() => {
-            addUser(props.id);
+            console.log("Send request");
           }}
         />
       );

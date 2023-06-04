@@ -16,21 +16,18 @@ import styles from "../styles/styles";
 const friends = [
   {
     id: "1",
-    profile: "https://picsum.photos/163",
-    user: "Pepe Pepín",
-    status: "Deja de leer mi estado",
+    photo: "https://picsum.photos/163",
+    name: "Pepe Pepín",
   },
   {
     id: "2",
-    profile: "https://picsum.photos/490",
-    user: "Juan Juanete",
-    status: "Vive sin límites",
+    photo: "https://picsum.photos/490",
+    name: "Juan Juanete",
   },
   {
     id: "3",
-    profile: "https://picsum.photos/501",
-    user: "Manolo Manolín",
-    status: "El interior es lo que cuesta",
+    photo: "https://picsum.photos/501",
+    name: "Manolo Manolín",
   },
 ];
 
@@ -106,7 +103,7 @@ const RequestScreen = () => {
       <FlatList
         data={friends}
         renderItem={({ item: request }) => (
-          <FriendComponent type="add" {...request} />
+          <FriendComponent type="manageRequest" {...request} />
         )}
       />
     </View>

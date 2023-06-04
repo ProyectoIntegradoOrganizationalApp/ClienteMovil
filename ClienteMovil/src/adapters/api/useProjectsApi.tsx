@@ -221,6 +221,41 @@ export const useProjectsApi = (fetch: boolean) => {
       });
   };
 
+  const changeUserProjectRole = (
+    idUser: string,
+    idProject: string,
+    newRole: string
+  ) => {
+    setLoading(true);
+
+    /**
+     * Props de la petición
+     */
+    const props: RequestParams = {
+      url: `${API}/user/${idUser}/project/${idProject}`,
+      method: "PUT",
+      headers: new AxiosHeaders({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?._token}`,
+      }),
+      data: {
+        idrole: newRole,
+      },
+    };
+
+    /**
+     *  Petición usando el Hook de Axios
+     */
+    useAxios(props)
+      .catch((err) => {
+        const error: ApiError = { error: true, message: err };
+        handleData(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   /**
    *  Función que maneja los datos que salen de la API.
    *  @param info
@@ -268,6 +303,7 @@ export const useProjectsApi = (fetch: boolean) => {
     leaveProject,
     editProject,
     deleteProject,
+    changeUserProjectRole,
   };
 };
 

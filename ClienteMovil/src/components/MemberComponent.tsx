@@ -27,6 +27,7 @@ interface IMember {
   name: string;
   role: string;
   isUserAdmin: boolean;
+  idProject: string;
 }
 
 function isMemberAdmin(role: string) {
@@ -78,7 +79,7 @@ function MemberComponent(props: IMember) {
     setModalConfirmVisible(e);
   };
 
-  const { leaveProject } = useProjectsApi(false);
+  const { leaveProject, changeUserProjectRole } = useProjectsApi(false);
 
   const { colors, components } = styles();
 
@@ -143,7 +144,15 @@ function MemberComponent(props: IMember) {
                   <Select
                     value={roles[selectedIndex.row].name}
                     selectedIndex={selectedIndex}
-                    onSelect={(index: any) => setSelectedIndex(index)}
+                    onSelect={(index: any) => {
+                      let newRole = index.row + 1;
+                      changeUserProjectRole(
+                        props.id,
+                        props.idProject,
+                        newRole.toString()
+                      );
+                      setSelectedIndex(index);
+                    }}
                     style={{ flex: 1 }}
                   >
                     {roles.map(

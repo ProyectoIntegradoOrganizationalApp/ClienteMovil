@@ -1,6 +1,5 @@
 // Componentes
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 // Pantallas
 import FriendsListScreen from "../screens/FriendsListScreen";
@@ -24,14 +23,7 @@ const FriendsScreen = ({ navigation }: { navigation: any }) => {
         component={FriendsListScreen}
         options={{
           title: "Friends",
-          headerRight: () => (
-            <Icon
-              name="cog"
-              color={colors.primary}
-              size={23}
-              onPress={() => navigation.navigate("FriendsSettings")}
-            />
-          ),
+
           headerTintColor: colors.text,
           headerStyle: {
             backgroundColor: colors.tabNavigator,

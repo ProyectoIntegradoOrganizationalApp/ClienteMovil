@@ -65,7 +65,7 @@ const FriendsListScreen = ({ navigation }: { navigation: any }) => {
             icon="account-multiple-plus"
             size={20}
             iconColor="#fff"
-            style={components.icons.basketIcon}
+            style={components.icons.addUserIcon}
             onPress={() => navigation.navigate("AddFriend")}
           />
         </View>

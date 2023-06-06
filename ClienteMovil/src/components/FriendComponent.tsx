@@ -87,7 +87,7 @@ function FriendComponent(props: IFriend) {
           size={15}
           style={components.icons.requestIcon}
           onPress={() => {
-            console.log("Send request");
+            console.log("Send friend request");
           }}
         />
       );
@@ -101,6 +101,19 @@ function FriendComponent(props: IFriend) {
           style={components.icons.cancelRequestIcon}
           onPress={() => {
             console.log("Cancel request");
+          }}
+        />
+      );
+      break;
+    case "invite":
+      componentOptions = (
+        <IconButton
+          icon="send"
+          iconColor="#fff"
+          size={15}
+          style={components.icons.requestIcon}
+          onPress={() => {
+            console.log("Send project invite");
           }}
         />
       );

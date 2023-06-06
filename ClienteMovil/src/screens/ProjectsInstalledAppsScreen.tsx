@@ -19,7 +19,7 @@ const apps = [
 ];
 
 const ProjectsInstalledAppsScreen = ({ navigation }: { navigation: any }) => {
-  const { colors, components, screens } = styles();
+  const { components, screens } = styles();
 
   return (
     <View style={[screens.projectsInstalledApps.background, { flex: 1 }]}>
@@ -34,14 +34,8 @@ const ProjectsInstalledAppsScreen = ({ navigation }: { navigation: any }) => {
           icon="basket"
           size={20}
           iconColor="#fff"
-          style={components.icons.basketIcon}
+          style={[components.icons.basketIcon, { marginRight: 15 }]}
           onPress={() => navigation.navigate("ProjectsApps")}
-        />
-        <IconButton
-          icon="cog"
-          size={25}
-          iconColor={colors.primary}
-          style={components.icons.settingsIcon}
         />
       </View>
       <View style={{ flex: 1, marginBottom: 15 }}>

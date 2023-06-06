@@ -9,21 +9,28 @@ import MemberComponent from "../components/MemberComponent";
 // Estilos
 import styles from "../styles/styles";
 
-const ProjectsMembersScreen = ({ route }: { route: any }) => {
+const ProjectsMembersScreen = ({
+  navigation,
+  route,
+}: {
+  navigation: any;
+  route: any;
+}) => {
   const { project } = route.params;
   const members = project.members;
   const { user } = useAuth();
 
-  const { colors, components, screens } = styles();
+  const { components, screens } = styles();
 
   return (
     <View style={[screens.projectsMembers.background, { flex: 1 }]}>
       <View style={screens.projectsMembers.container}>
         <IconButton
-          icon="cog"
-          size={25}
-          iconColor={colors.primary}
-          style={components.icons.settingsIcon}
+          icon="account-multiple-plus"
+          size={20}
+          iconColor="#fff"
+          style={components.icons.addUserIcon}
+          onPress={() => navigation.navigate("InviteMember")}
         />
       </View>
       <View style={{ flex: 1, marginBottom: 15 }}>

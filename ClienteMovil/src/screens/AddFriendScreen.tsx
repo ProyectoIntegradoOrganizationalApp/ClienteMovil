@@ -1,5 +1,5 @@
 // React
-import * as React from "react";
+import { useState } from "react";
 
 // Hooks
 import { useUser } from "../hooks/useUser";
@@ -59,7 +59,7 @@ const AddFriendScreen = () => {
 };
 
 const PendingRequestScreen = () => {
-  const [searchQuery, setSearchQuery] = React.useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const onChangeSearch = (query: any) => setSearchQuery(query);
 
   const { user } = useUser();

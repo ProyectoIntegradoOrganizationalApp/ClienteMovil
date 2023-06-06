@@ -7,6 +7,8 @@ import ProjectsSingleScreen from "../screens/ProjectsSingleScreen";
 import BoardsSingleScreen from "../screens/BoardsSingleScreen";
 import CreateBoardScreen from "../screens/CreateBoardScreen";
 import ChatScreen from "../screens/ChatScreen";
+import InviteMemberScreen from "../screens/InviteMemberScreen";
+import FriendProfileScreen from "../screens/FriendProfileScreen";
 import ProjectsAppsScreen from "../screens/ProjectsAppsScreen";
 
 // Estilos
@@ -78,6 +80,30 @@ const MainStack = () => {
           title: "Apps for install",
           headerShadowVisible: false,
           headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        })}
+      />
+      <Stack.Screen
+        name="InviteMember"
+        component={InviteMemberScreen}
+        options={() => ({
+          title: "Invite member",
+          headerShadowVisible: false,
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        })}
+      />
+      <Stack.Screen
+        name="FriendProfile"
+        component={FriendProfileScreen}
+        options={({ route }: { route: any }) => ({
+          title: route.params.friendName,
+          headerTintColor: colors.text,
+          headerShadowVisible: false,
           headerStyle: {
             backgroundColor: colors.tabNavigator,
           },

@@ -195,6 +195,11 @@ const styles = () => {
           borderRadius: 5,
           backgroundColor: "#008f39",
         },
+        addUserIcon: {
+          borderRadius: 5,
+          backgroundColor: "#3c6db2",
+          marginRight: 15,
+        },
         basketIcon: {
           borderRadius: 5,
           backgroundColor: "#3c6db2",

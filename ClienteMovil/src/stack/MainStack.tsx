@@ -21,7 +21,7 @@ const MainStack = () => {
   const { colors } = styles();
 
   return (
-    <Stack.Navigator initialRouteName="Projects">
+    <Stack.Navigator>
       <Stack.Screen
         name="Projects"
         component={ProjectsScreen}

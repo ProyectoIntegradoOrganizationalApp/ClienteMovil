@@ -71,6 +71,10 @@ const styles = () => {
           color: colors.text,
         },
       }),
+      addTask: {
+        borderRadius: 5,
+        backgroundColor: colors.background,
+      },
       badge: {
         minWidth: 10,
         maxHeight: 10,
@@ -82,10 +86,6 @@ const styles = () => {
           marginTop: 15,
           marginHorizontal: 10,
           backgroundColor: colors.card,
-        },
-        boardChevronIcon: {
-          color: colors.text,
-          backgroundColor: "transparent",
         },
       }),
       button: {
@@ -136,6 +136,12 @@ const styles = () => {
         },
       },
       card: {
+        borderRadius: 5,
+        marginTop: 15,
+        marginHorizontal: 10,
+        backgroundColor: colors.card,
+      },
+      column: {
         borderRadius: 5,
         marginTop: 15,
         marginHorizontal: 10,
@@ -210,6 +216,9 @@ const styles = () => {
           borderRadius: 5,
           backgroundColor: "#d54f4f",
         },
+        chevronIcon: {
+          backgroundColor: "transparent",
+        },
         crownIcon: {
           backgroundColor: "transparent",
         },
@@ -283,6 +292,11 @@ const styles = () => {
           backgroundColor: colors.uikittenSecondary,
         },
       }),
+      task: {
+        borderRadius: 5,
+        marginTop: 15,
+        backgroundColor: colors.background,
+      },
     },
     screens: {
       accountManagement: StyleSheet.create({

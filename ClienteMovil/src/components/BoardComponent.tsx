@@ -38,7 +38,6 @@ function BoardComponent(props: IBoard) {
         <Text variant="titleLarge" style={{ color: colors.text, flex: 1 }}>
           {props.title}
         </Text>
-
         <View style={{ flexDirection: "row" }}>
           <IconButton
             icon="eye"

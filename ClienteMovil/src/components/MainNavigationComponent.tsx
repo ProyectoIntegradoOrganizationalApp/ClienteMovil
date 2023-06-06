@@ -50,6 +50,7 @@ const MainNavigationComponent = () => {
 
   return (
     <Tab.Navigator
+      initialRouteName="MainStack"
       screenOptions={{
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.text,

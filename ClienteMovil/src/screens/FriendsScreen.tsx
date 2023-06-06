@@ -6,7 +6,6 @@ import FriendsListScreen from "../screens/FriendsListScreen";
 import FriendProfileScreen from "./FriendProfileScreen";
 import ChatScreen from "./ChatScreen";
 import AddFriendScreen from "../screens/AddFriendScreen";
-import FriendsSettingsScreen from "../screens/FriendsSettingsScreen";
 
 // Estilos
 import styles from "../styles/styles";
@@ -60,17 +59,6 @@ const FriendsScreen = ({ navigation }: { navigation: any }) => {
         options={{
           headerTintColor: colors.text,
           headerShadowVisible: false,
-          headerStyle: {
-            backgroundColor: colors.tabNavigator,
-          },
-        }}
-      />
-      <Stack.Screen
-        name="FriendsSettings"
-        component={FriendsSettingsScreen}
-        options={{
-          title: "Friends Settings",
-          headerTintColor: colors.text,
           headerStyle: {
             backgroundColor: colors.tabNavigator,
           },

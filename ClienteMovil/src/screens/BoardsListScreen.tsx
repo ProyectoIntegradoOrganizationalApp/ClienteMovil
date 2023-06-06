@@ -1,6 +1,6 @@
 // Componentes
 import { FlatList, View } from "react-native";
-import { FAB, IconButton } from "react-native-paper";
+import { FAB } from "react-native-paper";
 import BoardComponent from "../components/BoardComponent";
 
 // Estilos
@@ -35,6 +35,7 @@ const BoardsListScreen = ({ navigation }: { navigation: any }) => {
         <FlatList
           data={boards}
           renderItem={({ item: board }) => <BoardComponent {...board} />}
+          ListFooterComponent={<View style={{ height: 80 }} />}
         />
       </View>
       <FAB

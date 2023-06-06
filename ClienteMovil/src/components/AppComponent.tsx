@@ -64,7 +64,10 @@ function AppComponent(props: IApp) {
           icon="plus"
           iconColor="#fff"
           size={15}
-          style={[components.icons.addIcon, { marginRight: 15 }]}
+          style={[
+            components.icons.addIcon,
+            { marginLeft: 10, marginRight: 15 },
+          ]}
         />
       );
     }

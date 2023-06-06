@@ -12,7 +12,7 @@ import PopupNotificationComponent from "../components/PopupNotificationComponent
 // Estilos
 import styles from "../styles/styles";
 
-const EditProjectScreen = ({
+const EditBoardScreen = ({
   route,
   navigation,
 }: {
@@ -23,43 +23,32 @@ const EditProjectScreen = ({
 
   const { props } = route.params;
 
-  const { editProject } = useProjectsApi(true);
+  const { editBoard } = useProjectsApi(true);
 
   const [newName, setNewName] = useState("");
-  const [newDescription, setNewDescription] = useState("");
 
   const handlePress = () => {
-    editProject(props.idProject, newName, newDescription);
+    editBoard(props.idBoard, newName);
 
     navigation.goBack();
 
     PopupNotificationComponent(
       "success",
-      "Project Edited",
-      `Project ${props.name} was edited`
+      "Board Edited",
+      `Board ${props.name} was edited`
     );
   };
 
   return (
-    <View style={[screens.createProject.view, { flex: 1 }]}>
+    <View style={[screens.createBoard.view, { flex: 1 }]}>
       <TextInput
-        placeholder="Project name"
+        placeholder="Board name"
         placeholderTextColor={colors.primary}
         defaultValue={props.name}
-        onChangeText={(text) => setNewDescription(text)}
-        style={screens.createProject.input}
-      ></TextInput>
-      <TextInput
-        placeholder="Project description"
-        placeholderTextColor={colors.primary}
-        defaultValue={props.description}
         onChangeText={(text) => setNewName(text)}
-        multiline={true}
-        numberOfLines={4}
-        textAlignVertical="top"
-        style={screens.createProject.textarea}
+        style={screens.createBoard.input}
       ></TextInput>
-      <View style={screens.createProject.viewRow}>
+      <View style={screens.createBoard.viewRow}>
         <ButtonComponent
           type="secondary"
           title="Cancel"
@@ -79,4 +68,4 @@ const EditProjectScreen = ({
   );
 };
 
-export default EditProjectScreen;
+export default EditBoardScreen;

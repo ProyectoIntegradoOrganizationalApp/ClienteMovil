@@ -7,7 +7,6 @@ import ProjectsListScreen from "./ProjectsListScreen";
 import FriendProfileScreen from "./FriendProfileScreen";
 import CreateProjectScreen from "./CreateProjectScreen";
 import EditProjectScreen from "./EditProjectScreen";
-import ProjectsSettingsScreen from "./ProjectsSettingsScreen";
 
 // Estilos
 import styles from "../styles/styles";
@@ -52,6 +51,7 @@ const ProjectsScreen = ({ navigation }: { navigation: any }) => {
       <Stack.Screen
         name="CreateProject"
         options={{
+          title: "Create Project",
           headerTintColor: colors.text,
           headerStyle: {
             backgroundColor: colors.tabNavigator,
@@ -62,23 +62,13 @@ const ProjectsScreen = ({ navigation }: { navigation: any }) => {
       <Stack.Screen
         name="EditProject"
         options={{
+          title: "Edit Project",
           headerTintColor: colors.text,
           headerStyle: {
             backgroundColor: colors.tabNavigator,
           },
         }}
         component={EditProjectScreen}
-      />
-      <Stack.Screen
-        name="ProjectsSettings"
-        options={{
-          title: "Settings",
-          headerTintColor: colors.text,
-          headerStyle: {
-            backgroundColor: colors.tabNavigator,
-          },
-        }}
-        component={ProjectsSettingsScreen}
       />
     </Stack.Navigator>
   );

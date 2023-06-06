@@ -12,10 +12,10 @@ import { useAuth } from "../hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
 import { Card, IconButton } from "react-native-paper";
 import { View } from "react-native";
+import ModalConfirmComponent from "./ModalConfirmComponent";
 
 // Estilos
 import styles from "../styles/styles";
-import ModalConfirmComponent from "./ModalConfirmComponent";
 
 function ProjectComponent(props: Project) {
   const navigation = useNavigation<any>();

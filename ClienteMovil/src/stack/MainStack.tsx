@@ -5,11 +5,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ProjectsScreen from "../screens/ProjectsScreen";
 import ProjectsSingleScreen from "../screens/ProjectsSingleScreen";
 import BoardsSingleScreen from "../screens/BoardsSingleScreen";
-import ProjectsAppsScreen from "../screens/ProjectsAppsScreen";
+import CreateBoardScreen from "../screens/CreateBoardScreen";
 import ChatScreen from "../screens/ChatScreen";
+import ProjectsAppsScreen from "../screens/ProjectsAppsScreen";
 
 // Estilos
 import styles from "../styles/styles";
+import EditBoardScreen from "../screens/EditBoardScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -36,7 +38,7 @@ const MainStack = () => {
         })}
       />
       <Stack.Screen
-        name="Board"
+        name="BoardSingle"
         component={BoardsSingleScreen}
         options={({ route }: { route: any }) => ({
           title: route.params.boardTitle,
@@ -46,6 +48,28 @@ const MainStack = () => {
             backgroundColor: colors.tabNavigator,
           },
         })}
+      />
+      <Stack.Screen
+        name="CreateBoard"
+        options={{
+          title: "Create Board",
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        }}
+        component={CreateBoardScreen}
+      />
+      <Stack.Screen
+        name="EditBoard"
+        options={{
+          title: "Edit Board",
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        }}
+        component={EditBoardScreen}
       />
       <Stack.Screen
         name="ProjectsApps"

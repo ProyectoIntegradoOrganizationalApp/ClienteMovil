@@ -256,6 +256,12 @@ export const useProjectsApi = (fetch: boolean) => {
       });
   };
 
+  const createBoard = (name: string) => {};
+
+  const editBoard = (id: string, newName: string) => {};
+
+  const deleteBoard = (id: string) => {};
+
   /**
    *  Función que maneja los datos que salen de la API.
    *  @param info
@@ -304,6 +310,9 @@ export const useProjectsApi = (fetch: boolean) => {
     editProject,
     deleteProject,
     changeUserProjectRole,
+    createBoard,
+    editBoard,
+    deleteBoard,
   };
 };
 

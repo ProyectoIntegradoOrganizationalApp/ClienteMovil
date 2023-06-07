@@ -2,8 +2,10 @@
 import { useState } from "react";
 
 // Hooks
+import { useProjectsApi } from "../adapters/api/useProjectsApi";
 
 // Components
+import { useNavigation } from "@react-navigation/native";
 import { Card, IconButton } from "react-native-paper";
 import { FlatList, View } from "react-native";
 import TaskComponent from "./TaskComponent";
@@ -43,6 +45,10 @@ const tasks = [
 ];
 
 function ColumnComponent(props: IColumn) {
+  const navigation = useNavigation<any>();
+
+  const { deleteColumn } = useProjectsApi(false);
+
   const [modalConfirmVisible, setModalConfirmVisible] = useState(false);
   const handleModalConfirmState = (e: boolean) => {
     setModalConfirmVisible(e);
@@ -66,7 +72,10 @@ function ColumnComponent(props: IColumn) {
                   size={15}
                   style={components.icons.pencilIcon}
                   onPress={() => {
-                    console.log("Edit column");
+                    navigation.navigate("EditColumn", {
+                      columnTitle: props.title,
+                      props: props,
+                    });
                   }}
                 />
                 <IconButton
@@ -94,7 +103,7 @@ function ColumnComponent(props: IColumn) {
                   size={15}
                   style={[components.icons.addIcon, { marginRight: 15 }]}
                   onPress={() => {
-                    console.log("Add task");
+                    navigation.navigate("CreateTask");
                   }}
                 />
               )}
@@ -113,7 +122,9 @@ function ColumnComponent(props: IColumn) {
         isVisible={modalConfirmVisible}
         setModalConfirmVisible={handleModalConfirmState}
         onConfirm={() => {
-          console.log("Delete column");
+          let idColumn = "";
+          deleteColumn(idColumn);
+          navigation.goBack();
         }}
       />
     </>

@@ -12,41 +12,48 @@ import PopupNotificationComponent from "../components/PopupNotificationComponent
 // Estilos
 import styles from "../styles/styles";
 
-const CreateProjectScreen = ({ navigation }: { navigation: any }) => {
-  const { createProject } = useProjectsApi(false);
-
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-
+const EditTaskScreen = ({
+  route,
+  navigation,
+}: {
+  route: any;
+  navigation: any;
+}) => {
   const { colors, screens } = styles();
 
-  const handlePress = () => {
-    createProject(name, description);
+  const { props } = route.params;
 
-    setName("");
-    setDescription("");
+  const { editTask } = useProjectsApi(true);
+
+  const [newName, setNewName] = useState("");
+  const [newDescription, setNewDescription] = useState("");
+
+  const handlePress = () => {
+    editTask(props.idProject, newName, newDescription);
+
+    navigation.goBack();
 
     PopupNotificationComponent(
       "success",
-      "Project Created",
-      `Project ${name} was created`
+      "Task Edited",
+      `Task ${props.name} was edited`
     );
   };
 
   return (
     <View style={[screens.createProject.view, { flex: 1 }]}>
       <TextInput
-        placeholder="Project name"
+        placeholder="Task name"
         placeholderTextColor={colors.primary}
-        value={name}
-        onChangeText={(text) => setName(text)}
+        defaultValue={props.name}
+        onChangeText={(text) => setNewDescription(text)}
         style={screens.createProject.input}
       ></TextInput>
       <TextInput
-        placeholder="Project description"
+        placeholder="Task description"
         placeholderTextColor={colors.primary}
-        value={description}
-        onChangeText={(text) => setDescription(text)}
+        defaultValue={props.description}
+        onChangeText={(text) => setNewName(text)}
         multiline={true}
         numberOfLines={4}
         textAlignVertical="top"
@@ -72,4 +79,4 @@ const CreateProjectScreen = ({ navigation }: { navigation: any }) => {
   );
 };
 
-export default CreateProjectScreen;
+export default EditTaskScreen;

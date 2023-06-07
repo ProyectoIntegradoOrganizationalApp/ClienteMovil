@@ -1,4 +1,11 @@
+// React
 import { useState } from "react";
+
+// Hooks
+import { useProjectsApi } from "../adapters/api/useProjectsApi";
+
+// Componentes
+import { useNavigation } from "@react-navigation/native";
 import { Card, IconButton } from "react-native-paper";
 import { View } from "react-native";
 import ModalConfirmComponent from "./ModalConfirmComponent";
@@ -14,6 +21,10 @@ interface ITask {
 }
 
 function TaskComponent(props: ITask) {
+  const navigation = useNavigation<any>();
+
+  const { deleteTask } = useProjectsApi(false);
+
   const [modalConfirmVisible, setModalConfirmVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const handleModalConfirmState = (e: boolean) => {
@@ -49,17 +60,18 @@ function TaskComponent(props: ITask) {
           }
         />
         {isExpanded && (
-          <Card.Actions>
-            <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
-            >
+          <Card.Content>
+            <View style={{ flexDirection: "row", justifyContent: "center" }}>
               <IconButton
                 icon="pencil"
                 iconColor="#fff"
                 size={15}
-                style={components.icons.pencilIcon}
+                style={[components.icons.pencilIcon, { marginRight: 15 }]}
                 onPress={() => {
-                  console.log("Edit task");
+                  navigation.navigate("EditTask", {
+                    taskTitle: props.title,
+                    props: props,
+                  });
                 }}
               />
               <IconButton
@@ -72,17 +84,19 @@ function TaskComponent(props: ITask) {
                 }}
               />
             </View>
-          </Card.Actions>
+          </Card.Content>
         )}
       </Card>
       <ModalConfirmComponent
-        message="Are you sure you want to delete this column?"
+        message="Are you sure you want to delete this task?"
         confirmText="Confirm"
         dismissText="Cancel"
         isVisible={modalConfirmVisible}
         setModalConfirmVisible={handleModalConfirmState}
         onConfirm={() => {
-          console.log("Delete task");
+          let idTask = "";
+          deleteTask(idTask);
+          navigation.goBack();
         }}
       />
     </>

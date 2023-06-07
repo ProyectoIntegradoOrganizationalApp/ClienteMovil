@@ -12,45 +12,33 @@ import PopupNotificationComponent from "../components/PopupNotificationComponent
 // Estilos
 import styles from "../styles/styles";
 
-const CreateProjectScreen = ({ navigation }: { navigation: any }) => {
-  const { createProject } = useProjectsApi(false);
+const CreateColumnScreen = ({ navigation }: { navigation: any }) => {
+  const { createColumn } = useProjectsApi(false);
 
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
 
   const { colors, screens } = styles();
 
   const handlePress = () => {
-    createProject(name, description);
+    createColumn(name);
 
     setName("");
-    setDescription("");
 
     PopupNotificationComponent(
       "success",
-      "Project Created",
-      `Project ${name} was created`
+      "Column Created",
+      `Column ${name} was created`
     );
   };
 
   return (
     <View style={[screens.createProject.view, { flex: 1 }]}>
       <TextInput
-        placeholder="Project name"
+        placeholder="Column name"
         placeholderTextColor={colors.primary}
         value={name}
         onChangeText={(text) => setName(text)}
         style={screens.createProject.input}
-      ></TextInput>
-      <TextInput
-        placeholder="Project description"
-        placeholderTextColor={colors.primary}
-        value={description}
-        onChangeText={(text) => setDescription(text)}
-        multiline={true}
-        numberOfLines={4}
-        textAlignVertical="top"
-        style={screens.createProject.textarea}
       ></TextInput>
       <View style={screens.createProject.viewRow}>
         <ButtonComponent
@@ -72,4 +60,4 @@ const CreateProjectScreen = ({ navigation }: { navigation: any }) => {
   );
 };
 
-export default CreateProjectScreen;
+export default CreateColumnScreen;

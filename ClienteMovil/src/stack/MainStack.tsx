@@ -6,14 +6,18 @@ import ProjectsScreen from "../screens/ProjectsScreen";
 import ProjectsSingleScreen from "../screens/ProjectsSingleScreen";
 import BoardsSingleScreen from "../screens/BoardsSingleScreen";
 import CreateBoardScreen from "../screens/CreateBoardScreen";
+import EditBoardScreen from "../screens/EditBoardScreen";
+import CreateColumnScreen from "../screens/CreateColumnScreen";
+import EditColumnScreen from "../screens/EditColumnScreen";
 import ChatScreen from "../screens/ChatScreen";
 import InviteMemberScreen from "../screens/InviteMemberScreen";
 import FriendProfileScreen from "../screens/FriendProfileScreen";
 import ProjectsAppsScreen from "../screens/ProjectsAppsScreen";
+import CreateTaskScreen from "../screens/CreateTaskScreen";
+import EditTaskScreen from "../screens/EditTaskScreen";
 
 // Estilos
 import styles from "../styles/styles";
-import EditBoardScreen from "../screens/EditBoardScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,7 +25,7 @@ const MainStack = () => {
   const { colors } = styles();
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="Projects">
       <Stack.Screen
         name="Projects"
         component={ProjectsScreen}
@@ -72,6 +76,50 @@ const MainStack = () => {
           },
         }}
         component={EditBoardScreen}
+      />
+      <Stack.Screen
+        name="CreateColumn"
+        options={{
+          title: "Create Column",
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        }}
+        component={CreateColumnScreen}
+      />
+      <Stack.Screen
+        name="EditColumn"
+        options={{
+          title: "Edit Column",
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        }}
+        component={EditColumnScreen}
+      />
+      <Stack.Screen
+        name="CreateTask"
+        options={{
+          title: "Create Task",
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        }}
+        component={CreateTaskScreen}
+      />
+      <Stack.Screen
+        name="EditTask"
+        options={{
+          title: "Edit Task",
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        }}
+        component={EditTaskScreen}
       />
       <Stack.Screen
         name="ProjectsApps"

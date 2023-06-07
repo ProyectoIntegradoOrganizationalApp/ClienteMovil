@@ -12,8 +12,8 @@ import PopupNotificationComponent from "../components/PopupNotificationComponent
 // Estilos
 import styles from "../styles/styles";
 
-const CreateProjectScreen = ({ navigation }: { navigation: any }) => {
-  const { createProject } = useProjectsApi(false);
+const CreateTaskScreen = ({ navigation }: { navigation: any }) => {
+  const { createTask } = useProjectsApi(false);
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -21,22 +21,22 @@ const CreateProjectScreen = ({ navigation }: { navigation: any }) => {
   const { colors, screens } = styles();
 
   const handlePress = () => {
-    createProject(name, description);
+    createTask(name, description);
 
     setName("");
     setDescription("");
 
     PopupNotificationComponent(
       "success",
-      "Project Created",
-      `Project ${name} was created`
+      "Task Created",
+      `Task ${name} was created`
     );
   };
 
   return (
     <View style={[screens.createProject.view, { flex: 1 }]}>
       <TextInput
-        placeholder="Project name"
+        placeholder="Task name"
         placeholderTextColor={colors.primary}
         value={name}
         onChangeText={(text) => setName(text)}
@@ -72,4 +72,4 @@ const CreateProjectScreen = ({ navigation }: { navigation: any }) => {
   );
 };
 
-export default CreateProjectScreen;
+export default CreateTaskScreen;

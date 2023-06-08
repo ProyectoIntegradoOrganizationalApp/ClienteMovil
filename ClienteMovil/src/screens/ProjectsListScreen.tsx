@@ -16,14 +16,6 @@ const ProjectsListScreen = ({ navigation }: { navigation: any }) => {
 
   const { components, screens } = styles();
 
-  const handlePress = () => {
-    PopupNotificationComponent(
-      "success",
-      "Project Created",
-      "Project 'algo' was created"
-    );
-  };
-
   return (
     <View style={[screens.projectsList.background, { flex: 1 }]}>
       <View style={{ flex: 1 }}>

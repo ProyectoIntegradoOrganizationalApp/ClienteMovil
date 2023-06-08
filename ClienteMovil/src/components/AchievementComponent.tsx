@@ -1,7 +1,7 @@
 // Componentes
 import { Avatar, Card, ProgressBar } from "react-native-paper";
 import { Text } from "react-native";
-//import { achievementsIcons } from "../utils/achievementsIcons"; // TODO: Use this
+import { achievementsIcons } from "../utils/achievementsIcons";
 
 // Estilos
 import styles from "../styles/styles";
@@ -15,25 +15,6 @@ interface IAchievement {
   progress: number;
   filterBy: string;
 }
-
-const achievementsIcons = [
-  {
-    id: "1",
-    icon: require(`../assets/images/achievements/icon-achievement-1.png`),
-  },
-  {
-    id: "2",
-    icon: require(`../assets/images/achievements/icon-achievement-2.png`),
-  },
-  {
-    id: "3",
-    icon: require(`../assets/images/achievements/icon-achievement-3.png`),
-  },
-  {
-    id: "4",
-    icon: require(`../assets/images/achievements/icon-achievement-4.png`),
-  },
-];
 
 function AchievementComponent(props: IAchievement) {
   const { colors, components } = styles();

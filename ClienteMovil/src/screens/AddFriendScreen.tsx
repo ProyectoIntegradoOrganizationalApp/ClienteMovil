@@ -58,9 +58,23 @@ const AddFriendScreen = () => {
   );
 };
 
+const getUsers = (query: any) => {
+  // TODO: Request
+};
+
 const PendingRequestScreen = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const onChangeSearch = (query: any) => setSearchQuery(query);
+  const [searchResults, setSearchResults] = useState([]);
+
+  const onChangeSearch = async (query: any) => {
+    setSearchQuery(query);
+    const results = await getUsers(query);
+    const formattedResults = results.map((user: any, index: string) => ({
+      ...user,
+      key: index.toString(),
+    }));
+    setSearchResults(formattedResults);
+  };
 
   const { user } = useUser();
 
@@ -81,7 +95,12 @@ const PendingRequestScreen = () => {
         }}
       />
       {
-        // * When search: <FriendComponent type="request" {...request} />
+        <FlatList
+          data={searchResults}
+          renderItem={({ item: request }) => (
+            <FriendComponent type="request" {...request} />
+          )}
+        />
       }
       <FlatList
         data={friends}

@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // Hooks
-import { useProjectsApi } from "../adapters/api/useProjectsApi";
+import { useBoardsApi } from "../adapters/api/useBoardsApi";
 
 // Componentes
 import { TextInput, View } from "react-native";
@@ -23,7 +23,7 @@ const EditBoardScreen = ({
 
   const { props } = route.params;
 
-  const { editBoard } = useProjectsApi(true);
+  const { editBoard } = useBoardsApi(true);
 
   const [newName, setNewName] = useState("");
 

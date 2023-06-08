@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // Hooks
-import { useProjectsApi } from "../adapters/api/useProjectsApi";
+import { useBoardsApi } from "../adapters/api/useBoardsApi";
 
 // Componentes
 import { useNavigation } from "@react-navigation/native";
@@ -14,15 +14,16 @@ import ModalConfirmComponent from "./ModalConfirmComponent";
 import styles from "../styles/styles";
 
 interface IBoard {
+  id: string;
   title: string;
-  cover: string;
-  owner: boolean;
+  photo: string;
+  idapp: string;
 }
 
 function BoardComponent(props: IBoard) {
   const navigation = useNavigation<any>();
 
-  const { deleteBoard } = useProjectsApi(true);
+  const { deleteBoard } = useBoardsApi(true);
 
   const [modalConfirmVisible, setModalConfirmVisible] = useState(false);
   const handleModalConfirmState = (e: boolean) => {
@@ -33,7 +34,7 @@ function BoardComponent(props: IBoard) {
 
   return (
     <Card style={components.board.board}>
-      <Card.Cover source={{ uri: props.cover }} />
+      <Card.Cover source={{ uri: props.photo }} />
       <Card.Actions>
         <Text variant="titleLarge" style={{ color: colors.text, flex: 1 }}>
           {props.title}
@@ -45,13 +46,16 @@ function BoardComponent(props: IBoard) {
             size={15}
             style={[
               components.icons.eyeIcon,
-              !props.owner ? { marginRight: 15 } : null,
+              !props.idapp ? { marginRight: 15 } : null,
             ]}
             onPress={() =>
-              navigation.navigate("BoardSingle", { boardTitle: props.title })
+              navigation.navigate("BoardSingle", {
+                boardTitle: props.title,
+                board: props,
+              })
             }
           />
-          {props.owner ? (
+          {props.idapp ? (
             <>
               <IconButton
                 icon="pencil"

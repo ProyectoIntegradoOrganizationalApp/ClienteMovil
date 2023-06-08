@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // Hooks
-import { useProjectsApi } from "../adapters/api/useProjectsApi";
+import { useTasksApi } from "../adapters/api/useTasksApi";
 
 // Componentes
 import { useNavigation } from "@react-navigation/native";
@@ -23,7 +23,7 @@ interface ITask {
 function TaskComponent(props: ITask) {
   const navigation = useNavigation<any>();
 
-  const { deleteTask } = useProjectsApi(false);
+  const { deleteTask } = useTasksApi(false);
 
   const [modalConfirmVisible, setModalConfirmVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);

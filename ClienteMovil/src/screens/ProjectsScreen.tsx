@@ -19,7 +19,6 @@ const ProjectsScreen = ({ navigation }: { navigation: any }) => {
         name="ProjectsList"
         options={{
           title: "Projects",
-
           headerTintColor: colors.text,
           headerStyle: {
             backgroundColor: colors.tabNavigator,

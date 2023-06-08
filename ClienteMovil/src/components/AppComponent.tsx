@@ -1,90 +1,47 @@
+// React
+import { useState } from "react";
+
+// Hooks
+import { useAppsApi } from "../adapters/api/useAppsApi";
+
 // Componentes
 import { useNavigation } from "@react-navigation/native";
 import { Avatar, Card, IconButton } from "react-native-paper";
 import { Text, View } from "react-native";
+import ModalConfirmComponent from "./ModalConfirmComponent";
 
 // Estilos
 import styles from "../styles/styles";
 
 interface IApp {
-  icon: string;
+  id: string;
+  idproject: string;
   name: string;
   description: string;
-  installed: boolean;
-  added: boolean;
-  premium: boolean;
-}
-
-function isAppPremium(premium: boolean) {
-  const { components } = styles();
-
-  if (premium) {
-    return (
-      <Avatar.Icon
-        icon="crown"
-        color="#ec9d27"
-        size={30}
-        style={components.icons.crownIcon}
-      />
-    );
-  }
+  photo: string;
 }
 
 function AppComponent(props: IApp) {
   const navigation = useNavigation<any>();
 
+  const { deleteApp } = useAppsApi(true);
+
+  const [modalConfirmVisible, setModalConfirmVisible] = useState(false);
+  const handleModalConfirmState = (e: boolean) => {
+    setModalConfirmVisible(e);
+  };
+
   const { colors, components } = styles();
 
-  let componentOptions: JSX.Element;
-  if (!props.installed) {
-    componentOptions = (
-      <IconButton
-        icon="basket"
-        iconColor="#fff"
-        size={15}
-        style={[
-          components.icons.basketIcon,
-          { marginLeft: 10, marginRight: 15 },
-        ]}
-      />
-    );
-  } else {
-    if (props.added) {
-      componentOptions = (
-        <IconButton
-          icon="delete"
-          iconColor="#fff"
-          size={15}
-          style={components.icons.deleteIcon}
-        />
-      );
-    } else {
-      componentOptions = (
-        <IconButton
-          icon="plus"
-          iconColor="#fff"
-          size={15}
-          style={[
-            components.icons.addIcon,
-            { marginLeft: 10, marginRight: 15 },
-          ]}
-        />
-      );
-    }
-  }
+  let owner = true;
 
   return (
     <Card style={components.card}>
       <Card.Title
-        title={
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={{ color: colors.text }}>{props.name}</Text>
-            {isAppPremium(props.premium)}
-          </View>
-        }
+        title={<Text style={{ color: colors.text }}>{props.name}</Text>}
         subtitle={props.description}
         subtitleStyle={{ color: colors.text }}
-        left={() => <Avatar.Image size={40} source={{ uri: props.icon }} />}
+        left={() => <Avatar.Image size={40} source={{ uri: props.photo }} />}
         right={() => (
           <View style={{ flexDirection: "row" }}>
             <IconButton
@@ -92,10 +49,51 @@ function AppComponent(props: IApp) {
               iconColor="#fff"
               size={15}
               style={components.icons.eyeIcon}
+              onPress={() =>
+                navigation.navigate("BoardList", {
+                  appTitle: props.name,
+                  app: props,
+                })
+              }
             />
-            {componentOptions}
+            {owner ? (
+              <>
+                <IconButton
+                  icon="pencil"
+                  iconColor="#fff"
+                  size={15}
+                  style={components.icons.pencilIcon}
+                  onPress={() => {
+                    navigation.navigate("EditApp", {
+                      appTitle: props.name,
+                      props: props,
+                    });
+                  }}
+                />
+                <IconButton
+                  icon="delete"
+                  iconColor="#fff"
+                  size={15}
+                  style={components.icons.deleteIcon}
+                  onPress={() => {
+                    setModalConfirmVisible(true);
+                  }}
+                />
+              </>
+            ) : null}
           </View>
         )}
+      />
+      <ModalConfirmComponent
+        message="Are you sure you want to delete this app?"
+        confirmText="Confirm"
+        dimissText="Cancel"
+        isVisible={modalConfirmVisible}
+        setModalConfirmVisible={handleModalConfirmState}
+        onConfirm={() => {
+          deleteApp(props.id);
+          navigation.goBack();
+        }}
       />
     </Card>
   );

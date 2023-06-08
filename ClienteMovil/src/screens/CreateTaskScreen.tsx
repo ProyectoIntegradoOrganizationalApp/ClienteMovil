@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // Hooks
-import { useProjectsApi } from "../adapters/api/useProjectsApi";
+import { useTasksApi } from "../adapters/api/useTasksApi";
 
 // Componentes
 import { TextInput, View } from "react-native";
@@ -12,8 +12,16 @@ import PopupNotificationComponent from "../components/PopupNotificationComponent
 // Estilos
 import styles from "../styles/styles";
 
-const CreateTaskScreen = ({ navigation }: { navigation: any }) => {
-  const { createTask } = useProjectsApi(false);
+const CreateTaskScreen = ({
+  navigation,
+  route,
+}: {
+  navigation: any;
+  route: any;
+}) => {
+  const { idcolumn } = route.params;
+
+  const { createTask } = useTasksApi(false);
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -21,7 +29,7 @@ const CreateTaskScreen = ({ navigation }: { navigation: any }) => {
   const { colors, screens } = styles();
 
   const handlePress = () => {
-    createTask(name, description);
+    createTask(name, description, idcolumn);
 
     setName("");
     setDescription("");

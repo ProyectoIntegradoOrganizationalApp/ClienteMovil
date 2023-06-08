@@ -1,105 +1,57 @@
 // React
-import React from "react";
+import { useEffect } from "react";
+
+// Hook
+import { useAppsApi } from "../adapters/api/useAppsApi";
 
 // Componentes
-import { FlatList, Text, View } from "react-native";
-import {
-  ApplicationProvider,
-  IndexPath,
-  Select,
-  SelectItem,
-} from "@ui-kitten/components";
-import { mapping } from "@eva-design/eva";
+import { FlatList, View } from "react-native";
+import { FAB } from "react-native-paper";
 import AppComponent from "../components/AppComponent";
+import LoadingComponent from "../components/LoadingComponent";
 
 // Estilos
 import styles from "../styles/styles";
 
-const apps = [
-  {
-    id: "1",
-    icon: "https://picsum.photos/268",
-    name: "Taskman",
-    description: "Work Managment",
-    installed: true,
-    added: false,
-    premium: false,
-  },
-  {
-    id: "2",
-    icon: "https://picsum.photos/193",
-    name: "Yesse",
-    description: "Music",
-    installed: false,
-    added: false,
-    premium: true,
-  },
-  {
-    id: "3",
-    icon: "https://picsum.photos/343",
-    name: "Engroup",
-    description: "Friends Groups",
-    installed: false,
-    added: false,
-    premium: true,
-  },
-  {
-    id: "4",
-    icon: "https://picsum.photos/444",
-    name: "Pinsave",
-    description: "Save Remote Projects",
-    installed: false,
-    added: false,
-    premium: true,
-  },
-  {
-    id: "5",
-    icon: "https://picsum.photos/777",
-    name: "BNP",
-    description: "Financial Advisor",
-    installed: false,
-    added: false,
-    premium: true,
-  },
-];
+const ProjectsAppsScreen = ({
+  navigation,
+  route,
+}: {
+  navigation: any;
+  route: any;
+}) => {
+  const { data: apps, loading, fetchData } = useAppsApi(true);
 
-const orders = ["Recently", "Older", "Alphabetical"];
+  useEffect(() => {
+    return navigation.addListener("focus", () => {
+      fetchData();
+    });
+  }, [navigation]);
 
-const ProjectsAppsScreen = () => {
-  const [selectedIndex, setSelectedIndex] = React.useState<IndexPath>(
-    new IndexPath(0)
-  );
+  const { project } = route.params;
 
   const { components, screens } = styles();
 
   return (
-    <View style={[screens.projectsApps.background, { flex: 1 }]}>
-      <View style={components.filter.filterView}>
-        <Text style={components.filter.filterText}>Order by:</Text>
-        <ApplicationProvider
-          mapping={mapping}
-          theme={components.filter.filterSelectTheme}
-        >
-          <Select
-            value={orders[selectedIndex.row]}
-            selectedIndex={selectedIndex}
-            onSelect={(index: any) => setSelectedIndex(index)}
-            style={components.filter.filterSelect}
-          >
-            {orders.map(
-              (title: string, index: number): React.ReactElement => (
-                <SelectItem key={index.toString()} title={title} />
-              )
-            )}
-          </Select>
-        </ApplicationProvider>
-      </View>
+    <View style={[screens.projectsInstalledApps.background, { flex: 1 }]}>
       <View style={{ flex: 1 }}>
-        <FlatList
-          data={apps}
-          renderItem={({ item: app }) => <AppComponent {...app} />}
-        />
+        {apps ? (
+          <FlatList
+            data={Array.isArray(apps) ? apps : [apps]}
+            renderItem={({ item: app }) => <AppComponent {...app} />}
+          />
+        ) : (
+          <LoadingComponent state={loading} />
+        )}
       </View>
+      <FAB
+        icon="plus"
+        color="#ffffff"
+        style={[components.fab, { position: "absolute" }]}
+        onPress={() => {
+          navigation.navigate("CreateApp", { idproject: project.id });
+        }}
+      />
     </View>
   );
 };

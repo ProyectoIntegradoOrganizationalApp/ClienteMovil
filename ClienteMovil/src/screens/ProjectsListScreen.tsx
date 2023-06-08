@@ -1,3 +1,6 @@
+// React
+import { useEffect } from "react";
+
 // Hook
 import { useProjectsApi } from "../adapters/api/useProjectsApi";
 
@@ -6,13 +9,18 @@ import { FlatList, View } from "react-native";
 import ProjectComponent from "../components/ProjectComponent";
 import { FAB } from "react-native-paper";
 import LoadingComponent from "../components/LoadingComponent";
-import PopupNotificationComponent from "../components/PopupNotificationComponent";
 
 // Estilos
 import styles from "../styles/styles";
 
 const ProjectsListScreen = ({ navigation }: { navigation: any }) => {
-  const { data: projects, loading } = useProjectsApi(true);
+  const { data: projects, loading, fetchData } = useProjectsApi(true);
+
+  useEffect(() => {
+    return navigation.addListener("focus", () => {
+      fetchData();
+    });
+  }, [navigation]);
 
   const { components, screens } = styles();
 

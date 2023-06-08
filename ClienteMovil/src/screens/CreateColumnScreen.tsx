@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // Hooks
-import { useProjectsApi } from "../adapters/api/useProjectsApi";
+import { useColumnsApi } from "../adapters/api/useColumnsApi";
 
 // Componentes
 import { TextInput, View } from "react-native";
@@ -12,15 +12,23 @@ import PopupNotificationComponent from "../components/PopupNotificationComponent
 // Estilos
 import styles from "../styles/styles";
 
-const CreateColumnScreen = ({ navigation }: { navigation: any }) => {
-  const { createColumn } = useProjectsApi(false);
+const CreateColumnScreen = ({
+  navigation,
+  route,
+}: {
+  navigation: any;
+  route: any;
+}) => {
+  const { idboard } = route.params;
+
+  const { createColumn } = useColumnsApi(false);
 
   const [name, setName] = useState("");
 
   const { colors, screens } = styles();
 
   const handlePress = () => {
-    createColumn(name);
+    createColumn(name, idboard);
 
     setName("");
 

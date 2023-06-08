@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // Hooks
-import { useProjectsApi } from "../adapters/api/useProjectsApi";
+import { useColumnsApi } from "../adapters/api/useColumnsApi";
 
 // Componentes
 import { TextInput, View } from "react-native";
@@ -23,7 +23,7 @@ const EditColumnScreen = ({
 
   const { props } = route.params;
 
-  const { editColumn } = useProjectsApi(true);
+  const { editColumn } = useColumnsApi(true);
 
   const [newName, setNewName] = useState("");
 

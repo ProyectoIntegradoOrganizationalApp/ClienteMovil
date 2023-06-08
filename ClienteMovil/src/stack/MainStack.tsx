@@ -4,6 +4,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // Pantallas
 import ProjectsScreen from "../screens/ProjectsScreen";
 import ProjectsSingleScreen from "../screens/ProjectsSingleScreen";
+import CreateAppScreen from "../screens/CreateAppScreen";
+import EditAppScreen from "../screens/EditAppScreen";
+import BoardsListScreen from "../screens/BoardsListScreen";
 import BoardsSingleScreen from "../screens/BoardsSingleScreen";
 import CreateBoardScreen from "../screens/CreateBoardScreen";
 import EditBoardScreen from "../screens/EditBoardScreen";
@@ -36,6 +39,40 @@ const MainStack = () => {
         component={ProjectsSingleScreen}
         options={({ route }: { route: any }) => ({
           title: route.params.projectTitle,
+          headerShadowVisible: false,
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        })}
+      />
+      <Stack.Screen
+        name="CreateApp"
+        options={{
+          title: "Create App",
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        }}
+        component={CreateAppScreen}
+      />
+      <Stack.Screen
+        name="EditApp"
+        options={{
+          title: "Edit App",
+          headerTintColor: colors.text,
+          headerStyle: {
+            backgroundColor: colors.tabNavigator,
+          },
+        }}
+        component={EditAppScreen}
+      />
+      <Stack.Screen
+        name="BoardList"
+        component={BoardsListScreen}
+        options={({ route }: { route: any }) => ({
+          title: route.params.appTitle,
           headerShadowVisible: false,
           headerTintColor: colors.text,
           headerStyle: {

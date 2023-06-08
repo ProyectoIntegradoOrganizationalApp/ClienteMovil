@@ -2,8 +2,7 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 // Pantallas
-import BoardsListScreen from "./BoardsListScreen";
-import ProjectsInstalledAppsScreen from "./ProjectsInstalledAppsScreen";
+import ProjectsAppsScreen from "./ProjectsAppsScreen";
 import ProjectsMembersScreen from "./ProjectsMembersScreen";
 
 // Estilos
@@ -25,15 +24,9 @@ const ProjectsSingleScreen = ({ route }: { route: any }) => {
       }}
     >
       <Tab.Screen
-        name="BoardsList"
-        options={{ title: "Boards" }}
-        component={BoardsListScreen}
-        initialParams={{ project: project }}
-      />
-      <Tab.Screen
-        name="ProjectsInstalledApps"
+        name="ProjectsApps"
         options={{ title: "Apps" }}
-        component={ProjectsInstalledAppsScreen}
+        component={ProjectsAppsScreen}
         initialParams={{ project: project }}
       />
       <Tab.Screen

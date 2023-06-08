@@ -1,14 +1,16 @@
 // React
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Hooks
-import { useProjectsApi } from "../adapters/api/useProjectsApi";
+import { useColumnsApi } from "../adapters/api/useColumnsApi";
+import { useTasksApi } from "../adapters/api/useTasksApi";
 
 // Components
 import { useNavigation } from "@react-navigation/native";
 import { Card, IconButton } from "react-native-paper";
 import { FlatList, View } from "react-native";
 import TaskComponent from "./TaskComponent";
+import LoadingComponent from "./LoadingComponent";
 import ModalConfirmComponent from "./ModalConfirmComponent";
 
 // Estilos
@@ -20,39 +22,23 @@ interface IColumn {
   title: string;
 }
 
-const tasks = [
-  {
-    id: "1",
-    idcolumn: "1",
-    title: "Task 1",
-    description: "Descripcion task 1",
-    github: "Github",
-  },
-  {
-    id: "2",
-    idcolumn: "2",
-    title: "Task 2",
-    description: "Descripcion task 2",
-    github: "Github",
-  },
-  {
-    id: "3",
-    idcolumn: "3",
-    title: "Task 3",
-    description: "Descripcion task 3",
-    github: "Github",
-  },
-];
-
 function ColumnComponent(props: IColumn) {
   const navigation = useNavigation<any>();
 
-  const { deleteColumn } = useProjectsApi(false);
+  const { deleteColumn } = useColumnsApi(false);
 
   const [modalConfirmVisible, setModalConfirmVisible] = useState(false);
   const handleModalConfirmState = (e: boolean) => {
     setModalConfirmVisible(e);
   };
+
+  const { data: tasks, loading, fetchData } = useTasksApi(true);
+
+  useEffect(() => {
+    return navigation.addListener("focus", () => {
+      fetchData();
+    });
+  }, [navigation]);
 
   const { colors, components } = styles();
 
@@ -103,16 +89,20 @@ function ColumnComponent(props: IColumn) {
                   size={15}
                   style={[components.icons.addIcon, { marginRight: 15 }]}
                   onPress={() => {
-                    navigation.navigate("CreateTask");
+                    navigation.navigate("CreateTask", { idcolumn: props.id });
                   }}
                 />
               )}
             />
           </Card>
-          <FlatList
-            data={tasks}
-            renderItem={({ item: task }) => <TaskComponent {...task} />}
-          />
+          {tasks ? (
+            <FlatList
+              data={Array.isArray(tasks) ? tasks : [tasks]}
+              renderItem={({ item: task }) => <TaskComponent {...task} />}
+            />
+          ) : (
+            <LoadingComponent state={loading} />
+          )}
         </Card.Content>
       </Card>
       <ModalConfirmComponent

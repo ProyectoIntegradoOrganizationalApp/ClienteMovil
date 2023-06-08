@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // Hooks
-import { useTasksApi } from "../adapters/api/useTasksApi";
+import { useAppsApi } from "../adapters/api/useAppsApi";
 
 // Componentes
 import { TextInput, View } from "react-native";
@@ -12,7 +12,7 @@ import PopupNotificationComponent from "../components/PopupNotificationComponent
 // Estilos
 import styles from "../styles/styles";
 
-const EditTaskScreen = ({
+const EditAppScreen = ({
   route,
   navigation,
 }: {
@@ -23,34 +23,34 @@ const EditTaskScreen = ({
 
   const { props } = route.params;
 
-  const { editTask } = useTasksApi(true);
+  const { editApp } = useAppsApi(true);
 
   const [newName, setNewName] = useState("");
   const [newDescription, setNewDescription] = useState("");
 
   const handlePress = () => {
-    editTask(props.idProject, newName, newDescription);
+    editApp(props.idApp, newName, newDescription);
 
     navigation.goBack();
 
     PopupNotificationComponent(
       "success",
-      "Task Edited",
-      `Task ${props.name} was edited`
+      "App Edited",
+      `App ${props.name} was edited`
     );
   };
 
   return (
     <View style={[screens.createProject.view, { flex: 1 }]}>
       <TextInput
-        placeholder="Task name"
+        placeholder="App name"
         placeholderTextColor={colors.primary}
         defaultValue={props.name}
         onChangeText={(text) => setNewDescription(text)}
         style={screens.createProject.input}
       ></TextInput>
       <TextInput
-        placeholder="Task description"
+        placeholder="App description"
         placeholderTextColor={colors.primary}
         defaultValue={props.description}
         onChangeText={(text) => setNewName(text)}
@@ -79,4 +79,4 @@ const EditTaskScreen = ({
   );
 };
 
-export default EditTaskScreen;
+export default EditAppScreen;

@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // Hooks
-import { useBoardsApi } from "../adapters/api/useBoardsApi";
+import { useAppsApi } from "../adapters/api/useAppsApi";
 
 // Componentes
 import { TextInput, View } from "react-native";
@@ -12,41 +12,53 @@ import PopupNotificationComponent from "../components/PopupNotificationComponent
 // Estilos
 import styles from "../styles/styles";
 
-const CreateBoardScreen = ({
+const CreateAppScreen = ({
   navigation,
   route,
 }: {
   navigation: any;
   route: any;
 }) => {
-  const { idapp } = route.params;
+  const { idproject } = route.params;
 
-  const { createBoard } = useBoardsApi(false);
+  const { createApp } = useAppsApi(false);
 
   const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
   const { colors, screens } = styles();
 
   const handlePress = () => {
-    createBoard(idapp, name);
+    createApp(idproject, name, description);
 
     setName("");
+    setDescription("");
 
     PopupNotificationComponent(
       "success",
-      "Board Created",
-      `Board ${name} was created`
+      "App Created",
+      `App ${name} was created`
     );
   };
 
   return (
     <View style={[screens.createBoard.view, { flex: 1 }]}>
       <TextInput
-        placeholder="Board name"
+        placeholder="App name"
         placeholderTextColor={colors.primary}
         value={name}
         onChangeText={(text) => setName(text)}
         style={screens.createBoard.input}
+      ></TextInput>
+      <TextInput
+        placeholder="App description"
+        placeholderTextColor={colors.primary}
+        value={description}
+        onChangeText={(text) => setDescription(text)}
+        multiline={true}
+        numberOfLines={4}
+        textAlignVertical="top"
+        style={screens.createProject.textarea}
       ></TextInput>
       <View style={screens.createBoard.viewRow}>
         <ButtonComponent
@@ -68,4 +80,4 @@ const CreateBoardScreen = ({
   );
 };
 
-export default CreateBoardScreen;
+export default CreateAppScreen;

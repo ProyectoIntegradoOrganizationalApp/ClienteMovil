@@ -6,7 +6,6 @@ import { Project } from "../domain/projects/Project.interface";
 
 // Hooks
 import { useProjectsApi } from "../adapters/api/useProjectsApi";
-import { useAuth } from "../hooks/useAuth";
 
 // Componentes
 import { useNavigation } from "@react-navigation/native";
@@ -25,10 +24,6 @@ function ProjectComponent(props: Project) {
   const [modalConfirmVisible, setModalConfirmVisible] = useState(false);
   const handleModalConfirmState = (e: boolean) => {
     setModalConfirmVisible(e);
-  };
-
-  const isUserOwned = (owned: string) => {
-    return owned === useAuth().user?.id;
   };
 
   const { colors, components } = styles();

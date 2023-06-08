@@ -256,24 +256,6 @@ export const useProjectsApi = (fetch: boolean) => {
       });
   };
 
-  const createBoard = (name: string) => {};
-
-  const editBoard = (id: string, newName: string) => {};
-
-  const deleteBoard = (id: string) => {};
-
-  const createColumn = (name: string) => {};
-
-  const editColumn = (id: string, newName: string) => {};
-
-  const deleteColumn = (id: string) => {};
-
-  const createTask = (name: string, description: string) => {};
-
-  const editTask = (id: string, newName: string, newDescription: string) => {};
-
-  const deleteTask = (id: string) => {};
-
   /**
    *  Función que maneja los datos que salen de la API.
    *  @param info
@@ -316,21 +298,13 @@ export const useProjectsApi = (fetch: boolean) => {
     data,
     error,
     loading,
+    fetchData,
     fetchProject,
     createProject,
     leaveProject,
     editProject,
     deleteProject,
     changeUserProjectRole,
-    createBoard,
-    editBoard,
-    deleteBoard,
-    createColumn,
-    editColumn,
-    deleteColumn,
-    createTask,
-    editTask,
-    deleteTask,
   };
 };
 

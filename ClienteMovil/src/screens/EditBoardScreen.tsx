@@ -23,12 +23,12 @@ const EditBoardScreen = ({
 
   const { props } = route.params;
 
-  const { editBoard } = useBoardsApi(true);
+  const { editBoard } = useBoardsApi();
 
   const [newName, setNewName] = useState("");
 
   const handlePress = () => {
-    editBoard(props.idBoard, newName);
+    editBoard(props.idapp, props.id, newName);
 
     navigation.goBack();
 

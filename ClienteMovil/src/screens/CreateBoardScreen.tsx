@@ -21,7 +21,7 @@ const CreateBoardScreen = ({
 }) => {
   const { idapp } = route.params;
 
-  const { createBoard } = useBoardsApi(false);
+  const { createBoard } = useBoardsApi();
 
   const [name, setName] = useState("");
 

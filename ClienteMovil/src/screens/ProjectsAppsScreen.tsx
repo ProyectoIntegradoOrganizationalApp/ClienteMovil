@@ -20,15 +20,15 @@ const ProjectsAppsScreen = ({
   navigation: any;
   route: any;
 }) => {
-  const { data: apps, loading, fetchData } = useAppsApi(true);
+  const { data: apps, loading, fetchData } = useAppsApi();
+
+  const { project } = route.params;
 
   useEffect(() => {
     return navigation.addListener("focus", () => {
-      fetchData();
+      fetchData(project.idproject);
     });
   }, [navigation]);
-
-  const { project } = route.params;
 
   const { components, screens } = styles();
 

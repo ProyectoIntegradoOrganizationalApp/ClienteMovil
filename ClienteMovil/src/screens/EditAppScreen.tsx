@@ -23,13 +23,13 @@ const EditAppScreen = ({
 
   const { props } = route.params;
 
-  const { editApp } = useAppsApi(true);
+  const { editApp } = useAppsApi();
 
   const [newName, setNewName] = useState("");
   const [newDescription, setNewDescription] = useState("");
 
   const handlePress = () => {
-    editApp(props.idApp, newName, newDescription);
+    editApp(props.idProject, newName, newDescription, props.id);
 
     navigation.goBack();
 

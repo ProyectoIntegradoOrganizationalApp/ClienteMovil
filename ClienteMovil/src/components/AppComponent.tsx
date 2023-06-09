@@ -1,6 +1,9 @@
 // React
 import { useState } from "react";
 
+// Interfaces
+import { App } from "../domain/apps/App.interface";
+
 // Hooks
 import { useAppsApi } from "../adapters/api/useAppsApi";
 
@@ -13,18 +16,10 @@ import ModalConfirmComponent from "./ModalConfirmComponent";
 // Estilos
 import styles from "../styles/styles";
 
-interface IApp {
-  id: string;
-  idproject: string;
-  name: string;
-  description: string;
-  photo: string;
-}
-
-function AppComponent(props: IApp) {
+function AppComponent(props: App) {
   const navigation = useNavigation<any>();
 
-  const { deleteApp } = useAppsApi(true);
+  const { deleteApp } = useAppsApi();
 
   const [modalConfirmVisible, setModalConfirmVisible] = useState(false);
   const handleModalConfirmState = (e: boolean) => {
@@ -91,7 +86,7 @@ function AppComponent(props: IApp) {
         isVisible={modalConfirmVisible}
         setModalConfirmVisible={handleModalConfirmState}
         onConfirm={() => {
-          deleteApp(props.id);
+          deleteApp(props.idProject, props.id);
           navigation.goBack();
         }}
       />

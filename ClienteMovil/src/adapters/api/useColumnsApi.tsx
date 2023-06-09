@@ -66,9 +66,64 @@ export const useColumnsApi = (fetch: boolean) => {
 
   const createColumn = (name: string, id: string) => {};
 
-  const editColumn = (id: string, newName: string) => {};
+  const editColumn = (idboard: string, newTitle: string, id: string) => {
+    setLoading(true);
 
-  const deleteColumn = (id: string) => {};
+    /**
+     * Props de la petición
+     */
+    const props: RequestParams = {
+      url: `${API}/${idboard}/task_app/board/${id}`,
+      method: "PUT",
+      headers: new AxiosHeaders({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?._token}`,
+      }),
+      data: {
+        ...(newTitle.length > 0 && { title: newTitle }),
+      },
+    };
+
+    /**
+     *  Petición usando el Hook de Axios
+     */
+    useAxios(props)
+      .catch((err) => {
+        const error: ApiError = { error: true, message: err };
+        handleData(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const deleteColumn = (idboard: string, id: string) => {
+    setLoading(true);
+
+    /**
+     * Props de la petición
+     */
+    const props: RequestParams = {
+      url: `${API}/${idboard}/task_app/column/${id}`,
+      method: "DELETE",
+      headers: new AxiosHeaders({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?._token}`,
+      }),
+    };
+
+    /**
+     *  Petición usando el Hook de Axios
+     */
+    useAxios(props)
+      .catch((err) => {
+        const error: ApiError = { error: true, message: err };
+        handleData(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   /**
    *  Función que maneja los datos que salen de la API.

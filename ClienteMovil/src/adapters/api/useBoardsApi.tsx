@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAxios } from "./useAxios";
 import { AxiosHeaders } from "axios";
 
 import { useAuth } from "../../hooks/useAuth";
 
 import { RequestParams } from "../../domain/RequestParams.interface";
-import { Project } from "../../domain/projects/Project.interface";
+import { Board } from "../../domain/boards/Board.interface";
 import { ApiError } from "../../domain/ApiError.interface";
-import { ProjectMapper } from "../mappers/ProjectMapper";
-import { ProjectDTO } from "../../domain/projects/ProjectDTO.interface";
+import { BoardMapper } from "../mappers/BoardMapper";
+import { BoardDTO } from "../../domain/boards/BoardDTO.interface";
 
 import { API_URL } from "@env";
 
@@ -16,22 +16,12 @@ import { API_URL } from "@env";
  * Hook para la conexión con los endpoints del back-end que se
  * encargan de hacer las peticiones sobre proyectos.
  */
-export const useBoardsApi = (fetch: boolean) => {
+export const useBoardsApi = () => {
   const { user } = useAuth();
 
-  const [data, setData] = useState<Array<Project> | Project>();
+  const [data, setData] = useState<Array<Board> | Board>();
   const [error, setError] = useState<ApiError>();
   const [loading, setLoading] = useState<boolean>(false);
-
-  /**
-   *  Efecto que maneja el ciclo de vida de la API
-   */
-  useEffect(() => {
-    // Para así poder usar el hook sin realizar otra query.
-    if (fetch) {
-      fetchData();
-    }
-  }, []);
 
   const API = API_URL;
 
@@ -39,14 +29,14 @@ export const useBoardsApi = (fetch: boolean) => {
    *  Función que fetchea los datos de los proyectos, se debe de llamar desde un
    *  efecto, para que el objeto de usuario ya haya cargado.
    */
-  const fetchData = () => {
+  const fetchData = (idapp: string) => {
     setLoading(true);
 
     /**
      * Props de la petición
      */
     const props: RequestParams = {
-      url: `${API}/user/${user?.id}/projects`,
+      url: `${API}/${idapp}/task_app/boards`,
       method: "GET",
       headers: new AxiosHeaders({
         "Content-Type": "application/json",
@@ -64,19 +54,102 @@ export const useBoardsApi = (fetch: boolean) => {
       });
   };
 
-  const createBoard = (name: string, id: string) => {};
+  const createBoard = (idapp: string, title: string) => {
+    setLoading(true);
 
-  const editBoard = (id: string, newName: string) => {};
+    /**
+     * Props de la petición
+     */
+    const props: RequestParams = {
+      url: `${API}/${idapp}/task_app/board`,
+      method: "POST",
+      headers: new AxiosHeaders({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?._token}`,
+      }),
+      data: {
+        title: title,
+        photo: "https://www.svgrepo.com/show/513474/rocket.svg",
+      },
+    };
 
-  const deleteBoard = (id: string) => {};
+    /**
+     *  Petición usando el Hook de Axios
+     */
+    useAxios(props)
+      .catch((err) => {
+        const error: ApiError = { error: true, message: err };
+        handleData(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
-  const createColumn = (name: string, id: string) => {};
+  const editBoard = (idapp: string, id: string, newTitle: string) => {
+    setLoading(true);
+
+    /**
+     * Props de la petición
+     */
+    const props: RequestParams = {
+      url: `${API}/${idapp}/task_app/board/${id}`,
+      method: "PUT",
+      headers: new AxiosHeaders({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?._token}`,
+      }),
+      data: {
+        ...(newTitle.length > 0 && { title: newTitle }),
+      },
+    };
+
+    /**
+     *  Petición usando el Hook de Axios
+     */
+    useAxios(props)
+      .catch((err) => {
+        const error: ApiError = { error: true, message: err };
+        handleData(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const deleteBoard = (idapp: string, id: string) => {
+    setLoading(true);
+
+    /**
+     * Props de la petición
+     */
+    const props: RequestParams = {
+      url: `${API}/${idapp}/task_app/board/${id}`,
+      method: "DELETE",
+      headers: new AxiosHeaders({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?._token}`,
+      }),
+    };
+
+    /**
+     *  Petición usando el Hook de Axios
+     */
+    useAxios(props)
+      .catch((err) => {
+        const error: ApiError = { error: true, message: err };
+        handleData(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   /**
    *  Función que maneja los datos que salen de la API.
    *  @param info
    */
-  const handleData = (info: ProjectWrapper | ProjectDTO | ApiError) => {
+  const handleData = (info: BoardWrapper | BoardDTO | ApiError) => {
     /**
      * Hay Error
      */
@@ -87,24 +160,22 @@ export const useBoardsApi = (fetch: boolean) => {
     /**
      * Si no hay error
      */
-    if (info && "projects" in info) {
+    if (info && "boards" in info) {
       // Quitamos los errores en caso de que los halla
       setError(undefined);
 
       // Cambiamos el state
       //console.log(info);
-      let projects: Array<Project> = ProjectMapper.prototype.mapArrayTo(
-        info.projects
-      );
-      setData(projects);
+      let boards: Array<Board> = BoardMapper.prototype.mapArrayTo(info.boards);
+      setData(boards);
     }
 
-    if (info && "idproject" in info) {
+    if (info && "id" in info) {
       // Quitamos los errores en caso de que los halla
       setError(undefined);
 
-      let project: Project = ProjectMapper.prototype.mapTo(info);
-      setData(project);
+      let board: Board = BoardMapper.prototype.mapTo(info);
+      setData(board);
     }
 
     setLoading(false);
@@ -118,13 +189,12 @@ export const useBoardsApi = (fetch: boolean) => {
     createBoard,
     editBoard,
     deleteBoard,
-    createColumn,
   };
 };
 
 /**
  *  Envoltorio de una propiedad que es un array. Esta es la respuesta del back-end.
  */
-interface ProjectWrapper {
-  projects: Array<ProjectDTO>;
+interface BoardWrapper {
+  boards: Array<BoardDTO>;
 }

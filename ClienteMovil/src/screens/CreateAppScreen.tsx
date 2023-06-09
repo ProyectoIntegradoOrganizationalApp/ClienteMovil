@@ -21,7 +21,7 @@ const CreateAppScreen = ({
 }) => {
   const { idproject } = route.params;
 
-  const { createApp } = useAppsApi(false);
+  const { createApp } = useAppsApi();
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");

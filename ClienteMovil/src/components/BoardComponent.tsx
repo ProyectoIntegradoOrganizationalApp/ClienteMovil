@@ -1,6 +1,9 @@
 // React
 import { useState } from "react";
 
+// Interfaces
+import { Board } from "../domain/boards/Board.interface";
+
 // Hooks
 import { useBoardsApi } from "../adapters/api/useBoardsApi";
 
@@ -13,17 +16,10 @@ import ModalConfirmComponent from "./ModalConfirmComponent";
 // Estilos
 import styles from "../styles/styles";
 
-interface IBoard {
-  id: string;
-  title: string;
-  photo: string;
-  idapp: string;
-}
-
-function BoardComponent(props: IBoard) {
+function BoardComponent(props: Board) {
   const navigation = useNavigation<any>();
 
-  const { deleteBoard } = useBoardsApi(true);
+  const { deleteBoard } = useBoardsApi();
 
   const [modalConfirmVisible, setModalConfirmVisible] = useState(false);
   const handleModalConfirmState = (e: boolean) => {
@@ -46,7 +42,7 @@ function BoardComponent(props: IBoard) {
             size={15}
             style={[
               components.icons.eyeIcon,
-              !props.idapp ? { marginRight: 15 } : null,
+              !props.idApp ? { marginRight: 15 } : null,
             ]}
             onPress={() =>
               navigation.navigate("BoardSingle", {
@@ -55,7 +51,7 @@ function BoardComponent(props: IBoard) {
               })
             }
           />
-          {props.idapp ? (
+          {props.idApp ? (
             <>
               <IconButton
                 icon="pencil"
@@ -89,8 +85,7 @@ function BoardComponent(props: IBoard) {
         isVisible={modalConfirmVisible}
         setModalConfirmVisible={handleModalConfirmState}
         onConfirm={() => {
-          let idBoard = "";
-          deleteBoard(idBoard);
+          deleteBoard(props.idApp, props.id);
           navigation.goBack();
         }}
       />

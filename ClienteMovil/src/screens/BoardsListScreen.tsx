@@ -20,15 +20,15 @@ const BoardsListScreen = ({
   navigation: any;
   route: any;
 }) => {
-  const { data: boards, loading, fetchData } = useBoardsApi(true);
+  const { data: boards, loading, fetchData } = useBoardsApi();
+
+  const { app } = route.params;
 
   useEffect(() => {
     return navigation.addListener("focus", () => {
-      fetchData();
+      fetchData(app.id);
     });
   }, [navigation]);
-
-  const { app } = route.params;
 
   const { components, screens } = styles();
   return (

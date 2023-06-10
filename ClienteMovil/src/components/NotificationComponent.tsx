@@ -1,17 +1,13 @@
+// Interfaces
+import { Notification } from "../domain/notification/Notification.interface";
+
 // Componentes
-import { useNavigation } from "@react-navigation/native";
-import { Avatar, IconButton, Card } from "react-native-paper";
+import { Card } from "react-native-paper";
 
 // Estilos
 import styles from "../styles/styles";
 
-interface INotification {
-  user: string;
-  message: string;
-  date: string;
-}
-
-function NotificationComponent(props: INotification) {
+function NotificationComponent(props: Notification) {
   //const navigation = useNavigation<any>();
 
   const { colors, components } = styles();
@@ -19,11 +15,10 @@ function NotificationComponent(props: INotification) {
   return (
     <Card style={components.card}>
       <Card.Title
-        title={props.message}
+        title={props.title}
         titleStyle={{ color: colors.text }}
-        subtitle={props.date}
+        subtitle={props.message}
         subtitleStyle={{ color: colors.text }}
-        left={() => <Avatar.Image size={40} source={{ uri: props.user }} />}
       />
     </Card>
   );

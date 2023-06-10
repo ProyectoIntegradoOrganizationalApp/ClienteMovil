@@ -1,8 +1,8 @@
 // React
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Hooks
-import { useUser } from "../hooks/useUser";
+import { useFriendApi } from "../adapters/api/useFriendApi";
 
 // Componentes
 import { FlatList, View } from "react-native";
@@ -12,29 +12,33 @@ import FriendComponent from "../components/FriendComponent";
 // Estilos
 import styles from "../styles/styles";
 
-const friends = [
-  {
-    id: "1",
-    photo: "https://picsum.photos/163",
-    name: "Pepe Pepín",
-  },
-  {
-    id: "2",
-    photo: "https://picsum.photos/490",
-    name: "Juan Juanete",
-  },
-  {
-    id: "3",
-    photo: "https://picsum.photos/501",
-    name: "Manolo Manolín",
-  },
-];
-
 const InviteMemberScreen = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const onChangeSearch = (query: any) => setSearchQuery(query);
+  const { fetchUsers } = useFriendApi(true);
 
-  const { user } = useUser();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (searchQuery.length > 0) {
+      fetchUsers(searchQuery);
+    } else {
+      setSearchResults([]);
+    }
+  }, [searchQuery]);
+
+  const onChangeSearch = async (query: string) => {
+    setSearchQuery(query);
+    if (query.length > 0) {
+      const results = await fetchUsers(query);
+      const formattedResults = results.map((user: any, index: string) => ({
+        ...user,
+        key: index.toString(),
+      }));
+      setSearchResults(formattedResults);
+    } else {
+      setSearchResults([]);
+    }
+  };
 
   const { colors, components, screens } = styles();
 
@@ -52,9 +56,14 @@ const InviteMemberScreen = () => {
           colors: { onSurfaceVariant: colors.text },
         }}
       />
-      {
-        // * When search: <FriendComponent type="invite" {...request} />
-      }
+      <View style={{ flex: 1 }}>
+        <FlatList
+          data={searchResults}
+          renderItem={({ item: user }) => (
+            <FriendComponent type="invite" {...user} />
+          )}
+        />
+      </View>
     </View>
   );
 };

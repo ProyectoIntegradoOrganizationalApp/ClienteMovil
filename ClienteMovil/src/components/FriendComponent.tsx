@@ -1,14 +1,11 @@
-// React
-import { useEffect } from "react";
-
 // Hooks
+import { useAuth } from "../hooks/useAuth";
 import { useFriendApi } from "../adapters/api/useFriendApi";
 
 // Componentes
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { Avatar, Card, IconButton, TouchableRipple } from "react-native-paper";
 import { View } from "react-native";
-import PopupNotificationComponent from "./PopupNotificationComponent";
 
 // Interfaces
 import { Friend } from "../domain/friend/Friend.interface";
@@ -23,7 +20,19 @@ interface IFriend extends Friend {
 function FriendComponent(props: IFriend) {
   const navigation = useNavigation<any>();
 
-  const { data, error, addUser, removeUser } = useFriendApi();
+  const { user } = useAuth();
+
+  const { projectId } = useRoute<any>();
+
+  const {
+    addFriend,
+    removeFriend,
+    acceptFriendRequest,
+    denyFriendRequest,
+    inviteUser,
+    acceptInvitation,
+    denyInvitation,
+  } = useFriendApi(true);
 
   const { components, colors } = styles();
 
@@ -49,7 +58,7 @@ function FriendComponent(props: IFriend) {
             size={15}
             style={components.icons.deleteIcon}
             onPress={() => {
-              removeUser(props.id);
+              removeFriend(props.id);
             }}
           />
         </View>
@@ -64,7 +73,7 @@ function FriendComponent(props: IFriend) {
             size={15}
             style={components.icons.addIcon}
             onPress={() => {
-              console.log("Accept request");
+              acceptFriendRequest(user?.id);
             }}
           />
           <IconButton
@@ -73,7 +82,7 @@ function FriendComponent(props: IFriend) {
             size={15}
             style={components.icons.deleteIcon}
             onPress={() => {
-              console.log("Deny request");
+              denyFriendRequest(user?.id);
             }}
           />
         </View>
@@ -87,20 +96,7 @@ function FriendComponent(props: IFriend) {
           size={15}
           style={components.icons.requestIcon}
           onPress={() => {
-            console.log("Send friend request");
-          }}
-        />
-      );
-      break;
-    case "cancelRequest":
-      componentOptions = (
-        <IconButton
-          icon="cancel"
-          iconColor="#fff"
-          size={15}
-          style={components.icons.cancelRequestIcon}
-          onPress={() => {
-            console.log("Cancel request");
+            addFriend(props.id);
           }}
         />
       );
@@ -113,9 +109,33 @@ function FriendComponent(props: IFriend) {
           size={15}
           style={components.icons.requestIcon}
           onPress={() => {
-            console.log("Send project invite");
+            inviteUser(user?.id, projectId);
           }}
         />
+      );
+      break;
+    case "manageProjectRequest":
+      componentOptions = (
+        <View style={{ flexDirection: "row" }}>
+          <IconButton
+            icon="plus"
+            iconColor="#fff"
+            size={15}
+            style={components.icons.addIcon}
+            onPress={() => {
+              acceptInvitation(user?.id, projectId);
+            }}
+          />
+          <IconButton
+            icon="delete"
+            iconColor="#fff"
+            size={15}
+            style={components.icons.deleteIcon}
+            onPress={() => {
+              denyInvitation(user?.id, projectId);
+            }}
+          />
+        </View>
       );
       break;
   }

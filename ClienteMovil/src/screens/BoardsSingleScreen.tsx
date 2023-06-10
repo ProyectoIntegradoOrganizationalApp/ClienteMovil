@@ -39,7 +39,9 @@ const BoardsSingleScreen = ({
           <FlatList
             horizontal
             data={Array.isArray(columns) ? columns : [columns]}
-            renderItem={({ item: column }) => <ColumnComponent {...column} />}
+            renderItem={({ item: column }) => (
+              <ColumnComponent idApp={board.idApp} {...column} />
+            )}
           />
         ) : (
           <LoadingComponent state={loading} />

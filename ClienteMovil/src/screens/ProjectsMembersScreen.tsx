@@ -30,7 +30,11 @@ const ProjectsMembersScreen = ({
           size={20}
           iconColor="#fff"
           style={components.icons.addUserIcon}
-          onPress={() => navigation.navigate("InviteMember")}
+          onPress={() =>
+            navigation.navigate("InviteMember", {
+              projectId: project.idProject,
+            })
+          }
         />
       </View>
       <View style={{ flex: 1, marginBottom: 15 }}>

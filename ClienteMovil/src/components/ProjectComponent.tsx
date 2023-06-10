@@ -52,31 +52,29 @@ function ProjectComponent(props: Project) {
                 })
               }
             />
-            {props.owner ? (
-              <>
-                <IconButton
-                  icon="pencil"
-                  iconColor="#fff"
-                  size={15}
-                  style={components.icons.pencilIcon}
-                  onPress={() => {
-                    navigation.navigate("EditProject", {
-                      projectTitle: props.name,
-                      props: props,
-                    });
-                  }}
-                />
-                <IconButton
-                  icon="delete"
-                  iconColor="#fff"
-                  size={15}
-                  style={components.icons.deleteIcon}
-                  onPress={() => {
-                    setModalConfirmVisible(true);
-                  }}
-                />
-              </>
-            ) : null}
+            <>
+              <IconButton
+                icon="pencil"
+                iconColor="#fff"
+                size={15}
+                style={components.icons.pencilIcon}
+                onPress={() => {
+                  navigation.navigate("EditProject", {
+                    projectTitle: props.name,
+                    props: props,
+                  });
+                }}
+              />
+              <IconButton
+                icon="delete"
+                iconColor="#fff"
+                size={15}
+                style={components.icons.deleteIcon}
+                onPress={() => {
+                  setModalConfirmVisible(true);
+                }}
+              />
+            </>
           </View>
         )}
       />

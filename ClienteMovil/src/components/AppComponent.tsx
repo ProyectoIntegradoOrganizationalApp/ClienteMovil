@@ -28,8 +28,6 @@ function AppComponent(props: App) {
 
   const { colors, components } = styles();
 
-  let owner = true;
-
   return (
     <Card style={components.card}>
       <Card.Title
@@ -51,31 +49,29 @@ function AppComponent(props: App) {
                 })
               }
             />
-            {owner ? (
-              <>
-                <IconButton
-                  icon="pencil"
-                  iconColor="#fff"
-                  size={15}
-                  style={components.icons.pencilIcon}
-                  onPress={() => {
-                    navigation.navigate("EditApp", {
-                      appTitle: props.name,
-                      props: props,
-                    });
-                  }}
-                />
-                <IconButton
-                  icon="delete"
-                  iconColor="#fff"
-                  size={15}
-                  style={components.icons.deleteIcon}
-                  onPress={() => {
-                    setModalConfirmVisible(true);
-                  }}
-                />
-              </>
-            ) : null}
+            <>
+              <IconButton
+                icon="pencil"
+                iconColor="#fff"
+                size={15}
+                style={components.icons.pencilIcon}
+                onPress={() => {
+                  navigation.navigate("EditApp", {
+                    appTitle: props.name,
+                    props: props,
+                  });
+                }}
+              />
+              <IconButton
+                icon="delete"
+                iconColor="#fff"
+                size={15}
+                style={components.icons.deleteIcon}
+                onPress={() => {
+                  setModalConfirmVisible(true);
+                }}
+              />
+            </>
           </View>
         )}
       />

@@ -15,8 +15,10 @@ import ModalConfirmComponent from "./ModalConfirmComponent";
 
 import styles from "../styles/styles";
 
-function TaskComponent(props: Task) {
+function TaskComponent(props: Task & { idApp: string }) {
   const navigation = useNavigation<any>();
+
+  const { idApp } = props;
 
   const { deleteTask } = useTasksApi();
 
@@ -32,8 +34,6 @@ function TaskComponent(props: Task) {
 
   const { colors, components } = styles();
 
-  let role = "";
-
   return (
     <>
       <Card style={components.task}>
@@ -42,17 +42,15 @@ function TaskComponent(props: Task) {
           titleStyle={{ color: colors.text }}
           subtitle={props.description}
           subtitleStyle={{ color: colors.text }}
-          right={() =>
-            role !== "reader" && (
-              <IconButton
-                icon={isExpanded ? "chevron-up" : "chevron-down"}
-                iconColor={colors.text}
-                size={15}
-                style={components.icons.chevronIcon}
-                onPress={handleExpand}
-              />
-            )
-          }
+          right={() => (
+            <IconButton
+              icon={isExpanded ? "chevron-up" : "chevron-down"}
+              iconColor={colors.text}
+              size={15}
+              style={components.icons.chevronIcon}
+              onPress={handleExpand}
+            />
+          )}
         />
         {isExpanded && (
           <Card.Content>
@@ -65,7 +63,7 @@ function TaskComponent(props: Task) {
                 onPress={() => {
                   navigation.navigate("EditTask", {
                     taskTitle: props.title,
-                    idapp: idApp, // TODO: Get idApp
+                    idapp: idApp,
                     props: props,
                   });
                 }}

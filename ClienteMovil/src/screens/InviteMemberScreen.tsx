@@ -12,8 +12,10 @@ import FriendComponent from "../components/FriendComponent";
 // Estilos
 import styles from "../styles/styles";
 
-const InviteMemberScreen = () => {
+const InviteMemberScreen = ({ route }: { route: any }) => {
   const { fetchUsers } = useFriendApi(true);
+
+  const { projectId } = route.params;
 
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<any[]>([]);
@@ -60,7 +62,7 @@ const InviteMemberScreen = () => {
         <FlatList
           data={searchResults}
           renderItem={({ item: user }) => (
-            <FriendComponent type="invite" {...user} />
+            <FriendComponent type="invite" projectid={projectId} {...user} />
           )}
         />
       </View>

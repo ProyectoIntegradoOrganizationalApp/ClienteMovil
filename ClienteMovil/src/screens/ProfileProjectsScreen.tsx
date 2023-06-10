@@ -1,3 +1,6 @@
+// React
+import { useEffect } from "react";
+
 // Hook
 import { useProjectsApi } from "../adapters/api/useProjectsApi";
 
@@ -11,9 +14,15 @@ import LoadingComponent from "../components/LoadingComponent";
 import styles from "../styles/styles";
 
 const ProfileProjectsScreen = ({ navigation }: { navigation: any }) => {
-  const { data: projects, loading } = useProjectsApi(true);
+  const { data: projects, loading, fetchData } = useProjectsApi(true);
 
   const { components, screens } = styles();
+
+  useEffect(() => {
+    return navigation.addListener("focus", () => {
+      fetchData();
+    });
+  }, [navigation]);
 
   return (
     <View style={[screens.projectsList.background, { flex: 1 }]}>

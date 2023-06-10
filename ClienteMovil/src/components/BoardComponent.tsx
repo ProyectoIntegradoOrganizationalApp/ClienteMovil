@@ -51,31 +51,29 @@ function BoardComponent(props: Board) {
               })
             }
           />
-          {props.idApp ? (
-            <>
-              <IconButton
-                icon="pencil"
-                iconColor="#fff"
-                size={15}
-                style={components.icons.pencilIcon}
-                onPress={() => {
-                  navigation.navigate("EditBoard", {
-                    projectTitle: props.title,
-                    props: props,
-                  });
-                }}
-              />
-              <IconButton
-                icon="delete"
-                iconColor="#fff"
-                size={15}
-                style={components.icons.deleteIcon}
-                onPress={() => {
-                  setModalConfirmVisible(true);
-                }}
-              />
-            </>
-          ) : null}
+          <>
+            <IconButton
+              icon="pencil"
+              iconColor="#fff"
+              size={15}
+              style={components.icons.pencilIcon}
+              onPress={() => {
+                navigation.navigate("EditBoard", {
+                  projectTitle: props.title,
+                  props: props,
+                });
+              }}
+            />
+            <IconButton
+              icon="delete"
+              iconColor="#fff"
+              size={15}
+              style={components.icons.deleteIcon}
+              onPress={() => {
+                setModalConfirmVisible(true);
+              }}
+            />
+          </>
         </View>
       </Card.Actions>
       <ModalConfirmComponent

@@ -195,7 +195,10 @@ export const useFriendApi = (fetch: boolean) => {
       });
   };
 
-  const inviteUser = (userId: string | undefined, projectId: string) => {
+  const inviteUser = (
+    userId: string | undefined,
+    projectId: string | undefined
+  ) => {
     const props: RequestParams = {
       url: `${API}/user/${userId}/project/${projectId}`,
       method: "POST",
@@ -219,7 +222,10 @@ export const useFriendApi = (fetch: boolean) => {
       });
   };
 
-  const acceptInvitation = (userId: string | undefined, projectId: string) => {
+  const acceptInvitation = (
+    userId: string | undefined,
+    projectId: string | undefined
+  ) => {
     const props: RequestParams = {
       url: `${API}/user/${userId}/project/${projectId}/accept`,
       method: "GET",
@@ -239,7 +245,10 @@ export const useFriendApi = (fetch: boolean) => {
       });
   };
 
-  const denyInvitation = (userId: string | undefined, projectId: string) => {
+  const denyInvitation = (
+    userId: string | undefined,
+    projectId: string | undefined
+  ) => {
     const props: RequestParams = {
       url: `${API}/user/${userId}/project/${projectId}/deny`,
       method: "GET",

@@ -17,12 +17,13 @@ interface IFriend extends Friend {
   type: string;
 }
 
-function FriendComponent(props: IFriend) {
+function FriendComponent(props: IFriend & { projectId?: string }) {
   const navigation = useNavigation<any>();
+  const route = useRoute<any>();
+
+  const { projectId } = props;
 
   const { user } = useAuth();
-
-  const { projectId } = useRoute<any>();
 
   const {
     addFriend,

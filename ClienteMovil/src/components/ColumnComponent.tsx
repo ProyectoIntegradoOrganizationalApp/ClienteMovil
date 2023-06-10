@@ -19,8 +19,10 @@ import ModalConfirmComponent from "./ModalConfirmComponent";
 // Estilos
 import styles from "../styles/styles";
 
-function ColumnComponent(props: Column) {
+function ColumnComponent(props: Column & { idApp: string }) {
   const navigation = useNavigation<any>();
+
+  const { idApp } = props;
 
   const { deleteColumn } = useColumnsApi();
 
@@ -39,41 +41,37 @@ function ColumnComponent(props: Column) {
 
   const { colors, components } = styles();
 
-  let role = "";
-
   return (
     <>
       <Card style={components.column}>
         <Card.Title
           title={props.title}
-          right={() =>
-            role !== "reader" && (
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <IconButton
-                  icon="pencil"
-                  iconColor="#fff"
-                  size={15}
-                  style={components.icons.pencilIcon}
-                  onPress={() => {
-                    navigation.navigate("EditColumn", {
-                      columnTitle: props.title,
-                      idapp: idApp, // TODO: Get idApp
-                      props: props,
-                    });
-                  }}
-                />
-                <IconButton
-                  icon="delete"
-                  iconColor="#fff"
-                  size={15}
-                  style={components.icons.deleteIcon}
-                  onPress={() => {
-                    setModalConfirmVisible(true);
-                  }}
-                />
-              </View>
-            )
-          }
+          right={() => (
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <IconButton
+                icon="pencil"
+                iconColor="#fff"
+                size={15}
+                style={components.icons.pencilIcon}
+                onPress={() => {
+                  navigation.navigate("EditColumn", {
+                    columnTitle: props.title,
+                    idapp: idApp,
+                    props: props,
+                  });
+                }}
+              />
+              <IconButton
+                icon="delete"
+                iconColor="#fff"
+                size={15}
+                style={components.icons.deleteIcon}
+                onPress={() => {
+                  setModalConfirmVisible(true);
+                }}
+              />
+            </View>
+          )}
         />
         <Card.Content>
           <Card style={components.addTask}>
@@ -96,7 +94,9 @@ function ColumnComponent(props: Column) {
           {tasks ? (
             <FlatList
               data={Array.isArray(tasks) ? tasks : [tasks]}
-              renderItem={({ item: task }) => <TaskComponent {...task} />}
+              renderItem={({ item: task }) => (
+                <TaskComponent idApp={idApp} {...task} />
+              )}
             />
           ) : (
             <LoadingComponent state={loading} />

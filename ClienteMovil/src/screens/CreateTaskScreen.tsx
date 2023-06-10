@@ -19,9 +19,9 @@ const CreateTaskScreen = ({
   navigation: any;
   route: any;
 }) => {
-  const { idcolumn } = route.params;
+  const { idapp } = route.params;
 
-  const { createTask } = useTasksApi(false);
+  const { createTask } = useTasksApi();
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -29,7 +29,7 @@ const CreateTaskScreen = ({
   const { colors, screens } = styles();
 
   const handlePress = () => {
-    createTask(name, description, idcolumn);
+    createTask(idapp, name, description);
 
     setName("");
     setDescription("");

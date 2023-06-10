@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAxios } from "./useAxios";
 import { AxiosHeaders } from "axios";
 
 import { useAuth } from "../../hooks/useAuth";
 
 import { RequestParams } from "../../domain/RequestParams.interface";
-import { Project } from "../../domain/projects/Project.interface";
+import { Column } from "../../domain/columns/Column.interface";
 import { ApiError } from "../../domain/ApiError.interface";
-import { ProjectMapper } from "../mappers/ProjectMapper";
-import { ProjectDTO } from "../../domain/projects/ProjectDTO.interface";
+import { ColumnMapper } from "../mappers/ColumnMapper";
+import { ColumnDTO } from "../../domain/columns/ColumnDTO.interface";
 
 import { API_URL } from "@env";
 
@@ -16,22 +16,12 @@ import { API_URL } from "@env";
  * Hook para la conexión con los endpoints del back-end que se
  * encargan de hacer las peticiones sobre proyectos.
  */
-export const useColumnsApi = (fetch: boolean) => {
+export const useColumnsApi = () => {
   const { user } = useAuth();
 
-  const [data, setData] = useState<Array<Project> | Project>();
+  const [data, setData] = useState<Array<Column> | Column>();
   const [error, setError] = useState<ApiError>();
   const [loading, setLoading] = useState<boolean>(false);
-
-  /**
-   *  Efecto que maneja el ciclo de vida de la API
-   */
-  useEffect(() => {
-    // Para así poder usar el hook sin realizar otra query.
-    if (fetch) {
-      fetchData();
-    }
-  }, []);
 
   const API = API_URL;
 
@@ -39,14 +29,14 @@ export const useColumnsApi = (fetch: boolean) => {
    *  Función que fetchea los datos de los proyectos, se debe de llamar desde un
    *  efecto, para que el objeto de usuario ya haya cargado.
    */
-  const fetchData = () => {
+  const fetchData = (idapp: string) => {
     setLoading(true);
 
     /**
      * Props de la petición
      */
     const props: RequestParams = {
-      url: `${API}/user/${user?.id}/projects`,
+      url: `${API}/${idapp}/task_app/columns`,
       method: "GET",
       headers: new AxiosHeaders({
         "Content-Type": "application/json",
@@ -64,16 +54,45 @@ export const useColumnsApi = (fetch: boolean) => {
       });
   };
 
-  const createColumn = (name: string, id: string) => {};
-
-  const editColumn = (idboard: string, newTitle: string, id: string) => {
+  const createColumn = (idapp: string, title: string) => {
     setLoading(true);
 
     /**
      * Props de la petición
      */
     const props: RequestParams = {
-      url: `${API}/${idboard}/task_app/board/${id}`,
+      url: `${API}/${idapp}/task_app/column`,
+      method: "POST",
+      headers: new AxiosHeaders({
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user?._token}`,
+      }),
+      data: {
+        title: title,
+      },
+    };
+
+    /**
+     *  Petición usando el Hook de Axios
+     */
+    useAxios(props)
+      .catch((err) => {
+        const error: ApiError = { error: true, message: err };
+        handleData(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const editColumn = (idapp: string, newTitle: string, id: string) => {
+    setLoading(true);
+
+    /**
+     * Props de la petición
+     */
+    const props: RequestParams = {
+      url: `${API}/${idapp}/task_app/column/${id}`,
       method: "PUT",
       headers: new AxiosHeaders({
         "Content-Type": "application/json",
@@ -97,14 +116,14 @@ export const useColumnsApi = (fetch: boolean) => {
       });
   };
 
-  const deleteColumn = (idboard: string, id: string) => {
+  const deleteColumn = (idapp: string, id: string) => {
     setLoading(true);
 
     /**
      * Props de la petición
      */
     const props: RequestParams = {
-      url: `${API}/${idboard}/task_app/column/${id}`,
+      url: `${API}/${idapp}/task_app/column/${id}`,
       method: "DELETE",
       headers: new AxiosHeaders({
         "Content-Type": "application/json",
@@ -129,7 +148,7 @@ export const useColumnsApi = (fetch: boolean) => {
    *  Función que maneja los datos que salen de la API.
    *  @param info
    */
-  const handleData = (info: ProjectWrapper | ProjectDTO | ApiError) => {
+  const handleData = (info: ColumnWrapper | ColumnDTO | ApiError) => {
     /**
      * Hay Error
      */
@@ -140,24 +159,24 @@ export const useColumnsApi = (fetch: boolean) => {
     /**
      * Si no hay error
      */
-    if (info && "projects" in info) {
+    if (info && "columns" in info) {
       // Quitamos los errores en caso de que los halla
       setError(undefined);
 
       // Cambiamos el state
       //console.log(info);
-      let projects: Array<Project> = ProjectMapper.prototype.mapArrayTo(
-        info.projects
+      let columns: Array<Column> = ColumnMapper.prototype.mapArrayTo(
+        info.columns
       );
-      setData(projects);
+      setData(columns);
     }
 
-    if (info && "idproject" in info) {
+    if (info && "id" in info) {
       // Quitamos los errores en caso de que los halla
       setError(undefined);
 
-      let project: Project = ProjectMapper.prototype.mapTo(info);
-      setData(project);
+      let column: Column = ColumnMapper.prototype.mapTo(info);
+      setData(column);
     }
 
     setLoading(false);
@@ -177,6 +196,6 @@ export const useColumnsApi = (fetch: boolean) => {
 /**
  *  Envoltorio de una propiedad que es un array. Esta es la respuesta del back-end.
  */
-interface ProjectWrapper {
-  projects: Array<ProjectDTO>;
+interface ColumnWrapper {
+  columns: Array<ColumnDTO>;
 }

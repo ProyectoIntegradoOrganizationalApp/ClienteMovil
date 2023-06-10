@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { useColumnsApi } from "../adapters/api/useColumnsApi";
 import { useTasksApi } from "../adapters/api/useTasksApi";
 
+// Interfaces
+import { Column } from "../domain/columns/Column.interface";
+
 // Components
 import { useNavigation } from "@react-navigation/native";
 import { Card, IconButton } from "react-native-paper";
@@ -16,27 +19,21 @@ import ModalConfirmComponent from "./ModalConfirmComponent";
 // Estilos
 import styles from "../styles/styles";
 
-interface IColumn {
-  id: string;
-  idboard: string;
-  title: string;
-}
-
-function ColumnComponent(props: IColumn) {
+function ColumnComponent(props: Column) {
   const navigation = useNavigation<any>();
 
-  const { deleteColumn } = useColumnsApi(false);
+  const { deleteColumn } = useColumnsApi();
 
   const [modalConfirmVisible, setModalConfirmVisible] = useState(false);
   const handleModalConfirmState = (e: boolean) => {
     setModalConfirmVisible(e);
   };
 
-  const { data: tasks, loading, fetchData } = useTasksApi(true);
+  const { data: tasks, loading, fetchData } = useTasksApi();
 
   useEffect(() => {
     return navigation.addListener("focus", () => {
-      fetchData();
+      fetchData(idApp);
     });
   }, [navigation]);
 
@@ -60,6 +57,7 @@ function ColumnComponent(props: IColumn) {
                   onPress={() => {
                     navigation.navigate("EditColumn", {
                       columnTitle: props.title,
+                      idapp: idApp, // TODO: Get idApp
                       props: props,
                     });
                   }}
@@ -89,7 +87,7 @@ function ColumnComponent(props: IColumn) {
                   size={15}
                   style={[components.icons.addIcon, { marginRight: 15 }]}
                   onPress={() => {
-                    navigation.navigate("CreateTask", { idcolumn: props.id });
+                    navigation.navigate("CreateTask", { idapp: idApp });
                   }}
                 />
               )}
@@ -112,8 +110,7 @@ function ColumnComponent(props: IColumn) {
         isVisible={modalConfirmVisible}
         setModalConfirmVisible={handleModalConfirmState}
         onConfirm={() => {
-          let idColumn = "";
-          deleteColumn(idColumn);
+          deleteColumn(idApp, props.id);
           navigation.goBack();
         }}
       />

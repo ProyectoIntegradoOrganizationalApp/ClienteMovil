@@ -21,15 +21,15 @@ const EditTaskScreen = ({
 }) => {
   const { colors, screens } = styles();
 
-  const { props } = route.params;
+  const { idapp, props } = route.params;
 
-  const { editTask } = useTasksApi(true);
+  const { editTask } = useTasksApi();
 
   const [newName, setNewName] = useState("");
   const [newDescription, setNewDescription] = useState("");
 
   const handlePress = () => {
-    editTask(props.idProject, newName, newDescription);
+    editTask(idapp, newName, newDescription, props.id);
 
     navigation.goBack();
 

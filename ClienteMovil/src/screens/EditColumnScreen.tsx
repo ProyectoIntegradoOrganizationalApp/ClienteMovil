@@ -21,14 +21,14 @@ const EditColumnScreen = ({
 }) => {
   const { colors, screens } = styles();
 
-  const { props } = route.params;
+  const { idapp, props } = route.params;
 
-  const { editColumn } = useColumnsApi(true);
+  const { editColumn } = useColumnsApi();
 
   const [newName, setNewName] = useState("");
 
   const handlePress = () => {
-    editColumn(props.idColumn, newName);
+    editColumn(idapp, newName, props.id);
 
     navigation.goBack();
 

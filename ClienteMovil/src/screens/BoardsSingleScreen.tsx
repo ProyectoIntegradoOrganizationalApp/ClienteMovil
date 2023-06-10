@@ -20,15 +20,15 @@ const BoardsSingleScreen = ({
   navigation: any;
   route: any;
 }) => {
-  const { data: columns, loading, fetchData } = useColumnsApi(true);
+  const { data: columns, loading, fetchData } = useColumnsApi();
+
+  const { board } = route.params;
 
   useEffect(() => {
     return navigation.addListener("focus", () => {
-      fetchData();
+      fetchData(board.idApp);
     });
   }, [navigation]);
-
-  const { board } = route.params;
 
   const { components, screens } = styles();
 
@@ -50,7 +50,7 @@ const BoardsSingleScreen = ({
         color="#ffffff"
         style={[components.fab, { position: "absolute", marginTop: 80 }]}
         onPress={() => {
-          navigation.navigate("CreateColumn", { idboard: board.id });
+          navigation.navigate("CreateColumn", { idapp: board.idApp });
         }}
       />
     </View>

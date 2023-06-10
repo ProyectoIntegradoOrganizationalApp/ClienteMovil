@@ -1,6 +1,9 @@
 // React
 import { useState } from "react";
 
+// Interfaces
+import { Task } from "../domain/tasks/Task.interface";
+
 // Hooks
 import { useTasksApi } from "../adapters/api/useTasksApi";
 
@@ -12,18 +15,10 @@ import ModalConfirmComponent from "./ModalConfirmComponent";
 
 import styles from "../styles/styles";
 
-interface ITask {
-  id: string;
-  idcolumn: string;
-  title: string;
-  description: string;
-  github: string;
-}
-
-function TaskComponent(props: ITask) {
+function TaskComponent(props: Task) {
   const navigation = useNavigation<any>();
 
-  const { deleteTask } = useTasksApi(false);
+  const { deleteTask } = useTasksApi();
 
   const [modalConfirmVisible, setModalConfirmVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -70,6 +65,7 @@ function TaskComponent(props: ITask) {
                 onPress={() => {
                   navigation.navigate("EditTask", {
                     taskTitle: props.title,
+                    idapp: idApp, // TODO: Get idApp
                     props: props,
                   });
                 }}
@@ -94,8 +90,7 @@ function TaskComponent(props: ITask) {
         isVisible={modalConfirmVisible}
         setModalConfirmVisible={handleModalConfirmState}
         onConfirm={() => {
-          let idTask = "";
-          deleteTask(idTask);
+          deleteTask(idApp, props.id);
           navigation.goBack();
         }}
       />

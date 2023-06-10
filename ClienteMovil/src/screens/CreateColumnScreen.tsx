@@ -19,16 +19,16 @@ const CreateColumnScreen = ({
   navigation: any;
   route: any;
 }) => {
-  const { idboard } = route.params;
+  const { idapp } = route.params;
 
-  const { createColumn } = useColumnsApi(false);
+  const { createColumn } = useColumnsApi();
 
   const [name, setName] = useState("");
 
   const { colors, screens } = styles();
 
   const handlePress = () => {
-    createColumn(name, idboard);
+    createColumn(idapp, name);
 
     setName("");
 

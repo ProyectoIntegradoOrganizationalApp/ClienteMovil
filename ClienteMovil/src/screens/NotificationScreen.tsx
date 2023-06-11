@@ -1,45 +1,42 @@
+// React
+import { useEffect } from "react";
+
 // Hooks
-import { useUser } from "../hooks/useUser";
+import { useNotificationApi } from "../adapters/api/useNotificationApi";
 
 // Componentes
 import { FlatList, View } from "react-native";
 import NotificationComponent from "../components/NotificationComponent";
+import LoadingComponent from "../components/LoadingComponent";
 
 // Estilos
 import styles from "../styles/styles";
 
-const notifications = [
-  {
-    idUser: "1",
-    idGuest: "3",
-    title: "Task added",
-    message: "Pepe Pepín add a task",
-  },
-  {
-    idUser: "2",
-    idGuest: "3",
-    title: "Task updated",
-    message: "Juan Juanete update a task",
-  },
-  {
-    idUser: "3",
-    idGuest: "3",
-    title: "Task deleted",
-    message: "Manolo Manolín delete a task",
-  },
-];
+const NotificationScreen = ({ navigation }: { navigation: any }) => {
+  const {
+    data: notifications,
+    loading,
+    refreshData,
+  } = useNotificationApi(true);
 
-const NotificationScreen = () => {
-  const { user } = useUser();
+  useEffect(() => {
+    return navigation.addListener("focus", () => {
+      refreshData();
+    });
+  }, [navigation]);
 
   const { screens } = styles();
 
   return (
     <View style={[screens.notifications.background, { flex: 1 }]}>
-      <FlatList
-        data={notifications}
-        renderItem={({ item: org }) => <NotificationComponent {...org} />}
-      />
+      {notifications ? (
+        <FlatList
+          data={Array.isArray(notifications) ? notifications : [notifications]}
+          renderItem={({ item: org }) => <NotificationComponent {...org} />}
+        />
+      ) : (
+        <LoadingComponent state={loading} />
+      )}
     </View>
   );
 };

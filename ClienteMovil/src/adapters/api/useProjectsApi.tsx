@@ -115,6 +115,7 @@ export const useProjectsApi = (fetch: boolean) => {
         name: name,
         description: description,
         icon: "https://www.svgrepo.com/show/513474/rocket.svg",
+        state: 1,
       },
     };
 

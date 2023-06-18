@@ -41,10 +41,7 @@ function ProjectComponent(props: Project) {
               icon="eye"
               iconColor="#fff"
               size={15}
-              style={[
-                components.icons.eyeIcon,
-                !props.owner ? { marginRight: 15 } : null,
-              ]}
+              style={components.icons.eyeIcon}
               onPress={() =>
                 navigation.navigate("ProjectsSingle", {
                   projectTitle: props.name,

@@ -71,6 +71,7 @@ export const useAppsApi = () => {
         name: name,
         description: description,
         photo: "https://www.svgrepo.com/show/513474/rocket.svg",
+        apptype: "taskman",
       },
     };
 
